@@ -1,6 +1,9 @@
-let bundledX = []
+// in this algorithm, we will use the links, level, result which should be defined at first in html file
 
 function bundlingMethod(data) {
+    const zoom = width / (level[level.length - 1][0].x + 36 - level[0][0].x)
+    const bundlingPercent = 0.2
+
     for (let i = 0; i < level.length - 1; i++) {
     // at this cycle, we just do the pushing operation
     // after this, we take the baseLine one by one
@@ -17,7 +20,6 @@ function bundlingMethod(data) {
 
         if (bundlingFromSource) {
             // bundling From Source
-            bundledX.push([level[i][0].x - level[0][0].x + 80, level[i + 1][0].x - level[0][0].x])
 
             let startNodeIndex = 0
             let endNodeIndex = 0
@@ -88,7 +90,7 @@ function bundlingMethod(data) {
 
                         endingNode = linkSequence
 
-                        if (Math.abs(nodeList[endingNode].directionAngle - nodeList[beginningNode].directionAngle) > 0.523599) {
+                        if (Math.abs(nodeList[endingNode].directionAngle - nodeList[beginningNode].directionAngle) > 0.323599) {
                             // once this cycle break, we can get a cluster from [beginningNode to endingNode]
                             // and at the same time, pointer linkSequence have arrived at the beginningNode in next cluster
                             endingNode--
@@ -114,8 +116,6 @@ function bundlingMethod(data) {
                                     : ""
                     }
 
-                    // change the standard of baseLine width here
-                    const minimalBaseLineWidth = 0;
 
                     // Step5.
                     // remove the original paths and redraw the bundled path
@@ -123,18 +123,12 @@ function bundlingMethod(data) {
                         // no links behind this node here and start next cycle
                         console.log("no links here or no standard lines")
                     else {
-                        console.log(baseLine.source.name + "-" + baseLine.target.name)
                         let baseLineColor = document.getElementsByName(baseLine.source.name + "-" + baseLine.target.name)[0].style.stroke
                         document.getElementsByName(baseLine.source.name + "-" + baseLine.target.name)[0].style.strokeOpacity = "0.4"
-
-                        // the cluster group
-                        let group = svg.append("g")
-                            .attr("opacity", 0.2)
 
                         // 5.1 we do the redrawing actions first
                         // 5.1.1 check data
                         for (let t = beginningNode; t <= endingNode; t++) {
-                            console.log(baseLine)
                             // we redraw these links
                             let currentSourceNode = baseLine.source.sourceLinks[t].source
                             let currentTargetNode = baseLine.source.sourceLinks[t].target
@@ -151,8 +145,7 @@ function bundlingMethod(data) {
                                 let originalLineWidth = nodeList[t].dy // the y of expression
 
                                 // change the math expression here
-                                const alpha1 = 80;
-
+                                const alpha1 = (level[i + 1][0].x -  level[i][0].x) * zoom * bundlingPercent;
 
                                 const beta1 = 0.;
 
@@ -196,7 +189,7 @@ function bundlingMethod(data) {
                                             strokeWidth: remainingWidth < minimalBundledLineWidth ? remainingWidth : minimalBundledLineWidth,
                                             name: currentLineName + "-G1",
                                             title: currentLineName + "-G1",
-                                        }, true, baseLineColor, group)
+                                        }, true, baseLineColor)
 
 
                                         addLinksFromSource({
@@ -225,7 +218,7 @@ function bundlingMethod(data) {
                                             strokeWidth: remainingWidth < minimalBundledLineWidth ? remainingWidth : minimalBundledLineWidth,
                                             name: currentLineName + "-G2",
                                             title: currentLineName + "-G2"
-                                        }, true, baseLineColor, group)
+                                        }, true, baseLineColor)
                                     }
                                 } else {
                                     addLinksFromSource({
@@ -253,7 +246,7 @@ function bundlingMethod(data) {
                                         strokeWidth: nodeList[t].dy,
                                         name: currentLineName + "-G1",
                                         title: currentLineName + "-G1",
-                                    }, true, baseLineColor, group)
+                                    }, true, baseLineColor)
 
 
                                     // second line, which will be divided and point to the real target
@@ -282,7 +275,7 @@ function bundlingMethod(data) {
                                         strokeWidth: nodeList[t].dy,
                                         name: currentLineName + "-G2",
                                         title: currentLineName + "-G2"
-                                    }, true, baseLineColor, group)
+                                    }, true, baseLineColor)
                                 }
 
                                 // 5.2 do remove to original paths
@@ -352,7 +345,7 @@ function bundlingMethod(data) {
                                 return positionY
                             }
 
-                            function addLinksFromSource(pathData, isRealLine, baseLineColor, group) {
+                            function addLinksFromSource(pathData, isRealLine, baseLineColor) {
                                 if (isRealLine === true) // the line that point to the real node
                                     svg.append("g")
                                         .append("path")
@@ -382,9 +375,6 @@ function bundlingMethod(data) {
                 }
             }
         } else {
-            // bundling From Target
-            bundledX.push([level[i][0].x - level[0][0].x, level[i + 1][0].x - level[0][0].x - 80])
-
             let startNodeIndex = 0
             let endNodeIndex = 0
             level.forEach(element => {
@@ -431,7 +421,6 @@ function bundlingMethod(data) {
                         // 1 radians == 57.29578 radians;
                     })
 
-                console.log(nodeList)
                 // when starts a new cycle, we start from the place which we finished before
                 // at the same time, the list: nodeList[{}] shares the same order with data.nodes[pointerOfLevel].sourceLinks[{}]
                 let linkSequence = 0
@@ -452,7 +441,7 @@ function bundlingMethod(data) {
 
                         endingNode = linkSequence
 
-                        if (Math.abs(nodeList[endingNode].directionAngle - nodeList[beginningNode].directionAngle) > 0.523599) {
+                        if (Math.abs(nodeList[endingNode].directionAngle - nodeList[beginningNode].directionAngle) > 0.323599) {
                             // once this cycle break, we can get a cluster from [beginningNode 4to endingNode]
                             // and at the same time, pointer linkSequence have arrived at the beginningNode in next cluster
                             endingNode--
@@ -465,7 +454,6 @@ function bundlingMethod(data) {
                         else
                             break // we have arrived at the last node
                     }
-                    console.log(nodeList.slice(beginningNode, endingNode + 1))
 
                     // Step4. find the baseLine for this cluster
                     // find a line which can actually represent the direction for this cluster
@@ -483,22 +471,15 @@ function bundlingMethod(data) {
                                     : ""
                     }
 
-                    // change the standard of baseLine width here
-                    const minimalBaseLineWidth = 0;
-
                     // Step5.
                     // remove the original paths and redraw the bundled path
                     if (baseLine === "" || baseLine === undefined)
                         // no links behind this node here and start next cycle
                         console.log("no links here or no standard lines")
                     else {
-                        console.log(baseLine.source.name + "-" + baseLine.target.name)
                         let baseLineColor = document.getElementsByName(baseLine.source.name + "-" + baseLine.target.name)[0].style.stroke
                         document.getElementsByName(baseLine.source.name + "-" + baseLine.target.name)[0].style.strokeOpacity = "0.4"
 
-                        // the cluster group
-                        let group = svg.append("g")
-                            .attr("opacity", 0.2)
 
                         // 5.1 we do the redrawing actions first
                         // 5.1.1 check data
@@ -517,9 +498,7 @@ function bundlingMethod(data) {
                                 nodeDistance = 1 - lorentzianA / (nodeDistance * nodeDistance + lorentzianB)　// the x(x) of expression
                                 let originalLineWidth = nodeList[t].dy // the y of expression
 
-                                let alpha1 = level[i + 1][0].x -  level[i][0].x - 80
-                                // // change the math expression here
-                                // i === 0 ? alpha1 = 420 : alpha1 = 350
+                                let alpha1 = (level[i + 1][0].x -  level[i][0].x - 36) * zoom * (1 - bundlingPercent)
                                 const beta1 = 0.;
 
                                 // the distance to target
@@ -564,7 +543,7 @@ function bundlingMethod(data) {
                                             strokeWidth: remainingWidth < minimalBundledLineWidth ? remainingWidth : minimalBundledLineWidth,
                                             name: `${nodeList[t].source.name}-${nodeList[t].target.name}-G1`,
                                             title: `${nodeList[t].source.name}-${nodeList[t].target.name}-G1`,
-                                        }, true, baseLineColor, group) // first line, which shows with the baseline
+                                        }, true, baseLineColor) // first line, which shows with the baseline
 
 
                                         addLinksFromTarget({
@@ -585,7 +564,7 @@ function bundlingMethod(data) {
                                             strokeWidth: remainingWidth < minimalBundledLineWidth ? remainingWidth : minimalBundledLineWidth,
                                             name: `${nodeList[t].source.name}-${nodeList[t].target.name}-G2`,
                                             title: `${nodeList[t].source.name}-${nodeList[t].target.name}-G2`,
-                                        }, true, baseLineColor, group)
+                                        }, true, baseLineColor)
                                     }
                                 } else {
                                     // add links actions, which is opposite to the above one
@@ -606,7 +585,7 @@ function bundlingMethod(data) {
                                         strokeWidth: nodeList[t].dy,
                                         name: `${nodeList[t].source.name}-${nodeList[t].target.name}-G1`,
                                         title: `${nodeList[t].source.name}-${nodeList[t].target.name}-G1`,
-                                    }, true, baseLineColor, group) // first line, which shows with the baseline
+                                    }, true, baseLineColor) // first line, which shows with the baseline
 
 
                                     addLinksFromTarget({
@@ -627,7 +606,7 @@ function bundlingMethod(data) {
                                         strokeWidth: nodeList[t].dy,
                                         name: `${nodeList[t].source.name}-${nodeList[t].target.name}-G2`,
                                         title: `${nodeList[t].source.name}-${nodeList[t].target.name}-G2`,
-                                    }, true, baseLineColor, group)
+                                    }, true, baseLineColor)
                                 }
 
                                 // 5.2 do remove to original paths
@@ -697,7 +676,7 @@ function bundlingMethod(data) {
                                 return link(d)
                             }
 
-                            function addLinksFromTarget(pathData, isRealLine, baseLineColor, group) {
+                            function addLinksFromTarget(pathData, isRealLine, baseLineColor) {
                                 if (isRealLine === true) // the line that point to the real node
                                     svg.append("g")
                                         .append("path")

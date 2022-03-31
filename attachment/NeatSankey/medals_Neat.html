@@ -152,10 +152,6 @@
                 const endX = level[level.length - 1][0].x + 3
                 const realWidth = endX - startX
 
-                const zoom = width / realWidth
-
-                // let startPlace = level[0][0].x / realWidth * 1400 - 30
-
                 nodes.forEach(function (node) {
                     // for (let m =0 ;m< level.length; m++)
                     //     for (let n = 0;n< level[m].length; n++)
@@ -163,7 +159,7 @@
                     //             node.x = level[m][n].x
                     //             node.y = level[m][n].y
                     //         }
-                    node.x = (node.x - startX) * zoom// / realWidth * width// - startPlace
+                    node.x = (node.x - startX) / realWidth * width
                     node.dx = nodeWidth
                 })
                 // var remainingNodes = nodes,
@@ -338,9 +334,9 @@
         var units = "Widgets";
 
         var margin = {top: 10, right: 10, bottom: 10, left: 10},
-            width = 1400 - margin.left - margin.right,
+            width = 1420 - margin.left - margin.right,
             // width = 2500 - margin.left - margin.right,
-            height = 800 - margin.top - margin.bottom;
+            height = 760 - margin.top - margin.bottom;
 
         var formatNumber = d3.format(",.0f"),    // zero decimal places
             format = function (d) {

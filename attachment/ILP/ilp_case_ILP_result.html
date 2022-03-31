@@ -782,6 +782,9 @@
             .style("stroke-width", function (d) {
                 return Math.max(1, d.dy);
             })
+            .style("stroke", function (d, i) {
+                return d3.rgb(color(i + 5)).darker(1)
+            })
             .sort(function (a, b) {
                 return b.dy - a.dy;
             });
