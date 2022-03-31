@@ -1,0 +1,130 @@
+----*----
+auto-generated-data: 0
+Kn: 96.0
+Kv: 47.378589009433476
+
+----*----
+auto-generated-data: 1
+Kn: 376.0
+Kv: 301.7858886574571
+
+----*----
+auto-generated-data: 2
+Kn: 601.0
+Kv: 250.34980487258784
+
+----*----
+auto-generated-data: 3
+Kn: 309.0
+Kv: 263.2783416257783
+
+----*----
+auto-generated-data: 4
+Kn: 456.0
+Kv: 380.4260758526758
+
+----*----
+auto-generated-data: 5
+Kn: 200.0
+Kv: 152.5345488237253
+
+----*----
+auto-generated-data: 6
+Kn: 389.0
+Kv: 351.6326339374906
+
+----*----
+auto-generated-data: 7
+Kn: 235.0
+Kv: 83.05313237927305
+
+----*----
+auto-generated-data: 8
+Kn: 170.0
+Kv: 199.08905715895094
+
+----*----
+auto-generated-data: 9
+Kn: 50.0
+Kv: 51.736107063171275
+
+----*----
+auto-generated-data: 10
+Kn: 84.0
+Kv: 49.32481811489165
+
+----*----
+auto-generated-data: 11
+Kn: 328.0
+Kv: 378.92408168347225
+
+----*----
+auto-generated-data: 12
+Kn: 361.0
+Kv: 215.78155952239257
+
+----*----
+auto-generated-data: 13
+Kn: 122.0
+Kv: 79.10722731512391
+
+----*----
+auto-generated-data: 14
+Kn: 494.0
+Kv: 365.3629413357799
+
+----*----
+auto-generated-data: 15
+Kn: 202.0
+Kv: 1327.2605904127336
+
+----*----
+auto-generated-data: 16
+Kn: 5.0
+Kv: 3.336944444444444
+
+----*----
+auto-generated-data: 17
+Kn: 322.0
+Kv: 874.6409918264277
+
+----*----
+auto-generated-data: 18
+Kn: 61.0
+Kv: 223.67482448828827
+
+----*----
+auto-generated-data: 19
+Kn: 60.0
+Kv: 11.21
+
+----*----
+auto-generated-data: 20
+Kn: 18
+Kv: 21.9117569564938
+
+----*----
+auto-generated-data: 21
+Kn: 119.0
+Kv: 875.1962195074198
+
+----*----
+auto-generated-data: 22
+Kn: 100
+Kv: 84.29351204351205
+
+----*----
+auto-generated-data: 23
+Kn: 0
+Kv: 0
+
+----*----
+auto-generated-data: 24
+Kn: 8.0
+Kv: 11.201835884497774
+
+------------------------
+total Kn: 5166.0
+average Kn: 206.64
+total Kv: 6602.4914829160225
+average Kv: 264.0996593166409

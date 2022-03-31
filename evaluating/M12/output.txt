@@ -1,0 +1,55 @@
+----*----auto-generated-data: 0Kn: 13838.0
+Kv: 96.0
+----*----auto-generated-data: 1Kn: 4201.0
+Kv: 376.0
+----*----auto-generated-data: 2Kn: 6898.0
+Kv: 601.0
+----*----auto-generated-data: 3Kn: 8484.0
+Kv: 309.0
+----*----auto-generated-data: 4Kn: 6608.0
+Kv: 456.0
+----*----auto-generated-data: 5Kn: 3600.0
+Kv: 200.0
+----*----auto-generated-data: 6Kn: 7189.0
+Kv: 389.0
+----*----auto-generated-data: 7Kn: 3714.0
+Kv: 235.0
+----*----auto-generated-data: 8Kn: 1954.0
+Kv: 170.0
+----*----auto-generated-data: 9Kn: 1396.0
+Kv: 50.0
+----*----auto-generated-data: 10Kn: 1295.0
+Kv: 84.0
+----*----auto-generated-data: 11Kn: 22544.0
+Kv: 328.0
+----*----auto-generated-data: 12Kn: 4909.0
+Kv: 361.0
+----*----auto-generated-data: 13Kn: 2826.0
+Kv: 122.0
+----*----auto-generated-data: 14Kn: 7203.0
+Kv: 494.0
+----*----auto-generated-data: 15Kn: 202822.1442429701
+Kv: 202.0
+----*----auto-generated-data: 16Kn: 763560189.5919834
+Kv: 81.0
+----*----auto-generated-data: 17Kn: 99625.0
+Kv: 5.0
+----*----auto-generated-data: 18Kn: 1220.0699999999997
+Kv: 322.0
+----*----auto-generated-data: 19Kn: 256338.05879999994
+Kv: 61.0
+----*----auto-generated-data: 20Kn: 180.0
+Kv: 60.0
+----*----auto-generated-data: 21Kn: 12934.0
+Kv: 18
+----*----auto-generated-data: 22Kn: 0.03117563864434898
+Kv: 1295.0
+----*----auto-generated-data: 23Kn: 1305.9274999999998
+Kv: 119.0
+----*----auto-generated-data: 24Kn: 2628.0
+Kv: 100
+------------------------
+total Kn: 764233901.8237021
+average Kn: 30569356.072948083
+total Kv: 6534.0
+average Kv: 261.36
