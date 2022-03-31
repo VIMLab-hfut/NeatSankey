@@ -1,0 +1,288 @@
+From: <Saved by Blink>
+Snapshot-Content-Location: https://echarts.apache.org/examples/data/asset/data/
+Subject: Index of /examples/data/asset/data
+Date: Sat, 19 Feb 2022 04:45:17 -0000
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--X8cHuuKWJcgDDIlSEOI8yrHsjilGwinHwcUgitTKhP----"
+
+
+------MultipartBoundary--X8cHuuKWJcgDDIlSEOI8yrHsjilGwinHwcUgitTKhP----
+Content-Type: text/html
+Content-ID: <frame-0C65BFD6B662F8BFA622D303B7438839@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://echarts.apache.org/examples/data/asset/data/
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><html><head><meta ht=
+tp-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF-8">
+  <title>Index of /examples/data/asset/data</title>
+ </head>
+ <body>
+<h1>Index of /examples/data/asset/data</h1>
+  <table>
+   <tbody><tr><th valign=3D"top"><img src=3D"https://echarts.apache.org/ico=
+ns/blank.gif" alt=3D"[ICO]"></th><th><a href=3D"https://echarts.apache.org/=
+examples/data/asset/data/?C=3DN;O=3DD">Name</a></th><th><a href=3D"https://=
+echarts.apache.org/examples/data/asset/data/?C=3DM;O=3DA">Last modified</a>=
+</th><th><a href=3D"https://echarts.apache.org/examples/data/asset/data/?C=
+=3DS;O=3DA">Size</a></th><th><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/?C=3DD;O=3DA">Description</a></th></tr>
+   <tr><th colspan=3D"5"><hr></th></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/back.gi=
+f" alt=3D"[PARENTDIR]"></td><td><a href=3D"https://echarts.apache.org/examp=
+les/data/asset/">Parent Directory</a></td><td>&nbsp;</td><td align=3D"right=
+">  - </td><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/airport-schedule.json">airport-schedule.json</a></td><td a=
+lign=3D"right">2021-01-11 20:16  </td><td align=3D"right"> 63K</td><td>&nbs=
+p;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/aqi-beijing.json">aqi-beijing.json</a></td><td align=3D"ri=
+ght">2021-01-11 20:16  </td><td align=3D"right"> 88K</td><td>&nbsp;</td></t=
+r>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/text.gi=
+f" alt=3D"[TXT]"></td><td><a href=3D"https://echarts.apache.org/examples/da=
+ta/asset/data/aqi.csv">aqi.csv</a></td><td align=3D"right">2021-01-11 20:16=
+  </td><td align=3D"right"> 16M</td><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/aqi_convert.js">aqi_convert.js</a></td><td align=3D"right"=
+>2021-01-11 20:16  </td><td align=3D"right">325 </td><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/confidence-band.json">confidence-band.json</a></td><td ali=
+gn=3D"right">2021-01-11 20:16  </td><td align=3D"right"> 11K</td><td>&nbsp;=
+</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/disk.tree.json">disk.tree.json</a></td><td align=3D"right"=
+>2021-01-11 20:16  </td><td align=3D"right">733K</td><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/draggable.js">draggable.js</a></td><td align=3D"right">202=
+1-01-11 20:16  </td><td align=3D"right">6.8K</td><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/ec-option-doc-statistics-201604.json">ec-option-doc-statis=
+tics-201604.json</a></td><td align=3D"right">2021-01-11 20:16  </td><td ali=
+gn=3D"right">226K</td><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/echarts-package-size.json">echarts-package-size.json</a></=
+td><td align=3D"right">2021-09-01 08:34  </td><td align=3D"right"> 95K</td>=
+<td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/energy.json">energy.json</a></td><td align=3D"right">2021-=
+01-11 20:16  </td><td align=3D"right">6.0K</td><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/binary.=
+gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples/=
+data/asset/data/fake-nebula.bin">fake-nebula.bin</a></td><td align=3D"right=
+">2021-01-11 20:16  </td><td align=3D"right">7.6M</td><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/flare.json">flare.json</a></td><td align=3D"right">2021-01=
+-11 20:16  </td><td align=3D"right"> 11K</td><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/flights.json">flights.json</a></td><td align=3D"right">202=
+1-01-11 20:16  </td><td align=3D"right">1.5M</td><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/folder.=
+gif" alt=3D"[DIR]"></td><td><a href=3D"https://echarts.apache.org/examples/=
+data/asset/data/gps/">gps/</a></td><td align=3D"right">2021-01-11 20:16  </=
+td><td align=3D"right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/hangzhou-tracks.json">hangzhou-tracks.json</a></td><td ali=
+gn=3D"right">2021-01-11 20:16  </td><td align=3D"right">333K</td><td>&nbsp;=
+</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/house-price-area2.json">house-price-area2.json</a></td><td=
+ align=3D"right">2021-01-11 20:16  </td><td align=3D"right">225K</td><td>&n=
+bsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/kawhi-leonard-16-17-regular.json">kawhi-leonard-16-17-regu=
+lar.json</a></td><td align=3D"right">2021-01-11 20:16  </td><td align=3D"ri=
+ght">326K</td><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/les-miserables.json">les-miserables.json</a></td><td align=
+=3D"right">2021-09-22 06:31  </td><td align=3D"right"> 31K</td><td>&nbsp;</=
+td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/life-expectancy-table.json">life-expectancy-table.json</a>=
+</td><td align=3D"right">2021-01-11 20:16  </td><td align=3D"right"> 57K</t=
+d><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/life-expectancy.json">life-expectancy.json</a></td><td ali=
+gn=3D"right">2021-01-11 20:16  </td><td align=3D"right"> 58K</td><td>&nbsp;=
+</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/linear-regression.json">linear-regression.json</a></td><td=
+ align=3D"right">2021-01-11 20:16  </td><td align=3D"right">5.0K</td><td>&n=
+bsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/lines-bus.json">lines-bus.json</a></td><td align=3D"right"=
+>2021-01-11 20:16  </td><td align=3D"right">588K</td><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/folder.=
+gif" alt=3D"[DIR]"></td><td><a href=3D"https://echarts.apache.org/examples/=
+data/asset/data/links-ny/">links-ny/</a></td><td align=3D"right">2021-01-11=
+ 20:16  </td><td align=3D"right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/masterPainterColorChoice.json">masterPainterColorChoice.js=
+on</a></td><td align=3D"right">2021-01-11 20:16  </td><td align=3D"right">4=
+00K</td><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/nba-court.json">nba-court.json</a></td><td align=3D"right"=
+>2021-01-11 20:16  </td><td align=3D"right"> 18K</td><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/npmdepgraph.min10.json">npmdepgraph.min10.json</a></td><td=
+ align=3D"right">2021-01-11 20:16  </td><td align=3D"right">163K</td><td>&n=
+bsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/nutrients.json">nutrients.json</a></td><td align=3D"right"=
+>2021-01-11 20:16  </td><td align=3D"right">1.2M</td><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/obama_budget_proposal_2012.json">obama_budget_proposal_201=
+2.json</a></td><td align=3D"right">2021-01-11 20:16  </td><td align=3D"righ=
+t">130K</td><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/obama_budget_proposal_2012.list.json">obama_budget_proposa=
+l_2012.list.json</a></td><td align=3D"right">2021-01-11 20:16  </td><td ali=
+gn=3D"right"> 48K</td><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/option-view.json">option-view.json</a></td><td align=3D"ri=
+ght">2021-01-22 12:34  </td><td align=3D"right">190K</td><td>&nbsp;</td></t=
+r>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/product.json">product.json</a></td><td align=3D"right">202=
+1-01-11 20:16  </td><td align=3D"right"> 11K</td><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/south-america-polygon.json">south-america-polygon.json</a>=
+</td><td align=3D"right">2021-01-22 12:34  </td><td align=3D"right"> 36K</t=
+d><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/stock-DJI.json">stock-DJI.json</a></td><td align=3D"right"=
+>2021-01-11 20:16  </td><td align=3D"right">184K</td><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/timelineGDP.js">timelineGDP.js</a></td><td align=3D"right"=
+>2021-01-11 20:16  </td><td align=3D"right"> 16K</td><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/webkit-dep.json">webkit-dep.json</a></td><td align=3D"righ=
+t">2021-01-11 20:16  </td><td align=3D"right">112K</td><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/weibo.json">weibo.json</a></td><td align=3D"right">2021-01=
+-11 20:16  </td><td align=3D"right">755K</td><td>&nbsp;</td></tr>
+<tr><td valign=3D"top"><img src=3D"https://echarts.apache.org/icons/unknown=
+.gif" alt=3D"[   ]"></td><td><a href=3D"https://echarts.apache.org/examples=
+/data/asset/data/wind-barb-hobart.json">wind-barb-hobart.json</a></td><td a=
+lign=3D"right">2021-01-11 20:16  </td><td align=3D"right"> 21K</td><td>&nbs=
+p;</td></tr>
+   <tr><th colspan=3D"5"><hr></th></tr>
+</tbody></table>
+
+<div id=3D"qb-sougou-search" style=3D"display: none; opacity: 0;"><p>=E6=90=
+=9C=E7=B4=A2</p><p class=3D"last-btn">=E5=A4=8D=E5=88=B6</p><iframe src=3D"=
+cid:frame-91BF0DC89D87DF860041F3690298140D@mhtml.blink"></iframe></div></bo=
+dy><div id=3D"qbTrans-pageTrans-dialog" style=3D"display: none;"><!----> <s=
+pan class=3D"qbTrans-pageTrans-dialog-success" style=3D"display: none;"></s=
+pan> <span class=3D"qbTrans-pageTrans-dialog-guide" style=3D"display: none;=
+"></span> <span class=3D"qbTrans-pageTrans-dialog-text">=E6=98=AF=E5=90=A6=
+=E5=B0=86=E5=BD=93=E5=89=8D=E7=BD=91=E9=A1=B5=E7=BF=BB=E8=AF=91=E6=88=90=E4=
+=B8=AD=E6=96=87</span> <div id=3D"qbTrans-pageTrans-dialog-btn" class=3D"qb=
+Trans-pageTrans-dialog-btn">=E7=BD=91=E9=A1=B5=E7=BF=BB=E8=AF=91</div> <!--=
+--> <!----> <div class=3D"qbTrans-pageTrans-dialog-close"><span class=3D"qb=
+Trans-pageTrans-dialog-close-text">=E5=85=B3=E9=97=AD</span></div></div></h=
+tml>
+------MultipartBoundary--X8cHuuKWJcgDDIlSEOI8yrHsjilGwinHwcUgitTKhP----
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: https://echarts.apache.org/icons/blank.gif
+
+R0lGODlhFAAWAKEAAP///8z//wAAAAAAACH+TlRoaXMgYXJ0IGlzIGluIHRoZSBwdWJsaWMgZG9t
+YWluLiBLZXZpbiBIdWdoZXMsIGtldmluaEBlaXQuY29tLCBTZXB0ZW1iZXIgMTk5NQAh+QQBAAAB
+ACwAAAAAFAAWAAACE4yPqcvtD6OctNqLs968+w+GSQEAOw==
+
+------MultipartBoundary--X8cHuuKWJcgDDIlSEOI8yrHsjilGwinHwcUgitTKhP----
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: https://echarts.apache.org/icons/back.gif
+
+R0lGODlhFAAWAMIAAP///8z//5mZmWZmZjMzMwAAAAAAAAAAACH+TlRoaXMgYXJ0IGlzIGluIHRo
+ZSBwdWJsaWMgZG9tYWluLiBLZXZpbiBIdWdoZXMsIGtldmluaEBlaXQuY29tLCBTZXB0ZW1iZXIg
+MTk5NQAh+QQBAAABACwAAAAAFAAWAAADSxi63P4jEPJqEDNTu6LO3PVpnDdOFnaCkHQGBTcqRRxu
+WG0v+5LrNUZQ8QPqeMakkaZsFihOpyDajMCoOoJAGNVWkt7QVfzokc+LBAA7
+
+------MultipartBoundary--X8cHuuKWJcgDDIlSEOI8yrHsjilGwinHwcUgitTKhP----
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: https://echarts.apache.org/icons/unknown.gif
+
+R0lGODlhFAAWAMIAAP///8z//5mZmTMzMwAAAAAAAAAAAAAAACH+TlRoaXMgYXJ0IGlzIGluIHRo
+ZSBwdWJsaWMgZG9tYWluLiBLZXZpbiBIdWdoZXMsIGtldmluaEBlaXQuY29tLCBTZXB0ZW1iZXIg
+MTk5NQAh+QQBAAABACwAAAAAFAAWAAADaDi6vPEwDECrnSO+aTvPEQcIAmGaIrhR5XmKgMq1LkoM
+N7ECrjDWp52r0iPpJJ0KjUAq7SxLE+sI+9V8vycFiM0iLb2O80s8JcfVJJTaGYrZYPNby5Ov6Wol
+PD+XDJqAgSQ4EUCGQQEJADs=
+
+------MultipartBoundary--X8cHuuKWJcgDDIlSEOI8yrHsjilGwinHwcUgitTKhP----
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: https://echarts.apache.org/icons/text.gif
+
+R0lGODlhFAAWAMIAAP///8z//5mZmTMzMwAAAAAAAAAAAAAAACH+TlRoaXMgYXJ0IGlzIGluIHRo
+ZSBwdWJsaWMgZG9tYWluLiBLZXZpbiBIdWdoZXMsIGtldmluaEBlaXQuY29tLCBTZXB0ZW1iZXIg
+MTk5NQAh+QQBAAABACwAAAAAFAAWAAADWDi6vPEwDECrnSO+aTvPEddVIriN1wVxROtSxBDPJwq7
+bo23luALhJqt8gtKbrsXBSgcEo2spBLAPDp7UKT02bxWRdrp94rtbpdZMrrr/A5+8LhPFpHajQkA
+Ow==
+
+------MultipartBoundary--X8cHuuKWJcgDDIlSEOI8yrHsjilGwinHwcUgitTKhP----
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: https://echarts.apache.org/icons/binary.gif
+
+R0lGODlhFAAWAMIAAP///8z//8zMzJmZmTMzMwAAAAAAAAAAACH+TlRoaXMgYXJ0IGlzIGluIHRo
+ZSBwdWJsaWMgZG9tYWluLiBLZXZpbiBIdWdoZXMsIGtldmluaEBlaXQuY29tLCBTZXB0ZW1iZXIg
+MTk5NQAh+QQBAAABACwAAAAAFAAWAAADaUi6vPEwEECrnSS+WQoQXSEAE6lxXgeopQmha+q1rhTf
+akHo/HaDnVFo6LMYKYPkoOADim4VJdOWkx2XvirUgqVaVcbuxCn0hKe04znrIV/ROOvaG3+z63OY
+O6/uiwlKgYJJOxFDh4hTCQA7
+
+------MultipartBoundary--X8cHuuKWJcgDDIlSEOI8yrHsjilGwinHwcUgitTKhP----
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: https://echarts.apache.org/icons/folder.gif
+
+R0lGODlhFAAWAMIAAP/////Mmcz//5lmMzMzMwAAAAAAAAAAACH+TlRoaXMgYXJ0IGlzIGluIHRo
+ZSBwdWJsaWMgZG9tYWluLiBLZXZpbiBIdWdoZXMsIGtldmluaEBlaXQuY29tLCBTZXB0ZW1iZXIg
+MTk5NQAh+QQBAAACACwAAAAAFAAWAAADVCi63P4wyklZufjOErrvRcR9ZKYpxUB6aokGQyzHKxyO
+9RoTV54PPJyPBewNSUXhcWc8soJOIjTaSVJhVphWxd3CeILUbDwmgMPmtHrNIyxM8Iw7AQA7
+
+------MultipartBoundary--X8cHuuKWJcgDDIlSEOI8yrHsjilGwinHwcUgitTKhP----
+Content-Type: text/html
+Content-ID: <frame-91BF0DC89D87DF860041F3690298140D@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; charset=
+=3DUTF-8"></head><body></body></html>
+------MultipartBoundary--X8cHuuKWJcgDDIlSEOI8yrHsjilGwinHwcUgitTKhP------

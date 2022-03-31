@@ -1,0 +1,24 @@
+{
+    "nodes": [
+        {"name": "USA"},
+        {"name": "China"},
+        {"name": "Japan"},
+        {"name": "ROC"},
+        {"name": "gold"},
+        {"name": "silver"},
+        {"name": "brown"}
+    ], "links": [
+        {"source": "USA", "target": "gold", "value": 39},
+        {"source": "USA", "target": "silver", "value": 41},
+        {"source": "USA", "target": "brown", "value": 33},
+        {"source": "China", "target": "gold", "value": 38},
+        {"source": "China", "target": "silver", "value": 32},
+        {"source": "China", "target": "brown", "value": 18},
+        {"source": "Japan", "target": "gold", "value": 27},
+        {"source": "Japan", "target": "silver", "value": 14},
+        {"source": "Japan", "target": "brown", "value": 17},
+        {"source": "ROC", "target": "gold", "value": 20},
+        {"source": "ROC", "target": "silver", "value": 28},
+        {"source": "ROC", "target": "brown", "value": 23}
+    ]
+}

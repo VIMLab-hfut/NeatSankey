@@ -1,0 +1,1421 @@
+{
+	"nodes": [
+		{
+			"node": 0,
+			"name": "Anhui"
+		},
+		{
+			"node": 1,
+			"name": "CPC (Communist Party of China)"
+		},
+		{
+			"node": 2,
+			"name": "Hunan"
+		},
+		{
+			"node": 3,
+			"name": "Shaanxi"
+		},
+		{
+			"node": 4,
+			"name": "Fujian"
+		},
+		{
+			"node": 5,
+			"name": "No party affiliation"
+		},
+		{
+			"node": 6,
+			"name": "Zhejiang"
+		},
+		{
+			"node": 7,
+			"name": "Chinese Peasants and Workers Democratic Party"
+		},
+		{
+			"node": 8,
+			"name": "Shanghai"
+		},
+		{
+			"node": 9,
+			"name": "The China Democratic League"
+		},
+		{
+			"node": 10,
+			"name": "The Chinese People's Liberation Army and Armed Police Force"
+		},
+		{
+			"node": 11,
+			"name": "Jiangsu"
+		},
+		{
+			"node": 12,
+			"name": "Guangdong"
+		},
+		{
+			"node": 13,
+			"name": "Hubei"
+		},
+		{
+			"node": 14,
+			"name": "Hebei"
+		},
+		{
+			"node": 15,
+			"name": "Jilin"
+		},
+		{
+			"node": 16,
+			"name": "Henan"
+		},
+		{
+			"node": 17,
+			"name": "Guizhou"
+		},
+		{
+			"node": 18,
+			"name": "Xinjiang"
+		},
+		{
+			"node": 19,
+			"name": "Yunnan"
+		},
+		{
+			"node": 20,
+			"name": "Heilongjiang"
+		},
+		{
+			"node": 21,
+			"name": "Liaoning"
+		},
+		{
+			"node": 22,
+			"name": "Inner Mongolia"
+		},
+		{
+			"node": 23,
+			"name": "Sichuan"
+		},
+		{
+			"node": 24,
+			"name": "Shandong"
+		},
+		{
+			"node": 25,
+			"name": "China National Democratic Construction Association"
+		},
+		{
+			"node": 26,
+			"name": "Beijing"
+		},
+		{
+			"node": 27,
+			"name": "Jiangxi"
+		},
+		{
+			"node": 28,
+			"name": "Tianjin"
+		},
+		{
+			"node": 29,
+			"name": "China Zhi Gong Party"
+		},
+		{
+			"node": 30,
+			"name": "Jiusan Society"
+		},
+		{
+			"node": 31,
+			"name": "The Revolutionary Committee of the Chinese Kuomintang"
+		},
+		{
+			"node": 32,
+			"name": "Ningxia"
+		},
+		{
+			"node": 33,
+			"name": "Shanxi"
+		},
+		{
+			"node": 34,
+			"name": "China Association for Promoting Democracy"
+		},
+		{
+			"node": 35,
+			"name": "Qinghai"
+		},
+		{
+			"node": 36,
+			"name": "Gansu"
+		},
+		{
+			"node": 37,
+			"name": "Guangxi"
+		},
+		{
+			"node": 38,
+			"name": "Hong Kong"
+		},
+		{
+			"node": 39,
+			"name": "Chongqing"
+		},
+		{
+			"node": 40,
+			"name": "Hainan"
+		},
+		{
+			"node": 41,
+			"name": "Tibet"
+		},
+		{
+			"node": 42,
+			"name": "Taiwan Democratic Self-Government League"
+		},
+		{
+			"node": 43,
+			"name": "Macao"
+		},
+		{
+			"node": 44,
+			"name": "Taiwan"
+		}
+	],
+	"links": [
+		{
+			"source": 0,
+			"target": 1,
+			"value": 74
+		},
+		{
+			"source": 2,
+			"target": 1,
+			"value": 77
+		},
+		{
+			"source": 3,
+			"target": 1,
+			"value": 48
+		},
+		{
+			"source": 4,
+			"target": 5,
+			"value": 10
+		},
+		{
+			"source": 6,
+			"target": 7,
+			"value": 3
+		},
+		{
+			"source": 8,
+			"target": 9,
+			"value": 4
+		},
+		{
+			"source": 10,
+			"target": 1,
+			"value": 294
+		},
+		{
+			"source": 0,
+			"target": 5,
+			"value": 17
+		},
+		{
+			"source": 11,
+			"target": 1,
+			"value": 106
+		},
+		{
+			"source": 12,
+			"target": 5,
+			"value": 35
+		},
+		{
+			"source": 13,
+			"target": 1,
+			"value": 90
+		},
+		{
+			"source": 14,
+			"target": 1,
+			"value": 77
+		},
+		{
+			"source": 15,
+			"target": 1,
+			"value": 49
+		},
+		{
+			"source": 16,
+			"target": 1,
+			"value": 127
+		},
+		{
+			"source": 17,
+			"target": 1,
+			"value": 54
+		},
+		{
+			"source": 18,
+			"target": 1,
+			"value": 47
+		},
+		{
+			"source": 19,
+			"target": 5,
+			"value": 22
+		},
+		{
+			"source": 20,
+			"target": 1,
+			"value": 68
+		},
+		{
+			"source": 21,
+			"target": 1,
+			"value": 71
+		},
+		{
+			"source": 22,
+			"target": 1,
+			"value": 48
+		},
+		{
+			"source": 4,
+			"target": 1,
+			"value": 44
+		},
+		{
+			"source": 23,
+			"target": 1,
+			"value": 104
+		},
+		{
+			"source": 24,
+			"target": 25,
+			"value": 5
+		},
+		{
+			"source": 26,
+			"target": 1,
+			"value": 32
+		},
+		{
+			"source": 27,
+			"target": 1,
+			"value": 61
+		},
+		{
+			"source": 24,
+			"target": 1,
+			"value": 122
+		},
+		{
+			"source": 6,
+			"target": 1,
+			"value": 66
+		},
+		{
+			"source": 27,
+			"target": 5,
+			"value": 6
+		},
+		{
+			"source": 28,
+			"target": 29,
+			"value": 2
+		},
+		{
+			"source": 13,
+			"target": 30,
+			"value": 3
+		},
+		{
+			"source": 16,
+			"target": 31,
+			"value": 3
+		},
+		{
+			"source": 32,
+			"target": 1,
+			"value": 16
+		},
+		{
+			"source": 14,
+			"target": 7,
+			"value": 4
+		},
+		{
+			"source": 33,
+			"target": 34,
+			"value": 1
+		},
+		{
+			"source": 19,
+			"target": 1,
+			"value": 63
+		},
+		{
+			"source": 26,
+			"target": 29,
+			"value": 2
+		},
+		{
+			"source": 35,
+			"target": 1,
+			"value": 15
+		},
+		{
+			"source": 36,
+			"target": 1,
+			"value": 39
+		},
+		{
+			"source": 3,
+			"target": 9,
+			"value": 2
+		},
+		{
+			"source": 16,
+			"target": 34,
+			"value": 2
+		},
+		{
+			"source": 8,
+			"target": 30,
+			"value": 3
+		},
+		{
+			"source": 14,
+			"target": 9,
+			"value": 5
+		},
+		{
+			"source": 14,
+			"target": 5,
+			"value": 26
+		},
+		{
+			"source": 36,
+			"target": 5,
+			"value": 11
+		},
+		{
+			"source": 24,
+			"target": 29,
+			"value": 4
+		},
+		{
+			"source": 20,
+			"target": 25,
+			"value": 3
+		},
+		{
+			"source": 12,
+			"target": 1,
+			"value": 114
+		},
+		{
+			"source": 27,
+			"target": 31,
+			"value": 2
+		},
+		{
+			"source": 28,
+			"target": 1,
+			"value": 27
+		},
+		{
+			"source": 37,
+			"target": 1,
+			"value": 61
+		},
+		{
+			"source": 22,
+			"target": 31,
+			"value": 1
+		},
+		{
+			"source": 6,
+			"target": 30,
+			"value": 4
+		},
+		{
+			"source": 21,
+			"target": 5,
+			"value": 12
+		},
+		{
+			"source": 36,
+			"target": 31,
+			"value": 1
+		},
+		{
+			"source": 38,
+			"target": 5,
+			"value": 34
+		},
+		{
+			"source": 20,
+			"target": 5,
+			"value": 14
+		},
+		{
+			"source": 39,
+			"target": 1,
+			"value": 43
+		},
+		{
+			"source": 33,
+			"target": 5,
+			"value": 9
+		},
+		{
+			"source": 35,
+			"target": 5,
+			"value": 5
+		},
+		{
+			"source": 32,
+			"target": 5,
+			"value": 4
+		},
+		{
+			"source": 24,
+			"target": 9,
+			"value": 4
+		},
+		{
+			"source": 40,
+			"target": 1,
+			"value": 22
+		},
+		{
+			"source": 19,
+			"target": 7,
+			"value": 1
+		},
+		{
+			"source": 14,
+			"target": 34,
+			"value": 2
+		},
+		{
+			"source": 33,
+			"target": 1,
+			"value": 52
+		},
+		{
+			"source": 24,
+			"target": 30,
+			"value": 7
+		},
+		{
+			"source": 11,
+			"target": 5,
+			"value": 22
+		},
+		{
+			"source": 4,
+			"target": 25,
+			"value": 1
+		},
+		{
+			"source": 16,
+			"target": 25,
+			"value": 5
+		},
+		{
+			"source": 17,
+			"target": 5,
+			"value": 9
+		},
+		{
+			"source": 37,
+			"target": 5,
+			"value": 15
+		},
+		{
+			"source": 23,
+			"target": 5,
+			"value": 14
+		},
+		{
+			"source": 15,
+			"target": 30,
+			"value": 1
+		},
+		{
+			"source": 8,
+			"target": 5,
+			"value": 6
+		},
+		{
+			"source": 11,
+			"target": 25,
+			"value": 4
+		},
+		{
+			"source": 11,
+			"target": 9,
+			"value": 5
+		},
+		{
+			"source": 14,
+			"target": 25,
+			"value": 3
+		},
+		{
+			"source": 13,
+			"target": 7,
+			"value": 3
+		},
+		{
+			"source": 8,
+			"target": 1,
+			"value": 37
+		},
+		{
+			"source": 21,
+			"target": 30,
+			"value": 6
+		},
+		{
+			"source": 2,
+			"target": 5,
+			"value": 27
+		},
+		{
+			"source": 41,
+			"target": 1,
+			"value": 18
+		},
+		{
+			"source": 22,
+			"target": 9,
+			"value": 1
+		},
+		{
+			"source": 33,
+			"target": 7,
+			"value": 2
+		},
+		{
+			"source": 12,
+			"target": 9,
+			"value": 1
+		},
+		{
+			"source": 24,
+			"target": 31,
+			"value": 5
+		},
+		{
+			"source": 24,
+			"target": 5,
+			"value": 20
+		},
+		{
+			"source": 3,
+			"target": 34,
+			"value": 2
+		},
+		{
+			"source": 18,
+			"target": 5,
+			"value": 10
+		},
+		{
+			"source": 22,
+			"target": 34,
+			"value": 1
+		},
+		{
+			"source": 24,
+			"target": 34,
+			"value": 4
+		},
+		{
+			"source": 21,
+			"target": 7,
+			"value": 4
+		},
+		{
+			"source": 21,
+			"target": 34,
+			"value": 2
+		},
+		{
+			"source": 0,
+			"target": 34,
+			"value": 2
+		},
+		{
+			"source": 26,
+			"target": 34,
+			"value": 3
+		},
+		{
+			"source": 16,
+			"target": 5,
+			"value": 23
+		},
+		{
+			"source": 23,
+			"target": 31,
+			"value": 2
+		},
+		{
+			"source": 6,
+			"target": 34,
+			"value": 3
+		},
+		{
+			"source": 11,
+			"target": 31,
+			"value": 1
+		},
+		{
+			"source": 4,
+			"target": 34,
+			"value": 3
+		},
+		{
+			"source": 23,
+			"target": 29,
+			"value": 4
+		},
+		{
+			"source": 37,
+			"target": 31,
+			"value": 2
+		},
+		{
+			"source": 15,
+			"target": 25,
+			"value": 1
+		},
+		{
+			"source": 0,
+			"target": 29,
+			"value": 3
+		},
+		{
+			"source": 13,
+			"target": 31,
+			"value": 1
+		},
+		{
+			"source": 24,
+			"target": 7,
+			"value": 2
+		},
+		{
+			"source": 3,
+			"target": 25,
+			"value": 2
+		},
+		{
+			"source": 20,
+			"target": 34,
+			"value": 1
+		},
+		{
+			"source": 16,
+			"target": 30,
+			"value": 3
+		},
+		{
+			"source": 26,
+			"target": 5,
+			"value": 10
+		},
+		{
+			"source": 6,
+			"target": 9,
+			"value": 1
+		},
+		{
+			"source": 28,
+			"target": 5,
+			"value": 5
+		},
+		{
+			"source": 4,
+			"target": 31,
+			"value": 2
+		},
+		{
+			"source": 13,
+			"target": 9,
+			"value": 2
+		},
+		{
+			"source": 33,
+			"target": 30,
+			"value": 2
+		},
+		{
+			"source": 23,
+			"target": 7,
+			"value": 6
+		},
+		{
+			"source": 37,
+			"target": 7,
+			"value": 2
+		},
+		{
+			"source": 17,
+			"target": 25,
+			"value": 2
+		},
+		{
+			"source": 39,
+			"target": 5,
+			"value": 7
+		},
+		{
+			"source": 27,
+			"target": 34,
+			"value": 2
+		},
+		{
+			"source": 12,
+			"target": 42,
+			"value": 1
+		},
+		{
+			"source": 6,
+			"target": 5,
+			"value": 13
+		},
+		{
+			"source": 28,
+			"target": 31,
+			"value": 2
+		},
+		{
+			"source": 20,
+			"target": 30,
+			"value": 1
+		},
+		{
+			"source": 2,
+			"target": 31,
+			"value": 2
+		},
+		{
+			"source": 3,
+			"target": 5,
+			"value": 5
+		},
+		{
+			"source": 27,
+			"target": 7,
+			"value": 2
+		},
+		{
+			"source": 21,
+			"target": 9,
+			"value": 3
+		},
+		{
+			"source": 37,
+			"target": 34,
+			"value": 1
+		},
+		{
+			"source": 16,
+			"target": 29,
+			"value": 3
+		},
+		{
+			"source": 23,
+			"target": 34,
+			"value": 4
+		},
+		{
+			"source": 40,
+			"target": 29,
+			"value": 1
+		},
+		{
+			"source": 15,
+			"target": 5,
+			"value": 3
+		},
+		{
+			"source": 37,
+			"target": 30,
+			"value": 2
+		},
+		{
+			"source": 3,
+			"target": 7,
+			"value": 2
+		},
+		{
+			"source": 2,
+			"target": 7,
+			"value": 2
+		},
+		{
+			"source": 8,
+			"target": 31,
+			"value": 1
+		},
+		{
+			"source": 43,
+			"target": 5,
+			"value": 12
+		},
+		{
+			"source": 23,
+			"target": 25,
+			"value": 3
+		},
+		{
+			"source": 22,
+			"target": 7,
+			"value": 1
+		},
+		{
+			"source": 27,
+			"target": 9,
+			"value": 3
+		},
+		{
+			"source": 23,
+			"target": 30,
+			"value": 5
+		},
+		{
+			"source": 23,
+			"target": 9,
+			"value": 5
+		},
+		{
+			"source": 13,
+			"target": 42,
+			"value": 1
+		},
+		{
+			"source": 0,
+			"target": 7,
+			"value": 4
+		},
+		{
+			"source": 11,
+			"target": 42,
+			"value": 1
+		},
+		{
+			"source": 8,
+			"target": 42,
+			"value": 1
+		},
+		{
+			"source": 13,
+			"target": 34,
+			"value": 5
+		},
+		{
+			"source": 4,
+			"target": 7,
+			"value": 2
+		},
+		{
+			"source": 13,
+			"target": 5,
+			"value": 8
+		},
+		{
+			"source": 11,
+			"target": 29,
+			"value": 3
+		},
+		{
+			"source": 14,
+			"target": 30,
+			"value": 4
+		},
+		{
+			"source": 44,
+			"target": 42,
+			"value": 4
+		},
+		{
+			"source": 19,
+			"target": 29,
+			"value": 1
+		},
+		{
+			"source": 15,
+			"target": 9,
+			"value": 1
+		},
+		{
+			"source": 28,
+			"target": 30,
+			"value": 1
+		},
+		{
+			"source": 8,
+			"target": 7,
+			"value": 2
+		},
+		{
+			"source": 39,
+			"target": 7,
+			"value": 1
+		},
+		{
+			"source": 2,
+			"target": 34,
+			"value": 2
+		},
+		{
+			"source": 12,
+			"target": 34,
+			"value": 1
+		},
+		{
+			"source": 38,
+			"target": 1,
+			"value": 1
+		},
+		{
+			"source": 16,
+			"target": 9,
+			"value": 4
+		},
+		{
+			"source": 19,
+			"target": 34,
+			"value": 1
+		},
+		{
+			"source": 33,
+			"target": 25,
+			"value": 1
+		},
+		{
+			"source": 27,
+			"target": 25,
+			"value": 2
+		},
+		{
+			"source": 12,
+			"target": 29,
+			"value": 2
+		},
+		{
+			"source": 2,
+			"target": 25,
+			"value": 1
+		},
+		{
+			"source": 22,
+			"target": 25,
+			"value": 1
+		},
+		{
+			"source": 39,
+			"target": 9,
+			"value": 1
+		},
+		{
+			"source": 3,
+			"target": 31,
+			"value": 2
+		},
+		{
+			"source": 26,
+			"target": 25,
+			"value": 2
+		},
+		{
+			"source": 4,
+			"target": 42,
+			"value": 3
+		},
+		{
+			"source": 0,
+			"target": 31,
+			"value": 2
+		},
+		{
+			"source": 16,
+			"target": 7,
+			"value": 2
+		},
+		{
+			"source": 19,
+			"target": 25,
+			"value": 1
+		},
+		{
+			"source": 22,
+			"target": 5,
+			"value": 4
+		},
+		{
+			"source": 21,
+			"target": 29,
+			"value": 2
+		},
+		{
+			"source": 15,
+			"target": 7,
+			"value": 1
+		},
+		{
+			"source": 33,
+			"target": 31,
+			"value": 2
+		},
+		{
+			"source": 2,
+			"target": 29,
+			"value": 2
+		},
+		{
+			"source": 40,
+			"target": 5,
+			"value": 1
+		},
+		{
+			"source": 13,
+			"target": 25,
+			"value": 3
+		},
+		{
+			"source": 11,
+			"target": 7,
+			"value": 1
+		},
+		{
+			"source": 0,
+			"target": 25,
+			"value": 3
+		},
+		{
+			"source": 11,
+			"target": 34,
+			"value": 4
+		},
+		{
+			"source": 17,
+			"target": 34,
+			"value": 3
+		},
+		{
+			"source": 39,
+			"target": 34,
+			"value": 1
+		},
+		{
+			"source": 28,
+			"target": 34,
+			"value": 1
+		},
+		{
+			"source": 18,
+			"target": 31,
+			"value": 1
+		},
+		{
+			"source": 17,
+			"target": 7,
+			"value": 1
+		},
+		{
+			"source": 26,
+			"target": 9,
+			"value": 1
+		},
+		{
+			"source": 39,
+			"target": 25,
+			"value": 4
+		},
+		{
+			"source": 12,
+			"target": 30,
+			"value": 4
+		},
+		{
+			"source": 27,
+			"target": 30,
+			"value": 2
+		},
+		{
+			"source": 8,
+			"target": 25,
+			"value": 1
+		},
+		{
+			"source": 15,
+			"target": 31,
+			"value": 3
+		},
+		{
+			"source": 3,
+			"target": 29,
+			"value": 1
+		},
+		{
+			"source": 13,
+			"target": 29,
+			"value": 1
+		},
+		{
+			"source": 39,
+			"target": 29,
+			"value": 1
+		},
+		{
+			"source": 2,
+			"target": 9,
+			"value": 1
+		},
+		{
+			"source": 44,
+			"target": 1,
+			"value": 5
+		},
+		{
+			"source": 28,
+			"target": 7,
+			"value": 1
+		},
+		{
+			"source": 14,
+			"target": 31,
+			"value": 2
+		},
+		{
+			"source": 4,
+			"target": 9,
+			"value": 2
+		},
+		{
+			"source": 6,
+			"target": 29,
+			"value": 1
+		},
+		{
+			"source": 44,
+			"target": 5,
+			"value": 3
+		},
+		{
+			"source": 37,
+			"target": 29,
+			"value": 2
+		},
+		{
+			"source": 20,
+			"target": 31,
+			"value": 1
+		},
+		{
+			"source": 20,
+			"target": 7,
+			"value": 1
+		},
+		{
+			"source": 4,
+			"target": 29,
+			"value": 1
+		},
+		{
+			"source": 32,
+			"target": 7,
+			"value": 1
+		},
+		{
+			"source": 6,
+			"target": 25,
+			"value": 2
+		},
+		{
+			"source": 8,
+			"target": 29,
+			"value": 1
+		},
+		{
+			"source": 38,
+			"target": 25,
+			"value": 1
+		},
+		{
+			"source": 12,
+			"target": 25,
+			"value": 2
+		},
+		{
+			"source": 37,
+			"target": 25,
+			"value": 2
+		},
+		{
+			"source": 0,
+			"target": 30,
+			"value": 3
+		},
+		{
+			"source": 26,
+			"target": 31,
+			"value": 1
+		},
+		{
+			"source": 15,
+			"target": 34,
+			"value": 2
+		},
+		{
+			"source": 0,
+			"target": 9,
+			"value": 3
+		},
+		{
+			"source": 3,
+			"target": 30,
+			"value": 2
+		},
+		{
+			"source": 2,
+			"target": 30,
+			"value": 3
+		},
+		{
+			"source": 20,
+			"target": 9,
+			"value": 3
+		},
+		{
+			"source": 37,
+			"target": 9,
+			"value": 2
+		},
+		{
+			"source": 41,
+			"target": 5,
+			"value": 1
+		},
+		{
+			"source": 17,
+			"target": 30,
+			"value": 1
+		},
+		{
+			"source": 4,
+			"target": 30,
+			"value": 1
+		},
+		{
+			"source": 11,
+			"target": 30,
+			"value": 1
+		},
+		{
+			"source": 26,
+			"target": 30,
+			"value": 2
+		},
+		{
+			"source": 26,
+			"target": 7,
+			"value": 1
+		},
+		{
+			"source": 28,
+			"target": 9,
+			"value": 1
+		},
+		{
+			"source": 36,
+			"target": 9,
+			"value": 1
+		},
+		{
+			"source": 19,
+			"target": 30,
+			"value": 1
+		},
+		{
+			"source": 22,
+			"target": 30,
+			"value": 1
+		},
+		{
+			"source": 17,
+			"target": 31,
+			"value": 1
+		},
+		{
+			"source": 17,
+			"target": 9,
+			"value": 1
+		},
+		{
+			"source": 12,
+			"target": 7,
+			"value": 2
+		},
+		{
+			"source": 33,
+			"target": 9,
+			"value": 1
+		},
+		{
+			"source": 6,
+			"target": 31,
+			"value": 1
+		},
+		{
+			"source": 40,
+			"target": 25,
+			"value": 1
+		},
+		{
+			"source": 12,
+			"target": 31,
+			"value": 1
+		},
+		{
+			"source": 44,
+			"target": 31,
+			"value": 1
+		},
+		{
+			"source": 17,
+			"target": 29,
+			"value": 1
+		},
+		{
+			"source": 28,
+			"target": 25,
+			"value": 1
+		},
+		{
+			"source": 39,
+			"target": 31,
+			"value": 1
+		},
+		{
+			"source": 8,
+			"target": 34,
+			"value": 1
+		},
+		{
+			"source": 39,
+			"target": 30,
+			"value": 1
+		}
+	]
+}

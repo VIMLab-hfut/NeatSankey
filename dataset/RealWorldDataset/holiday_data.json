@@ -1,0 +1,161 @@
+{
+    "nodes": [
+        {
+            "name": "Student"
+        },
+        {
+            "name": "Reading"
+        },
+        {
+            "name": "Swimming"
+        },
+        {
+            "name": "Sleeping"
+        },
+        {
+            "name": "Travelling"
+        },
+        {
+            "name": "Working out"
+        },
+        {
+            "name": "Trainee"
+        },
+        {
+            "name": "Administrator"
+        },
+        {
+            "name": "Manager"
+        },
+        {
+            "name": "Pensioner"
+        }
+    ],
+    "links": [
+        {
+            "source": "Student",
+            "target": "Reading",
+            "value": 2.5
+        },
+        {
+            "source": "Student",
+            "target": "Swimming",
+            "value": 4.5
+        },
+        {
+            "source": "Student",
+            "target": "Sleeping",
+            "value": 8.0
+        },
+        {
+            "source": "Student",
+            "target": "Travelling",
+            "value": 1.0
+        },
+        {
+            "source": "Student",
+            "target": "Working out",
+            "value": 8.0
+        },
+        {
+            "source": "Trainee",
+            "target": "Reading",
+            "value": 1.0
+        },
+        {
+            "source": "Trainee",
+            "target": "Travelling",
+            "value": 3.0
+        },
+        {
+            "source": "Trainee",
+            "target": "Swimming",
+            "value": 2.0
+        },
+        {
+            "source": "Trainee",
+            "target": "Sleeping",
+            "value": 6.0
+        },
+        {
+            "source": "Trainee",
+            "target": "Working out",
+            "value": 12.0
+        },
+        {
+            "source": "Administrator",
+            "target": "Swimming",
+            "value": 4.5
+        },
+        {
+            "source": "Administrator",
+            "target": "Sleeping",
+            "value": 9.0
+        },
+        {
+            "source": "Administrator",
+            "target": "Working out",
+            "value": 7.5
+        },
+        {
+            "source": "Administrator",
+            "target": "Reading",
+            "value": 1.5
+        },
+        {
+            "source": "Administrator",
+            "target": "Travelling",
+            "value": 1.5
+        },
+        {
+            "source": "Manager",
+            "target": "Working out",
+            "value": 11.0
+        },
+        {
+            "source": "Manager",
+            "target": "Reading",
+            "value": 2.0
+        },
+        {
+            "source": "Manager",
+            "target": "Sleeping",
+            "value": 7.5
+        },
+        {
+            "source": "Manager",
+            "target": "Travelling",
+            "value": 1.5
+        },
+        {
+            "source": "Manager",
+            "target": "Swimming",
+            "value": 2.0
+        },
+        {
+            "source": "Pensioner",
+            "target": "Reading",
+            "value": 3.0
+        },
+        {
+            "source": "Pensioner",
+            "target": "Swimming",
+            "value": 9.0
+        },
+        {
+            "source": "Pensioner",
+            "target": "Sleeping",
+            "value": 9.0
+        },
+        {
+            "source": "Pensioner",
+            "target": "Travelling",
+            "value": 3.0
+        },
+        {
+            "source": "Pensioner",
+            "target": "Working out",
+            "value": 0.0
+        }
+    ]
+}

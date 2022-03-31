@@ -1,0 +1,168 @@
+{
+    "nodes": [
+        {
+            "name": "Netherlands"
+        },
+        {
+            "name": "Canada"
+        },
+        {
+            "name": "Belgium"
+        },
+        {
+            "name": "Italy"
+        },
+        {
+            "name": "Mexico"
+        },
+        {
+            "name": "Russia"
+        },
+        {
+            "name": "Spain"
+        },
+        {
+            "name": "South Korea"
+        },
+        {
+            "name": "Germany"
+        },
+        {
+            "name": "China"
+        },
+        {
+            "name": "European Union"
+        },
+        {
+            "name": "Japan"
+        },
+        {
+            "name": "United Kingdom"
+        },
+        {
+            "name": "United States"
+        },
+        {
+            "name": "France"
+        },
+        {
+            "name": "Hong Kong"
+        },
+        {
+            "name": "Switzerland"
+        },
+        {
+            "name": "Austria"
+        },
+        {
+            "name": "Sweden"
+        }
+    ],
+    "links": [
+        {
+            "source": "Netherlands",
+            "target": "European Union",
+            "value": 798744
+        },
+        {
+            "source": "Germany",
+            "target": "European Union",
+            "value": 1468990
+        },
+        {
+            "source": "European Union",
+            "target": "France",
+            "value": 745931
+        },
+        {
+            "source": "European Union",
+            "target": "United States",
+            "value": 660541
+        },
+        {
+            "source": "Canada",
+            "target": "United States",
+            "value": 594546
+        },
+        {
+            "source": "Belgium",
+            "target": "European Union",
+            "value": 628796
+        },
+        {
+            "source": "China",
+            "target": "Hong Kong",
+            "value": 400571
+        },
+        {
+            "source": "China",
+            "target": "United States",
+            "value": 526454
+        },
+        {
+            "source": "European Union",
+            "target": "United Kingdom",
+            "value": 520318
+        },
+        {
+            "source": "China",
+            "target": "European Union",
+            "value": 560536
+        },
+        {
+            "source": "Italy",
+            "target": "European Union",
+            "value": 539556
+        },
+        {
+            "source": "Mexico",
+            "target": "United States",
+            "value": 492715
+        },
+        {
+            "source": "Russia",
+            "target": "European Union",
+            "value": 385778
+        },
+        {
+            "source": "Spain",
+            "target": "European Union",
+            "value": 365191
+        },
+        {
+            "source": "China",
+            "target": "Japan",
+            "value": 312062
+        },
+        {
+            "source": "European Union",
+            "target": "Switzerland",
+            "value": 328609
+        },
+        {
+            "source": "South Korea",
+            "target": "China",
+            "value": 229073
+        },
+        {
+            "source": "European Union",
+            "target": "Austria",
+            "value": 244913
+        },
+        {
+            "source": "Japan",
+            "target": "United States",
+            "value": 206091
+        },
+        {
+            "source": "European Union",
+            "target": "Sweden",
+            "value": 204849
+        },
+        {
+            "source": "Germany",
+            "target": "United States",
+            "value": 184287
+        }
+    ]
+}

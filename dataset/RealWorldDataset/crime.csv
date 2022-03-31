@@ -1,0 +1,254 @@
+Crime_type,outcome_summary,index
+Anti-social behaviour,Unknown,1362075
+Bicycle theft,Charged as part of another case,39
+Bicycle theft,Court - awaiting outcome,2
+Bicycle theft,Court - awiting outcome,1130
+Bicycle theft,Court - case abandoned,16
+Bicycle theft,Court - community Sentence,71
+Bicycle theft,Court - compensation payment,17
+Bicycle theft,Court - not guilty,14
+Bicycle theft,Discharge - conditional,26
+Bicycle theft,Fined,24
+Bicycle theft,No suspect identified,56072
+Bicycle theft,Not worth pursuing,254
+Bicycle theft,Offender otherwise dealt with,5
+Bicycle theft,Prison - suspended sentence,26
+Bicycle theft,Prison Sentence,101
+Bicycle theft,Resolved,344
+Bicycle theft,Unable to prosecute suspect,4501
+Bicycle theft,Unknown,30693
+Bicycle theft,Warning / Caution,119
+Burglary,Charged as part of another case,1771
+Burglary,Court - awaiting outcome,195
+Burglary,Court - awiting outcome,16455
+Burglary,Court - case abandoned,197
+Burglary,Court - community Sentence,500
+Burglary,Court - compensation payment,16
+Burglary,Court - not guilty,371
+Burglary,Discharge - conditional,50
+Burglary,Fined,54
+Burglary,No suspect identified,251383
+Burglary,Not worth pursuing,1208
+Burglary,Offender otherwise dealt with,30
+Burglary,Prison - suspended sentence,299
+Burglary,Prison Sentence,1774
+Burglary,Property seized,2
+Burglary,Resolved,834
+Burglary,Unable to prosecute suspect,29667
+Burglary,Unknown,99482
+Burglary,Warning / Caution,663
+Criminal damage and arson,Charged as part of another case,187
+Criminal damage and arson,Court - awaiting outcome,62
+Criminal damage and arson,Court - awiting outcome,21091
+Criminal damage and arson,Court - case abandoned,508
+Criminal damage and arson,Court - community Sentence,1705
+Criminal damage and arson,Court - compensation payment,760
+Criminal damage and arson,Court - not guilty,499
+Criminal damage and arson,Discharge - absolute,23
+Criminal damage and arson,Discharge - conditional,974
+Criminal damage and arson,Fined,1256
+Criminal damage and arson,No suspect identified,300537
+Criminal damage and arson,Not worth pursuing,5191
+Criminal damage and arson,Offender otherwise dealt with,233
+Criminal damage and arson,Prison - suspended sentence,302
+Criminal damage and arson,Prison Sentence,760
+Criminal damage and arson,Property seized,1
+Criminal damage and arson,Resolved,11219
+Criminal damage and arson,Unable to prosecute suspect,104078
+Criminal damage and arson,Unknown,102138
+Criminal damage and arson,Warning / Caution,6849
+Drugs,Charged as part of another case,25
+Drugs,Court - awaiting outcome,599
+Drugs,Court - awiting outcome,36991
+Drugs,Court - case abandoned,289
+Drugs,Court - community Sentence,1184
+Drugs,Court - compensation payment,38
+Drugs,Court - not guilty,225
+Drugs,Discharge - absolute,24
+Drugs,Discharge - conditional,976
+Drugs,Fined,10022
+Drugs,No suspect identified,7427
+Drugs,Not worth pursuing,8738
+Drugs,Offender otherwise dealt with,165
+Drugs,Prison - suspended sentence,250
+Drugs,Prison Sentence,1042
+Drugs,Property seized,776
+Drugs,Resolved,32405
+Drugs,Unable to prosecute suspect,13916
+Drugs,Unknown,22295
+Drugs,Warning / Caution,33854
+Other crime,Charged as part of another case,68
+Other crime,Court - awaiting outcome,345
+Other crime,Court - awiting outcome,12744
+Other crime,Court - case abandoned,184
+Other crime,Court - community Sentence,280
+Other crime,Court - compensation payment,2
+Other crime,Court - not guilty,203
+Other crime,Discharge - absolute,2
+Other crime,Discharge - conditional,81
+Other crime,Fined,132
+Other crime,No suspect identified,19046
+Other crime,Not worth pursuing,8764
+Other crime,Offender otherwise dealt with,42
+Other crime,Prison - suspended sentence,200
+Other crime,Prison Sentence,575
+Other crime,Property seized,2
+Other crime,Resolved,1940
+Other crime,Unable to prosecute suspect,39404
+Other crime,Unknown,19572
+Other crime,Warning / Caution,1339
+Other theft,Charged as part of another case,317
+Other theft,Court - awaiting outcome,117
+Other theft,Court - awiting outcome,8102
+Other theft,Court - case abandoned,129
+Other theft,Court - community Sentence,368
+Other theft,Court - compensation payment,72
+Other theft,Court - not guilty,86
+Other theft,Discharge - absolute,2
+Other theft,Discharge - conditional,138
+Other theft,Fined,223
+Other theft,No suspect identified,280722
+Other theft,Not worth pursuing,4931
+Other theft,Offender otherwise dealt with,39
+Other theft,Prison - suspended sentence,123
+Other theft,Prison Sentence,307
+Other theft,Resolved,4013
+Other theft,Unable to prosecute suspect,73260
+Other theft,Unknown,161629
+Other theft,Warning / Caution,2100
+Possession of weapons,Charged as part of another case,4
+Possession of weapons,Court - awaiting outcome,78
+Possession of weapons,Court - awiting outcome,12328
+Possession of weapons,Court - case abandoned,293
+Possession of weapons,Court - community Sentence,983
+Possession of weapons,Court - compensation payment,2
+Possession of weapons,Court - not guilty,301
+Possession of weapons,Discharge - absolute,4
+Possession of weapons,Discharge - conditional,47
+Possession of weapons,Fined,102
+Possession of weapons,No suspect identified,5767
+Possession of weapons,Not worth pursuing,2445
+Possession of weapons,Offender otherwise dealt with,23
+Possession of weapons,Prison - suspended sentence,707
+Possession of weapons,Prison Sentence,904
+Possession of weapons,Property seized,5
+Possession of weapons,Resolved,1644
+Possession of weapons,Unable to prosecute suspect,11221
+Possession of weapons,Unknown,7679
+Possession of weapons,Warning / Caution,2665
+Public order,Charged as part of another case,31
+Public order,Court - awaiting outcome,110
+Public order,Court - awiting outcome,29980
+Public order,Court - case abandoned,733
+Public order,Court - community Sentence,1506
+Public order,Court - compensation payment,66
+Public order,Court - not guilty,707
+Public order,Discharge - absolute,34
+Public order,Discharge - conditional,573
+Public order,Fined,3411
+Public order,No suspect identified,118320
+Public order,Not worth pursuing,14974
+Public order,Offender otherwise dealt with,476
+Public order,Prison - suspended sentence,529
+Public order,Prison Sentence,1478
+Public order,Property seized,2
+Public order,Resolved,7518
+Public order,Unable to prosecute suspect,169057
+Public order,Unknown,85143
+Public order,Warning / Caution,4755
+Robbery,Charged as part of another case,32
+Robbery,Court - awaiting outcome,63
+Robbery,Court - awiting outcome,6163
+Robbery,Court - case abandoned,63
+Robbery,Court - community Sentence,176
+Robbery,Court - compensation payment,1
+Robbery,Court - not guilty,172
+Robbery,Discharge - absolute,1
+Robbery,Discharge - conditional,9
+Robbery,Fined,12
+Robbery,No suspect identified,35265
+Robbery,Not worth pursuing,289
+Robbery,Offender otherwise dealt with,9
+Robbery,Prison - suspended sentence,27
+Robbery,Prison Sentence,567
+Robbery,Resolved,211
+Robbery,Unable to prosecute suspect,14323
+Robbery,Unknown,30243
+Robbery,Warning / Caution,156
+Shoplifting,Charged as part of another case,2288
+Shoplifting,Court - awaiting outcome,56
+Shoplifting,Court - awiting outcome,46778
+Shoplifting,Court - case abandoned,502
+Shoplifting,Court - community Sentence,4428
+Shoplifting,Court - compensation payment,536
+Shoplifting,Court - not guilty,415
+Shoplifting,Discharge - absolute,37
+Shoplifting,Discharge - conditional,2206
+Shoplifting,Fined,3910
+Shoplifting,No suspect identified,155086
+Shoplifting,Not worth pursuing,10427
+Shoplifting,Offender otherwise dealt with,651
+Shoplifting,Prison - suspended sentence,2108
+Shoplifting,Prison Sentence,7207
+Shoplifting,Property seized,1
+Shoplifting,Resolved,15250
+Shoplifting,Unable to prosecute suspect,50458
+Shoplifting,Unknown,59100
+Shoplifting,Warning / Caution,4552
+Theft from the person,Charged as part of another case,26
+Theft from the person,Court - awaiting outcome,7
+Theft from the person,Court - awiting outcome,1130
+Theft from the person,Court - case abandoned,26
+Theft from the person,Court - community Sentence,37
+Theft from the person,Court - compensation payment,2
+Theft from the person,Court - not guilty,18
+Theft from the person,Discharge - conditional,7
+Theft from the person,Fined,17
+Theft from the person,No suspect identified,43833
+Theft from the person,Not worth pursuing,282
+Theft from the person,Offender otherwise dealt with,2
+Theft from the person,Prison - suspended sentence,17
+Theft from the person,Prison Sentence,80
+Theft from the person,Property seized,2
+Theft from the person,Resolved,249
+Theft from the person,Unable to prosecute suspect,6332
+Theft from the person,Unknown,58630
+Theft from the person,Warning / Caution,154
+Vehicle crime,Charged as part of another case,385
+Vehicle crime,Court - awaiting outcome,74
+Vehicle crime,Court - awiting outcome,8378
+Vehicle crime,Court - case abandoned,217
+Vehicle crime,Court - community Sentence,534
+Vehicle crime,Court - compensation payment,19
+Vehicle crime,Court - not guilty,227
+Vehicle crime,Discharge - absolute,3
+Vehicle crime,Discharge - conditional,117
+Vehicle crime,Fined,172
+Vehicle crime,No suspect identified,290006
+Vehicle crime,Not worth pursuing,1044
+Vehicle crime,Offender otherwise dealt with,96
+Vehicle crime,Prison - suspended sentence,136
+Vehicle crime,Prison Sentence,493
+Vehicle crime,Resolved,487
+Vehicle crime,Unable to prosecute suspect,22460
+Vehicle crime,Unknown,135323
+Vehicle crime,Warning / Caution,438
+Violence and sexual offences,Charged as part of another case,98
+Violence and sexual offences,Court - awaiting outcome,1364
+Violence and sexual offences,Court - awiting outcome,112067
+Violence and sexual offences,Court - case abandoned,2987
+Violence and sexual offences,Court - community Sentence,6978
+Violence and sexual offences,Court - compensation payment,316
+Violence and sexual offences,Court - not guilty,4387
+Violence and sexual offences,Discharge - absolute,36
+Violence and sexual offences,Discharge - conditional,1502
+Violence and sexual offences,Fined,2511
+Violence and sexual offences,No suspect identified,301365
+Violence and sexual offences,Not worth pursuing,39097
+Violence and sexual offences,Offender otherwise dealt with,272
+Violence and sexual offences,Prison - suspended sentence,1916
+Violence and sexual offences,Prison Sentence,4141
+Violence and sexual offences,Resolved,30569
+Violence and sexual offences,Unable to prosecute suspect,1007284
+Violence and sexual offences,Unknown,336204
+Violence and sexual offences,Warning / Caution,24400

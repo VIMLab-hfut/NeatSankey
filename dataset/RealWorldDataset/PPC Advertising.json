@@ -1,0 +1,20 @@
+{
+    "nodes": [
+        {"name": "Exact"},
+        {"name": "Phrase"},
+        {"name": "Modified"},
+        {"name": "Broad"},
+        {"name": "Impression Share"},
+        {"name": "Desktop"},
+        {"name": "Mobile"},
+        {"name": "Tablet"}
+    ], "links": [
+        {"source": "Exact", "target": "Impression Share", "value": 1740},
+        {"source": "Phrase", "target": "Impression Share", "value": 577},
+        {"source": "Modified", "target": "Impression Share", "value": 530},
+        {"source": "Broad", "target": "Impression Share", "value": 547},
+        {"source": "Impression Share", "target": "Desktop", "value": 2810},
+        {"source": "Impression Share", "target": "Mobile", "value": 282},
+        {"source": "Impression Share", "target": "Tablet", "value": 302}
+    ]
+}

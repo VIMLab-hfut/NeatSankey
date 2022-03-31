@@ -1,0 +1,461 @@
+{
+    "nodes": [
+        {
+            "name": "Capital Improvement Projects"
+        },
+        {
+            "name": "City Administrator"
+        },
+        {
+            "name": "City Attorney"
+        },
+        {
+            "name": "City Auditor"
+        },
+        {
+            "name": "City Clerk"
+        },
+        {
+            "name": "City Council"
+        },
+        {
+            "name": "Economic & Workforce Development"
+        },
+        {
+            "name": "Finance"
+        },
+        {
+            "name": "Fire"
+        },
+        {
+            "name": "Human Resources Management"
+        },
+        {
+            "name": "Human Services"
+        },
+        {
+            "name": "Information Technology"
+        },
+        {
+            "name": "Mayor"
+        },
+        {
+            "name": "Non-Departmental"
+        },
+        {
+            "name": "Oakland Parks & Recreation"
+        },
+        {
+            "name": "Oakland Public Library"
+        },
+        {
+            "name": "Oakland Public Works"
+        },
+        {
+            "name": "Planning & Building"
+        },
+        {
+            "name": "Police"
+        },
+        {
+            "name": "Business License Tax"
+        },
+        {
+            "name": "Fines & Penalties"
+        },
+        {
+            "name": "Grants & Subsidies"
+        },
+        {
+            "name": "Interest Income"
+        },
+        {
+            "name": "Interfund Transfers"
+        },
+        {
+            "name": "Licenses & Permits"
+        },
+        {
+            "name": "Miscellaneous Revenue"
+        },
+        {
+            "name": "Parking Tax"
+        },
+        {
+            "name": "Property Tax"
+        },
+        {
+            "name": "Real Estate Transfer Tax"
+        },
+        {
+            "name": "Sales Tax"
+        },
+        {
+            "name": "Service Charges"
+        },
+        {
+            "name": "Transfers from Fund Balance"
+        },
+        {
+            "name": "Transient Occupancy Tax"
+        },
+        {
+            "name": "Utility Consumption Tax"
+        },
+        {
+            "name": "Housing & Community Development"
+        },
+        {
+            "name": "Gas Tax"
+        },
+        {
+            "name": "Internal Service Funds"
+        },
+        {
+            "name": "Local Tax"
+        },
+        {
+            "name": "General Fund"
+        },
+        {
+            "name": "Non-Discretionary"
+        }
+    ],
+    "links": [
+        {
+            "source": "General Fund",
+            "target": "Capital Improvement Projects",
+            "value": 1.252
+        },
+        {
+            "source": "General Fund",
+            "target": "City Administrator",
+            "value": 16.1024
+        },
+        {
+            "source": "General Fund",
+            "target": "City Attorney",
+            "value": 4.9034
+        },
+        {
+            "source": "General Fund",
+            "target": "City Auditor",
+            "value": 1.9137
+        },
+        {
+            "source": "General Fund",
+            "target": "City Clerk",
+            "value": 1.9156
+        },
+        {
+            "source": "General Fund",
+            "target": "City Council",
+            "value": 4.1698
+        },
+        {
+            "source": "General Fund",
+            "target": "Economic & Workforce Development",
+            "value": 4.8559
+        },
+        {
+            "source": "General Fund",
+            "target": "Finance",
+            "value": 22.4377
+        },
+        {
+            "source": "General Fund",
+            "target": "Fire",
+            "value": 124.7475
+        },
+        {
+            "source": "General Fund",
+            "target": "Human Resources Management",
+            "value": 4.7713
+        },
+        {
+            "source": "General Fund",
+            "target": "Human Services",
+            "value": 5.2234
+        },
+        {
+            "source": "General Fund",
+            "target": "Information Technology",
+            "value": 10.2803
+        },
+        {
+            "source": "General Fund",
+            "target": "Mayor",
+            "value": 2.549
+        },
+        {
+            "source": "General Fund",
+            "target": "Non-Departmental",
+            "value": 77.2006
+        },
+        {
+            "source": "General Fund",
+            "target": "Oakland Parks & Recreation",
+            "value": 15.662
+        },
+        {
+            "source": "General Fund",
+            "target": "Oakland Public Library",
+            "value": 11.2828
+        },
+        {
+            "source": "General Fund",
+            "target": "Oakland Public Works",
+            "value": 2.8819
+        },
+        {
+            "source": "General Fund",
+            "target": "Planning & Building",
+            "value": 0.0454
+        },
+        {
+            "source": "General Fund",
+            "target": "Police",
+            "value": 212.5089
+        },
+        {
+            "source": "Business License Tax",
+            "target": "General Fund",
+            "value": 71.5054
+        },
+        {
+            "source": "Fines & Penalties",
+            "target": "General Fund",
+            "value": 23.8335
+        },
+        {
+            "source": "Grants & Subsidies",
+            "target": "General Fund",
+            "value": 0.1194
+        },
+        {
+            "source": "Interest Income",
+            "target": "General Fund",
+            "value": 0.7405
+        },
+        {
+            "source": "Interfund Transfers",
+            "target": "General Fund",
+            "value": 14.9229
+        },
+        {
+            "source": "Licenses & Permits",
+            "target": "General Fund",
+            "value": 2.2107
+        },
+        {
+            "source": "Miscellaneous Revenue",
+            "target": "General Fund",
+            "value": 0.7493
+        },
+        {
+            "source": "Parking Tax",
+            "target": "General Fund",
+            "value": 10.2113
+        },
+        {
+            "source": "Property Tax",
+            "target": "General Fund",
+            "value": 169.3074
+        },
+        {
+            "source": "Real Estate Transfer Tax",
+            "target": "General Fund",
+            "value": 55.63
+        },
+        {
+            "source": "Sales Tax",
+            "target": "General Fund",
+            "value": 55.4251
+        },
+        {
+            "source": "Service Charges",
+            "target": "General Fund",
+            "value": 46.8456
+        },
+        {
+            "source": "Transfers from Fund Balance",
+            "target": "General Fund",
+            "value": 6.8025
+        },
+        {
+            "source": "Transient Occupancy Tax",
+            "target": "General Fund",
+            "value": 16.4
+        },
+        {
+            "source": "Utility Consumption Tax",
+            "target": "General Fund",
+            "value": 50
+        },
+        {
+            "source": "Non-Discretionary",
+            "target": "Capital Improvement Projects",
+            "value": 38.4343
+        },
+        {
+            "source": "Non-Discretionary",
+            "target": "City Administrator",
+            "value": 4.0636
+        },
+        {
+            "source": "Non-Discretionary",
+            "target": "City Attorney",
+            "value": 9.6838
+        },
+        {
+            "source": "Non-Discretionary",
+            "target": "City Clerk",
+            "value": 0.0675
+        },
+        {
+            "source": "Non-Discretionary",
+            "target": "Economic & Workforce Development",
+            "value": 12.5926
+        },
+        {
+            "source": "Non-Discretionary",
+            "target": "Finance",
+            "value": 13.5228
+        },
+        {
+            "source": "Non-Discretionary",
+            "target": "Fire",
+            "value": 10.8653
+        },
+        {
+            "source": "Non-Discretionary",
+            "target": "Housing & Community Development",
+            "value": 18.5454
+        },
+        {
+            "source": "Non-Discretionary",
+            "target": "Human Resources Management",
+            "value": 1.9615
+        },
+        {
+            "source": "Non-Discretionary",
+            "target": "Human Services",
+            "value": 62.6754
+        },
+        {
+            "source": "Non-Discretionary",
+            "target": "Information Technology",
+            "value": 16.9423
+        },
+        {
+            "source": "Non-Discretionary",
+            "target": "Mayor",
+            "value": 0.2937
+        },
+        {
+            "source": "Non-Discretionary",
+            "target": "Non-Departmental",
+            "value": 263.7925
+        },
+        {
+            "source": "Non-Discretionary",
+            "target": "Oakland Parks & Recreation",
+            "value": 10.5757
+        },
+        {
+            "source": "Non-Discretionary",
+            "target": "Oakland Public Library",
+            "value": 17.5294
+        },
+        {
+            "source": "Non-Discretionary",
+            "target": "Oakland Public Works",
+            "value": 156.8086
+        },
+        {
+            "source": "Non-Discretionary",
+            "target": "Planning & Building",
+            "value": 27.1776
+        },
+        {
+            "source": "Non-Discretionary",
+            "target": "Police",
+            "value": 23.6575
+        },
+        {
+            "source": "Fines & Penalties",
+            "target": "Non-Discretionary",
+            "value": 4.7521
+        },
+        {
+            "source": "Gas Tax",
+            "target": "Non-Discretionary",
+            "value": 7.0609
+        },
+        {
+            "source": "Grants & Subsidies",
+            "target": "Non-Discretionary",
+            "value": 58.1621
+        },
+        {
+            "source": "Interest Income",
+            "target": "Non-Discretionary",
+            "value": 0.1915
+        },
+        {
+            "source": "Interfund Transfers",
+            "target": "Non-Discretionary",
+            "value": 135.5091
+        },
+        {
+            "source": "Internal Service Funds",
+            "target": "Non-Discretionary",
+            "value": 74.2976
+        },
+        {
+            "source": "Licenses & Permits",
+            "target": "Non-Discretionary",
+            "value": 15.4548
+        },
+        {
+            "source": "Local Tax",
+            "target": "Non-Discretionary",
+            "value": 148.1487
+        },
+        {
+            "source": "Miscellaneous Revenue",
+            "target": "Non-Discretionary",
+            "value": 36.7525
+        },
+        {
+            "source": "Parking Tax",
+            "target": "Non-Discretionary",
+            "value": 8.6796
+        },
+        {
+            "source": "Property Tax",
+            "target": "Non-Discretionary",
+            "value": 4.2857
+        },
+        {
+            "source": "Sales Tax",
+            "target": "Non-Discretionary",
+            "value": 24.6465
+        },
+        {
+            "source": "Service Charges",
+            "target": "Non-Discretionary",
+            "value": 121.437
+        },
+        {
+            "source": "Transfers from Fund Balance",
+            "target": "Non-Discretionary",
+            "value": 45.3387
+        },
+        {
+            "source": "Transient Occupancy Tax",
+            "target": "Non-Discretionary",
+            "value": 4.4727
+        }
+    ]
+}

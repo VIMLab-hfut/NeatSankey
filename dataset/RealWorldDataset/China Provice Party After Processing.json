@@ -1,0 +1,1376 @@
+{
+    "nodes": [
+        {
+            "name": "Anhui"
+        },
+        {
+            "name": "CPC (Communist Party of China)"
+        },
+        {
+            "name": "Hunan"
+        },
+        {
+            "name": "Shaanxi"
+        },
+        {
+            "name": "Fujian"
+        },
+        {
+            "name": "No party affiliation"
+        },
+        {
+            "name": "Zhejiang"
+        },
+        {
+            "name": "Chinese Peasants and Workers Democratic Party"
+        },
+        {
+            "name": "Shanghai"
+        },
+        {
+            "name": "The China Democratic League"
+        },
+        {
+            "name": "The Chinese People's Liberation Army and Armed Police Force"
+        },
+        {
+            "name": "Jiangsu"
+        },
+        {
+            "name": "Guangdong"
+        },
+        {
+            "name": "Hubei"
+        },
+        {
+            "name": "Hebei"
+        },
+        {
+            "name": "Jilin"
+        },
+        {
+            "name": "Henan"
+        },
+        {
+            "name": "Guizhou"
+        },
+        {
+            "name": "Xinjiang"
+        },
+        {
+            "name": "Yunnan"
+        },
+        {
+            "name": "Heilongjiang"
+        },
+        {
+            "name": "Liaoning"
+        },
+        {
+            "name": "Inner Mongolia"
+        },
+        {
+            "name": "Sichuan"
+        },
+        {
+            "name": "Shandong"
+        },
+        {
+            "name": "China National Democratic Construction Association"
+        },
+        {
+            "name": "Beijing"
+        },
+        {
+            "name": "Jiangxi"
+        },
+        {
+            "name": "Tianjin"
+        },
+        {
+            "name": "China Zhi Gong Party"
+        },
+        {
+            "name": "Jiusan Society"
+        },
+        {
+            "name": "The Revolutionary Committee of the Chinese Kuomintang"
+        },
+        {
+            "name": "Ningxia"
+        },
+        {
+            "name": "Shanxi"
+        },
+        {
+            "name": "China Association for Promoting Democracy"
+        },
+        {
+            "name": "Qinghai"
+        },
+        {
+            "name": "Gansu"
+        },
+        {
+            "name": "Guangxi"
+        },
+        {
+            "name": "Hong Kong"
+        },
+        {
+            "name": "Chongqing"
+        },
+        {
+            "name": "Hainan"
+        },
+        {
+            "name": "Tibet"
+        },
+        {
+            "name": "Taiwan Democratic Self-Government League"
+        },
+        {
+            "name": "Macao"
+        },
+        {
+            "name": "Taiwan"
+        }
+    ],
+    "links": [
+        {
+            "source": "Anhui",
+            "target": "CPC (Communist Party of China)",
+            "value": 74
+        },
+        {
+            "source": "Hunan",
+            "target": "CPC (Communist Party of China)",
+            "value": 77
+        },
+        {
+            "source": "Shaanxi",
+            "target": "CPC (Communist Party of China)",
+            "value": 48
+        },
+        {
+            "source": "Fujian",
+            "target": "No party affiliation",
+            "value": 10
+        },
+        {
+            "source": "Zhejiang",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 3
+        },
+        {
+            "source": "Shanghai",
+            "target": "The China Democratic League",
+            "value": 4
+        },
+        {
+            "source": "The Chinese People's Liberation Army and Armed Police Force",
+            "target": "CPC (Communist Party of China)",
+            "value": 294
+        },
+        {
+            "source": "Anhui",
+            "target": "No party affiliation",
+            "value": 17
+        },
+        {
+            "source": "Jiangsu",
+            "target": "CPC (Communist Party of China)",
+            "value": 106
+        },
+        {
+            "source": "Guangdong",
+            "target": "No party affiliation",
+            "value": 35
+        },
+        {
+            "source": "Hubei",
+            "target": "CPC (Communist Party of China)",
+            "value": 90
+        },
+        {
+            "source": "Hebei",
+            "target": "CPC (Communist Party of China)",
+            "value": 77
+        },
+        {
+            "source": "Jilin",
+            "target": "CPC (Communist Party of China)",
+            "value": 49
+        },
+        {
+            "source": "Henan",
+            "target": "CPC (Communist Party of China)",
+            "value": 127
+        },
+        {
+            "source": "Guizhou",
+            "target": "CPC (Communist Party of China)",
+            "value": 54
+        },
+        {
+            "source": "Xinjiang",
+            "target": "CPC (Communist Party of China)",
+            "value": 47
+        },
+        {
+            "source": "Yunnan",
+            "target": "No party affiliation",
+            "value": 22
+        },
+        {
+            "source": "Heilongjiang",
+            "target": "CPC (Communist Party of China)",
+            "value": 68
+        },
+        {
+            "source": "Liaoning",
+            "target": "CPC (Communist Party of China)",
+            "value": 71
+        },
+        {
+            "source": "Inner Mongolia",
+            "target": "CPC (Communist Party of China)",
+            "value": 48
+        },
+        {
+            "source": "Fujian",
+            "target": "CPC (Communist Party of China)",
+            "value": 44
+        },
+        {
+            "source": "Sichuan",
+            "target": "CPC (Communist Party of China)",
+            "value": 104
+        },
+        {
+            "source": "Shandong",
+            "target": "China National Democratic Construction Association",
+            "value": 5
+        },
+        {
+            "source": "Beijing",
+            "target": "CPC (Communist Party of China)",
+            "value": 32
+        },
+        {
+            "source": "Jiangxi",
+            "target": "CPC (Communist Party of China)",
+            "value": 61
+        },
+        {
+            "source": "Shandong",
+            "target": "CPC (Communist Party of China)",
+            "value": 122
+        },
+        {
+            "source": "Zhejiang",
+            "target": "CPC (Communist Party of China)",
+            "value": 66
+        },
+        {
+            "source": "Jiangxi",
+            "target": "No party affiliation",
+            "value": 6
+        },
+        {
+            "source": "Tianjin",
+            "target": "China Zhi Gong Party",
+            "value": 2
+        },
+        {
+            "source": "Hubei",
+            "target": "Jiusan Society",
+            "value": 3
+        },
+        {
+            "source": "Henan",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 3
+        },
+        {
+            "source": "Ningxia",
+            "target": "CPC (Communist Party of China)",
+            "value": 16
+        },
+        {
+            "source": "Hebei",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 4
+        },
+        {
+            "source": "Shanxi",
+            "target": "China Association for Promoting Democracy",
+            "value": 1
+        },
+        {
+            "source": "Yunnan",
+            "target": "CPC (Communist Party of China)",
+            "value": 63
+        },
+        {
+            "source": "Beijing",
+            "target": "China Zhi Gong Party",
+            "value": 2
+        },
+        {
+            "source": "Qinghai",
+            "target": "CPC (Communist Party of China)",
+            "value": 15
+        },
+        {
+            "source": "Gansu",
+            "target": "CPC (Communist Party of China)",
+            "value": 39
+        },
+        {
+            "source": "Shaanxi",
+            "target": "The China Democratic League",
+            "value": 2
+        },
+        {
+            "source": "Henan",
+            "target": "China Association for Promoting Democracy",
+            "value": 2
+        },
+        {
+            "source": "Shanghai",
+            "target": "Jiusan Society",
+            "value": 3
+        },
+        {
+            "source": "Hebei",
+            "target": "The China Democratic League",
+            "value": 5
+        },
+        {
+            "source": "Hebei",
+            "target": "No party affiliation",
+            "value": 26
+        },
+        {
+            "source": "Gansu",
+            "target": "No party affiliation",
+            "value": 11
+        },
+        {
+            "source": "Shandong",
+            "target": "China Zhi Gong Party",
+            "value": 4
+        },
+        {
+            "source": "Heilongjiang",
+            "target": "China National Democratic Construction Association",
+            "value": 3
+        },
+        {
+            "source": "Guangdong",
+            "target": "CPC (Communist Party of China)",
+            "value": 114
+        },
+        {
+            "source": "Jiangxi",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 2
+        },
+        {
+            "source": "Tianjin",
+            "target": "CPC (Communist Party of China)",
+            "value": 27
+        },
+        {
+            "source": "Guangxi",
+            "target": "CPC (Communist Party of China)",
+            "value": 61
+        },
+        {
+            "source": "Inner Mongolia",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 1
+        },
+        {
+            "source": "Zhejiang",
+            "target": "Jiusan Society",
+            "value": 4
+        },
+        {
+            "source": "Liaoning",
+            "target": "No party affiliation",
+            "value": 12
+        },
+        {
+            "source": "Gansu",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 1
+        },
+        {
+            "source": "Hong Kong",
+            "target": "No party affiliation",
+            "value": 34
+        },
+        {
+            "source": "Heilongjiang",
+            "target": "No party affiliation",
+            "value": 14
+        },
+        {
+            "source": "Chongqing",
+            "target": "CPC (Communist Party of China)",
+            "value": 43
+        },
+        {
+            "source": "Shanxi",
+            "target": "No party affiliation",
+            "value": 9
+        },
+        {
+            "source": "Qinghai",
+            "target": "No party affiliation",
+            "value": 5
+        },
+        {
+            "source": "Ningxia",
+            "target": "No party affiliation",
+            "value": 4
+        },
+        {
+            "source": "Shandong",
+            "target": "The China Democratic League",
+            "value": 4
+        },
+        {
+            "source": "Hainan",
+            "target": "CPC (Communist Party of China)",
+            "value": 22
+        },
+        {
+            "source": "Yunnan",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 1
+        },
+        {
+            "source": "Hebei",
+            "target": "China Association for Promoting Democracy",
+            "value": 2
+        },
+        {
+            "source": "Shanxi",
+            "target": "CPC (Communist Party of China)",
+            "value": 52
+        },
+        {
+            "source": "Shandong",
+            "target": "Jiusan Society",
+            "value": 7
+        },
+        {
+            "source": "Jiangsu",
+            "target": "No party affiliation",
+            "value": 22
+        },
+        {
+            "source": "Fujian",
+            "target": "China National Democratic Construction Association",
+            "value": 1
+        },
+        {
+            "source": "Henan",
+            "target": "China National Democratic Construction Association",
+            "value": 5
+        },
+        {
+            "source": "Guizhou",
+            "target": "No party affiliation",
+            "value": 9
+        },
+        {
+            "source": "Guangxi",
+            "target": "No party affiliation",
+            "value": 15
+        },
+        {
+            "source": "Sichuan",
+            "target": "No party affiliation",
+            "value": 14
+        },
+        {
+            "source": "Jilin",
+            "target": "Jiusan Society",
+            "value": 1
+        },
+        {
+            "source": "Shanghai",
+            "target": "No party affiliation",
+            "value": 6
+        },
+        {
+            "source": "Jiangsu",
+            "target": "China National Democratic Construction Association",
+            "value": 4
+        },
+        {
+            "source": "Jiangsu",
+            "target": "The China Democratic League",
+            "value": 5
+        },
+        {
+            "source": "Hebei",
+            "target": "China National Democratic Construction Association",
+            "value": 3
+        },
+        {
+            "source": "Hubei",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 3
+        },
+        {
+            "source": "Shanghai",
+            "target": "CPC (Communist Party of China)",
+            "value": 37
+        },
+        {
+            "source": "Liaoning",
+            "target": "Jiusan Society",
+            "value": 6
+        },
+        {
+            "source": "Hunan",
+            "target": "No party affiliation",
+            "value": 27
+        },
+        {
+            "source": "Tibet",
+            "target": "CPC (Communist Party of China)",
+            "value": 18
+        },
+        {
+            "source": "Inner Mongolia",
+            "target": "The China Democratic League",
+            "value": 1
+        },
+        {
+            "source": "Shanxi",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 2
+        },
+        {
+            "source": "Guangdong",
+            "target": "The China Democratic League",
+            "value": 1
+        },
+        {
+            "source": "Shandong",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 5
+        },
+        {
+            "source": "Shandong",
+            "target": "No party affiliation",
+            "value": 20
+        },
+        {
+            "source": "Shaanxi",
+            "target": "China Association for Promoting Democracy",
+            "value": 2
+        },
+        {
+            "source": "Xinjiang",
+            "target": "No party affiliation",
+            "value": 10
+        },
+        {
+            "source": "Inner Mongolia",
+            "target": "China Association for Promoting Democracy",
+            "value": 1
+        },
+        {
+            "source": "Shandong",
+            "target": "China Association for Promoting Democracy",
+            "value": 4
+        },
+        {
+            "source": "Liaoning",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 4
+        },
+        {
+            "source": "Liaoning",
+            "target": "China Association for Promoting Democracy",
+            "value": 2
+        },
+        {
+            "source": "Anhui",
+            "target": "China Association for Promoting Democracy",
+            "value": 2
+        },
+        {
+            "source": "Beijing",
+            "target": "China Association for Promoting Democracy",
+            "value": 3
+        },
+        {
+            "source": "Henan",
+            "target": "No party affiliation",
+            "value": 23
+        },
+        {
+            "source": "Sichuan",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 2
+        },
+        {
+            "source": "Zhejiang",
+            "target": "China Association for Promoting Democracy",
+            "value": 3
+        },
+        {
+            "source": "Jiangsu",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 1
+        },
+        {
+            "source": "Fujian",
+            "target": "China Association for Promoting Democracy",
+            "value": 3
+        },
+        {
+            "source": "Sichuan",
+            "target": "China Zhi Gong Party",
+            "value": 4
+        },
+        {
+            "source": "Guangxi",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 2
+        },
+        {
+            "source": "Jilin",
+            "target": "China National Democratic Construction Association",
+            "value": 1
+        },
+        {
+            "source": "Anhui",
+            "target": "China Zhi Gong Party",
+            "value": 3
+        },
+        {
+            "source": "Hubei",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 1
+        },
+        {
+            "source": "Shandong",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 2
+        },
+        {
+            "source": "Shaanxi",
+            "target": "China National Democratic Construction Association",
+            "value": 2
+        },
+        {
+            "source": "Heilongjiang",
+            "target": "China Association for Promoting Democracy",
+            "value": 1
+        },
+        {
+            "source": "Henan",
+            "target": "Jiusan Society",
+            "value": 3
+        },
+        {
+            "source": "Beijing",
+            "target": "No party affiliation",
+            "value": 10
+        },
+        {
+            "source": "Zhejiang",
+            "target": "The China Democratic League",
+            "value": 1
+        },
+        {
+            "source": "Tianjin",
+            "target": "No party affiliation",
+            "value": 5
+        },
+        {
+            "source": "Fujian",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 2
+        },
+        {
+            "source": "Hubei",
+            "target": "The China Democratic League",
+            "value": 2
+        },
+        {
+            "source": "Shanxi",
+            "target": "Jiusan Society",
+            "value": 2
+        },
+        {
+            "source": "Sichuan",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 6
+        },
+        {
+            "source": "Guangxi",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 2
+        },
+        {
+            "source": "Guizhou",
+            "target": "China National Democratic Construction Association",
+            "value": 2
+        },
+        {
+            "source": "Chongqing",
+            "target": "No party affiliation",
+            "value": 7
+        },
+        {
+            "source": "Jiangxi",
+            "target": "China Association for Promoting Democracy",
+            "value": 2
+        },
+        {
+            "source": "Guangdong",
+            "target": "Taiwan Democratic Self-Government League",
+            "value": 1
+        },
+        {
+            "source": "Zhejiang",
+            "target": "No party affiliation",
+            "value": 13
+        },
+        {
+            "source": "Tianjin",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 2
+        },
+        {
+            "source": "Heilongjiang",
+            "target": "Jiusan Society",
+            "value": 1
+        },
+        {
+            "source": "Hunan",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 2
+        },
+        {
+            "source": "Shaanxi",
+            "target": "No party affiliation",
+            "value": 5
+        },
+        {
+            "source": "Jiangxi",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 2
+        },
+        {
+            "source": "Liaoning",
+            "target": "The China Democratic League",
+            "value": 3
+        },
+        {
+            "source": "Guangxi",
+            "target": "China Association for Promoting Democracy",
+            "value": 1
+        },
+        {
+            "source": "Henan",
+            "target": "China Zhi Gong Party",
+            "value": 3
+        },
+        {
+            "source": "Sichuan",
+            "target": "China Association for Promoting Democracy",
+            "value": 4
+        },
+        {
+            "source": "Hainan",
+            "target": "China Zhi Gong Party",
+            "value": 1
+        },
+        {
+            "source": "Jilin",
+            "target": "No party affiliation",
+            "value": 3
+        },
+        {
+            "source": "Guangxi",
+            "target": "Jiusan Society",
+            "value": 2
+        },
+        {
+            "source": "Shaanxi",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 2
+        },
+        {
+            "source": "Hunan",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 2
+        },
+        {
+            "source": "Shanghai",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 1
+        },
+        {
+            "source": "Macao",
+            "target": "No party affiliation",
+            "value": 12
+        },
+        {
+            "source": "Sichuan",
+            "target": "China National Democratic Construction Association",
+            "value": 3
+        },
+        {
+            "source": "Inner Mongolia",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 1
+        },
+        {
+            "source": "Jiangxi",
+            "target": "The China Democratic League",
+            "value": 3
+        },
+        {
+            "source": "Sichuan",
+            "target": "Jiusan Society",
+            "value": 5
+        },
+        {
+            "source": "Sichuan",
+            "target": "The China Democratic League",
+            "value": 5
+        },
+        {
+            "source": "Hubei",
+            "target": "Taiwan Democratic Self-Government League",
+            "value": 1
+        },
+        {
+            "source": "Anhui",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 4
+        },
+        {
+            "source": "Jiangsu",
+            "target": "Taiwan Democratic Self-Government League",
+            "value": 1
+        },
+        {
+            "source": "Shanghai",
+            "target": "Taiwan Democratic Self-Government League",
+            "value": 1
+        },
+        {
+            "source": "Hubei",
+            "target": "China Association for Promoting Democracy",
+            "value": 5
+        },
+        {
+            "source": "Fujian",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 2
+        },
+        {
+            "source": "Hubei",
+            "target": "No party affiliation",
+            "value": 8
+        },
+        {
+            "source": "Jiangsu",
+            "target": "China Zhi Gong Party",
+            "value": 3
+        },
+        {
+            "source": "Hebei",
+            "target": "Jiusan Society",
+            "value": 4
+        },
+        {
+            "source": "Taiwan",
+            "target": "Taiwan Democratic Self-Government League",
+            "value": 4
+        },
+        {
+            "source": "Yunnan",
+            "target": "China Zhi Gong Party",
+            "value": 1
+        },
+        {
+            "source": "Jilin",
+            "target": "The China Democratic League",
+            "value": 1
+        },
+        {
+            "source": "Tianjin",
+            "target": "Jiusan Society",
+            "value": 1
+        },
+        {
+            "source": "Shanghai",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 2
+        },
+        {
+            "source": "Chongqing",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 1
+        },
+        {
+            "source": "Hunan",
+            "target": "China Association for Promoting Democracy",
+            "value": 2
+        },
+        {
+            "source": "Guangdong",
+            "target": "China Association for Promoting Democracy",
+            "value": 1
+        },
+        {
+            "source": "Hong Kong",
+            "target": "CPC (Communist Party of China)",
+            "value": 1
+        },
+        {
+            "source": "Henan",
+            "target": "The China Democratic League",
+            "value": 4
+        },
+        {
+            "source": "Yunnan",
+            "target": "China Association for Promoting Democracy",
+            "value": 1
+        },
+        {
+            "source": "Shanxi",
+            "target": "China National Democratic Construction Association",
+            "value": 1
+        },
+        {
+            "source": "Jiangxi",
+            "target": "China National Democratic Construction Association",
+            "value": 2
+        },
+        {
+            "source": "Guangdong",
+            "target": "China Zhi Gong Party",
+            "value": 2
+        },
+        {
+            "source": "Hunan",
+            "target": "China National Democratic Construction Association",
+            "value": 1
+        },
+        {
+            "source": "Inner Mongolia",
+            "target": "China National Democratic Construction Association",
+            "value": 1
+        },
+        {
+            "source": "Chongqing",
+            "target": "The China Democratic League",
+            "value": 1
+        },
+        {
+            "source": "Shaanxi",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 2
+        },
+        {
+            "source": "Beijing",
+            "target": "China National Democratic Construction Association",
+            "value": 2
+        },
+        {
+            "source": "Fujian",
+            "target": "Taiwan Democratic Self-Government League",
+            "value": 3
+        },
+        {
+            "source": "Anhui",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 2
+        },
+        {
+            "source": "Henan",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 2
+        },
+        {
+            "source": "Yunnan",
+            "target": "China National Democratic Construction Association",
+            "value": 1
+        },
+        {
+            "source": "Inner Mongolia",
+            "target": "No party affiliation",
+            "value": 4
+        },
+        {
+            "source": "Liaoning",
+            "target": "China Zhi Gong Party",
+            "value": 2
+        },
+        {
+            "source": "Jilin",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 1
+        },
+        {
+            "source": "Shanxi",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 2
+        },
+        {
+            "source": "Hunan",
+            "target": "China Zhi Gong Party",
+            "value": 2
+        },
+        {
+            "source": "Hainan",
+            "target": "No party affiliation",
+            "value": 1
+        },
+        {
+            "source": "Hubei",
+            "target": "China National Democratic Construction Association",
+            "value": 3
+        },
+        {
+            "source": "Jiangsu",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 1
+        },
+        {
+            "source": "Anhui",
+            "target": "China National Democratic Construction Association",
+            "value": 3
+        },
+        {
+            "source": "Jiangsu",
+            "target": "China Association for Promoting Democracy",
+            "value": 4
+        },
+        {
+            "source": "Guizhou",
+            "target": "China Association for Promoting Democracy",
+            "value": 3
+        },
+        {
+            "source": "Chongqing",
+            "target": "China Association for Promoting Democracy",
+            "value": 1
+        },
+        {
+            "source": "Tianjin",
+            "target": "China Association for Promoting Democracy",
+            "value": 1
+        },
+        {
+            "source": "Xinjiang",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 1
+        },
+        {
+            "source": "Guizhou",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 1
+        },
+        {
+            "source": "Beijing",
+            "target": "The China Democratic League",
+            "value": 1
+        },
+        {
+            "source": "Chongqing",
+            "target": "China National Democratic Construction Association",
+            "value": 4
+        },
+        {
+            "source": "Guangdong",
+            "target": "Jiusan Society",
+            "value": 4
+        },
+        {
+            "source": "Jiangxi",
+            "target": "Jiusan Society",
+            "value": 2
+        },
+        {
+            "source": "Shanghai",
+            "target": "China National Democratic Construction Association",
+            "value": 1
+        },
+        {
+            "source": "Jilin",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 3
+        },
+        {
+            "source": "Shaanxi",
+            "target": "China Zhi Gong Party",
+            "value": 1
+        },
+        {
+            "source": "Hubei",
+            "target": "China Zhi Gong Party",
+            "value": 1
+        },
+        {
+            "source": "Chongqing",
+            "target": "China Zhi Gong Party",
+            "value": 1
+        },
+        {
+            "source": "Hunan",
+            "target": "The China Democratic League",
+            "value": 1
+        },
+        {
+            "source": "Taiwan",
+            "target": "CPC (Communist Party of China)",
+            "value": 5
+        },
+        {
+            "source": "Tianjin",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 1
+        },
+        {
+            "source": "Hebei",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 2
+        },
+        {
+            "source": "Fujian",
+            "target": "The China Democratic League",
+            "value": 2
+        },
+        {
+            "source": "Zhejiang",
+            "target": "China Zhi Gong Party",
+            "value": 1
+        },
+        {
+            "source": "Taiwan",
+            "target": "No party affiliation",
+            "value": 3
+        },
+        {
+            "source": "Guangxi",
+            "target": "China Zhi Gong Party",
+            "value": 2
+        },
+        {
+            "source": "Heilongjiang",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 1
+        },
+        {
+            "source": "Heilongjiang",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 1
+        },
+        {
+            "source": "Fujian",
+            "target": "China Zhi Gong Party",
+            "value": 1
+        },
+        {
+            "source": "Ningxia",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 1
+        },
+        {
+            "source": "Zhejiang",
+            "target": "China National Democratic Construction Association",
+            "value": 2
+        },
+        {
+            "source": "Shanghai",
+            "target": "China Zhi Gong Party",
+            "value": 1
+        },
+        {
+            "source": "Hong Kong",
+            "target": "China National Democratic Construction Association",
+            "value": 1
+        },
+        {
+            "source": "Guangdong",
+            "target": "China National Democratic Construction Association",
+            "value": 2
+        },
+        {
+            "source": "Guangxi",
+            "target": "China National Democratic Construction Association",
+            "value": 2
+        },
+        {
+            "source": "Anhui",
+            "target": "Jiusan Society",
+            "value": 3
+        },
+        {
+            "source": "Beijing",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 1
+        },
+        {
+            "source": "Jilin",
+            "target": "China Association for Promoting Democracy",
+            "value": 2
+        },
+        {
+            "source": "Anhui",
+            "target": "The China Democratic League",
+            "value": 3
+        },
+        {
+            "source": "Shaanxi",
+            "target": "Jiusan Society",
+            "value": 2
+        },
+        {
+            "source": "Hunan",
+            "target": "Jiusan Society",
+            "value": 3
+        },
+        {
+            "source": "Heilongjiang",
+            "target": "The China Democratic League",
+            "value": 3
+        },
+        {
+            "source": "Guangxi",
+            "target": "The China Democratic League",
+            "value": 2
+        },
+        {
+            "source": "Tibet",
+            "target": "No party affiliation",
+            "value": 1
+        },
+        {
+            "source": "Guizhou",
+            "target": "Jiusan Society",
+            "value": 1
+        },
+        {
+            "source": "Fujian",
+            "target": "Jiusan Society",
+            "value": 1
+        },
+        {
+            "source": "Jiangsu",
+            "target": "Jiusan Society",
+            "value": 1
+        },
+        {
+            "source": "Beijing",
+            "target": "Jiusan Society",
+            "value": 2
+        },
+        {
+            "source": "Beijing",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 1
+        },
+        {
+            "source": "Tianjin",
+            "target": "The China Democratic League",
+            "value": 1
+        },
+        {
+            "source": "Gansu",
+            "target": "The China Democratic League",
+            "value": 1
+        },
+        {
+            "source": "Yunnan",
+            "target": "Jiusan Society",
+            "value": 1
+        },
+        {
+            "source": "Inner Mongolia",
+            "target": "Jiusan Society",
+            "value": 1
+        },
+        {
+            "source": "Guizhou",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 1
+        },
+        {
+            "source": "Guizhou",
+            "target": "The China Democratic League",
+            "value": 1
+        },
+        {
+            "source": "Guangdong",
+            "target": "Chinese Peasants and Workers Democratic Party",
+            "value": 2
+        },
+        {
+            "source": "Shanxi",
+            "target": "The China Democratic League",
+            "value": 1
+        },
+        {
+            "source": "Zhejiang",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 1
+        },
+        {
+            "source": "Hainan",
+            "target": "China National Democratic Construction Association",
+            "value": 1
+        },
+        {
+            "source": "Guangdong",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 1
+        },
+        {
+            "source": "Taiwan",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 1
+        },
+        {
+            "source": "Guizhou",
+            "target": "China Zhi Gong Party",
+            "value": 1
+        },
+        {
+            "source": "Tianjin",
+            "target": "China National Democratic Construction Association",
+            "value": 1
+        },
+        {
+            "source": "Chongqing",
+            "target": "The Revolutionary Committee of the Chinese Kuomintang",
+            "value": 1
+        },
+        {
+            "source": "Shanghai",
+            "target": "China Association for Promoting Democracy",
+            "value": 1
+        },
+        {
+            "source": "Chongqing",
+            "target": "Jiusan Society",
+            "value": 1
+        }
+    ]
+}
