@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<title>SANKEY Experiment</title>
+<style>
+    /**{*/
+    /*    z-index: 0*/
+    /*}*/
+    .node rect {
+        /*cursor: move;*/
+        fill-opacity: .9;
+        shape-rendering: crispEdges;
+    }
+
+    .node text {
+        pointer-events: none;
+        text-shadow: 0 1px 0 #fff;
+    }
+
+    .link {
+        fill: none;
+        stroke: #000; /*#CCCCCC;*/
+        stroke-opacity: 0.2;
+    }
+
+    .link:hover {
+        stroke: #000000;
+        stroke-opacity: .5;
+    }
+
+</style>
+
+<body>
+
+<p id="chart" style="text-align: center">
+
+<!--    <script src="./lib/d3.v3.js" style="shape-rendering:geometricPrecision;"></script>-->
+    <script src="http://d3js.org/d3.v3.js"></script>
+    <script>
+
+        d3.sankey = function () {
+            var sankey = {},
+                nodeWidth = 24,
+                nodePadding = 8,
+                size = [1, 1],
+                nodes = [],
+                links = [];
+
+            sankey.nodeWidth = function (_) {
+                if (!arguments.length) return nodeWidth;
+                nodeWidth = +_;
+                return sankey;
+            };
+
+            sankey.nodePadding = function (_) {
+                if (!arguments.length) return nodePadding;
+                nodePadding = +_;
+                return sankey;
+            };
+
+            sankey.nodes = function (_) {
+                if (!arguments.length) return nodes;
+                nodes = _;
+                return sankey;
+            };
+
+            sankey.links = function (_) {
+                if (!arguments.length) return links;
+                links = _;
+                return sankey;
+            };
+
+            sankey.size = function (_) {
+                if (!arguments.length) return size;
+                size = _;
+                return sankey;
+            };
+
+            sankey.layout = function (iterations) {
+                computeNodeLinks();
+                computeNodeValues();
+                computeNodeBreadths();
+                computeNodeDepths(iterations);
+                computeLinkDepths();
+                return sankey;
+            };
+
+            sankey.relayout = function () {
+                computeLinkDepths();
+                return sankey;
+            };
+
+            sankey.link = function () {
+                var curvature = .5;
+
+                function link(d) {
+                    var x0 = d.source.x + d.source.dx,
+                        x1 = d.target.x,
+                        xi = d3.interpolateNumber(x0, x1),
+                        x2 = xi(curvature),
+                        x3 = xi(1 - curvature),
+                        y0 = d.source.y + d.sy + d.dy / 2,
+                        y1 = d.target.y + d.ty + d.dy / 2;
+                    return "M" + x0 + "," + y0
+                        + "C" + x2 + "," + y0
+                        + " " + x3 + "," + y1
+                        + " " + x1 + "," + y1;
+                }
+
+                link.curvature = function (_) {
+                    if (!arguments.length) return curvature;
+                    curvature = +_;
+                    return link;
+                };
+
+                return link;
+            };
+
+            // Populate the sourceLinks and targetLinks for each node.
+            // Also, if the source and target are not objects, assume they are indices.
+            function computeNodeLinks() {
+                nodes.forEach(function (node) {
+                    node.sourceLinks = [];
+                    node.targetLinks = [];
+                });
+                links.forEach(function (link) {
+                    var source = link.source,
+                        target = link.target;
+                    if (typeof source === "number") source = link.source = nodes[link.source];
+                    if (typeof target === "number") target = link.target = nodes[link.target];
+                    source.sourceLinks.push(link);
+                    target.targetLinks.push(link);
+                });
+            }
+
+            // Compute the value (size) of each node by summing the associated links.
+            function computeNodeValues() {
+                nodes.forEach(function (node) {
+                    node.value = Math.max(
+                        d3.sum(node.sourceLinks, value),
+                        d3.sum(node.targetLinks, value)
+                    );
+                });
+            }
+
+            // Iteratively assign the breadth (x-position) for each node.
+            // Nodes are assigned the maximum breadth of incoming neighbors plus one;
+            // nodes with no incoming links are assigned breadth zero, while
+            // nodes with no outgoing links are assigned the maximum breadth.
+            function computeNodeBreadths() {
+                const startX = level[0][0].x
+                const endX = level[level.length - 1][0].x + 36
+                const realWidth = endX - startX
+                // let startPlace = level[0][0].x / realWidth * 1400 - 30
+
+                nodes.forEach(function (node) {
+                    // for (let m =0 ;m< level.length; m++)
+                    //     for (let n = 0;n< level[m].length; n++)
+                    //         if (level[m][n].name === node.name) {
+                    //             node.x = level[m][n].x
+                    //             node.y = level[m][n].y
+                    //         }
+                    node.x = (node.x - startX) / realWidth * width// - startPlace
+                    node.dx = nodeWidth
+                })
+                // var remainingNodes = nodes,
+                //     nextNodes,
+                //     x = 0;
+                //
+                // while (remainingNodes.length) {
+                //     nextNodes = [];
+                //     remainingNodes.forEach(function (node) {
+                //         node.x = x;
+                //         node.dx = nodeWidth;
+                //         node.sourceLinks.forEach(function (link) {
+                //             nextNodes.push(link.target);
+                //         });
+                //     });
+                //     remainingNodes = nextNodes;
+                //     ++x;
+                // }
+                //
+                // //
+                // // moveSinksRight(x);
+                // scaleNodeBreadths((size[0] - nodeWidth) / (x - 1));
+            }
+
+            function computeNodeDepths(iterations) {
+                var nodesByBreadth = d3.nest()
+                    .key(function (d) {
+                        return d.x;
+                    })
+                    .sortKeys(d3.ascending)
+                    .entries(nodes)
+                    .map(function (d) {
+                        return d.values;
+                    });
+
+                initializeNodeDepth();
+                resolveCollisions();
+
+                // relaxLeftToRight(1);
+                // resolveCollisions();
+                //
+                // for (var alpha = 0.001; iterations > 0; --iterations) {
+                //     relaxRightToLeft(alpha *= .99);
+                //     resolveCollisions();
+                //     relaxLeftToRight(alpha);
+                //     resolveCollisions();
+                // }
+
+                function initializeNodeDepth() {
+                    // var ky = d3.min(nodesByBreadth, function (nodes) {
+                    //     return (size[1] - (nodes.length - 1) * nodePadding) / d3.sum(nodes, value);
+                    // });
+                    var ky = 4
+
+                    nodesByBreadth.forEach(function (nodes) {
+                        nodes.forEach(function (node, i) {
+                            // node.y = i;
+                            node.dy = node.value * ky;
+                        });
+                    });
+
+                    links.forEach(function (link) {
+                        link.dy = link.value * ky;
+                    });
+                }
+
+                function resolveCollisions() {
+                    nodesByBreadth.forEach(function (nodes) {
+                        var node,
+                            dy,
+                            y0 = 0,
+                            n = nodes.length,
+                            i;
+
+                        // Push any overlapping nodes down.
+                        nodes.sort(ascendingDepth);
+                        for (i = 0; i < n; ++i) {
+                            node = nodes[i];
+                            dy = y0 - node.y;
+                            if (dy > 0) node.y += dy;
+                            y0 = node.y + node.dy + nodePadding;
+                        }
+
+                        // If the bottommost node goes outside the bounds, push it back up.
+                        dy = y0 - nodePadding - size[1];
+                        if (dy > 0) {
+                            y0 = node.y -= dy;
+
+                            // Push any overlapping nodes back up.
+                            for (i = n - 2; i >= 0; --i) {
+                                node = nodes[i];
+                                dy = node.y + node.dy + nodePadding - y0;
+                                if (dy > 0) node.y -= dy;
+                                y0 = node.y;
+                            }
+                        }
+                    });
+                }
+
+                function ascendingDepth(a, b) {
+                    return a.y - b.y;
+                }
+
+                function relaxLeftToRight(alpha) {
+                    nodesByBreadth.forEach(function (nodes, breadth) {
+                        nodes.forEach(function (node) {
+                            if (node.targetLinks.length) {
+                                var y = d3.sum(node.targetLinks, weightedSource) / d3.sum(node.targetLinks, value);
+                                node.y += (y - center(node)) * alpha;
+                            }
+                        });
+                    });
+
+                    function weightedSource(link) {
+                        return center(link.source) * link.value;
+                    }
+                }
+
+                function relaxRightToLeft(alpha) {
+                    nodesByBreadth.slice().reverse().forEach(function (nodes) {
+                        nodes.forEach(function (node) {
+                            if (node.sourceLinks.length) {
+                                var y = d3.sum(node.sourceLinks, weightedTarget) / d3.sum(node.sourceLinks, value);
+                                node.y += (y - center(node)) * alpha;
+                            }
+                        });
+                    });
+
+                    function weightedTarget(link) {
+                        return center(link.target) * link.value;
+                    }
+                }
+            }
+
+            function computeLinkDepths() {
+                nodes.forEach(function (node) {
+                    node.sourceLinks.sort(ascendingTargetDepth);
+                    node.targetLinks.sort(ascendingSourceDepth);
+                });
+                nodes.forEach(function (node) {
+                    var sy = 0, ty = 0;
+                    node.sourceLinks.forEach(function (link) {
+                        link.sy = sy;
+                        sy += link.dy;
+                    });
+                    node.targetLinks.forEach(function (link) {
+                        link.ty = ty;
+                        ty += link.dy;
+                    });
+                });
+
+                function ascendingSourceDepth(a, b) {
+                    return a.source.y - b.source.y;
+                }
+
+                function ascendingTargetDepth(a, b) {
+                    return a.target.y - b.target.y;
+                }
+            }
+
+            function center(node) {
+                return node.y + node.dy / 2;
+            }
+
+            function value(link) {
+                return link.value;
+            }
+
+            return sankey;
+        };
+
+        var units = "Widgets";
+
+        var margin = {top: 10, right: 10, bottom: 10, left: 10},
+            width = 1420 - margin.left - margin.right,
+            // width = 2500 - margin.left - margin.right,
+            height = 760 - margin.top - margin.bottom;
+
+        var formatNumber = d3.format(",.0f"),    // zero decimal places
+            format = function (d) {
+                return formatNumber(d) + " " + units;
+            },
+            color = d3.scale.category20();
+
+        // append the svg canvas to the page
+        var svg = d3.select("#chart").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+        // Set the sankey diagram properties
+        var sankey = d3.sankey()
+            .nodeWidth(36)
+            .nodePadding(10)
+            .size([width, height]);
+
+        var path = sankey.link();
+
+
+        let links = [{"source": "L0N0", "target": "L1N4", "value": 21.25874125874126}, {"source": "L1N4", "target": "L2N2", "value": 0.27972027972027974}, {"source": "L0N1", "target": "L1N0", "value": 0.27972027972027974}, {"source": "L1N0", "target": "L2N1", "value": 2.5174825174825175}, {"source": "L1N0", "target": "L2N5", "value": 4.195804195804196}, {"source": "L1N0", "target": "L2N2", "value": 7.272727272727273}, {"source": "L0N2", "target": "L1N2", "value": 15.944055944055945}, {"source": "L0N2", "target": "L1N0", "value": 0.8391608391608392}, {"source": "L0N2", "target": "L1N4", "value": 0.27972027972027974}, {"source": "L0N2", "target": "L1N5", "value": 0.27972027972027974}, {"source": "L1N2", "target": "L2N6", "value": 1.6783216783216783}, {"source": "L1N2", "target": "L2N1", "value": 0.8391608391608392}, {"source": "L1N2", "target": "L2N3", "value": 0.8391608391608392}, {"source": "L1N2", "target": "L2N2", "value": 0.27972027972027974}, {"source": "L1N5", "target": "L2N1", "value": 0.27972027972027974}, {"source": "L1N5", "target": "L2N5", "value": 0.27972027972027974}, {"source": "L0N3", "target": "L1N1", "value": 0.27972027972027974}, {"source": "L0N3", "target": "L1N5", "value": 0.27972027972027974}, {"source": "L1N1", "target": "L2N6", "value": 3.3566433566433567}, {"source": "L1N1", "target": "L2N5", "value": 7.552447552447553}, {"source": "L1N1", "target": "L2N3", "value": 15.384615384615385}, {"source": "L0N4", "target": "L1N0", "value": 0.5594405594405595}, {"source": "L0N4", "target": "L1N4", "value": 0.27972027972027974}, {"source": "L0N4", "target": "L1N3", "value": 0.5594405594405595}, {"source": "L0N4", "target": "L1N1", "value": 0.27972027972027974}, {"source": "L0N4", "target": "L1N2", "value": 0.27972027972027974}, {"source": "L0N4", "target": "L1N5", "value": 0.27972027972027974}, {"source": "L1N3", "target": "L2N1", "value": 0.27972027972027974}, {"source": "L0N5", "target": "L1N4", "value": 0.27972027972027974}, {"source": "L0N5", "target": "L1N5", "value": 0.27972027972027974}, {"source": "L0N6", "target": "L1N0", "value": 0.27972027972027974}, {"source": "L0N7", "target": "L1N0", "value": 0.27972027972027974}, {"source": "L0N8", "target": "L1N1", "value": 0.27972027972027974}, {"source": "L0N9", "target": "L1N1", "value": 0.27972027972027974}, {"source": "L0N10", "target": "L1N5", "value": 0.27972027972027974}, {"source": "L0N11", "target": "L1N4", "value": 0.27972027972027974}, {"source": "L0N12", "target": "L1N2", "value": 0.27972027972027974}, {"source": "L0N13", "target": "L1N1", "value": 0.27972027972027974}, {"source": "L0N14", "target": "L1N1", "value": 0.27972027972027974}, {"source": "L0N15", "target": "L1N4", "value": 0.27972027972027974}, {"source": "L2N1", "target": "L3N3", "value": 0.27972027972027974}, {"source": "L2N1", "target": "L3N5", "value": 0.27972027972027974}, {"source": "L2N1", "target": "L3N7", "value": 0.27972027972027974}, {"source": "L2N1", "target": "L3N2", "value": 0.27972027972027974}, {"source": "L2N5", "target": "L3N0", "value": 0.27972027972027974}, {"source": "L2N5", "target": "L3N3", "value": 0.27972027972027974}, {"source": "L2N5", "target": "L3N5", "value": 0.27972027972027974}, {"source": "L2N5", "target": "L3N4", "value": 0.27972027972027974}, {"source": "L2N2", "target": "L3N6", "value": 0.27972027972027974}, {"source": "L2N6", "target": "L3N4", "value": 0.27972027972027974}, {"source": "L2N3", "target": "L3N0", "value": 0.27972027972027974}, {"source": "L2N3", "target": "L3N1", "value": 0.8391608391608392}, {"source": "L2N3", "target": "L3N5", "value": 0.27972027972027974}, {"source": "L2N3", "target": "L3N7", "value": 0.27972027972027974}, {"source": "L2N0", "target": "dummy->L2N0->L3N6->V1", "value": 11.748251748251748}, {"source": "L2N0", "target": "dummy->L2N0->L3N1->V1", "value": 7.272727272727273}, {"source": "L2N0", "target": "dummy->L2N0->L3N5->V1", "value": 20.97902097902098}, {"source": "L2N4", "target": "dummy->L2N4->L3N6->V1", "value": 0.27972027972027974}, {"source": "L2N4", "target": "dummy->L2N4->L3N3->V1", "value": 0.27972027972027974}, {"source": "dummy->L2N0->L3N6->V1", "target": "dummy->L2N0->L3N6->V2", "value": 11.748251748251748}, {"source": "dummy->L2N0->L3N6->V2", "target": "L3N6", "value": 11.748251748251748}, {"source": "dummy->L2N0->L3N1->V1", "target": "dummy->L2N0->L3N1->V2", "value": 7.272727272727273}, {"source": "dummy->L2N0->L3N1->V2", "target": "L3N1", "value": 7.272727272727273}, {"source": "dummy->L2N0->L3N5->V1", "target": "dummy->L2N0->L3N5->V2", "value": 20.97902097902098}, {"source": "dummy->L2N0->L3N5->V2", "target": "L3N5", "value": 20.97902097902098}, {"source": "dummy->L2N4->L3N6->V1", "target": "dummy->L2N4->L3N6->V2", "value": 0.27972027972027974}, {"source": "dummy->L2N4->L3N6->V2", "target": "L3N6", "value": 0.27972027972027974}, {"source": "dummy->L2N4->L3N3->V1", "target": "dummy->L2N4->L3N3->V2", "value": 0.27972027972027974}, {"source": "dummy->L2N4->L3N3->V2", "target": "L3N3", "value": 0.27972027972027974}]
+
+        //nodesPositionInfo:
+        let level = [[{"x": 448.0, "y": 0, "name": "L0N14"}, {"x": 448.0, "y": 9.41241075772131, "name": "L0N13"}, {"x": 448.0, "y": 19.636363636363637, "name": "L0N9"}, {"x": 448.0, "y": 29.034965034965033, "name": "L0N8"}, {"x": 448.0, "y": 39.27272727272727, "name": "L0N3"}, {"x": 448.0, "y": 49.230769230769226, "name": "L0N10"}, {"x": 448.0, "y": 58.62937062937063, "name": "L0N12"}, {"x": 448.0, "y": 73.9020979020979, "name": "L0N4"}, {"x": 448.0, "y": 138.4055944055944, "name": "L0N2"}, {"x": 448.0, "y": 181.0909090909091, "name": "L0N5"}, {"x": 448.0, "y": 191.8881118881119, "name": "L0N7"}, {"x": 448.0, "y": 202.1258741258741, "name": "L0N6"}, {"x": 448.0, "y": 211.5244755244755, "name": "L0N1"}, {"x": 448.0, "y": 220.08391608391605, "name": "L2N0"}, {"x": 448.0, "y": 428.08391608391605, "name": "L0N15"}, {"x": 448.0, "y": 437.48251748251744, "name": "L0N11"}, {"x": 448.0, "y": 446.8811188811188, "name": "L0N0"}, {"x": 448.0, "y": 561.1748251748252, "name": "L2N4"}], [{"x": 797.1998500494751, "y": 78.88111888111891, "name": "L1N1"}, {"x": 797.1998500494751, "y": 144.8497759571106, "name": "L1N5"}, {"x": 797.1998500494751, "y": 161.10489510489512, "name": "L1N3"}, {"x": 797.1998500494751, "y": 185.5734265734266, "name": "L1N2"}, {"x": 797.1998500494751, "y": 268.7832167832168, "name": "dummy->L2N0->L3N5->V1"}, {"x": 797.1998500494751, "y": 323.7412587412588, "name": "L1N0"}, {"x": 797.1998500494751, "y": 406.6713286713287, "name": "dummy->L2N0->L3N1->V1"}, {"x": 797.1998500494751, "y": 456.03496503496507, "name": "dummy->L2N4->L3N3->V1"}, {"x": 797.1998500494751, "y": 471.2727272727273, "name": "L1N4"}, {"x": 797.1998500494751, "y": 520.0769230769231, "name": "dummy->L2N0->L3N6->V1"}, {"x": 797.1998500494751, "y": 556.5734265734266, "name": "dummy->L2N4->L3N6->V1"}], [{"x": 1070.5948848599137, "y": 5.034965034965035, "name": "L2N3"}, {"x": 1070.5948848599137, "y": 26.74825174825175, "name": "L2N5"}, {"x": 1070.5948848599137, "y": 44.82517482517483, "name": "L2N6"}, {"x": 1070.5948848599137, "y": 123.32167832167833, "name": "dummy->L2N0->L3N5->V2"}, {"x": 1070.5948848599137, "y": 183.63636363636365, "name": "L2N1"}, {"x": 1070.5948848599137, "y": 200.8741258741259, "name": "dummy->L2N0->L3N1->V2"}, {"x": 1070.5948848599137, "y": 252.23776223776227, "name": "dummy->L2N4->L3N3->V2"}, {"x": 1070.5948848599137, "y": 269.47552447552454, "name": "L2N2"}, {"x": 1070.5948848599137, "y": 285.03496503496507, "name": "dummy->L2N0->L3N6->V2"}, {"x": 1070.5948848599137, "y": 358.7762237762238, "name": "dummy->L2N4->L3N6->V2"}], [{"x": 1344.0, "y": 24.335664335664337, "name": "L3N1"}, {"x": 1344.0, "y": 58.55944055944056, "name": "L3N0"}, {"x": 1344.0, "y": 81.03496503496504, "name": "L3N7"}, {"x": 1344.0, "y": 151.62772263100982, "name": "L3N5"}, {"x": 1344.0, "y": 227.24475524475525, "name": "L3N2"}, {"x": 1344.0, "y": 246.64335664335664, "name": "L3N4"}, {"x": 1344.0, "y": 269.9580419580419, "name": "L3N3"}, {"x": 1344.0, "y": 289.6363636363636, "name": "L3N6"}]]
+
+        let result = [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], [1, 2, 3, 4, 5, 6, 7, 8]]
+
+
+
+        let nodes = []
+        result.forEach((d, i) => {
+            d.forEach(j => {
+                nodes.push(level[i][parseInt(j) - 1])
+            })
+        })
+        console.log(nodes)
+
+        var another = nodes.map(d => ({name: d['name']}))
+        var orgNode = nodes.map(d => d.name)
+        var anotherLinks = links.map(d => ({
+                'source': orgNode.indexOf(d.source),
+                'target': orgNode.indexOf(d.target),
+                'value': d.value
+            }
+        ))
+        console.log(nodes, links)
+        var data = ({
+            "nodes": nodes,
+            "links": links,
+        })
+
+        var nodeMap = {};
+        var graph = data;
+        graph.nodes.forEach(function (x) {
+            nodeMap[x.name] = x;
+        });
+        console.log(nodeMap)
+        graph.links = graph.links.map(function (x) {
+            if (typeof nodeMap[x.target] === "undefined") console.log(x.target)
+            if (typeof nodeMap[x.source] === "undefined") console.log(x.source)
+            return {
+                source: nodeMap[x.source],
+                target: nodeMap[x.target],
+                value: x.value
+            };
+        });
+        console.log(graph)
+
+        sankey
+            .nodes(graph.nodes)
+            .links(graph.links)
+            .layout(32);
+        // add in the nodes
+        var node = svg.append("g").selectAll(".node")
+            .data(graph.nodes)
+            .enter().append("g")
+            .attr("class", "node")
+            .attr("transform", function (d) {
+                return "translate(" + d.x + "," + d.y + ")";
+            })
+
+        // add the rectangles for the nodes
+        node.append("rect")
+            .attr("name", (d) => d.name)
+            .attr("height", function (d) {
+                return d.dy;
+            })
+            .attr("width", sankey.nodeWidth())
+            .style("fill", function (d) {
+                return d.color = color(d.name.replace(/ .*/, ""));
+            })
+            .style("stroke", function (d) {
+                return d3.rgb(d.color).darker(1);
+            })
+            .append("title")
+            .text(function (d) {
+                return d.name + "\n" + format(d.value);
+            });
+
+        // add in the title for the nodes
+        node.append("text")
+            .attr("x", d => {
+                if (d.x < 300)
+                    return 6 + sankey.nodeWidth()
+                else if (d.x < 1000)
+                    return 6 + sankey.nodeWidth()
+                else return -6
+            })
+            .attr("y", function (d) {
+                console.log(d);
+                return d.dy / 2// + 3;
+            })
+            .attr("dy", ".35em")
+            .attr("text-anchor", d => {
+                if (d.x < 200)
+                    return "start"
+                else if (d.x < 500)
+                    return "start"
+                else if (d.x < 1000)
+                    return "start"
+                else return "end"
+            })
+            .attr("transform", null)
+            .text(function (d) {
+                return d.name;
+            }).style("opacity", 0.8)
+
+        // add in the links
+        var link = svg
+            .append("g")
+            .selectAll(".link")
+            .data(graph.links)
+            .enter()
+            .append("path")
+            .attr("class", "link")
+            .attr("d", path)
+            .attr("name", (d) => d.source.name + "-" + d.target.name)
+            .style("stroke-width", function (d) {
+                return Math.max(1, d.dy);
+            })
+            .style("stroke", function (d, i) {
+                return d3.rgb(color(i + 5)).darker(0.9)
+            })
+            // .sort(function (a, b) {return b.dy - a.dy;});
+            .append("title")
+            .text(function (d) {
+                return d.source.name + " → " +
+                    d.target.name + "\n" + format(d.value);
+            });
+
+
+    </script>
+    <script src="../sankeyEdgesBundling.js"></script>`
+</body>
+
+</html>

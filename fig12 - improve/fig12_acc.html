@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome-pyecharts</title>
+            <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+
+</head>
+<body>
+    <div id="fd04aa871fae4169a3e8e7edffbf5b54" class="chart-container" style="width:900px; height:500px;"></div>
+    <script>
+        var chart_fd04aa871fae4169a3e8e7edffbf5b54 = echarts.init(
+            document.getElementById('fd04aa871fae4169a3e8e7edffbf5b54'), 'white', {renderer: 'canvas'});
+        var option_fd04aa871fae4169a3e8e7edffbf5b54 = {
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "color": [
+        "#c23531",
+        "#2f4554",
+        "#61a0a8",
+        "#d48265",
+        "#749f83",
+        "#ca8622",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3",
+        "#f05b72",
+        "#ef5b9c",
+        "#f47920",
+        "#905a3d",
+        "#fab27b",
+        "#2a5caa",
+        "#444693",
+        "#726930",
+        "#b2d235",
+        "#6d8346",
+        "#ac6767",
+        "#1d953f",
+        "#6950a1",
+        "#918597"
+    ],
+    "series": [
+        {
+            "type": "boxplot",
+            "name": "OptimSankey",
+            "data": [
+                [
+                    0.133,
+                    0.133,
+                    0.233,
+                    0.38325000000000004,
+                    0.4
+                ],
+                [
+                    0.133,
+                    0.14975,
+                    0.2,
+                    0.2,
+                    0.2
+                ],
+                [
+                    0.0,
+                    0.2,
+                    0.267,
+                    0.3165,
+                    0.533
+                ],
+                [
+                    0.067,
+                    0.10025,
+                    0.2665,
+                    0.333,
+                    0.333
+                ]
+            ],
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
+            },
+            "markPoint": {
+                "label": {
+                    "show": true,
+                    "position": "inside",
+                    "color": "#fff",
+                    "margin": 8
+                }
+            },
+            "markLine": {
+                "silent": false,
+                "precision": 2,
+                "label": {
+                    "show": true,
+                    "position": "top",
+                    "margin": 8
+                }
+            }
+        },
+        {
+            "type": "boxplot",
+            "name": "NeatSankey",
+            "data": [
+                [
+                    0.067,
+                    0.0835,
+                    0.2665,
+                    0.49975,
+                    0.533
+                ],
+                [
+                    0.267,
+                    0.28350000000000003,
+                    0.36650000000000005,
+                    0.4,
+                    0.4
+                ],
+                [
+                    0.0,
+                    0.267,
+                    0.333,
+                    0.4,
+                    0.533
+                ],
+                [
+                    0.267,
+                    0.267,
+                    0.30000000000000004,
+                    0.38325000000000004,
+                    0.4
+                ]
+            ],
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
+            },
+            "markPoint": {
+                "label": {
+                    "show": true,
+                    "position": "inside",
+                    "color": "#fff",
+                    "margin": 8
+                }
+            },
+            "markLine": {
+                "silent": false,
+                "precision": 2,
+                "label": {
+                    "show": true,
+                    "position": "top",
+                    "margin": 8
+                }
+            }
+        },
+        {
+            "type": "boxplot",
+            "name": "BCSankey",
+            "data": [
+                [
+                    0.133,
+                    0.14975,
+                    0.2665,
+                    0.38325000000000004,
+                    0.4
+                ],
+                [
+                    0.2,
+                    0.2,
+                    0.30000000000000004,
+                    0.4,
+                    0.4
+                ],
+                [
+                    0.067,
+                    0.2,
+                    0.267,
+                    0.333,
+                    0.4
+                ],
+                [
+                    0.2,
+                    0.2,
+                    0.2335,
+                    0.267,
+                    0.267
+                ]
+            ],
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
+            },
+            "markPoint": {
+                "label": {
+                    "show": true,
+                    "position": "inside",
+                    "color": "#fff",
+                    "margin": 8
+                }
+            },
+            "markLine": {
+                "silent": false,
+                "precision": 2,
+                "label": {
+                    "show": true,
+                    "position": "top",
+                    "margin": 8
+                }
+            }
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                "OptimSankey",
+                "NeatSankey",
+                "BCSankey"
+            ],
+            "selected": {
+                "OptimSankey": true,
+                "NeatSankey": true,
+                "BCSankey": true
+            }
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0,
+        "padding": 5
+    },
+    "xAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "gridIndex": 0,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": false,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            },
+            "data": [
+                "Economics",
+                "Teacher",
+                "Computer",
+                "Mechanism"
+            ]
+        }
+    ],
+    "yAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "gridIndex": 0,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": false,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            }
+        }
+    ]
+};
+        chart_fd04aa871fae4169a3e8e7edffbf5b54.setOption(option_fd04aa871fae4169a3e8e7edffbf5b54);
+    </script>
+</body>
+</html>

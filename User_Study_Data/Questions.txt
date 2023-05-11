@@ -1,0 +1,84 @@
+City of Oakland Budget Sankey Particles
+1. Please select which of the following paths appears in the above diagram?
+A. Local Tax -> General Fund -> Police
+B. Internal Service Funds -> General Fund -> None-Departmental
+C. Interfund Transfers -> Non-Discretionary -> City  Council
+D. Property Tax -> Non-Discretionary -> City Auditor
+2. For the node 'General Fund' in the diagram, which node in the third layer is it not flowing to?
+A. Finance
+B. 无
+C. Housing & Community Development
+D. Oakland Public Library
+3. For the first layer, which node has the largest value?
+A. Property Tax
+B. Interfund Transfers
+C. Local Tax
+D. Service Charges
+
+ilp_case_result
+1. Please select which of the following paths appears in the above diagram?
+A. Energy -> Transportation -> Air -> HFCs-PFCs
+B. Industrial Process -> Landfills -> Aluminium Non-Ferrous Metals -> Methane
+C. Industrial Process -> dummy Cement411 -> Cement -> Carbon Dioxide
+D. Land Use Change -> Harvest / Management -> Other Industry -> Carbon Dioxide
+2. For the node 'Chemicals' in the figure, what are its inflow nodes?
+A. Electricity and heat, Industry, Rice Cultivation
+B. Electricity and heat, Industry, dummy Chemicals421
+C. Transportation, Industry, dummy Chemicals421
+D. Electricity and heat, Fugitive Emissions, dummy Chemicals421
+3. For the third level, which node has the largest value?
+A. Road
+B. Residential Buildings
+C. Oil and Gas Processing
+D. Other Industry
+
+product_2
+1. Please select which of the following paths appears in the above diagram?
+A. Total -> Human rights -> Working hours -> Cocoa mass
+B. Total -> Human rights -> Packaging
+C. Total -> Environment -> Land use -> Vegetables
+D. Total -> Environment -> Climate change -> Coconut oil
+2. For the node 'Environment' in the graph, which of the following inflow nodes is not its outflow node?
+A. Land use
+B. Packaging
+C. climate change
+D. Suffient wage
+3. Which node has the largest value for layers 2, 3, and 4?
+A. Human rights
+B. Environment
+C. Land use
+D. Coco butter
+
+rCharts Examples Sankey Particles
+1. Please select which of the following paths appears in the above diagram?
+A. nvd3 -> scatterplot -> shinyapp -> Ramnath Vaidyanathan
+B. d3 -> sankey -> tutorial -> Ramnath Vaidyanathan
+C. dimple -> multiple -> blog post -> TimelyProtfolio
+D. polychart -> custom -> standalone visualization -> TimelyProtfolio
+2. For the node 'tutorial' in the graph, which of the following inflow nodes is not its inflow node?
+A. sankey
+B. line chart
+C. custom
+D. parallel coordinates
+3. Which node has the largest value for the first layer?
+A. d3
+B. highcharts
+C. polychart
+D. dimple
+
+us-energy-consumption
+1. Please select which of the following paths appears in the above diagram?
+A. Biomass -> dummy-Biomass-Industrial -> Residential -> Energy Services
+B. Natural Gas -> dummy-Gas-Industrial -> Residential -> Rejected Energy
+C. Coal -> Electricity-Generation -> Industry -> Energy Services
+D. Nuclear -> Electricity-Generation -> dummy-Electricity-Generation-Rejected Energy -> Energy Services
+2. For the node 'Industry' in the graph, which of the following inflow nodes is not its inflow node?
+A. dummy-Petroleum-Industrial
+B. dummy-Biomass-Industrial
+C. dummy-Natural Gas-Residential
+D. Electricity Generation
+3. For the third level, which node has the largest value?
+A. Transportation
+B. Industrial
+C. Residential
+D. dummy-Electricity-Generation-Rejected Energy

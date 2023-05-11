@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<title>SANKEY Experiment</title>
+<style>
+    /**{*/
+    /*    z-index: 0*/
+    /*}*/
+    .node rect {
+        /*cursor: move;*/
+        fill-opacity: .9;
+        shape-rendering: crispEdges;
+    }
+
+    .node text {
+        pointer-events: none;
+        text-shadow: 0 1px 0 #fff;
+    }
+
+    .link {
+        fill: none;
+        stroke: #000; /*#CCCCCC;*/
+        stroke-opacity: 0.2;
+    }
+
+    .link:hover {
+        stroke: #000000;
+        stroke-opacity: .5;
+    }
+
+</style>
+
+<body>
+
+<p id="chart" style="text-align: center">
+
+<!--    <script src="./lib/d3.v3.js" style="shape-rendering:geometricPrecision;"></script>-->
+    <script src="http://d3js.org/d3.v3.js"></script>
+    <script>
+
+        d3.sankey = function () {
+            var sankey = {},
+                nodeWidth = 24,
+                nodePadding = 8,
+                size = [1, 1],
+                nodes = [],
+                links = [];
+
+            sankey.nodeWidth = function (_) {
+                if (!arguments.length) return nodeWidth;
+                nodeWidth = +_;
+                return sankey;
+            };
+
+            sankey.nodePadding = function (_) {
+                if (!arguments.length) return nodePadding;
+                nodePadding = +_;
+                return sankey;
+            };
+
+            sankey.nodes = function (_) {
+                if (!arguments.length) return nodes;
+                nodes = _;
+                return sankey;
+            };
+
+            sankey.links = function (_) {
+                if (!arguments.length) return links;
+                links = _;
+                return sankey;
+            };
+
+            sankey.size = function (_) {
+                if (!arguments.length) return size;
+                size = _;
+                return sankey;
+            };
+
+            sankey.layout = function (iterations) {
+                computeNodeLinks();
+                computeNodeValues();
+                computeNodeBreadths();
+                computeNodeDepths(iterations);
+                computeLinkDepths();
+                return sankey;
+            };
+
+            sankey.relayout = function () {
+                computeLinkDepths();
+                return sankey;
+            };
+
+            sankey.link = function () {
+                var curvature = .5;
+
+                function link(d) {
+                    var x0 = d.source.x + d.source.dx,
+                        x1 = d.target.x,
+                        xi = d3.interpolateNumber(x0, x1),
+                        x2 = xi(curvature),
+                        x3 = xi(1 - curvature),
+                        y0 = d.source.y + d.sy + d.dy / 2,
+                        y1 = d.target.y + d.ty + d.dy / 2;
+                    return "M" + x0 + "," + y0
+                        + "C" + x2 + "," + y0
+                        + " " + x3 + "," + y1
+                        + " " + x1 + "," + y1;
+                }
+
+                link.curvature = function (_) {
+                    if (!arguments.length) return curvature;
+                    curvature = +_;
+                    return link;
+                };
+
+                return link;
+            };
+
+            // Populate the sourceLinks and targetLinks for each node.
+            // Also, if the source and target are not objects, assume they are indices.
+            function computeNodeLinks() {
+                nodes.forEach(function (node) {
+                    node.sourceLinks = [];
+                    node.targetLinks = [];
+                });
+                links.forEach(function (link) {
+                    var source = link.source,
+                        target = link.target;
+                    if (typeof source === "number") source = link.source = nodes[link.source];
+                    if (typeof target === "number") target = link.target = nodes[link.target];
+                    source.sourceLinks.push(link);
+                    target.targetLinks.push(link);
+                });
+            }
+
+            // Compute the value (size) of each node by summing the associated links.
+            function computeNodeValues() {
+                nodes.forEach(function (node) {
+                    node.value = Math.max(
+                        d3.sum(node.sourceLinks, value),
+                        d3.sum(node.targetLinks, value)
+                    );
+                });
+            }
+
+            // Iteratively assign the breadth (x-position) for each node.
+            // Nodes are assigned the maximum breadth of incoming neighbors plus one;
+            // nodes with no incoming links are assigned breadth zero, while
+            // nodes with no outgoing links are assigned the maximum breadth.
+            function computeNodeBreadths() {
+                const startX = level[0][0].x
+                const endX = level[level.length - 1][0].x + 36
+                const realWidth = endX - startX
+                // let startPlace = level[0][0].x / realWidth * 1400 - 30
+
+                nodes.forEach(function (node) {
+                    // for (let m =0 ;m< level.length; m++)
+                    //     for (let n = 0;n< level[m].length; n++)
+                    //         if (level[m][n].name === node.name) {
+                    //             node.x = level[m][n].x
+                    //             node.y = level[m][n].y
+                    //         }
+                    node.x = (node.x - startX) / realWidth * width// - startPlace
+                    node.dx = nodeWidth
+                })
+                // var remainingNodes = nodes,
+                //     nextNodes,
+                //     x = 0;
+                //
+                // while (remainingNodes.length) {
+                //     nextNodes = [];
+                //     remainingNodes.forEach(function (node) {
+                //         node.x = x;
+                //         node.dx = nodeWidth;
+                //         node.sourceLinks.forEach(function (link) {
+                //             nextNodes.push(link.target);
+                //         });
+                //     });
+                //     remainingNodes = nextNodes;
+                //     ++x;
+                // }
+                //
+                // //
+                // // moveSinksRight(x);
+                // scaleNodeBreadths((size[0] - nodeWidth) / (x - 1));
+            }
+
+            function computeNodeDepths(iterations) {
+                var nodesByBreadth = d3.nest()
+                    .key(function (d) {
+                        return d.x;
+                    })
+                    .sortKeys(d3.ascending)
+                    .entries(nodes)
+                    .map(function (d) {
+                        return d.values;
+                    });
+
+                initializeNodeDepth();
+                resolveCollisions();
+
+                // relaxLeftToRight(1);
+                // resolveCollisions();
+                //
+                // for (var alpha = 0.001; iterations > 0; --iterations) {
+                //     relaxRightToLeft(alpha *= .99);
+                //     resolveCollisions();
+                //     relaxLeftToRight(alpha);
+                //     resolveCollisions();
+                // }
+
+                function initializeNodeDepth() {
+                    // var ky = d3.min(nodesByBreadth, function (nodes) {
+                    //     return (size[1] - (nodes.length - 1) * nodePadding) / d3.sum(nodes, value);
+                    // });
+                    var ky = 4
+
+                    nodesByBreadth.forEach(function (nodes) {
+                        nodes.forEach(function (node, i) {
+                            // node.y = i;
+                            node.dy = node.value * ky;
+                        });
+                    });
+
+                    links.forEach(function (link) {
+                        link.dy = link.value * ky;
+                    });
+                }
+
+                function resolveCollisions() {
+                    nodesByBreadth.forEach(function (nodes) {
+                        var node,
+                            dy,
+                            y0 = 0,
+                            n = nodes.length,
+                            i;
+
+                        // Push any overlapping nodes down.
+                        nodes.sort(ascendingDepth);
+                        for (i = 0; i < n; ++i) {
+                            node = nodes[i];
+                            dy = y0 - node.y;
+                            if (dy > 0) node.y += dy;
+                            y0 = node.y + node.dy + nodePadding;
+                        }
+
+                        // If the bottommost node goes outside the bounds, push it back up.
+                        dy = y0 - nodePadding - size[1];
+                        if (dy > 0) {
+                            y0 = node.y -= dy;
+
+                            // Push any overlapping nodes back up.
+                            for (i = n - 2; i >= 0; --i) {
+                                node = nodes[i];
+                                dy = node.y + node.dy + nodePadding - y0;
+                                if (dy > 0) node.y -= dy;
+                                y0 = node.y;
+                            }
+                        }
+                    });
+                }
+
+                function ascendingDepth(a, b) {
+                    return a.y - b.y;
+                }
+
+                function relaxLeftToRight(alpha) {
+                    nodesByBreadth.forEach(function (nodes, breadth) {
+                        nodes.forEach(function (node) {
+                            if (node.targetLinks.length) {
+                                var y = d3.sum(node.targetLinks, weightedSource) / d3.sum(node.targetLinks, value);
+                                node.y += (y - center(node)) * alpha;
+                            }
+                        });
+                    });
+
+                    function weightedSource(link) {
+                        return center(link.source) * link.value;
+                    }
+                }
+
+                function relaxRightToLeft(alpha) {
+                    nodesByBreadth.slice().reverse().forEach(function (nodes) {
+                        nodes.forEach(function (node) {
+                            if (node.sourceLinks.length) {
+                                var y = d3.sum(node.sourceLinks, weightedTarget) / d3.sum(node.sourceLinks, value);
+                                node.y += (y - center(node)) * alpha;
+                            }
+                        });
+                    });
+
+                    function weightedTarget(link) {
+                        return center(link.target) * link.value;
+                    }
+                }
+            }
+
+            function computeLinkDepths() {
+                nodes.forEach(function (node) {
+                    node.sourceLinks.sort(ascendingTargetDepth);
+                    node.targetLinks.sort(ascendingSourceDepth);
+                });
+                nodes.forEach(function (node) {
+                    var sy = 0, ty = 0;
+                    node.sourceLinks.forEach(function (link) {
+                        link.sy = sy;
+                        sy += link.dy;
+                    });
+                    node.targetLinks.forEach(function (link) {
+                        link.ty = ty;
+                        ty += link.dy;
+                    });
+                });
+
+                function ascendingSourceDepth(a, b) {
+                    return a.source.y - b.source.y;
+                }
+
+                function ascendingTargetDepth(a, b) {
+                    return a.target.y - b.target.y;
+                }
+            }
+
+            function center(node) {
+                return node.y + node.dy / 2;
+            }
+
+            function value(link) {
+                return link.value;
+            }
+
+            return sankey;
+        };
+
+        var units = "Widgets";
+
+        var margin = {top: 10, right: 10, bottom: 10, left: 10},
+            width = 1420 - margin.left - margin.right,
+            // width = 2500 - margin.left - margin.right,
+            height = 760 - margin.top - margin.bottom;
+
+        var formatNumber = d3.format(",.0f"),    // zero decimal places
+            format = function (d) {
+                return formatNumber(d) + " " + units;
+            },
+            color = d3.scale.category20();
+
+        // append the svg canvas to the page
+        var svg = d3.select("#chart").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+        // Set the sankey diagram properties
+        var sankey = d3.sankey()
+            .nodeWidth(36)
+            .nodePadding(10)
+            .size([width, height]);
+
+        var path = sankey.link();
+
+        // load the data
+        let links = [{"source": "General Fund", "target": "Capital Improvement Projects", "value": 0.07266506526869607}, {"source": "General Fund", "target": "City Administrator", "value": 0.934570245193811}, {"source": "General Fund", "target": "City Attorney", "value": 0.28458936185185646}, {"source": "General Fund", "target": "City Auditor", "value": 0.11106959696861314}, {"source": "General Fund", "target": "City Clerk", "value": 0.11117987142868543}, {"source": "General Fund", "target": "City Council", "value": 0.24201181242604541}, {"source": "General Fund", "target": "Economic & Workforce Development", "value": 0.28183250035004886}, {"source": "General Fund", "target": "Finance", "value": 1.3022659225075253}, {"source": "General Fund", "target": "Fire", "value": 7.240243793615544}, {"source": "General Fund", "target": "Human Resources Management", "value": 0.2769223849173558}, {"source": "General Fund", "target": "Human Services", "value": 0.3031619024956126}, {"source": "General Fund", "target": "Information Technology", "value": 0.5966602799375209}, {"source": "General Fund", "target": "Mayor", "value": 0.14794189406542033}, {"source": "General Fund", "target": "Non-Departmental", "value": 4.480660253819885}, {"source": "General Fund", "target": "Oakland Parks & Recreation", "value": 0.9090097861328417}, {"source": "General Fund", "target": "Oakland Public Library", "value": 0.6548445674230382}, {"source": "General Fund", "target": "Oakland Public Works", "value": 0.16726314025387792}, {"source": "General Fund", "target": "Planning & Building", "value": 0.0026349792038329084}, {"source": "General Fund", "target": "Police", "value": 12.333844320030995}, {"source": "Business License Tax", "target": "General Fund", "value": 4.150115461712635}, {"source": "Fines & Penalties", "target": "General Fund", "value": 1.3832770232280092}, {"source": "Fines & Penalties", "target": "Non-Discretionary", "value": 0.2758080324787305}, {"source": "Grants & Subsidies", "target": "General Fund", "value": 0.006929879227701525}, {"source": "Grants & Subsidies", "target": "Non-Discretionary", "value": 3.375681144300661}, {"source": "Interest Income", "target": "General Fund", "value": 0.042978019833442044}, {"source": "Interest Income", "target": "Non-Discretionary", "value": 0.01111450479149784}, {"source": "Interfund Transfers", "target": "General Fund", "value": 0.866113021164716}, {"source": "Interfund Transfers", "target": "Non-Discretionary", "value": 7.864838335465064}, {"source": "Licenses & Permits", "target": "General Fund", "value": 0.12830723625359935}, {"source": "Licenses & Permits", "target": "Non-Discretionary", "value": 0.8969840660660096}, {"source": "Miscellaneous Revenue", "target": "General Fund", "value": 0.04348876470114533}, {"source": "Miscellaneous Revenue", "target": "Non-Discretionary", "value": 2.133085312530153}, {"source": "Parking Tax", "target": "General Fund", "value": 0.5926555758612109}, {"source": "Parking Tax", "target": "Non-Discretionary", "value": 0.5037569492860817}, {"source": "Property Tax", "target": "General Fund", "value": 9.826464274339642}, {"source": "Property Tax", "target": "Non-Discretionary", "value": 0.24873855449045584}, {"source": "Real Estate Transfer Tax", "target": "General Fund", "value": 3.2287201125379887}, {"source": "Sales Tax", "target": "General Fund", "value": 3.2168278826070336}, {"source": "Sales Tax", "target": "Non-Discretionary", "value": 1.4304628843010523}, {"source": "Service Charges", "target": "General Fund", "value": 2.7188806561910766}, {"source": "Service Charges", "target": "Non-Discretionary", "value": 7.048105056736936}, {"source": "Transfers from Fund Balance", "target": "General Fund", "value": 0.3948115866535982}, {"source": "Transfers from Fund Balance", "target": "Non-Discretionary", "value": 2.631421401515839}, {"source": "Transient Occupancy Tax", "target": "General Fund", "value": 0.9518427079925043}, {"source": "Transient Occupancy Tax", "target": "Non-Discretionary", "value": 0.2595918829291508}, {"source": "Utility Consumption Tax", "target": "General Fund", "value": 2.9019594755869034}, {"source": "Non-Discretionary", "target": "Capital Improvement Projects", "value": 2.2306956214509945}, {"source": "Non-Discretionary", "target": "City Administrator", "value": 0.23584805049989882}, {"source": "Non-Discretionary", "target": "City Attorney", "value": 0.5620399033937691}, {"source": "Non-Discretionary", "target": "City Clerk", "value": 0.00391764529204232}, {"source": "Non-Discretionary", "target": "Economic & Workforce Development", "value": 0.7308642978455128}, {"source": "Non-Discretionary", "target": "Finance", "value": 0.7848523519293316}, {"source": "Non-Discretionary", "target": "Fire", "value": 0.6306132058018876}, {"source": "Non-Discretionary", "target": "Housing & Community Development", "value": 1.076359985170987}, {"source": "Non-Discretionary", "target": "Human Resources Management", "value": 0.11384387022727421}, {"source": "Non-Discretionary", "target": "Human Services", "value": 3.6376294183239883}, {"source": "Non-Discretionary", "target": "Information Technology", "value": 0.9833173604647198}, {"source": "Non-Discretionary", "target": "Mayor", "value": 0.01704610995959747}, {"source": "Non-Discretionary", "target": "Non-Departmental", "value": 15.310302899275165}, {"source": "Non-Discretionary", "target": "Oakland Parks & Recreation", "value": 0.6138050565192882}, {"source": "Non-Discretionary", "target": "Oakland Public Library", "value": 1.0173921686270613}, {"source": "Non-Discretionary", "target": "Oakland Public Works", "value": 9.10104405247033}, {"source": "Non-Discretionary", "target": "Planning & Building", "value": 1.5773658768742125}, {"source": "Non-Discretionary", "target": "Police", "value": 1.3730621258739433}, {"source": "Gas Tax", "target": "Non-Discretionary", "value": 0.4098089132234313}, {"source": "Internal Service Funds", "target": "Non-Discretionary", "value": 4.31217248666731}, {"source": "Local Tax", "target": "Non-Discretionary", "value": 8.59843047521763}]
+
+        //nodesPositionInfo:
+        let level = [[{"x": 448.0, "y": 0, "name": "Utility Consumption Tax"}, {"x": 448.0, "y": 22.509797377934518, "name": "Real Estate Transfer Tax"}, {"x": 448.0, "y": 46.65339794062446, "name": "Business License Tax"}, {"x": 448.0, "y": 75.40397524918762, "name": "Transient Occupancy Tax"}, {"x": 448.0, "y": 98.5398471683042, "name": "Transfers from Fund Balance"}, {"x": 448.0, "y": 112.59231314464311, "name": "Service Charges"}, {"x": 448.0, "y": 183.36911401000742, "name": "Sales Tax"}, {"x": 448.0, "y": 230.88930403031387, "name": "Property Tax"}, {"x": 448.0, "y": 259.0397096879741, "name": "Parking Tax"}, {"x": 448.0, "y": 279.05149454540447, "name": "Miscellaneous Revenue"}, {"x": 448.0, "y": 294.48051660682586, "name": "Licenses & Permits"}, {"x": 448.0, "y": 330.7239532813544, "name": "Interfund Transfers"}, {"x": 448.0, "y": 356.18585599461403, "name": "Interest Income"}, {"x": 448.0, "y": 374.6041516883237, "name": "Grants & Subsidies"}, {"x": 448.0, "y": 394.34662890250075, "name": "Fines & Penalties"}, {"x": 448.0, "y": 431.46009043956707, "name": "Local Tax"}, {"x": 448.0, "y": 469.59346885000423, "name": "Internal Service Funds"}, {"x": 448.0, "y": 486.21781382333893, "name": "Gas Tax"}], [{"x": 660.2683853649014, "y": 0, "name": "General Fund"}, {"x": 660.2683853649014, "y": 247.26685838945605, "name": "Non-Discretionary"}], [{"x": 896.0, "y": 0.7260354372781361, "name": "City Council"}, {"x": 896.0, "y": 8.543267853036069, "name": "City Auditor"}, {"x": 896.0, "y": 56.886126384688104, "name": "Police"}, {"x": 896.0, "y": 91.29993927649798, "name": "Planning & Building"}, {"x": 896.0, "y": 129.8125145551405, "name": "Fire"}, {"x": 896.0, "y": 152.55422855397535, "name": "Oakland Public Library"}, {"x": 896.0, "y": 172.48385676218226, "name": "Oakland Parks & Recreation"}, {"x": 896.0, "y": 241.90237590677162, "name": "Non-Departmental"}, {"x": 896.0, "y": 288.4843022129617, "name": "Mayor"}, {"x": 896.0, "y": 301.04917515429355, "name": "Information Technology"}, {"x": 896.0, "y": 311.209130435098, "name": "Human Services"}, {"x": 896.0, "y": 337.913087039196, "name": "Human Resources Management"}, {"x": 896.0, "y": 346.8669183149192, "name": "Oakland Public Works"}, {"x": 896.0, "y": 400.20845427854016, "name": "Finance"}, {"x": 896.0, "y": 417.6440456507244, "name": "Economic & Workforce Development"}, {"x": 896.0, "y": 430.0528221918644, "name": "City Clerk"}, {"x": 896.0, "y": 437.2830172253059, "name": "City Attorney"}, {"x": 896.0, "y": 448.516163551534, "name": "City Administrator"}, {"x": 896.0, "y": 468.2783370901616, "name": "Capital Improvement Projects"}, {"x": 896.0, "y": 480.4232384561865, "name": "Housing & Community Development"}]]
+
+        let result = [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18], [1, 2], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]]
+
+
+
+        let nodes = []
+        result.forEach((d, i) => {
+            d.forEach(j => {
+                nodes.push(level[i][parseInt(j) - 1])
+            })
+        })
+        console.log(nodes)
+
+        var another = nodes.map(d => ({name: d['name']}))
+        var orgNode = nodes.map(d => d.name)
+        var anotherLinks = links.map(d => ({
+                'source': orgNode.indexOf(d.source),
+                'target': orgNode.indexOf(d.target),
+                'value': d.value
+            }
+        ))
+        console.log(nodes, links)
+        var data = ({
+            "nodes": nodes,
+            "links": links,
+        })
+
+        var nodeMap = {};
+        var graph = data;
+        graph.nodes.forEach(function (x) {
+            nodeMap[x.name] = x;
+        });
+        console.log(nodeMap)
+        graph.links = graph.links.map(function (x) {
+            if (typeof nodeMap[x.target] === "undefined") console.log(x.target)
+            if (typeof nodeMap[x.source] === "undefined") console.log(x.source)
+            return {
+                source: nodeMap[x.source],
+                target: nodeMap[x.target],
+                value: x.value
+            };
+        });
+        console.log(graph)
+
+        sankey
+            .nodes(graph.nodes)
+            .links(graph.links)
+            .layout(32);
+        // add in the nodes
+        var node = svg.append("g").selectAll(".node")
+            .data(graph.nodes)
+            .enter().append("g")
+            .attr("class", "node")
+            .attr("transform", function (d) {
+                return "translate(" + d.x + "," + d.y + ")";
+            })
+
+        // add the rectangles for the nodes
+        node.append("rect")
+            .attr("name", (d) => d.name)
+            .attr("height", function (d) {
+                return d.dy;
+            })
+            .attr("width", sankey.nodeWidth())
+            .style("fill", function (d) {
+                return d.color = color(d.name.replace(/ .*/, ""));
+            })
+            .style("stroke", function (d) {
+                return d3.rgb(d.color).darker(2);
+            })
+            .append("title")
+            .text(function (d) {
+                return d.name + "\n" + format(d.value);
+            });
+
+        // add in the title for the nodes
+        node.append("text")
+            .attr("x", d => {
+                if (d.x < 300)
+                    return 6 + sankey.nodeWidth()
+                else if (d.x < 1000)
+                    return 6 + sankey.nodeWidth()
+                else return -6
+            })
+            .attr("y", function (d) {
+                console.log(d);
+                return d.dy / 2// + 3;
+            })
+            .attr("dy", ".35em")
+            .attr("text-anchor", d => {
+                if (d.x < 200)
+                    return "start"
+                else if (d.x < 500)
+                    return "start"
+                else if (d.x < 1000)
+                    return "start"
+                else return "end"
+            })
+            .attr("transform", null)
+            .text(function (d) {
+                return d.name;
+            }).style("opacity", 0.8)
+
+        // add in the links
+        var link = svg
+            .append("g")
+            .selectAll(".link")
+            .data(graph.links)
+            .enter()
+            .append("path")
+            .attr("class", "link")
+            .attr("d", path)
+            .attr("name", (d) => d.source.name + "-" + d.target.name)
+            .style("stroke-width", function (d) {
+                return Math.max(1, d.dy);
+            })
+            .style("stroke", function (d, i) {
+                return d3.rgb(color(i + 5)).darker(1)
+            })
+            // .sort(function (a, b) {return b.dy - a.dy;});
+            .append("title")
+            .text(function (d) {
+                return d.source.name + " → " +
+                    d.target.name + "\n" + format(d.value);
+            });
+
+
+
+    </script>
+
+    <script src="../sankeyEdgesBundling.js"></script>
+</body>
+
+</html>

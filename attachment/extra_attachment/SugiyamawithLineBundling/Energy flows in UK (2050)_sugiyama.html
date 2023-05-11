@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>SANKEY Experiment</title>
+<style>
+    .node rect {
+        cursor: move;
+        fill-opacity: .9;
+        shape-rendering: crispEdges;
+    }
+
+    .node text {
+        pointer-events: none;
+        text-shadow: 0 1px 0 #fff;
+    }
+
+    .link {
+        fill: none;
+        stroke: #000;
+        stroke-opacity: .2;
+    }
+
+    .link:hover {
+        stroke-opacity: .5;
+    }
+</style>
+
+<body>
+
+<p id="chart" style="text-align: center">
+
+    <script src="http://d3js.org/d3.v3.js"></script>
+    <script>
+
+        // 并没有引入原d3-sankey.js
+        // 而是直接重写了sankey function
+        d3.sankey = function () {
+            var sankey = {},
+                nodeWidth = 24,
+                nodePadding = 8,
+                size = [1, 1],
+                nodes = [],
+                links = [];
+
+            sankey.nodeWidth = function (_) {
+                if (!arguments.length) return nodeWidth;
+                nodeWidth = +_;
+                return sankey;
+            };
+
+            sankey.nodePadding = function (_) {
+                if (!arguments.length) return nodePadding;
+                nodePadding = +_;
+                return sankey;
+            };
+
+            sankey.nodes = function (_) {
+                if (!arguments.length) return nodes;
+                nodes = _;
+                return sankey;
+            };
+
+            sankey.links = function (_) {
+                if (!arguments.length) return links;
+                links = _;
+                return sankey;
+            };
+
+            sankey.size = function (_) {
+                if (!arguments.length) return size;
+                size = _;
+                return sankey;
+            };
+
+            sankey.layout = function (iterations) {
+                computeNodeLinks();
+                computeNodeValues();
+                computeNodeBreadths();
+                computeNodeDepths(iterations);
+                computeLinkDepths();
+                return sankey;
+            };
+
+            sankey.relayout = function () {
+                computeLinkDepths();
+                return sankey;
+            };
+
+            sankey.link = function () {
+                var curvature = .5;
+
+                function link(d) {
+                    var x0 = d.source.x + d.source.dx,
+                        x1 = d.target.x,
+                        xi = d3.interpolateNumber(x0, x1),
+                        x2 = xi(curvature),
+                        x3 = xi(1 - curvature),
+                        y0 = d.source.y + d.sy + d.dy / 2,
+                        y1 = d.target.y + d.ty + d.dy / 2;
+                    return "M" + x0 + "," + y0
+                        + "C" + x2 + "," + y0
+                        + " " + x3 + "," + y1
+                        + " " + x1 + "," + y1;
+                }
+
+                link.curvature = function (_) {
+                    if (!arguments.length) return curvature;
+                    curvature = +_;
+                    return link;
+                };
+
+                return link;
+            };
+
+            // Populate the sourceLinks and targetLinks for each node.
+            // Also, if the source and target are not objects, assume they are indices.
+            function computeNodeLinks() {
+                nodes.forEach(function (node) {
+                    node.sourceLinks = [];
+                    node.targetLinks = [];
+                });
+                links.forEach(function (link) {
+                    var source = link.source,
+                        target = link.target;
+                    if (typeof source === "number") source = link.source = nodes[link.source];
+                    if (typeof target === "number") target = link.target = nodes[link.target];
+                    source.sourceLinks.push(link);
+                    target.targetLinks.push(link);
+                });
+            }
+
+            // Compute the value (size) of each node by summing the associated links.
+            function computeNodeValues() {
+                nodes.forEach(function (node) {
+                    node.value = Math.max(
+                        d3.sum(node.sourceLinks, value),
+                        d3.sum(node.targetLinks, value)
+                    );
+                });
+            }
+
+            // Iteratively assign the breadth (x-position) for each node.
+            // Nodes are assigned the maximum breadth of incoming neighbors plus one;
+            // nodes with no incoming links are assigned breadth zero, while
+            // nodes with no outgoing links are assigned the maximum breadth.
+            function computeNodeBreadths() {
+                var remainingNodes = nodes,
+                    nextNodes,
+                    x = 0;
+
+                while (remainingNodes.length) {
+                    nextNodes = [];
+                    remainingNodes.forEach(function (node) {
+                        node.x = x;
+                        node.dx = nodeWidth;
+                        node.sourceLinks.forEach(function (link) {
+                            nextNodes.push(link.target);
+                        });
+                    });
+                    remainingNodes = nextNodes;
+                    ++x;
+                }
+
+                //
+                // moveSinksRight(x);
+                scaleNodeBreadths((size[0] - nodeWidth) / (x - 1));
+            }
+
+            function moveSourcesRight() {
+                nodes.forEach(function (node) {
+                    if (!node.targetLinks.length) {
+                        node.x = d3.min(node.sourceLinks, function (d) {
+                            return d.target.x;
+                        }) - 1;
+                    }
+                });
+            }
+
+            function moveSinksRight(x) {
+                nodes.forEach(function (node) {
+                    if (!node.sourceLinks.length) {
+                        node.x = x - 1;
+                    }
+                });
+            }
+
+            function scaleNodeBreadths(kx) {
+                nodes.forEach(function (node) {
+                    node.x *= kx;
+                });
+            }
+
+            function computeNodeDepths(iterations) {
+                var nodesByBreadth = d3.nest()
+                    .key(function (d) {
+                        return d.x;
+                    })
+                    .sortKeys(d3.ascending)
+                    .entries(nodes)
+                    .map(function (d) {
+                        return d.values;
+                    });
+
+                //
+                initializeNodeDepth();
+                resolveCollisions();
+                // relaxLeftToRight(1);
+                // resolveCollisions();
+
+                // for (var alpha = 0.001; iterations > 0; --iterations) {
+                //     relaxRightToLeft(alpha *= .99);
+                //     resolveCollisions();
+                //     relaxLeftToRight(alpha);
+                //     resolveCollisions();
+                // }
+
+                function initializeNodeDepth() {
+                    var ky = d3.min(nodesByBreadth, function (nodes) {
+                        return (size[1] - (nodes.length - 1) * nodePadding) / d3.sum(nodes, value);
+                    });
+
+                    nodesByBreadth.forEach(function (nodes) {
+                        nodes.forEach(function (node, i) {
+                            node.y = i;
+                            node.dy = node.value * ky;
+                        });
+                    });
+
+                    links.forEach(function (link) {
+                        link.dy = link.value * ky;
+                    });
+                }
+
+                function relaxLeftToRight(alpha) {
+                    nodesByBreadth.forEach(function (nodes, breadth) {
+                        nodes.forEach(function (node) {
+                            if (node.targetLinks.length) {
+                                var y = d3.sum(node.targetLinks, weightedSource) / d3.sum(node.targetLinks, value);
+                                node.y += (y - center(node)) * alpha;
+                            }
+                        });
+                    });
+
+                    function weightedSource(link) {
+                        return center(link.source) * link.value;
+                    }
+                }
+
+                function relaxRightToLeft(alpha) {
+                    nodesByBreadth.slice().reverse().forEach(function (nodes) {
+                        nodes.forEach(function (node) {
+                            if (node.sourceLinks.length) {
+                                var y = d3.sum(node.sourceLinks, weightedTarget) / d3.sum(node.sourceLinks, value);
+                                node.y += (y - center(node)) * alpha;
+                            }
+                        });
+                    });
+
+                    function weightedTarget(link) {
+                        return center(link.target) * link.value;
+                    }
+                }
+
+                function resolveCollisions() {
+                    nodesByBreadth.forEach(function (nodes) {
+                        var node,
+                            dy,
+                            y0 = 0,
+                            n = nodes.length,
+                            i;
+
+                        // Push any overlapping nodes down.
+                        nodes.sort(ascendingDepth);
+                        for (i = 0; i < n; ++i) {
+                            node = nodes[i];
+                            dy = y0 - node.y;
+                            if (dy > 0) node.y += dy;
+                            y0 = node.y + node.dy + nodePadding;
+                        }
+
+                        // If the bottommost node goes outside the bounds, push it back up.
+                        dy = y0 - nodePadding - size[1];
+                        if (dy > 0) {
+                            y0 = node.y -= dy;
+
+                            // Push any overlapping nodes back up.
+                            for (i = n - 2; i >= 0; --i) {
+                                node = nodes[i];
+                                dy = node.y + node.dy + nodePadding - y0;
+                                if (dy > 0) node.y -= dy;
+                                y0 = node.y;
+                            }
+                        }
+                    });
+                }
+
+                function ascendingDepth(a, b) {
+                    return a.y - b.y;
+                }
+            }
+
+            function computeLinkDepths() {
+                nodes.forEach(function (node) {
+                    node.sourceLinks.sort(ascendingTargetDepth);
+                    node.targetLinks.sort(ascendingSourceDepth);
+                });
+                nodes.forEach(function (node) {
+                    var sy = 0, ty = 0;
+                    node.sourceLinks.forEach(function (link) {
+                        link.sy = sy;
+                        sy += link.dy;
+                    });
+                    node.targetLinks.forEach(function (link) {
+                        link.ty = ty;
+                        ty += link.dy;
+                    });
+                });
+
+                function ascendingSourceDepth(a, b) {
+                    return a.source.y - b.source.y;
+                }
+
+                function ascendingTargetDepth(a, b) {
+                    return a.target.y - b.target.y;
+                }
+            }
+
+            function center(node) {
+                return node.y + node.dy / 2;
+            }
+
+            function value(link) {
+                return link.value;
+            }
+
+            return sankey;
+        };
+
+        // 正式绘制Sankey图
+        var units = "Widgets";
+
+        var margin = {top: 10, right: 10, bottom: 10, left: 10},
+            width = 1400 - margin.left - margin.right,
+            // width = 2500 - margin.left - margin.right,
+            height = 760 - margin.top - margin.bottom;
+
+        var formatNumber = d3.format(",.0f"),    // zero decimal places
+            format = function (d) {
+                return formatNumber(d) + " " + units;
+            },
+            color = d3.scale.category20();
+
+        // append the svg canvas to the page
+        var svg = d3.select("#chart").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+        // Set the sankey diagram properties
+        var sankey = d3.sankey()
+            .nodeWidth(36)
+            .nodePadding(10)
+            .size([width, height]);
+
+        var path = sankey.link();
+
+        // load the data
+
+        var links = [{"source": "Coal reserves", "target": "Coal", "value": "63.96"}, {"source": "Coal", "target": "Solid", "value": "95.34"}, {"source": "Coal imports", "target": "Coal", "value": "31.37"}, {"source": "Oil reserves", "target": "Oil", "value": "107.70"}, {"source": "Oil", "target": "Liquid", "value": "880.08"}, {"source": "Oil imports", "target": "Oil", "value": "772.37"}, {"source": "Gas reserves", "target": "Natural Gas", "value": "82.23"}, {"source": "Natural Gas", "target": "Gas", "value": "2116.55"}, {"source": "Gas imports", "target": "Natural Gas", "value": "2034.32"}, {"source": "UK land based bioenergy", "target": "Bio-conversion", "value": "17.66"}, {"source": "Bio-conversion", "target": "Solid", "value": "30.19"}, {"source": "Bio-conversion", "target": "Liquid", "value": "7.74"}, {"source": "Bio-conversion", "target": "Gas", "value": "39.59"}, {"source": "Bio-conversion", "target": "dummy->Bio-conversion->Losses->V2", "value": "17.90"}, {"source": "Agricultural waste", "target": "Bio-conversion", "value": "37.42"}, {"source": "Other waste", "target": "Bio-conversion", "value": "40.34"}, {"source": "Other waste", "target": "dummy->Other waste->Solid->V1", "value": "14.24"}, {"source": "Solid", "target": "Thermal generation", "value": "32.82"}, {"source": "Solid", "target": "dummy->Solid->Industry->V3", "value": "106.05"}, {"source": "Solid", "target": "dummy->Solid->Agriculture->V3", "value": "0.89"}, {"source": "Liquid", "target": "Domestic aviation", "value": "14.78"}, {"source": "Liquid", "target": "National navigation", "value": "22.49"}, {"source": "Liquid", "target": "International aviation", "value": "188.58"}, {"source": "Liquid", "target": "International shipping", "value": "129.50"}, {"source": "Liquid", "target": "dummy->Liquid->Industry->V3", "value": "199.26"}, {"source": "Liquid", "target": "dummy->Liquid->Agriculture->V3", "value": "3.69"}, {"source": "Liquid", "target": "dummy->Liquid->Road transport->V3", "value": "322.01"}, {"source": "Liquid", "target": "dummy->Liquid->Rail transport->V3", "value": "7.48"}, {"source": "Gas", "target": "Thermal generation", "value": "1152.79"}, {"source": "Gas", "target": "dummy->Gas->Heating and cooling - homes->V3", "value": "517.94"}, {"source": "Gas", "target": "dummy->Gas->Heating and cooling - commercial->V3", "value": "141.48"}, {"source": "Gas", "target": "dummy->Gas->Lighting & appliances - homes->V3", "value": "8.03"}, {"source": "Gas", "target": "dummy->Gas->Lighting & appliances - commercial->V3", "value": "9.05"}, {"source": "Gas", "target": "dummy->Gas->Industry->V3", "value": "300.59"}, {"source": "Gas", "target": "dummy->Gas->Agriculture->V3", "value": "2.12"}, {"source": "Gas", "target": "dummy->Gas->Losses->V3", "value": "24.11"}, {"source": "Thermal generation", "target": "District heating", "value": "16.14"}, {"source": "Thermal generation", "target": "Electricity grid", "value": "576.03"}, {"source": "Thermal generation", "target": "dummy->Thermal generation->Losses->V4", "value": "593.44"}, {"source": "District heating", "target": "Industry", "value": "16.14"}, {"source": "Electricity grid", "target": "Losses", "value": "40.55"}, {"source": "Electricity grid", "target": "Heating and cooling - homes", "value": "60.65"}, {"source": "Electricity grid", "target": "Heating and cooling - commercial", "value": "31.41"}, {"source": "Electricity grid", "target": "Lighting & appliances - homes", "value": "103.40"}, {"source": "Electricity grid", "target": "Lighting & appliances - commercial", "value": "92.33"}, {"source": "Electricity grid", "target": "Industry", "value": "227.82"}, {"source": "Electricity grid", "target": "Agriculture", "value": "4.47"}, {"source": "Electricity grid", "target": "Road transport", "value": "13.84"}, {"source": "Electricity grid", "target": "Rail transport", "value": "6.94"}, {"source": "Wind", "target": "dummy->Wind->Electricity grid->V1", "value": "0.08"}, {"source": "Hydro", "target": "dummy->Hydro->Electricity grid->V1", "value": "5.32"}, {"source": "dummy->Other waste->Solid->V1", "target": "Solid", "value": "14.24"}, {"source": "dummy->Wind->Electricity grid->V1", "target": "dummy->Wind->Electricity grid->V2", "value": "0.08"}, {"source": "dummy->Wind->Electricity grid->V2", "target": "dummy->Wind->Electricity grid->V3", "value": "0.08"}, {"source": "dummy->Wind->Electricity grid->V3", "target": "Electricity grid", "value": "0.08"}, {"source": "dummy->Hydro->Electricity grid->V1", "target": "dummy->Hydro->Electricity grid->V2", "value": "5.32"}, {"source": "dummy->Hydro->Electricity grid->V2", "target": "dummy->Hydro->Electricity grid->V3", "value": "5.32"}, {"source": "dummy->Hydro->Electricity grid->V3", "target": "Electricity grid", "value": "5.32"}, {"source": "dummy->Bio-conversion->Losses->V2", "target": "dummy->Bio-conversion->Losses->V3", "value": "17.90"}, {"source": "dummy->Bio-conversion->Losses->V3", "target": "dummy->Bio-conversion->Losses->V4", "value": "17.90"}, {"source": "dummy->Bio-conversion->Losses->V4", "target": "Losses", "value": "17.90"}, {"source": "dummy->Solid->Industry->V3", "target": "dummy->Solid->Industry->V4", "value": "106.05"}, {"source": "dummy->Solid->Industry->V4", "target": "Industry", "value": "106.05"}, {"source": "dummy->Solid->Agriculture->V3", "target": "dummy->Solid->Agriculture->V4", "value": "0.89"}, {"source": "dummy->Solid->Agriculture->V4", "target": "Agriculture", "value": "0.89"}, {"source": "dummy->Liquid->Industry->V3", "target": "dummy->Liquid->Industry->V4", "value": "199.26"}, {"source": "dummy->Liquid->Industry->V4", "target": "Industry", "value": "199.26"}, {"source": "dummy->Liquid->Agriculture->V3", "target": "dummy->Liquid->Agriculture->V4", "value": "3.69"}, {"source": "dummy->Liquid->Agriculture->V4", "target": "Agriculture", "value": "3.69"}, {"source": "dummy->Liquid->Road transport->V3", "target": "dummy->Liquid->Road transport->V4", "value": "322.01"}, {"source": "dummy->Liquid->Road transport->V4", "target": "Road transport", "value": "322.01"}, {"source": "dummy->Liquid->Rail transport->V3", "target": "dummy->Liquid->Rail transport->V4", "value": "7.48"}, {"source": "dummy->Liquid->Rail transport->V4", "target": "Rail transport", "value": "7.48"}, {"source": "dummy->Gas->Heating and cooling - homes->V3", "target": "dummy->Gas->Heating and cooling - homes->V4", "value": "517.94"}, {"source": "dummy->Gas->Heating and cooling - homes->V4", "target": "Heating and cooling - homes", "value": "517.94"}, {"source": "dummy->Gas->Heating and cooling - commercial->V3", "target": "dummy->Gas->Heating and cooling - commercial->V4", "value": "141.48"}, {"source": "dummy->Gas->Heating and cooling - commercial->V4", "target": "Heating and cooling - commercial", "value": "141.48"}, {"source": "dummy->Gas->Lighting & appliances - homes->V3", "target": "dummy->Gas->Lighting & appliances - homes->V4", "value": "8.03"}, {"source": "dummy->Gas->Lighting & appliances - homes->V4", "target": "Lighting & appliances - homes", "value": "8.03"}, {"source": "dummy->Gas->Lighting & appliances - commercial->V3", "target": "dummy->Gas->Lighting & appliances - commercial->V4", "value": "9.05"}, {"source": "dummy->Gas->Lighting & appliances - commercial->V4", "target": "Lighting & appliances - commercial", "value": "9.05"}, {"source": "dummy->Gas->Industry->V3", "target": "dummy->Gas->Industry->V4", "value": "300.59"}, {"source": "dummy->Gas->Industry->V4", "target": "Industry", "value": "300.59"}, {"source": "dummy->Gas->Agriculture->V3", "target": "dummy->Gas->Agriculture->V4", "value": "2.12"}, {"source": "dummy->Gas->Agriculture->V4", "target": "Agriculture", "value": "2.12"}, {"source": "dummy->Gas->Losses->V3", "target": "dummy->Gas->Losses->V4", "value": "24.11"}, {"source": "dummy->Gas->Losses->V4", "target": "Losses", "value": "24.11"}, {"source": "dummy->Thermal generation->Losses->V4", "target": "Losses", "value": "593.44"}]
+
+        var level = [[{"name": "Oil imports", "size": 772.37}, {"name": "Oil reserves", "size": 107.7}, {"name": "Coal imports", "size": 31.37}, {"name": "Coal reserves", "size": 63.96}, {"name": "Other waste", "size": 54.580000000000005}, {"name": "Agricultural waste", "size": 37.42}, {"name": "UK land based bioenergy", "size": 17.66}, {"name": "Wind", "size": 0.08}, {"name": "Gas imports", "size": 2034.32}, {"name": "Gas reserves", "size": 82.23}, {"name": "Hydro", "size": 5.32}], [{"name": "Oil", "size": 880.08}, {"name": "Coal", "size": 95.34}, {"name": "dummy->Other waste->Solid->V1", "size": 14.24}, {"name": "Bio-conversion", "size": 95.42000000000002}, {"name": "dummy->Wind->Electricity grid->V1", "size": 0.08}, {"name": "Natural Gas", "size": 2116.55}, {"name": "dummy->Hydro->Electricity grid->V1", "size": 5.32}], [{"name": "Liquid", "size": 887.7900000000001}, {"name": "Solid", "size": 139.76}, {"name": "dummy->Bio-conversion->Losses->V2", "size": 17.9}, {"name": "dummy->Wind->Electricity grid->V2", "size": 0.08}, {"name": "Gas", "size": 2156.11}, {"name": "dummy->Hydro->Electricity grid->V2", "size": 5.32}], [{"name": "Domestic aviation", "size": 0}, {"name": "National navigation", "size": 0}, {"name": "International aviation", "size": 0}, {"name": "International shipping", "size": 0}, {"name": "dummy->Liquid->Road transport->V3", "size": 322.01}, {"name": "dummy->Liquid->Industry->V3", "size": 199.26}, {"name": "dummy->Solid->Industry->V3", "size": 106.05}, {"name": "dummy->Gas->Industry->V3", "size": 300.59}, {"name": "dummy->Liquid->Agriculture->V3", "size": 3.69}, {"name": "dummy->Solid->Agriculture->V3", "size": 0.89}, {"name": "dummy->Gas->Agriculture->V3", "size": 2.12}, {"name": "dummy->Liquid->Rail transport->V3", "size": 7.48}, {"name": "Thermal generation", "size": 1185.6100000000001}, {"name": "dummy->Bio-conversion->Losses->V3", "size": 17.9}, {"name": "dummy->Wind->Electricity grid->V3", "size": 0.08}, {"name": "dummy->Hydro->Electricity grid->V3", "size": 5.32}, {"name": "dummy->Gas->Losses->V3", "size": 24.11}, {"name": "dummy->Gas->Lighting & appliances - commercial->V3", "size": 9.05}, {"name": "dummy->Gas->Lighting & appliances - homes->V3", "size": 8.03}, {"name": "dummy->Gas->Heating and cooling - commercial->V3", "size": 141.48}, {"name": "dummy->Gas->Heating and cooling - homes->V3", "size": 517.94}], [{"name": "dummy->Liquid->Road transport->V4", "size": 322.01}, {"name": "dummy->Liquid->Industry->V4", "size": 199.26}, {"name": "dummy->Solid->Industry->V4", "size": 106.05}, {"name": "District heating", "size": 16.14}, {"name": "dummy->Gas->Industry->V4", "size": 300.59}, {"name": "dummy->Liquid->Agriculture->V4", "size": 3.69}, {"name": "dummy->Solid->Agriculture->V4", "size": 0.89}, {"name": "dummy->Gas->Agriculture->V4", "size": 2.12}, {"name": "dummy->Liquid->Rail transport->V4", "size": 7.48}, {"name": "dummy->Bio-conversion->Losses->V4", "size": 17.9}, {"name": "dummy->Thermal generation->Losses->V4", "size": 593.44}, {"name": "Electricity grid", "size": 581.4100000000001}, {"name": "dummy->Gas->Losses->V4", "size": 24.11}, {"name": "dummy->Gas->Lighting & appliances - commercial->V4", "size": 9.05}, {"name": "dummy->Gas->Lighting & appliances - homes->V4", "size": 8.03}, {"name": "dummy->Gas->Heating and cooling - commercial->V4", "size": 141.48}, {"name": "dummy->Gas->Heating and cooling - homes->V4", "size": 517.94}], [{"name": "Road transport", "size": 335.84999999999997}, {"name": "Industry", "size": 849.8599999999999}, {"name": "Agriculture", "size": 11.169999999999998}, {"name": "Rail transport", "size": 14.420000000000002}, {"name": "Losses", "size": 676.0}, {"name": "Lighting & appliances - commercial", "size": 101.38}, {"name": "Lighting & appliances - homes", "size": 111.43}, {"name": "Heating and cooling - commercial", "size": 172.89}, {"name": "Heating and cooling - homes", "size": 578.59}]]
+
+        // original result from bc
+        let result = [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], [1, 2, 3, 4, 5, 6, 7], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], [1, 2, 3, 4, 5, 6, 7, 8, 9]]
+
+
+        let nodes = []
+        result.forEach((d, i) => {
+            d.forEach(j => {
+                nodes.push(level[i][parseInt(j) - 1])
+            })
+        })
+        console.log(nodes)
+
+        var another = nodes.map(d => ({name: d['name']}))
+        var orgNode = nodes.map(d => d.name)
+        var anotherLinks = links.map(d => ({
+                'source': orgNode.indexOf(d.source),
+                'target': orgNode.indexOf(d.target),
+                'value': d.value
+            }
+        ))
+        console.log(nodes, links)
+        var data = ({
+            "nodes": nodes,
+            "links": links,
+        })
+
+        var nodeMap = {};
+        var graph = data;
+        graph.nodes.forEach(function (x) {
+            nodeMap[x.name] = x;
+        });
+        console.log(nodeMap)
+        graph.links = graph.links.map(function (x) {
+            if (typeof nodeMap[x.target] === "undefined") console.log(x.target)
+            if (typeof nodeMap[x.source] === "undefined") console.log(x.source)
+            return {
+                source: nodeMap[x.source],
+                target: nodeMap[x.target],
+                value: x.value
+            };
+        });
+        console.log(graph)
+
+        sankey
+            .nodes(graph.nodes)
+            .links(graph.links)
+            .layout(32);
+
+        // add in the links
+        var link = svg.append("g").selectAll(".link")
+            .data(graph.links)
+            .enter().append("path")
+            .attr("class", "link")
+            .attr("d", path)
+            .attr("name", (d) => d.source.name + "-" + d.target.name)
+            .style("stroke-width", function (d) {
+                return Math.max(1, d.dy);
+            })
+            .style("stroke", function (d, i) {
+                return d3.rgb(color(i + 5)).darker(1)
+            })
+            .sort(function (a, b) {
+                return b.dy - a.dy;
+            });
+
+        // add the link titles
+        link.append("title")
+            .text(function (d) {
+                return d.source.name + " → " +
+                    d.target.name + "\n" + format(d.value);
+            });
+
+        // add in the nodes
+        var node = svg.append("g").selectAll(".node")
+            .data(graph.nodes)
+            .enter().append("g")
+            .attr("class", "node")
+            .attr("transform", function (d) {
+                return "translate(" + d.x + "," + d.y + ")";
+            })
+            // .call(d3.behavior.drag()
+            //     .origin(function (d) {
+            //         return d;
+            //     })
+            //     .on("dragstart", function () {
+            //         this.parentNode.appendChild(this);
+            //     })
+            //     .on("drag", dragmove));
+
+        // add the rectangles for the nodes
+        node.append("rect")
+            .attr("height", function (d) {
+                return d.dy;
+            })
+            .attr("width", sankey.nodeWidth())
+            .style("fill", function (d) {
+                return d.color = color(d.name.replace(/ .*/, ""));
+            })
+            .style("stroke", function (d) {
+                return d3.rgb(d.color).darker(2);
+            })
+            .append("title")
+            .text(function (d) {
+                return d.name + "\n" + format(d.value);
+            });
+
+        // add in the title for the nodes
+        node.append("text")
+            .attr("x", d => {
+                if (d.x === 0)
+                    return 6 + sankey.nodeWidth()
+                else if (d.x === 448)
+                    return -6
+                else if (d.x === 896)
+                    return 6 + sankey.nodeWidth()
+                else return -6
+            })
+            .attr("y", function (d) {
+                console.log(d);
+                return d.dy / 2;
+            })
+            .attr("dy", ".35em")
+            .attr("text-anchor", d => {
+                if (d.x === 0)
+                    return "start"
+                else if (d.x === 448)
+                    return "end"
+                else if (d.x === 896)
+                    return "start"
+                else return "end"
+            })
+            .attr("transform", null)
+            .text(function (d) {
+                return d.name;
+            }).style("opacity", 0.5)
+        // .filter(function (d) { return d.x < width / 2; })
+        // .attr("x", 6 + sankey.nodeWidth())
+        // .attr("text-anchor", "start");
+
+        // the function for moving the nodes
+        function dragmove(d) {
+            d3.select(this).attr("transform",
+                "translate(" + (
+                    d.x = Math.max(0, Math.min(width - d.dx, d3.event.x))
+                ) + "," + (
+                    d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))
+                ) + ")");
+            sankey.relayout();
+            link.attr("d", path);
+        }
+    //　
+    </script>
+
+<script src="../sankeyEdgesBundling.js"></script>
+</body>
+
+</html>

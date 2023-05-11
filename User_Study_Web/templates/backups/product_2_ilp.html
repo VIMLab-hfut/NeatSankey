@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>SANKEY Experiment</title>
+<style>
+    .node rect {
+        cursor: move;
+        fill-opacity: .9;
+        shape-rendering: crispEdges;
+    }
+
+    .node text {
+        pointer-events: none;
+        text-shadow: 0 1px 0 #fff;
+    }
+
+    .link {
+        fill: none;
+        stroke: #000;
+        stroke-opacity: .2;
+    }
+
+    .link:hover {
+        stroke-opacity: .5;
+    }
+</style>
+
+<body>
+
+<p id="chart" style="text-align: center">
+
+    <script src="http://d3js.org/d3.v3.js"></script>
+    <script>
+
+        d3.sankey = function () {
+            var sankey = {},
+                nodeWidth = 24,
+                nodePadding = 8,
+                size = [1, 1],
+                nodes = [],
+                links = [];
+
+            sankey.nodeWidth = function (_) {
+                if (!arguments.length) return nodeWidth;
+                nodeWidth = +_;
+                return sankey;
+            };
+
+            sankey.nodePadding = function (_) {
+                if (!arguments.length) return nodePadding;
+                nodePadding = +_;
+                return sankey;
+            };
+
+            sankey.nodes = function (_) {
+                if (!arguments.length) return nodes;
+                nodes = _;
+                return sankey;
+            };
+
+            sankey.links = function (_) {
+                if (!arguments.length) return links;
+                links = _;
+                return sankey;
+            };
+
+            sankey.size = function (_) {
+                if (!arguments.length) return size;
+                size = _;
+                return sankey;
+            };
+
+            sankey.layout = function (iterations) {
+                computeNodeLinks();
+                computeNodeValues();
+                computeNodeBreadths();
+                computeNodeDepths(iterations);
+                computeLinkDepths();
+                return sankey;
+            };
+
+            sankey.relayout = function () {
+                computeLinkDepths();
+                return sankey;
+            };
+
+            sankey.link = function () {
+                var curvature = .5;
+
+                function link(d) {
+                    var x0 = d.source.x + d.source.dx,
+                        x1 = d.target.x,
+                        xi = d3.interpolateNumber(x0, x1),
+                        x2 = xi(curvature),
+                        x3 = xi(1 - curvature),
+                        y0 = d.source.y + d.sy + d.dy / 2,
+                        y1 = d.target.y + d.ty + d.dy / 2;
+                    return "M" + x0 + "," + y0
+                        + "C" + x2 + "," + y0
+                        + " " + x3 + "," + y1
+                        + " " + x1 + "," + y1;
+                }
+
+                link.curvature = function (_) {
+                    if (!arguments.length) return curvature;
+                    curvature = +_;
+                    return link;
+                };
+
+                return link;
+            };
+
+            // Populate the sourceLinks and targetLinks for each node.
+            // Also, if the source and target are not objects, assume they are indices.
+            function computeNodeLinks() {
+                nodes.forEach(function (node) {
+                    node.sourceLinks = [];
+                    node.targetLinks = [];
+                });
+                links.forEach(function (link) {
+                    var source = link.source,
+                        target = link.target;
+                    if (typeof source === "number") source = link.source = nodes[link.source];
+                    if (typeof target === "number") target = link.target = nodes[link.target];
+                    source.sourceLinks.push(link);
+                    target.targetLinks.push(link);
+                });
+            }
+
+            // Compute the value (size) of each node by summing the associated links.
+            function computeNodeValues() {
+                nodes.forEach(function (node) {
+                    node.value = Math.max(
+                        d3.sum(node.sourceLinks, value),
+                        d3.sum(node.targetLinks, value)
+                    );
+                });
+            }
+
+            // Iteratively assign the breadth (x-position) for each node.
+            // Nodes are assigned the maximum breadth of incoming neighbors plus one;
+            // nodes with no incoming links are assigned breadth zero, while
+            // nodes with no outgoing links are assigned the maximum breadth.
+            function computeNodeBreadths() {
+                var remainingNodes = nodes,
+                    nextNodes,
+                    x = 0;
+
+                while (remainingNodes.length) {
+                    nextNodes = [];
+                    remainingNodes.forEach(function (node) {
+                        node.x = x;
+                        node.dx = nodeWidth;
+                        node.sourceLinks.forEach(function (link) {
+                            nextNodes.push(link.target);
+                        });
+                    });
+                    remainingNodes = nextNodes;
+                    ++x;
+                }
+
+                //
+                // moveSinksRight(x);
+                scaleNodeBreadths((size[0] - nodeWidth) / (x - 1));
+            }
+
+            function moveSourcesRight() {
+                nodes.forEach(function (node) {
+                    if (!node.targetLinks.length) {
+                        node.x = d3.min(node.sourceLinks, function (d) {
+                            return d.target.x;
+                        }) - 1;
+                    }
+                });
+            }
+
+            function moveSinksRight(x) {
+                nodes.forEach(function (node) {
+                    if (!node.sourceLinks.length) {
+                        node.x = x - 1;
+                    }
+                });
+            }
+
+            function scaleNodeBreadths(kx) {
+                nodes.forEach(function (node) {
+                    node.x *= kx;
+                });
+            }
+
+            function computeNodeDepths(iterations) {
+                var nodesByBreadth = d3.nest()
+                    .key(function (d) {
+                        return d.x;
+                    })
+                    .sortKeys(d3.ascending)
+                    .entries(nodes)
+                    .map(function (d) {
+                        return d.values;
+                    });
+
+                //
+                initializeNodeDepth();
+                resolveCollisions();
+                // relaxLeftToRight(1);
+                // resolveCollisions();
+
+                // for (var alpha = 0.001; iterations > 0; --iterations) {
+                //     relaxRightToLeft(alpha *= .99);
+                //     resolveCollisions();
+                //     relaxLeftToRight(alpha);
+                //     resolveCollisions();
+                // }
+
+                function initializeNodeDepth() {
+                    var ky = d3.min(nodesByBreadth, function (nodes) {
+                        return (size[1] - (nodes.length - 1) * nodePadding) / d3.sum(nodes, value);
+                    });
+
+                    nodesByBreadth.forEach(function (nodes) {
+                        nodes.forEach(function (node, i) {
+                            node.y = i;
+                            node.dy = node.value * ky;
+                        });
+                    });
+
+                    links.forEach(function (link) {
+                        link.dy = link.value * ky;
+                    });
+                }
+
+                function relaxLeftToRight(alpha) {
+                    nodesByBreadth.forEach(function (nodes, breadth) {
+                        nodes.forEach(function (node) {
+                            if (node.targetLinks.length) {
+                                var y = d3.sum(node.targetLinks, weightedSource) / d3.sum(node.targetLinks, value);
+                                node.y += (y - center(node)) * alpha;
+                            }
+                        });
+                    });
+
+                    function weightedSource(link) {
+                        return center(link.source) * link.value;
+                    }
+                }
+
+                function relaxRightToLeft(alpha) {
+                    nodesByBreadth.slice().reverse().forEach(function (nodes) {
+                        nodes.forEach(function (node) {
+                            if (node.sourceLinks.length) {
+                                var y = d3.sum(node.sourceLinks, weightedTarget) / d3.sum(node.sourceLinks, value);
+                                node.y += (y - center(node)) * alpha;
+                            }
+                        });
+                    });
+
+                    function weightedTarget(link) {
+                        return center(link.target) * link.value;
+                    }
+                }
+
+                function resolveCollisions() {
+                    nodesByBreadth.forEach(function (nodes) {
+                        var node,
+                            dy,
+                            y0 = 0,
+                            n = nodes.length,
+                            i;
+
+                        // Push any overlapping nodes down.
+                        nodes.sort(ascendingDepth);
+                        for (i = 0; i < n; ++i) {
+                            node = nodes[i];
+                            dy = y0 - node.y;
+                            if (dy > 0) node.y += dy;
+                            y0 = node.y + node.dy + nodePadding;
+                        }
+
+                        // If the bottommost node goes outside the bounds, push it back up.
+                        dy = y0 - nodePadding - size[1];
+                        if (dy > 0) {
+                            y0 = node.y -= dy;
+
+                            // Push any overlapping nodes back up.
+                            for (i = n - 2; i >= 0; --i) {
+                                node = nodes[i];
+                                dy = node.y + node.dy + nodePadding - y0;
+                                if (dy > 0) node.y -= dy;
+                                y0 = node.y;
+                            }
+                        }
+                    });
+                }
+
+                function ascendingDepth(a, b) {
+                    return a.y - b.y;
+                }
+            }
+
+            function computeLinkDepths() {
+                nodes.forEach(function (node) {
+                    node.sourceLinks.sort(ascendingTargetDepth);
+                    node.targetLinks.sort(ascendingSourceDepth);
+                });
+                nodes.forEach(function (node) {
+                    var sy = 0, ty = 0;
+                    node.sourceLinks.forEach(function (link) {
+                        link.sy = sy;
+                        sy += link.dy;
+                    });
+                    node.targetLinks.forEach(function (link) {
+                        link.ty = ty;
+                        ty += link.dy;
+                    });
+                });
+
+                function ascendingSourceDepth(a, b) {
+                    return a.source.y - b.source.y;
+                }
+
+                function ascendingTargetDepth(a, b) {
+                    return a.target.y - b.target.y;
+                }
+            }
+
+            function center(node) {
+                return node.y + node.dy / 2;
+            }
+
+            function value(link) {
+                return link.value;
+            }
+
+            return sankey;
+        };
+
+        var units = "Widgets";
+
+        var margin = {top: 10, right: 10, bottom: 10, left: 10},
+            width = 1300 - margin.left - margin.right,
+            // width = 2500 - margin.left - margin.right,
+            height = 670 - margin.top - margin.bottom;
+
+        var formatNumber = d3.format(",.0f"),    // zero decimal places
+            format = function (d) {
+                return formatNumber(d) + " " + units;
+            },
+            color = d3.scale.category20();
+
+        // append the svg canvas to the page
+        var svg = d3.select("#chart").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+        // Set the sankey diagram properties
+        var sankey = d3.sankey()
+            .nodeWidth(36)
+            .nodePadding(10)
+            .size([width, height]);
+
+        var path = sankey.link();
+
+        // load the data
+
+        var links = [{"source": "Total", "target": "Environment", "value": "0.342284047256003"}, {"source": "Total", "target": "Human rights", "value": "0.307574096993239"}, {"source": "Environment", "target": "Land use", "value": "0.32322870366987"}, {"source": "Environment", "target": "Climate change", "value": "0.0112886157414413"}, {"source": "Environment", "target": "Harmful substances", "value": "0.00604275542495656"}, {"source": "Environment", "target": "Water use", "value": "0.00148345269044703"}, {"source": "Environment", "target": "Resource depletion", "value": "0.000240519729288764"}, {"source": "Environment", "target": "Refrigeration", "value": "0"}, {"source": "Environment", "target": "Packaging", "value": "0"}, {"source": "Land use", "target": "Cocoa butter (Organic)", "value": "0.177682517071359"}, {"source": "Land use", "target": "Cocoa mass (Organic)", "value": "0.137241325342711"}, {"source": "Land use", "target": "Hazelnuts (Organic)", "value": "0.00433076373512774"}, {"source": "Land use", "target": "Cane sugar (Organic)", "value": "0.00296956039863467"}, {"source": "Land use", "target": "Vegetables (Organic)", "value": "0.00100453712203756"}, {"source": "Climate change", "target": "Cocoa butter (Organic)", "value": "0.00676852971933996"}, {"source": "Climate change", "target": "Cocoa mass (Organic)", "value": "0.00394686874786743"}, {"source": "Climate change", "target": "Cane sugar (Organic)", "value": "0.000315972058711838"}, {"source": "Climate change", "target": "Hazelnuts (Organic)", "value": "0.000218969462265292"}, {"source": "Climate change", "target": "Vegetables (Organic)", "value": "3.82757532567656e-05"}, {"source": "Harmful substances", "target": "Cocoa mass (Organic)", "value": "0.0055125989240741"}, {"source": "Harmful substances", "target": "Cocoa butter (Organic)", "value": "0.000330017607892127"}, {"source": "Harmful substances", "target": "Cane sugar (Organic)", "value": "0.000200138892990337"}, {"source": "Harmful substances", "target": "Hazelnuts (Organic)", "value": "0"}, {"source": "Harmful substances", "target": "Vegetables (Organic)", "value": "0"}, {"source": "Water use", "target": "Cocoa butter (Organic)", "value": "0.00135309891304186"}, {"source": "Water use", "target": "Cocoa mass (Organic)", "value": "0.000105714137908639"}, {"source": "Water use", "target": "Hazelnuts (Organic)", "value": "1.33452642581887e-05"}, {"source": "Water use", "target": "Cane sugar (Organic)", "value": "8.78074837009238e-06"}, {"source": "Water use", "target": "Vegetables (Organic)", "value": "2.5136268682477e-06"}, {"source": "Resource depletion", "target": "Cane sugar (Organic)", "value": "0.000226237279345084"}, {"source": "Resource depletion", "target": "Vegetables (Organic)", "value": "1.42824499436793e-05"}, {"source": "Resource depletion", "target": "Hazelnuts (Organic)", "value": "0"}, {"source": "Resource depletion", "target": "Cocoa mass (Organic)", "value": "0"}, {"source": "Resource depletion", "target": "Cocoa butter (Organic)", "value": "0"}, {"source": "Human rights", "target": "Child labour", "value": "0.0410641202645833"}, {"source": "Human rights", "target": "Forced labour", "value": "0.0365458590642445"}, {"source": "Human rights", "target": "Health safety", "value": "0.0345435327843611"}, {"source": "Human rights", "target": "Access to water", "value": "0.0340206659360667"}, {"source": "Human rights", "target": "Freedom of association", "value": "0.0320571523941667"}, {"source": "Human rights", "target": "Access to land", "value": "0.0315022209894056"}, {"source": "Human rights", "target": "Sufficient wage", "value": "0.0287776757227333"}, {"source": "Human rights", "target": "Equal rights migrants", "value": "0.0271146645119444"}, {"source": "Human rights", "target": "Discrimination", "value": "0.0211217763359833"}, {"source": "Human rights", "target": "Working hours", "value": "0.02082642898975"}, {"source": "Child labour", "target": "Hazelnuts (Organic)", "value": "0.0105339381639722"}, {"source": "Child labour", "target": "Cocoa mass (Organic)", "value": "0.0105"}, {"source": "Child labour", "target": "Cocoa butter (Organic)", "value": "0.0087294420777"}, {"source": "Child labour", "target": "Coconut oil (Organic)", "value": "0.00474399974233333"}, {"source": "Child labour", "target": "Cane sugar (Organic)", "value": "0.00388226450884445"}, {"source": "Child labour", "target": "Vegetables (Organic)", "value": "0.00267447577173333"}, {"source": "Forced labour", "target": "Hazelnuts (Organic)", "value": "0.0114913076376389"}, {"source": "Forced labour", "target": "Cocoa butter (Organic)", "value": "0.0081134807347"}, {"source": "Forced labour", "target": "Cocoa mass (Organic)", "value": "0.00765230236575"}, {"source": "Forced labour", "target": "Cane sugar (Organic)", "value": "0.004"}, {"source": "Forced labour", "target": "Vegetables (Organic)", "value": "0.00296668823626667"}, {"source": "Forced labour", "target": "Coconut oil (Organic)", "value": "0.00232208008988889"}, {"source": "Health safety", "target": "Hazelnuts (Organic)", "value": "0.0121419536385"}, {"source": "Health safety", "target": "Cocoa mass (Organic)", "value": "0.00766772850678333"}, {"source": "Health safety", "target": "Cocoa butter (Organic)", "value": "0.0056245892061"}, {"source": "Health safety", "target": "Coconut oil (Organic)", "value": "0.00361616847688889"}, {"source": "Health safety", "target": "Cane sugar (Organic)", "value": "0.00277374682533333"}, {"source": "Health safety", "target": "Vegetables (Organic)", "value": "0.00271934613075556"}, {"source": "Access to water", "target": "Cocoa mass (Organic)", "value": "0.0105"}, {"source": "Access to water", "target": "Cocoa butter (Organic)", "value": "0.0089274160792"}, {"source": "Access to water", "target": "Hazelnuts (Organic)", "value": "0.0054148022845"}, {"source": "Access to water", "target": "Cane sugar (Organic)", "value": "0.00333938149786667"}, {"source": "Access to water", "target": "Vegetables (Organic)", "value": "0.00314663377488889"}, {"source": "Access to water", "target": "Coconut oil (Organic)", "value": "0.00269243229961111"}, {"source": "Freedom of association", "target": "Hazelnuts (Organic)", "value": "0.0132312483463611"}, {"source": "Freedom of association", "target": "Cocoa butter (Organic)", "value": "0.0077695200707"}, {"source": "Freedom of association", "target": "Cocoa mass (Organic)", "value": "0.00510606573995"}, {"source": "Freedom of association", "target": "Vegetables (Organic)", "value": "0.00354321156324444"}, {"source": "Freedom of association", "target": "Cane sugar (Organic)", "value": "0.00240710667391111"}, {"source": "Freedom of association", "target": "Coconut oil (Organic)", "value": "0"}, {"source": "Access to land", "target": "Hazelnuts (Organic)", "value": "0.00964970063322223"}, {"source": "Access to land", "target": "Cocoa mass (Organic)", "value": "0.00938530207965"}, {"source": "Access to land", "target": "Cocoa butter (Organic)", "value": "0.0060110791848"}, {"source": "Access to land", "target": "Cane sugar (Organic)", "value": "0.00380818314608889"}, {"source": "Access to land", "target": "Vegetables (Organic)", "value": "0.00264795594564445"}, {"source": "Access to land", "target": "Coconut oil (Organic)", "value": "0"}, {"source": "Sufficient wage", "target": "Cocoa mass (Organic)", "value": "0.00883512456493333"}, {"source": "Sufficient wage", "target": "Cocoa butter (Organic)", "value": "0.0078343367268"}, {"source": "Sufficient wage", "target": "Coconut oil (Organic)", "value": "0.00347879026511111"}, {"source": "Sufficient wage", "target": "Hazelnuts (Organic)", "value": "0.00316254211388889"}, {"source": "Sufficient wage", "target": "Vegetables (Organic)", "value": "0.00281013722808889"}, {"source": "Sufficient wage", "target": "Cane sugar (Organic)", "value": "0.00265674482391111"}, {"source": "Equal rights migrants", "target": "Cocoa butter (Organic)", "value": "0.0071042315061"}, {"source": "Equal rights migrants", "target": "Cocoa mass (Organic)", "value": "0.00636673210005"}, {"source": "Equal rights migrants", "target": "Hazelnuts (Organic)", "value": "0.00601459775836111"}, {"source": "Equal rights migrants", "target": "Coconut oil (Organic)", "value": "0.00429185583138889"}, {"source": "Equal rights migrants", "target": "Cane sugar (Organic)", "value": "0.00182647471915556"}, {"source": "Equal rights migrants", "target": "Vegetables (Organic)", "value": "0.00151077259688889"}, {"source": "Discrimination", "target": "Cocoa mass (Organic)", "value": "0.00609671700306667"}, {"source": "Discrimination", "target": "Cocoa butter (Organic)", "value": "0.0047738806325"}, {"source": "Discrimination", "target": "Coconut oil (Organic)", "value": "0.00368119084494444"}, {"source": "Discrimination", "target": "Vegetables (Organic)", "value": "0.00286009813604444"}, {"source": "Discrimination", "target": "Cane sugar (Organic)", "value": "0.00283706180951111"}, {"source": "Discrimination", "target": "Hazelnuts (Organic)", "value": "0.000872827909916666"}, {"source": "Working hours", "target": "Hazelnuts (Organic)", "value": "0.0107216773848333"}, {"source": "Working hours", "target": "Coconut oil (Organic)", "value": "0.00359009052944444"}, {"source": "Working hours", "target": "Vegetables (Organic)", "value": "0.00212300379075556"}, {"source": "Working hours", "target": "Cocoa butter (Organic)", "value": "0.0018518584356"}, {"source": "Working hours", "target": "Cocoa mass (Organic)", "value": "0.00158227069058333"}, {"source": "Working hours", "target": "Cane sugar (Organic)", "value": "0.000957528158533333"}]
+
+        var level = [[{"name": "Total", "size": 0.6498581442492419}], [{"name": "Human rights", "size": 0.3075740969932389}, {"name": "Environment", "size": 0.3422840472560037}], [{"name": "Refrigeration", "size": 0.05}, {"name": "Packaging", "size": 0.05}, {"name": "Child labour", "size": 0.04106412026458331}, {"name": "Forced labour", "size": 0.03654585906424446}, {"name": "Health safety", "size": 0.034543532784361106}, {"name": "Access to water", "size": 0.03402066593606667}, {"name": "Freedom of association", "size": 0.03205715239416665}, {"name": "Access to land", "size": 0.03150222098940557}, {"name": "Sufficient wage", "size": 0.028777675722733324}, {"name": "Equal rights migrants", "size": 0.02711466451194445}, {"name": "Discrimination", "size": 0.021121776335983326}, {"name": "Working hours", "size": 0.02082642898974996}, {"name": "Land use", "size": 0.32322870366987}, {"name": "Climate change", "size": 0.011288615741441285}, {"name": "Harmful substances", "size": 0.006042755424956563}, {"name": "Water use", "size": 0.0014834526904470278}, {"name": "Resource depletion", "size": 0.0002405197292887633}], [{"name": "Coconut oil (Organic)", "size": 0.028416608079611102}, {"name": "Vegetables (Organic)", "size": 0.02806193212641737}, {"name": "Cane sugar (Organic)", "size": 0.03220918154120758}, {"name": "Hazelnuts (Organic)", "size": 0.08779767433284562}, {"name": "Cocoa mass (Organic)", "size": 0.22049875020332785}, {"name": "Cocoa butter (Organic)", "size": 0.25287399796583293}]]
+
+        // result是python处理结果的result
+        let result = [[1], [1, 2], [1, 2, 12, 7, 5, 4, 8, 3, 10, 11, 6, 9, 17, 15, 13, 14, 16], [4, 2, 1, 3, 5, 6]]
+        // let result = [[1], [1, 2], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], [1, 2, 3, 4, 5, 6]]
+
+
+        let nodes = []
+        result.forEach((d, i) => {
+            d.forEach(j => {
+                nodes.push(level[i][parseInt(j) - 1])
+            })
+        })
+        console.log(nodes)
+
+        var another = nodes.map(d => ({name: d['name']}))
+        var orgNode = nodes.map(d => d.name)
+        var anotherLinks = links.map(d => ({
+                'source': orgNode.indexOf(d.source),
+                'target': orgNode.indexOf(d.target),
+                'value': d.value
+            }
+        ))
+        console.log(nodes, links)
+        var data = ({
+            "nodes": nodes,
+            "links": links,
+        })
+
+        var nodeMap = {};
+        var graph = data;
+        graph.nodes.forEach(function (x) {
+            nodeMap[x.name] = x;
+        });
+        console.log(nodeMap)
+        graph.links = graph.links.map(function (x) {
+            if (typeof nodeMap[x.target] === "undefined") console.log(x.target)
+            if (typeof nodeMap[x.source] === "undefined") console.log(x.source)
+            return {
+                source: nodeMap[x.source],
+                target: nodeMap[x.target],
+                value: x.value
+            };
+        });
+        console.log(graph)
+
+        sankey
+            .nodes(graph.nodes)
+            .links(graph.links)
+            .layout(32);
+
+        // add in the links
+        var link = svg.append("g").selectAll(".link")
+            .data(graph.links)
+            .enter().append("path")
+            .attr("class", "link")
+            .attr("d", path)
+            .style("stroke-width", function (d) {
+                return Math.max(1, d.dy);
+            })
+            .sort(function (a, b) {
+                return b.dy - a.dy;
+            });
+
+        // add the link titles
+        link.append("title")
+            .text(function (d) {
+                return d.source.name + " → " +
+                    d.target.name + "\n" + format(d.value);
+            });
+
+        // add in the nodes
+        var node = svg.append("g").selectAll(".node")
+            .data(graph.nodes)
+            .enter().append("g")
+            .attr("class", "node")
+            .attr("transform", function (d) {
+                return "translate(" + d.x + "," + d.y + ")";
+            })
+            // .call(d3.behavior.drag()
+            //     .origin(function (d) {
+            //         return d;
+            //     })
+            //     .on("dragstart", function () {
+            //         this.parentNode.appendChild(this);
+            //     })
+            //     .on("drag", dragmove));
+
+        // add the rectangles for the nodes
+        node.append("rect")
+            .attr("height", function (d) {
+                return Math.max(0.01, d.dy);
+            })
+            .attr("width", sankey.nodeWidth())
+            .style("fill", function (d) {
+                return d.color = color(d.name.replace(/ .*/, ""));
+            })
+            .style("stroke", function (d) {
+                return d3.rgb(d.color).darker(2);
+            })
+            .append("title")
+            .text(function (d) {
+                return d.name + "\n" + format(d.value);
+            });
+
+        // add in the title for the nodes
+        node.append("text")
+            .attr("x", d => {
+                if (d.x === 0)
+                    return 6 + sankey.nodeWidth()
+                else if (d.x === 448)
+                    return -6
+                else if (d.x === 896)
+                    return 6 + sankey.nodeWidth()
+                else return -6
+            })
+            .attr("y", function (d) {
+                console.log(d);
+                return d.dy / 2;
+            })
+            .attr("dy", ".35em")
+            .attr("text-anchor", d => {
+                if (d.x === 0)
+                    return "start"
+                else if (d.x === 448)
+                    return "end"
+                else if (d.x === 896)
+                    return "start"
+                else return "end"
+            })
+            .attr("transform", null)
+            .text(function (d) {
+                return d.name;
+            })
+        // .filter(function (d) { return d.x < width / 2; })
+        // .attr("x", 6 + sankey.nodeWidth())
+        // .attr("text-anchor", "start");
+
+        // the function for moving the nodes
+        function dragmove(d) {
+            d3.select(this).attr("transform",
+                "translate(" + (
+                    d.x = Math.max(0, Math.min(width - d.dx, d3.event.x))
+                ) + "," + (
+                    d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))
+                ) + ")");
+            sankey.relayout();
+            link.attr("d", path);
+        }
+
+    </script>
+
+</body>
+
+</html>

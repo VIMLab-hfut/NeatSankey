@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>SANKEY Experiment</title>
+<style>
+    .node rect {
+        cursor: move;
+        fill-opacity: .9;
+        shape-rendering: crispEdges;
+    }
+
+    .node text {
+        pointer-events: none;
+        text-shadow: 0 1px 0 #fff;
+    }
+
+    .link {
+        fill: none;
+        stroke: #000;
+        stroke-opacity: .2;
+    }
+
+    .link:hover {
+        stroke-opacity: .5;
+    }
+</style>
+
+<body>
+
+<p id="chart" style="text-align: center">
+
+    <script src="http://d3js.org/d3.v3.js"></script>
+
+<!--    <script src="../../static/js/d3.v3.js"></script>-->
+    <script>
+
+        // 并没有引入原d3-sankey.js
+        // 而是直接重写了sankey function
+        d3.sankey = function () {
+            var sankey = {},
+                nodeWidth = 24,
+                nodePadding = 8,
+                size = [1, 1],
+                nodes = [],
+                links = [];
+
+            sankey.nodeWidth = function (_) {
+                if (!arguments.length) return nodeWidth;
+                nodeWidth = +_;
+                return sankey;
+            };
+
+            sankey.nodePadding = function (_) {
+                if (!arguments.length) return nodePadding;
+                nodePadding = +_;
+                return sankey;
+            };
+
+            sankey.nodes = function (_) {
+                if (!arguments.length) return nodes;
+                nodes = _;
+                return sankey;
+            };
+
+            sankey.links = function (_) {
+                if (!arguments.length) return links;
+                links = _;
+                return sankey;
+            };
+
+            sankey.size = function (_) {
+                if (!arguments.length) return size;
+                size = _;
+                return sankey;
+            };
+
+            sankey.layout = function (iterations) {
+                computeNodeLinks();
+                computeNodeValues();
+                computeNodeBreadths();
+                computeNodeDepths(iterations);
+                computeLinkDepths();
+                return sankey;
+            };
+
+            sankey.relayout = function () {
+                computeLinkDepths();
+                return sankey;
+            };
+
+            sankey.link = function () {
+                var curvature = .5;
+
+                function link(d) {
+                    var x0 = d.source.x + d.source.dx,
+                        x1 = d.target.x,
+                        xi = d3.interpolateNumber(x0, x1),
+                        x2 = xi(curvature),
+                        x3 = xi(1 - curvature),
+                        y0 = d.source.y + d.sy + d.dy / 2,
+                        y1 = d.target.y + d.ty + d.dy / 2;
+                    return "M" + x0 + "," + y0
+                        + "C" + x2 + "," + y0
+                        + " " + x3 + "," + y1
+                        + " " + x1 + "," + y1;
+                }
+
+                link.curvature = function (_) {
+                    if (!arguments.length) return curvature;
+                    curvature = +_;
+                    return link;
+                };
+
+                return link;
+            };
+
+            // Populate the sourceLinks and targetLinks for each node.
+            // Also, if the source and target are not objects, assume they are indices.
+            function computeNodeLinks() {
+                nodes.forEach(function (node) {
+                    node.sourceLinks = [];
+                    node.targetLinks = [];
+                });
+                links.forEach(function (link) {
+                    var source = link.source,
+                        target = link.target;
+                    if (typeof source === "number") source = link.source = nodes[link.source];
+                    if (typeof target === "number") target = link.target = nodes[link.target];
+                    source.sourceLinks.push(link);
+                    target.targetLinks.push(link);
+                });
+            }
+
+            // Compute the value (size) of each node by summing the associated links.
+            function computeNodeValues() {
+                nodes.forEach(function (node) {
+                    node.value = Math.max(
+                        d3.sum(node.sourceLinks, value),
+                        d3.sum(node.targetLinks, value)
+                    );
+                });
+            }
+
+            // Iteratively assign the breadth (x-position) for each node.
+            // Nodes are assigned the maximum breadth of incoming neighbors plus one;
+            // nodes with no incoming links are assigned breadth zero, while
+            // nodes with no outgoing links are assigned the maximum breadth.
+            function computeNodeBreadths() {
+                var remainingNodes = nodes,
+                    nextNodes,
+                    x = 0;
+
+                while (remainingNodes.length) {
+                    nextNodes = [];
+                    remainingNodes.forEach(function (node) {
+                        node.x = x;
+                        node.dx = nodeWidth;
+                        node.sourceLinks.forEach(function (link) {
+                            nextNodes.push(link.target);
+                        });
+                    });
+                    remainingNodes = nextNodes;
+                    ++x;
+                }
+
+                //
+                // moveSinksRight(x);
+                scaleNodeBreadths((size[0] - nodeWidth) / (x - 1));
+            }
+
+            function moveSourcesRight() {
+                nodes.forEach(function (node) {
+                    if (!node.targetLinks.length) {
+                        node.x = d3.min(node.sourceLinks, function (d) {
+                            return d.target.x;
+                        }) - 1;
+                    }
+                });
+            }
+
+            function moveSinksRight(x) {
+                nodes.forEach(function (node) {
+                    if (!node.sourceLinks.length) {
+                        node.x = x - 1;
+                    }
+                });
+            }
+
+            function scaleNodeBreadths(kx) {
+                nodes.forEach(function (node) {
+                    node.x *= kx;
+                });
+            }
+
+            function computeNodeDepths(iterations) {
+                var nodesByBreadth = d3.nest()
+                    .key(function (d) {
+                        return d.x;
+                    })
+                    .sortKeys(d3.ascending)
+                    .entries(nodes)
+                    .map(function (d) {
+                        return d.values;
+                    });
+
+                //
+                initializeNodeDepth();
+                resolveCollisions();
+                // relaxLeftToRight(1);
+                // resolveCollisions();
+
+                // for (var alpha = 0.001; iterations > 0; --iterations) {
+                //     relaxRightToLeft(alpha *= .99);
+                //     resolveCollisions();
+                //     relaxLeftToRight(alpha);
+                //     resolveCollisions();
+                // }
+
+                function initializeNodeDepth() {
+                    var ky = d3.min(nodesByBreadth, function (nodes) {
+                        return (size[1] - (nodes.length - 1) * nodePadding) / d3.sum(nodes, value);
+                    });
+
+                    nodesByBreadth.forEach(function (nodes) {
+                        nodes.forEach(function (node, i) {
+                            node.y = i;
+                            node.dy = node.value * ky;
+                        });
+                    });
+
+                    links.forEach(function (link) {
+                        link.dy = link.value * ky;
+                    });
+                }
+
+                function relaxLeftToRight(alpha) {
+                    nodesByBreadth.forEach(function (nodes, breadth) {
+                        nodes.forEach(function (node) {
+                            if (node.targetLinks.length) {
+                                var y = d3.sum(node.targetLinks, weightedSource) / d3.sum(node.targetLinks, value);
+                                node.y += (y - center(node)) * alpha;
+                            }
+                        });
+                    });
+
+                    function weightedSource(link) {
+                        return center(link.source) * link.value;
+                    }
+                }
+
+                function relaxRightToLeft(alpha) {
+                    nodesByBreadth.slice().reverse().forEach(function (nodes) {
+                        nodes.forEach(function (node) {
+                            if (node.sourceLinks.length) {
+                                var y = d3.sum(node.sourceLinks, weightedTarget) / d3.sum(node.sourceLinks, value);
+                                node.y += (y - center(node)) * alpha;
+                            }
+                        });
+                    });
+
+                    function weightedTarget(link) {
+                        return center(link.target) * link.value;
+                    }
+                }
+
+                function resolveCollisions() {
+                    nodesByBreadth.forEach(function (nodes) {
+                        var node,
+                            dy,
+                            y0 = 0,
+                            n = nodes.length,
+                            i;
+
+                        // Push any overlapping nodes down.
+                        nodes.sort(ascendingDepth);
+                        for (i = 0; i < n; ++i) {
+                            node = nodes[i];
+                            dy = y0 - node.y;
+                            if (dy > 0) node.y += dy;
+                            y0 = node.y + node.dy + nodePadding;
+                        }
+
+                        // If the bottommost node goes outside the bounds, push it back up.
+                        dy = y0 - nodePadding - size[1];
+                        if (dy > 0) {
+                            y0 = node.y -= dy;
+
+                            // Push any overlapping nodes back up.
+                            for (i = n - 2; i >= 0; --i) {
+                                node = nodes[i];
+                                dy = node.y + node.dy + nodePadding - y0;
+                                if (dy > 0) node.y -= dy;
+                                y0 = node.y;
+                            }
+                        }
+                    });
+                }
+
+                function ascendingDepth(a, b) {
+                    return a.y - b.y;
+                }
+            }
+
+            function computeLinkDepths() {
+                nodes.forEach(function (node) {
+                    node.sourceLinks.sort(ascendingTargetDepth);
+                    node.targetLinks.sort(ascendingSourceDepth);
+                });
+                nodes.forEach(function (node) {
+                    var sy = 0, ty = 0;
+                    node.sourceLinks.forEach(function (link) {
+                        link.sy = sy;
+                        sy += link.dy;
+                    });
+                    node.targetLinks.forEach(function (link) {
+                        link.ty = ty;
+                        ty += link.dy;
+                    });
+                });
+
+                function ascendingSourceDepth(a, b) {
+                    return a.source.y - b.source.y;
+                }
+
+                function ascendingTargetDepth(a, b) {
+                    return a.target.y - b.target.y;
+                }
+            }
+
+            function center(node) {
+                return node.y + node.dy / 2;
+            }
+
+            function value(link) {
+                return link.value;
+            }
+
+            return sankey;
+        };
+
+        // 正式绘制Sankey图
+        var units = "Widgets";
+
+        var margin = {top: 10, right: 10, bottom: 10, left: 10},
+            width = 1400 - margin.left - margin.right,
+            // width = 2500 - margin.left - margin.right,
+            height = 760 - margin.top - margin.bottom;
+
+        var formatNumber = d3.format(",.0f"),    // zero decimal places
+            format = function (d) {
+                return formatNumber(d) + " " + units;
+            },
+            color = d3.scale.category20();
+
+        // append the svg canvas to the page
+        var svg = d3.select("#chart").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+        // Set the sankey diagram properties
+        var sankey = d3.sankey()
+            .nodeWidth(36)
+            .nodePadding(10)
+            .size([width, height]);
+
+        var path = sankey.link();
+
+        // load the data
+
+        var links = [{"source": "General Fund", "target": "Capital Improvement Projects", "value": "1.252"}, {"source": "General Fund", "target": "City Administrator", "value": "16.1024"}, {"source": "General Fund", "target": "City Attorney", "value": "4.9034"}, {"source": "General Fund", "target": "City Auditor", "value": "1.9137"}, {"source": "General Fund", "target": "City Clerk", "value": "1.9156"}, {"source": "General Fund", "target": "City Council", "value": "4.1698"}, {"source": "General Fund", "target": "Economic & Workforce Development", "value": "4.8559"}, {"source": "General Fund", "target": "Finance", "value": "22.4377"}, {"source": "General Fund", "target": "Fire", "value": "124.7475"}, {"source": "General Fund", "target": "Human Resources Management", "value": "4.7713"}, {"source": "General Fund", "target": "Human Services", "value": "5.2234"}, {"source": "General Fund", "target": "Information Technology", "value": "10.2803"}, {"source": "General Fund", "target": "Mayor", "value": "2.549"}, {"source": "General Fund", "target": "Non-Departmental", "value": "77.2006"}, {"source": "General Fund", "target": "Oakland Parks & Recreation", "value": "15.662"}, {"source": "General Fund", "target": "Oakland Public Library", "value": "11.2828"}, {"source": "General Fund", "target": "Oakland Public Works", "value": "2.8819"}, {"source": "General Fund", "target": "Planning & Building", "value": "0.0454"}, {"source": "General Fund", "target": "Police", "value": "212.5089"}, {"source": "Business License Tax", "target": "General Fund", "value": "71.5054"}, {"source": "Fines & Penalties", "target": "General Fund", "value": "23.8335"}, {"source": "Fines & Penalties", "target": "Non-Discretionary", "value": "4.7521"}, {"source": "Grants & Subsidies", "target": "General Fund", "value": "0.1194"}, {"source": "Grants & Subsidies", "target": "Non-Discretionary", "value": "58.1621"}, {"source": "Interest Income", "target": "General Fund", "value": "0.7405"}, {"source": "Interest Income", "target": "Non-Discretionary", "value": "0.1915"}, {"source": "Interfund Transfers", "target": "General Fund", "value": "14.9229"}, {"source": "Interfund Transfers", "target": "Non-Discretionary", "value": "135.5091"}, {"source": "Licenses & Permits", "target": "General Fund", "value": "2.2107"}, {"source": "Licenses & Permits", "target": "Non-Discretionary", "value": "15.4548"}, {"source": "Miscellaneous Revenue", "target": "General Fund", "value": "0.7493"}, {"source": "Miscellaneous Revenue", "target": "Non-Discretionary", "value": "36.7525"}, {"source": "Parking Tax", "target": "General Fund", "value": "10.2113"}, {"source": "Parking Tax", "target": "Non-Discretionary", "value": "8.6796"}, {"source": "Property Tax", "target": "General Fund", "value": "169.3074"}, {"source": "Property Tax", "target": "Non-Discretionary", "value": "4.2857"}, {"source": "Real Estate Transfer Tax", "target": "General Fund", "value": "55.63"}, {"source": "Sales Tax", "target": "General Fund", "value": "55.4251"}, {"source": "Sales Tax", "target": "Non-Discretionary", "value": "24.6465"}, {"source": "Service Charges", "target": "General Fund", "value": "46.8456"}, {"source": "Service Charges", "target": "Non-Discretionary", "value": "121.437"}, {"source": "Transfers from Fund Balance", "target": "General Fund", "value": "6.8025"}, {"source": "Transfers from Fund Balance", "target": "Non-Discretionary", "value": "45.3387"}, {"source": "Transient Occupancy Tax", "target": "General Fund", "value": "16.4"}, {"source": "Transient Occupancy Tax", "target": "Non-Discretionary", "value": "4.4727"}, {"source": "Utility Consumption Tax", "target": "General Fund", "value": "50"}, {"source": "Non-Discretionary", "target": "Capital Improvement Projects", "value": "38.4343"}, {"source": "Non-Discretionary", "target": "City Administrator", "value": "4.0636"}, {"source": "Non-Discretionary", "target": "City Attorney", "value": "9.6838"}, {"source": "Non-Discretionary", "target": "City Clerk", "value": "0.0675"}, {"source": "Non-Discretionary", "target": "Economic & Workforce Development", "value": "12.5926"}, {"source": "Non-Discretionary", "target": "Finance", "value": "13.5228"}, {"source": "Non-Discretionary", "target": "Fire", "value": "10.8653"}, {"source": "Non-Discretionary", "target": "Housing & Community Development", "value": "18.5454"}, {"source": "Non-Discretionary", "target": "Human Resources Management", "value": "1.9615"}, {"source": "Non-Discretionary", "target": "Human Services", "value": "62.6754"}, {"source": "Non-Discretionary", "target": "Information Technology", "value": "16.9423"}, {"source": "Non-Discretionary", "target": "Mayor", "value": "0.2937"}, {"source": "Non-Discretionary", "target": "Non-Departmental", "value": "263.7925"}, {"source": "Non-Discretionary", "target": "Oakland Parks & Recreation", "value": "10.5757"}, {"source": "Non-Discretionary", "target": "Oakland Public Library", "value": "17.5294"}, {"source": "Non-Discretionary", "target": "Oakland Public Works", "value": "156.8086"}, {"source": "Non-Discretionary", "target": "Planning & Building", "value": "27.1776"}, {"source": "Non-Discretionary", "target": "Police", "value": "23.6575"}, {"source": "Gas Tax", "target": "Non-Discretionary", "value": "7.0609"}, {"source": "Internal Service Funds", "target": "Non-Discretionary", "value": "74.2976"}, {"source": "Local Tax", "target": "Non-Discretionary", "value": "148.1487"}]
+
+        var level = [[{"name": "Utility Consumption Tax", "size": 50.0}, {"name": "Real Estate Transfer Tax", "size": 55.63}, {"name": "Business License Tax", "size": 71.5054}, {"name": "Transient Occupancy Tax", "size": 20.8727}, {"name": "Transfers from Fund Balance", "size": 52.141200000000005}, {"name": "Service Charges", "size": 168.2826}, {"name": "Sales Tax", "size": 80.0716}, {"name": "Property Tax", "size": 173.5931}, {"name": "Parking Tax", "size": 18.890900000000002}, {"name": "Miscellaneous Revenue", "size": 37.501799999999996}, {"name": "Licenses & Permits", "size": 17.6655}, {"name": "Interfund Transfers", "size": 150.432}, {"name": "Interest Income", "size": 0.932}, {"name": "Grants & Subsidies", "size": 58.2815}, {"name": "Fines & Penalties", "size": 28.5856}, {"name": "Local Tax", "size": 148.1487}, {"name": "Internal Service Funds", "size": 74.2976}, {"name": "Gas Tax", "size": 7.0609}], [{"name": "General Fund", "size": 524.7035999999999}, {"name": "Non-Discretionary", "size": 689.1895}], [{"name": "City Council", "size": 4.1698}, {"name": "City Auditor", "size": 1.9137}, {"name": "Police", "size": 236.1664}, {"name": "Planning & Building", "size": 27.223000000000003}, {"name": "Oakland Public Works", "size": 159.69050000000001}, {"name": "Oakland Public Library", "size": 28.812199999999997}, {"name": "Oakland Parks & Recreation", "size": 26.2377}, {"name": "Non-Departmental", "size": 340.9931}, {"name": "Mayor", "size": 2.8427}, {"name": "Information Technology", "size": 27.2226}, {"name": "Human Services", "size": 67.89880000000001}, {"name": "Human Resources Management", "size": 6.7328}, {"name": "Fire", "size": 135.6128}, {"name": "Finance", "size": 35.960499999999996}, {"name": "Economic & Workforce Development", "size": 17.4485}, {"name": "City Clerk", "size": 1.9830999999999999}, {"name": "City Attorney", "size": 14.5872}, {"name": "City Administrator", "size": 20.166}, {"name": "Capital Improvement Projects", "size": 39.6863}, {"name": "Housing & Community Development", "size": 18.5454}]]
+
+        // original processingResult from bc
+        let result = [[1, 2, 3, 8, 15, 13, 4, 7, 9, 6, 5, 11, 12, 10, 14, 16, 17, 18], [1, 2], [1, 2, 16, 13, 3, 9, 18, 12, 14, 7, 6, 10, 17, 15, 8, 11, 19, 5, 4, 20]]
+
+        let nodes = []
+        result.forEach((d, i) => {
+            d.forEach(j => {
+                nodes.push(level[i][parseInt(j) - 1])
+            })
+        })
+        console.log(nodes)
+
+        var another = nodes.map(d => ({name: d['name']}))
+        var orgNode = nodes.map(d => d.name)
+        var anotherLinks = links.map(d => ({
+                'source': orgNode.indexOf(d.source),
+                'target': orgNode.indexOf(d.target),
+                'value': d.value
+            }
+        ))
+        console.log(nodes, links)
+        var data = ({
+            "nodes": nodes,
+            "links": links,
+        })
+
+        var nodeMap = {};
+        var graph = data;
+        graph.nodes.forEach(function (x) {
+            nodeMap[x.name] = x;
+        });
+        console.log(nodeMap)
+        graph.links = graph.links.map(function (x) {
+            if (typeof nodeMap[x.target] === "undefined") console.log(x.target)
+            if (typeof nodeMap[x.source] === "undefined") console.log(x.source)
+            return {
+                source: nodeMap[x.source],
+                target: nodeMap[x.target],
+                value: x.value
+            };
+        });
+        console.log(graph)
+
+        sankey
+            .nodes(graph.nodes)
+            .links(graph.links)
+            .layout(32);
+
+        // add in the links
+        var link = svg.append("g").selectAll(".link")
+            .data(graph.links)
+            .enter().append("path")
+            .attr("class", "link")
+            .attr("d", path)
+            .attr("name", (d) => d.source.name + "-" + d.target.name)
+            .style("stroke-width", function (d) {
+                return Math.max(1, d.dy);
+            })
+            .style("stroke", function (d, i) {
+                return d3.rgb(color(i + 5)).darker(1)
+            })
+            .sort(function (a, b) {
+                return b.dy - a.dy;
+            });
+
+        // add the link titles
+        link.append("title")
+            .text(function (d) {
+                return d.source.name + " → " +
+                    d.target.name + "\n" + format(d.value);
+            });
+
+        // add in the nodes
+        var node = svg.append("g").selectAll(".node")
+            .data(graph.nodes)
+            .enter().append("g")
+            .attr("class", "node")
+            .attr("transform", function (d) {
+                return "translate(" + d.x + "," + d.y + ")";
+            })
+            // .call(d3.behavior.drag()
+            //     .origin(function (d) {
+            //         return d;
+            //     })
+            //     .on("dragstart", function () {
+            //         this.parentNode.appendChild(this);
+            //     })
+            //     .on("drag", dragmove));
+
+        // add the rectangles for the nodes
+        node.append("rect")
+            .attr("height", function (d) {
+                return d.dy;
+            })
+            .attr("width", sankey.nodeWidth())
+            .style("fill", function (d) {
+                return d.color = color(d.name.replace(/ .*/, ""));
+            })
+            .style("stroke", function (d) {
+                return d3.rgb(d.color).darker(2);
+            })
+            .append("title")
+            .text(function (d) {
+                return d.name + "\n" + format(d.value);
+            });
+
+        // add in the title for the nodes
+        node.append("text")
+            .attr("x", d => {
+                if (d.x === 0)
+                    return 6 + sankey.nodeWidth()
+                else if (d.x === 448)
+                    return -6
+                else if (d.x === 896)
+                    return 6 + sankey.nodeWidth()
+                else return -6
+            })
+            .attr("y", function (d) {
+                console.log(d);
+                return d.dy / 2;
+            })
+            .attr("dy", ".35em")
+            .attr("text-anchor", d => {
+                if (d.x === 0)
+                    return "start"
+                else if (d.x === 448)
+                    return "end"
+                else if (d.x === 896)
+                    return "start"
+                else return "end"
+            })
+            .attr("transform", null)
+            .text(function (d) {
+                return d.name;
+            })
+        // .filter(function (d) { return d.x < width / 2; })
+        // .attr("x", 6 + sankey.nodeWidth())
+        // .attr("text-anchor", "start");
+
+        // the function for moving the nodes
+        function dragmove(d) {
+            d3.select(this).attr("transform",
+                "translate(" + (
+                    d.x = Math.max(0, Math.min(width - d.dx, d3.event.x))
+                ) + "," + (
+                    d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))
+                ) + ")");
+            sankey.relayout();
+            link.attr("d", path);
+        }
+    //　
+    </script>
+
+<script src="../sankeyEdgesBundling.js"></script>
+</body>
+
+</html>

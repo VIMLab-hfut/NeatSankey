@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PRE-INVESTIGATION</title>
+    <link rel="icon" href="/static/img/icon.png"/>
+
+    <!--<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>-->
+    <script src="/static/js/axios.min.js"></script>
+    <!-- <script src="http://d3js.org/d3.v3.js"></script> -->
+    <script src="/static/js/d3.v3.js"></script>
+
+    <!-- load CSS -->
+    <!-- Google web font "Open Sans" -->
+    <link rel="stylesheet" href="/static/css/materialize.min.css">
+    <!-- https://materializecss.com -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <!-- https://getbootstrap.com/ -->
+    <link rel="stylesheet" href="/static/css/all.min.css">
+    <!-- Template Mo style -->
+
+    <script src="/static/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/js/materialize.min.js"></script>
+    <!--<script src="/static/js/FileSaver.js"></script>-->
+
+    <!-- https://fontawesome.com/ -->
+    <link rel="stylesheet" href="/static/css/templatemo-style.css">
+</head>
+<body>
+<div style="text-align: center;">
+    <h2 class="tm-site-name">基本信息收集单</h2>
+    <div class="row" style="margin: 0 -15px 0 -15px">
+        <div class="col-sm-12 col-md-7">
+            <img src="/static/img/logo.png" alt="Image Fetching Failed" height="83.6px">
+        </div>
+
+        <div class="col-sm-12 col-md-4">
+            <em>
+                <div class="tm-highlight">“Tendency is all we need”</div>
+            </em>
+        </div>
+    </div>
+</div>
+
+<div style="text-align: center">
+    <div>感谢您参与本次调查，在正式开始调查之前，我们将收集一些关于您的基本信息，我们承诺绝不会外泄这些信息</div>
+</div>
+
+<hr style="stroke: black; stroke-width: 5px; width: 70vw; text-align: center;"/>
+
+<div class="container">
+    <div class="col-12 tm-respondent-info" id="basicInfoCollecting">
+
+        <h2 class="tm-question-header tm-question-header-mt"> - 您的性别？</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                <div class="form-group">
+                    <div class="tm-choice-mt">
+                        <label class="tm-q-choice">
+                            <input type="radio" name="gender" id="male" class="with-gap" value="male"
+                                   onclick="storeUserInfo('sex', 'male')">
+                            <span>男</span>
+                        </label>
+                        <label class="tm-q-choice tm-choice-ml">
+                            <input type="radio" name="gender" id="female" class="with-gap" value="female"
+                                   onclick="storeUserInfo('sex', 'female')">
+                            <span>女</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <h2 class="tm-question-header tm-question-header-mt"> - 您的年龄？</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                <div class="form-group">
+                    <label for="inputAge"></label>
+                    <input type="text" class="form-control browser-default" id="inputAge" name="age"
+                           onchange="storeUserInfo(this.name, this.value)">
+                </div>
+            </div>
+        </div>
+        <hr>
+        <h2 class="tm-question-header tm-question-header-mt"> - 您的专业？</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                <div class="form-group">
+                    <label for="inputMajor"></label>
+                    <input type="text" class="form-control browser-default" id="inputMajor" name="major"
+                           onchange="storeUserInfo(this.name, this.value)">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-12 text-center tm-submit-container">
+    <button id="startAnswer" type="submit" href="#" class="btn btn-primary tm-btn-submit" onclick="ok()" disabled>开始答题</button>
+</div>
+
+<script>
+    let sex = false
+    let age = false
+    let major = false
+
+    function storeUserInfo(elementName, elementValue) {
+        localStorage.setItem(elementName, elementValue)
+        console.log(elementName, localStorage.getItem(elementName))
+
+        "sex" === elementName ? sex = true : ""
+        "age" === elementName ? age = true : ""
+        "major" === elementName ? major = true : ""
+
+        if (sex && age && major) {
+            document.getElementById("startAnswer").disabled = false
+        }
+    }
+
+    function ok() {
+        window.location.href="Investigation"
+    }
+
+</script>
+
+</body>
+</html>

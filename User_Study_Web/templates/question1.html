@@ -1,0 +1,1608 @@
+<!doctype html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>调查问卷（一）</title>
+
+    <!-- load CSS -->
+    <!-- Google web font "Open Sans" -->
+    <link rel="stylesheet" href="/static/css/materialize.min.css">
+    <!-- https://materializecss.com -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <!-- https://getbootstrap.com/ -->
+    <link rel="stylesheet" href="/static/css/all.min.css">
+    <!-- https://fontawesome.com/ -->
+    <link rel="stylesheet" href="/static/css/templatemo-style.css">
+    <!-- Template Mo style -->
+    <link rel="icon" href="/static/img/icon.png"/>
+ 
+    <script src="/static/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/js/materialize.min.js"></script>
+    <script src="/static/js/FileSaver.js"></script>
+
+<script>
+var second = 0;
+window.setInterval(function () {
+    second++;
+}, 1000);
+function ok(){
+    var content = res1+res2+res3+res4+res5+res6+res7+res8+res9+res10+res11+res12+res13+res14+res15+res16+res17+res18+res19+res20+res21+res22+res23+res24+res25+res26+res27+res28+res29+res30;
+    var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
+    saveAs(blob, "res1.txt");
+}
+</script>
+
+</head>
+<body>
+<div class="adcenter"></div>    
+	<div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-7">
+				<img src="/static/img/logo.png" alt="Image">
+                <h2 class="tm-site-name">调&nbsp;查&nbsp;问&nbsp;卷</h2>
+            </div>
+            <div class="col-sm-12 col-md-5 mt-md-0 mt-5">
+                <div class="tm-site-header-right-col">
+                    <a href="https://baidu.com" class="btn btn-primary"　style="line-height: 100px">联系我们</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="tm-intro">
+                <div class="col-sm-12 col-md-8 mb-md-0 mb-4 tm-intro-left">
+                    <p class="mb-0">本调查问卷共计两页。请在看清题目后<b>点击“查看图片”按钮</b>开始答题；在完成每个任务后<b>务必点击“确认选项”按钮</b>以确保结果的正确提交；在完成本页后<b>点击“下一页”</b>会自动生成<b>“res1.txt”文件</b>并前往下一页。我们将记录您的答题时间，请您耐心配合！</p>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <em>
+                        <p class="tm-highlight">“Tendency is all you need”</p>
+                    </em>
+                </div>
+            </div>
+        </div>
+
+        <form action="question2.html" method="post">
+            <div class="row">
+				<!-- 第1个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题1</h2>
+                    <p>请您选择图层1的22位置和图层2的38位置哪里更厚，您应该判断对应区域的厚度。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q1_q1_a1.png" alt="Image" style="display:none;" id="Q1_q1_a1_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q1_a1" class="filled-in tm-checkbox" id="Q1_q1_a1_1">
+										<span>图层1的22位置更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q1_a1" class="filled-in tm-checkbox"  id="Q1_q1_a1_2">
+										<span>图层2的38位置更厚</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio1()" id="Q1_q1_a1_button">查看图片</button>
+								<script>
+									var res1="";
+									function disable_radio1(){
+										var myButton=document.getElementById("Q1_q1_a1_button");
+										var radio1=document.getElementById("Q1_q1_a1_1");
+										var radio2=document.getElementById("Q1_q1_a1_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q1_q1_a1_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res1=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res1=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>				<!-- 第2个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题2</h2>
+                    <p>请您选择图层1的36位置和图层2的21位置哪里更厚，您应该判断对应区域的厚度。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q1_q2_a2.png" alt="Image" style="display:none;" id="Q1_q2_a2_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q2_a2" class="filled-in tm-checkbox" id="Q1_q2_a2_1">
+										<span>图层1的36位置更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q2_a2" class="filled-in tm-checkbox"  id="Q1_q2_a2_2">
+										<span>图层2的21位置更厚</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio2()" id="Q1_q2_a2_button">查看图片</button>
+								<script>
+									var res2="";
+									function disable_radio2(){
+										var myButton=document.getElementById("Q1_q2_a2_button");
+										var radio1=document.getElementById("Q1_q2_a2_1");
+										var radio2=document.getElementById("Q1_q2_a2_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q1_q2_a2_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res2=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res2=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>				<!-- 第3个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题3</h2>
+                    <p>请您选择图层1的40位置和图层2的14位置哪里更厚，您应该判断对应区域的厚度。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q1_q4_a3.png" alt="Image" style="display:none;" id="Q1_q4_a3_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q4_a3" class="filled-in tm-checkbox" id="Q1_q4_a3_1">
+										<span>图层1的40位置更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q4_a3" class="filled-in tm-checkbox"  id="Q1_q4_a3_2">
+										<span>图层2的14位置更厚</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio3()" id="Q1_q4_a3_button">查看图片</button>
+								<script>
+									var res3="";
+									function disable_radio3(){
+										var myButton=document.getElementById("Q1_q4_a3_button");
+										var radio1=document.getElementById("Q1_q4_a3_1");
+										var radio2=document.getElementById("Q1_q4_a3_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q1_q4_a3_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res3=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res3=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>				<!-- 第4个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题4</h2>
+                    <p>请您选择图层1的50位置和图层2的19位置哪里更厚，您应该判断对应区域的厚度。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q1_q3_a1.png" alt="Image" style="display:none;" id="Q1_q3_a1_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q3_a1" class="filled-in tm-checkbox" id="Q1_q3_a1_1">
+										<span>图层1的50位置更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q3_a1" class="filled-in tm-checkbox"  id="Q1_q3_a1_2">
+										<span>图层2的19位置更厚</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio4()" id="Q1_q3_a1_button">查看图片</button>
+								<script>
+									var res4="";
+									function disable_radio4(){
+										var myButton=document.getElementById("Q1_q3_a1_button");
+										var radio1=document.getElementById("Q1_q3_a1_1");
+										var radio2=document.getElementById("Q1_q3_a1_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q1_q3_a1_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res4=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res4=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>				<!-- 第5个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题5</h2>
+                    <p>请您选择图层1的36位置和图层2的21位置哪里更厚，您应该判断对应区域的厚度。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q1_q2_a3.png" alt="Image" style="display:none;" id="Q1_q2_a3_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q2_a3" class="filled-in tm-checkbox" id="Q1_q2_a3_1">
+										<span>图层1的36位置更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q2_a3" class="filled-in tm-checkbox"  id="Q1_q2_a3_2">
+										<span>图层2的21位置更厚</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio5()" id="Q1_q2_a3_button">查看图片</button>
+								<script>
+									var res5="";
+									function disable_radio5(){
+										var myButton=document.getElementById("Q1_q2_a3_button");
+										var radio1=document.getElementById("Q1_q2_a3_1");
+										var radio2=document.getElementById("Q1_q2_a3_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q1_q2_a3_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res5=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res5=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>				<!-- 第6个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题6</h2>
+                    <p>请您选择图层1的40位置和图层2的14位置哪里更厚，您应该判断对应区域的厚度。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q1_q4_a2.png" alt="Image" style="display:none;" id="Q1_q4_a2_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q4_a2" class="filled-in tm-checkbox" id="Q1_q4_a2_1">
+										<span>图层1的40位置更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q4_a2" class="filled-in tm-checkbox"  id="Q1_q4_a2_2">
+										<span>图层2的14位置更厚</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio6()" id="Q1_q4_a2_button">查看图片</button>
+								<script>
+									var res6="";
+									function disable_radio6(){
+										var myButton=document.getElementById("Q1_q4_a2_button");
+										var radio1=document.getElementById("Q1_q4_a2_1");
+										var radio2=document.getElementById("Q1_q4_a2_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q1_q4_a2_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res6=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res6=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>				<!-- 第7个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题7</h2>
+                    <p>请您选择图层1的7位置和图层2的20位置哪里更厚，您应该判断对应区域的厚度。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q1_q5_a2.png" alt="Image" style="display:none;" id="Q1_q5_a2_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q5_a2" class="filled-in tm-checkbox" id="Q1_q5_a2_1">
+										<span>图层1的7位置更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q5_a2" class="filled-in tm-checkbox"  id="Q1_q5_a2_2">
+										<span>图层2的20位置更厚</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio7()" id="Q1_q5_a2_button">查看图片</button>
+								<script>
+									var res7="";
+									function disable_radio7(){
+										var myButton=document.getElementById("Q1_q5_a2_button");
+										var radio1=document.getElementById("Q1_q5_a2_1");
+										var radio2=document.getElementById("Q1_q5_a2_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q1_q5_a2_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res7=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res7=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>				<!-- 第8个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题8</h2>
+                    <p>请您选择图层1的50位置和图层2的19位置哪里更厚，您应该判断对应区域的厚度。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q1_q3_a3.png" alt="Image" style="display:none;" id="Q1_q3_a3_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q3_a3" class="filled-in tm-checkbox" id="Q1_q3_a3_1">
+										<span>图层1的50位置更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q3_a3" class="filled-in tm-checkbox"  id="Q1_q3_a3_2">
+										<span>图层2的19位置更厚</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio8()" id="Q1_q3_a3_button">查看图片</button>
+								<script>
+									var res8="";
+									function disable_radio8(){
+										var myButton=document.getElementById("Q1_q3_a3_button");
+										var radio1=document.getElementById("Q1_q3_a3_1");
+										var radio2=document.getElementById("Q1_q3_a3_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q1_q3_a3_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res8=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res8=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>				<!-- 第9个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题9</h2>
+                    <p>请您选择图层1的40位置和图层2的14位置哪里更厚，您应该判断对应区域的厚度。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q1_q4_a1.png" alt="Image" style="display:none;" id="Q1_q4_a1_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q4_a1" class="filled-in tm-checkbox" id="Q1_q4_a1_1">
+										<span>图层1的40位置更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q4_a1" class="filled-in tm-checkbox"  id="Q1_q4_a1_2">
+										<span>图层2的14位置更厚</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio9()" id="Q1_q4_a1_button">查看图片</button>
+								<script>
+									var res9="";
+									function disable_radio9(){
+										var myButton=document.getElementById("Q1_q4_a1_button");
+										var radio1=document.getElementById("Q1_q4_a1_1");
+										var radio2=document.getElementById("Q1_q4_a1_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q1_q4_a1_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res9=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res9=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>				<!-- 第10个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题10</h2>
+                    <p>请您选择图层1的7位置和图层2的20位置哪里更厚，您应该判断对应区域的厚度。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q1_q5_a3.png" alt="Image" style="display:none;" id="Q1_q5_a3_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q5_a3" class="filled-in tm-checkbox" id="Q1_q5_a3_1">
+										<span>图层1的7位置更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q5_a3" class="filled-in tm-checkbox"  id="Q1_q5_a3_2">
+										<span>图层2的20位置更厚</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio10()" id="Q1_q5_a3_button">查看图片</button>
+								<script>
+									var res10="";
+									function disable_radio10(){
+										var myButton=document.getElementById("Q1_q5_a3_button");
+										var radio1=document.getElementById("Q1_q5_a3_1");
+										var radio2=document.getElementById("Q1_q5_a3_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q1_q5_a3_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res10=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res10=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>				<!-- 第11个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题11</h2>
+                    <p>请您选择图层1的22位置和图层2的38位置哪里更厚，您应该判断对应区域的厚度。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q1_q1_a3.png" alt="Image" style="display:none;" id="Q1_q1_a3_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q1_a3" class="filled-in tm-checkbox" id="Q1_q1_a3_1">
+										<span>图层1的22位置更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q1_a3" class="filled-in tm-checkbox"  id="Q1_q1_a3_2">
+										<span>图层2的38位置更厚</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio11()" id="Q1_q1_a3_button">查看图片</button>
+								<script>
+									var res11="";
+									function disable_radio11(){
+										var myButton=document.getElementById("Q1_q1_a3_button");
+										var radio1=document.getElementById("Q1_q1_a3_1");
+										var radio2=document.getElementById("Q1_q1_a3_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q1_q1_a3_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res11=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res11=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>				<!-- 第12个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题12</h2>
+                    <p>请您选择图层1的50位置和图层2的19位置哪里更厚，您应该判断对应区域的厚度。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q1_q3_a2.png" alt="Image" style="display:none;" id="Q1_q3_a2_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q3_a2" class="filled-in tm-checkbox" id="Q1_q3_a2_1">
+										<span>图层1的50位置更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q3_a2" class="filled-in tm-checkbox"  id="Q1_q3_a2_2">
+										<span>图层2的19位置更厚</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio12()" id="Q1_q3_a2_button">查看图片</button>
+								<script>
+									var res12="";
+									function disable_radio12(){
+										var myButton=document.getElementById("Q1_q3_a2_button");
+										var radio1=document.getElementById("Q1_q3_a2_1");
+										var radio2=document.getElementById("Q1_q3_a2_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q1_q3_a2_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res12=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res12=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>				
+				<!-- 第13个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题13</h2>
+                    <p>请您选择图层1的38位置和图层2的22位置哪里更厚，您应该判断对应区域的厚度。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q1_q1_a2.png" alt="Image" style="display:none;" id="Q1_q1_a2_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q1_a2" class="filled-in tm-checkbox" id="Q1_q1_a2_1">
+										<span>图层1的38位置更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q1_a2" class="filled-in tm-checkbox"  id="Q1_q1_a2_2">
+										<span>图层2的22位置更厚</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio13()" id="Q1_q1_a2_button">查看图片</button>
+								<script>
+									var res13="";
+									function disable_radio13(){
+										var myButton=document.getElementById("Q1_q1_a2_button");
+										var radio1=document.getElementById("Q1_q1_a2_1");
+										var radio2=document.getElementById("Q1_q1_a2_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q1_q1_a2_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res13=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res13=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>
+								<!-- 第14个问题 --> 
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题14</h2>
+                    <p>请您选择图层1的7位置、图层2的20位置和图层3的18位置哪里更厚，您应该判断对应区域的厚度。</p>
+                    <div class="tm-q-choice-container">
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q1_q5_a1.png" alt="Image" style="display:none;" id="Q1_q5_a1_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q5_a1" class="filled-in tm-checkbox" id="Q1_q5_a1_1" >
+										<span>图层1的7位置更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q5_a1" class="filled-in tm-checkbox" id="Q1_q5_a1_2" >
+										<span>图层2的20位置更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q5_a1" class="filled-in tm-checkbox" id="Q1_q5_a1_3" >
+										<span>图层3的18位置更厚</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio14()" id="Q1_q5_a1_button">查看图片</button>
+								<script>
+									var res14="";
+									function disable_radio14(){
+										var myButton=document.getElementById("Q1_q5_a1_button");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q1_q5_a1_Img");
+											myImg.style="";
+										}else{									
+											var radio1=document.getElementById("Q1_q5_a1_1"); 
+											var radio2=document.getElementById("Q1_q5_a1_2"); 
+											var radio3=document.getElementById("Q1_q5_a1_3"); 
+											if(!radio1.disabled){
+											if(radio1.checked){
+												res14=radio1.id+","+second+"\n";
+											}else if(radio2.checked){
+												res14=radio2.id+","+second+"\n";	
+											}else if(radio2.checked){
+												res14=radio3.id+","+second+"\n";
+											}
+											radio1.disabled=true;
+											radio2.disabled=true;
+											radio3.disabled=true;
+											}
+										}
+									}
+								</script>
+							</div>
+                        </label>
+                    </div>
+                </div> 							
+				<!-- 第15个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题15</h2>
+                    <p>请您选择图层1的36位置和图层2的21位置哪里更厚，您应该判断对应区域的厚度。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q1_q2_a1.png" alt="Image" style="display:none;" id="Q1_q2_a1_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q2_a1" class="filled-in tm-checkbox" id="Q1_q2_a1_1">
+										<span>图层1的36位置更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q1_q2_a1" class="filled-in tm-checkbox"  id="Q1_q2_a1_2">
+										<span>图层2的21位置更厚</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio15()" id="Q1_q2_a1_button">查看图片</button>
+								<script>
+									var res15="";
+									function disable_radio15(){
+										var myButton=document.getElementById("Q1_q2_a1_button");
+										var radio1=document.getElementById("Q1_q2_a1_1");
+										var radio2=document.getElementById("Q1_q2_a1_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q1_q2_a1_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res15=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res15=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>
+		
+				<!-- 第16个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题16</h2>
+                    <p>对于这个问题，我们请您从若干个时间点中选出哪个时间点对应的图层总厚度最厚。如下图，请您判断8位置和19位置哪里更厚。</p>
+                    <div class="tm-q-choice-container">
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q2_q1_a2.png" alt="Image" style="display:none;" id="Q2_q1_a2_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q1_a2" class="filled-in tm-checkbox" id="Q2_q1_a2_1" >
+										<span>8时刻总体更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q1_a2" class="filled-in tm-checkbox" id="Q2_q1_a2_2" >
+										<span>19时刻总体更厚</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio16()" id="Q2_q1_a2_button">查看图片</button>
+								<script>
+									var res16="";
+									function disable_radio16(){
+										var myButton=document.getElementById("Q2_q1_a2_button");
+										var radio1=document.getElementById("Q2_q1_a2_1");
+										var radio2=document.getElementById("Q2_q1_a2_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q2_q1_a2_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+											if(radio1.checked){
+												res16=radio1.id+","+second+"\n";
+											}else if(radio2.checked){
+												res16=radio2.id+","+second+"\n";
+											}
+											radio1.disabled=true;
+											radio2.disabled=true;
+											}
+										}
+									}
+								</script>
+							</div>
+                        </label>
+                    </div>
+                </div>				<!-- 第17个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题17</h2>
+                    <p>对于这个问题，我们请您从若干个时间点中选出哪个时间点对应的图层总厚度最厚。如下图，请您判断8位置和19位置哪里更厚。</p>
+                    <div class="tm-q-choice-container">
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q2_q1_a1.png" alt="Image" style="display:none;" id="Q2_q1_a1_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q1_a1" class="filled-in tm-checkbox" id="Q2_q1_a1_1" >
+										<span>8时刻总体更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q1_a1" class="filled-in tm-checkbox" id="Q2_q1_a1_2" >
+										<span>19时刻总体更厚</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio17()" id="Q2_q1_a1_button">查看图片</button>
+								<script>
+									var res17="";
+									function disable_radio17(){
+										var myButton=document.getElementById("Q2_q1_a1_button");
+										var radio1=document.getElementById("Q2_q1_a1_1");
+										var radio2=document.getElementById("Q2_q1_a1_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q2_q1_a1_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+											if(radio1.checked){
+												res17=radio1.id+","+second+"\n";
+											}else if(radio2.checked){
+												res17=radio2.id+","+second+"\n";
+											}
+											radio1.disabled=true;
+											radio2.disabled=true;
+											}
+										}
+									}
+								</script>
+							</div>
+                        </label>
+                    </div>
+                </div>				<!-- 第18个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题18</h2>
+                    <p>对于这个问题，我们请您从若干个时间点中选出哪个时间点对应的图层总厚度最厚。如下图，请您判断16位置和23位置哪里更厚。</p>
+                    <div class="tm-q-choice-container">
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q2_q2_a3.png" alt="Image" style="display:none;" id="Q2_q2_a3_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q2_a3" class="filled-in tm-checkbox" id="Q2_q2_a3_1" >
+										<span>16时刻总体更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q2_a3" class="filled-in tm-checkbox" id="Q2_q2_a3_2" >
+										<span>23时刻总体更厚</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio18()" id="Q2_q2_a3_button">查看图片</button>
+								<script>
+									var res18="";
+									function disable_radio18(){
+										var myButton=document.getElementById("Q2_q2_a3_button");
+										var radio1=document.getElementById("Q2_q2_a3_1");
+										var radio2=document.getElementById("Q2_q2_a3_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q2_q2_a3_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+											if(radio1.checked){
+												res18=radio1.id+","+second+"\n";
+											}else if(radio2.checked){
+												res18=radio2.id+","+second+"\n";
+											}
+											radio1.disabled=true;
+											radio2.disabled=true;
+											}
+										}
+									}
+								</script>
+							</div>
+                        </label>
+                    </div>
+                </div>				<!-- 第19个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题19</h2>
+                    <p>对于这个问题，我们请您从若干个时间点中选出哪个时间点对应的图层总厚度最厚。如下图，请您判断7位置和37位置哪里更厚。</p>
+                    <div class="tm-q-choice-container">
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q2_q3_a1.png" alt="Image" style="display:none;" id="Q2_q3_a1_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q3_a1" class="filled-in tm-checkbox" id="Q2_q3_a1_1" >
+										<span>7时刻总体更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q3_a1" class="filled-in tm-checkbox" id="Q2_q3_a1_2" >
+										<span>37时刻总体更厚</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio19()" id="Q2_q3_a1_button">查看图片</button>
+								<script>
+									var res19="";
+									function disable_radio19(){
+										var myButton=document.getElementById("Q2_q3_a1_button");
+										var radio1=document.getElementById("Q2_q3_a1_1");
+										var radio2=document.getElementById("Q2_q3_a1_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q2_q3_a1_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+											if(radio1.checked){
+												res19=radio1.id+","+second+"\n";
+											}else if(radio2.checked){
+												res19=radio2.id+","+second+"\n";
+											}
+											radio1.disabled=true;
+											radio2.disabled=true;
+											}
+										}
+									}
+								</script>
+							</div>
+                        </label>
+                    </div>
+                </div>				<!-- 第20个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题20</h2>
+                    <p>对于这个问题，我们请您从若干个时间点中选出哪个时间点对应的图层总厚度最厚。如下图，请您判断1位置和7位置哪里更厚。</p>
+                    <div class="tm-q-choice-container">
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q2_q4_a1.png" alt="Image" style="display:none;" id="Q2_q4_a1_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q4_a1" class="filled-in tm-checkbox" id="Q2_q4_a1_1" >
+										<span>1时刻总体更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q4_a1" class="filled-in tm-checkbox" id="Q2_q4_a1_2" >
+										<span>7时刻总体更厚</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio20()" id="Q2_q4_a1_button">查看图片</button>
+								<script>
+									var res20="";
+									function disable_radio20(){
+										var myButton=document.getElementById("Q2_q4_a1_button");
+										var radio1=document.getElementById("Q2_q4_a1_1");
+										var radio2=document.getElementById("Q2_q4_a1_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q2_q4_a1_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+											if(radio1.checked){
+												res20=radio1.id+","+second+"\n";
+											}else if(radio2.checked){
+												res20=radio2.id+","+second+"\n";
+											}
+											radio1.disabled=true;
+											radio2.disabled=true;
+											}
+										}
+									}
+								</script>
+							</div>
+                        </label>
+                    </div>
+                </div>				<!-- 第21个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题21</h2>
+                    <p>对于这个问题，我们请您从若干个时间点中选出哪个时间点对应的图层总厚度最厚。如下图，请您判断16位置和23位置哪里更厚。</p>
+                    <div class="tm-q-choice-container">
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q2_q2_a1.png" alt="Image" style="display:none;" id="Q2_q2_a1_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q2_a1" class="filled-in tm-checkbox" id="Q2_q2_a1_1" >
+										<span>16时刻总体更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q2_a1" class="filled-in tm-checkbox" id="Q2_q2_a1_2" >
+										<span>23时刻总体更厚</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio21()" id="Q2_q2_a1_button">查看图片</button>
+								<script>
+									var res21="";
+									function disable_radio21(){
+										var myButton=document.getElementById("Q2_q2_a1_button");
+										var radio1=document.getElementById("Q2_q2_a1_1");
+										var radio2=document.getElementById("Q2_q2_a1_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q2_q2_a1_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+											if(radio1.checked){
+												res21=radio1.id+","+second+"\n";
+											}else if(radio2.checked){
+												res21=radio2.id+","+second+"\n";
+											}
+											radio1.disabled=true;
+											radio2.disabled=true;
+											}
+										}
+									}
+								</script>
+							</div>
+                        </label>
+                    </div>
+                </div>				<!-- 第22个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题22</h2>
+                    <p>对于这个问题，我们请您从若干个时间点中选出哪个时间点对应的图层总厚度最厚。如下图，请您判断1位置和7位置哪里更厚。</p>
+                    <div class="tm-q-choice-container">
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q2_q4_a2.png" alt="Image" style="display:none;" id="Q2_q4_a2_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q4_a2" class="filled-in tm-checkbox" id="Q2_q4_a2_1" >
+										<span>1时刻总体更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q4_a2" class="filled-in tm-checkbox" id="Q2_q4_a2_2" >
+										<span>7时刻总体更厚</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio22()" id="Q2_q4_a2_button">查看图片</button>
+								<script>
+									var res22="";
+									function disable_radio22(){
+										var myButton=document.getElementById("Q2_q4_a2_button");
+										var radio1=document.getElementById("Q2_q4_a2_1");
+										var radio2=document.getElementById("Q2_q4_a2_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q2_q4_a2_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+											if(radio1.checked){
+												res22=radio1.id+","+second+"\n";
+											}else if(radio2.checked){
+												res22=radio2.id+","+second+"\n";
+											}
+											radio1.disabled=true;
+											radio2.disabled=true;
+											}
+										}
+									}
+								</script>
+							</div>
+                        </label>
+                    </div>
+                </div>				<!-- 第23个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题23</h2>
+                    <p>对于这个问题，我们请您从若干个时间点中选出哪个时间点对应的图层总厚度最厚。如下图，请您判断7位置和37位置哪里更厚。</p>
+                    <div class="tm-q-choice-container">
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q2_q3_a3.png" alt="Image" style="display:none;" id="Q2_q3_a3_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q3_a3" class="filled-in tm-checkbox" id="Q2_q3_a3_1" >
+										<span>7时刻总体更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q3_a3" class="filled-in tm-checkbox" id="Q2_q3_a3_2" >
+										<span>37时刻总体更厚</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio23()" id="Q2_q3_a3_button">查看图片</button>
+								<script>
+									var res23="";
+									function disable_radio23(){
+										var myButton=document.getElementById("Q2_q3_a3_button");
+										var radio1=document.getElementById("Q2_q3_a3_1");
+										var radio2=document.getElementById("Q2_q3_a3_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q2_q3_a3_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+											if(radio1.checked){
+												res23=radio1.id+","+second+"\n";
+											}else if(radio2.checked){
+												res23=radio2.id+","+second+"\n";
+											}
+											radio1.disabled=true;
+											radio2.disabled=true;
+											}
+										}
+									}
+								</script>
+							</div>
+                        </label>
+                    </div>
+                </div>				<!-- 第24个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题24</h2>
+                    <p>对于这个问题，我们请您从若干个时间点中选出哪个时间点对应的图层总厚度最厚。如下图，请您判断8位置和29位置哪里更厚。</p>
+                    <div class="tm-q-choice-container">
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q2_q5_a1.png" alt="Image" style="display:none;" id="Q2_q5_a1_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q5_a1" class="filled-in tm-checkbox" id="Q2_q5_a1_1" >
+										<span>8时刻总体更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q5_a1" class="filled-in tm-checkbox" id="Q2_q5_a1_2" >
+										<span>29时刻总体更厚</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio24()" id="Q2_q5_a1_button">查看图片</button>
+								<script>
+									var res24="";
+									function disable_radio24(){
+										var myButton=document.getElementById("Q2_q5_a1_button");
+										var radio1=document.getElementById("Q2_q5_a1_1");
+										var radio2=document.getElementById("Q2_q5_a1_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q2_q5_a1_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+											if(radio1.checked){
+												res24=radio1.id+","+second+"\n";
+											}else if(radio2.checked){
+												res24=radio2.id+","+second+"\n";
+											}
+											radio1.disabled=true;
+											radio2.disabled=true;
+											}
+										}
+									}
+								</script>
+							</div>
+                        </label>
+                    </div>
+                </div>				<!-- 第25个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题25</h2>
+                    <p>对于这个问题，我们请您从若干个时间点中选出哪个时间点对应的图层总厚度最厚。如下图，请您判断8位置和29位置哪里更厚。</p>
+                    <div class="tm-q-choice-container">
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q2_q5_a3.png" alt="Image" style="display:none;" id="Q2_q5_a3_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q5_a3" class="filled-in tm-checkbox" id="Q2_q5_a3_1" >
+										<span>8时刻总体更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q5_a3" class="filled-in tm-checkbox" id="Q2_q5_a3_2" >
+										<span>29时刻总体更厚</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio25()" id="Q2_q5_a3_button">查看图片</button>
+								<script>
+									var res25="";
+									function disable_radio25(){
+										var myButton=document.getElementById("Q2_q5_a3_button");
+										var radio1=document.getElementById("Q2_q5_a3_1");
+										var radio2=document.getElementById("Q2_q5_a3_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q2_q5_a3_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+											if(radio1.checked){
+												res25=radio1.id+","+second+"\n";
+											}else if(radio2.checked){
+												res25=radio2.id+","+second+"\n";
+											}
+											radio1.disabled=true;
+											radio2.disabled=true;
+											}
+										}
+									}
+								</script>
+							</div>
+                        </label>
+                    </div>
+                </div>				<!-- 第26个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题26</h2>
+                    <p>对于这个问题，我们请您从若干个时间点中选出哪个时间点对应的图层总厚度最厚。如下图，请您判断1位置和7位置哪里更厚。</p>
+                    <div class="tm-q-choice-container">
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q2_q4_a3.png" alt="Image" style="display:none;" id="Q2_q4_a3_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q4_a3" class="filled-in tm-checkbox" id="Q2_q4_a3_1" >
+										<span>1时刻总体更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q4_a3" class="filled-in tm-checkbox" id="Q2_q4_a3_2" >
+										<span>7时刻总体更厚</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio26()" id="Q2_q4_a3_button">查看图片</button>
+								<script>
+									var res26="";
+									function disable_radio26(){
+										var myButton=document.getElementById("Q2_q4_a3_button");
+										var radio1=document.getElementById("Q2_q4_a3_1");
+										var radio2=document.getElementById("Q2_q4_a3_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q2_q4_a3_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+											if(radio1.checked){
+												res26=radio1.id+","+second+"\n";
+											}else if(radio2.checked){
+												res26=radio2.id+","+second+"\n";
+											}
+											radio1.disabled=true;
+											radio2.disabled=true;
+											}
+										}
+									}
+								</script>
+							</div>
+                        </label>
+                    </div>
+                </div>				<!-- 第27个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题27</h2>
+                    <p>对于这个问题，我们请您从若干个时间点中选出哪个时间点对应的图层总厚度最厚。如下图，请您判断8位置和29位置哪里更厚。</p>
+                    <div class="tm-q-choice-container">
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q2_q5_a2.png" alt="Image" style="display:none;" id="Q2_q5_a2_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q5_a2" class="filled-in tm-checkbox" id="Q2_q5_a2_1" >
+										<span>8时刻总体更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q5_a2" class="filled-in tm-checkbox" id="Q2_q5_a2_2" >
+										<span>29时刻总体更厚</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio27()" id="Q2_q5_a2_button">查看图片</button>
+								<script>
+									var res27="";
+									function disable_radio27(){
+										var myButton=document.getElementById("Q2_q5_a2_button");
+										var radio1=document.getElementById("Q2_q5_a2_1");
+										var radio2=document.getElementById("Q2_q5_a2_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q2_q5_a2_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+											if(radio1.checked){
+												res27=radio1.id+","+second+"\n";
+											}else if(radio2.checked){
+												res27=radio2.id+","+second+"\n";
+											}
+											radio1.disabled=true;
+											radio2.disabled=true;
+											}
+										}
+									}
+								</script>
+							</div>
+                        </label>
+                    </div>
+                </div>				<!-- 第28个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题28</h2>
+                    <p>对于这个问题，我们请您从若干个时间点中选出哪个时间点对应的图层总厚度最厚。如下图，请您判断16位置和23位置哪里更厚。</p>
+                    <div class="tm-q-choice-container">
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q2_q2_a2.png" alt="Image" style="display:none;" id="Q2_q2_a2_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q2_a2" class="filled-in tm-checkbox" id="Q2_q2_a2_1" >
+										<span>16时刻总体更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q2_a2" class="filled-in tm-checkbox" id="Q2_q2_a2_2" >
+										<span>23时刻总体更厚</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio28()" id="Q2_q2_a2_button">查看图片</button>
+								<script>
+									var res28="";
+									function disable_radio28(){
+										var myButton=document.getElementById("Q2_q2_a2_button");
+										var radio1=document.getElementById("Q2_q2_a2_1");
+										var radio2=document.getElementById("Q2_q2_a2_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q2_q2_a2_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+											if(radio1.checked){
+												res28=radio1.id+","+second+"\n";
+											}else if(radio2.checked){
+												res28=radio2.id+","+second+"\n";
+											}
+											radio1.disabled=true;
+											radio2.disabled=true;
+											}
+										}
+									}
+								</script>
+							</div>
+                        </label>
+                    </div>
+                </div>				<!-- 第29个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题29</h2>
+                    <p>对于这个问题，我们请您从若干个时间点中选出哪个时间点对应的图层总厚度最厚。如下图，请您判断7位置和37位置哪里更厚。</p>
+                    <div class="tm-q-choice-container">
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q2_q3_a2.png" alt="Image" style="display:none;" id="Q2_q3_a2_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q3_a2" class="filled-in tm-checkbox" id="Q2_q3_a2_1" >
+										<span>7时刻总体更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q3_a2" class="filled-in tm-checkbox" id="Q2_q3_a2_2" >
+										<span>37时刻总体更厚</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio29()" id="Q2_q3_a2_button">查看图片</button>
+								<script>
+									var res29="";
+									function disable_radio29(){
+										var myButton=document.getElementById("Q2_q3_a2_button");
+										var radio1=document.getElementById("Q2_q3_a2_1");
+										var radio2=document.getElementById("Q2_q3_a2_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q2_q3_a2_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+											if(radio1.checked){
+												res29=radio1.id+","+second+"\n";
+											}else if(radio2.checked){
+												res29=radio2.id+","+second+"\n";
+											}
+											radio1.disabled=true;
+											radio2.disabled=true;
+											}
+										}
+									}
+								</script>
+							</div>
+                        </label>
+                    </div>
+                </div>				<!-- 第30个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题30</h2>
+                    <p>对于这个问题，我们请您从若干个时间点中选出哪个时间点对应的图层总厚度最厚。如下图，请您判断8位置和19位置哪里更厚。</p>
+                    <div class="tm-q-choice-container">
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q2_q1_a3.png" alt="Image" style="display:none;" id="Q2_q1_a3_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q1_a3" class="filled-in tm-checkbox" id="Q2_q1_a3_1" >
+										<span>8时刻总体更厚</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q2_q1_a3" class="filled-in tm-checkbox" id="Q2_q1_a3_2" >
+										<span>19时刻总体更厚</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio30()" id="Q2_q1_a3_button">查看图片</button>
+								<script>
+									var res30="";
+									function disable_radio30(){
+										var myButton=document.getElementById("Q2_q1_a3_button");
+										var radio1=document.getElementById("Q2_q1_a3_1");
+										var radio2=document.getElementById("Q2_q1_a3_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q2_q1_a3_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+											if(radio1.checked){
+												res30=radio1.id+","+second+"\n";
+											}else if(radio2.checked){
+												res30=radio2.id+","+second+"\n";
+											}
+											radio1.disabled=true;
+											radio2.disabled=true;
+											}
+										}
+									}
+								</script>
+							</div>
+                        </label>
+                    </div>
+                </div>				
+				
+
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+                <div class="col-12 text-center tm-submit-container">
+                    <button type="submit" class="btn btn-primary tm-btn-submit" onclick="ok()">下一页</button>
+                </div>
+            </div> <!-- row -->
+        </form>
+    </div>
+
+</body>
+</html>

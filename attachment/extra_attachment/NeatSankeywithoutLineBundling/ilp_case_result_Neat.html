@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<title>SANKEY Experiment</title>
+<style>
+    /**{*/
+    /*    z-index: 0*/
+    /*}*/
+    .node rect {
+        /*cursor: move;*/
+        fill-opacity: .9;
+        shape-rendering: crispEdges;
+    }
+
+    .node text {
+        pointer-events: none;
+        text-shadow: 0 1px 0 #fff;
+    }
+
+    .link {
+        fill: none;
+        stroke: #000; /*#CCCCCC;*/
+        stroke-opacity: 0.2;
+    }
+
+    .link:hover {
+        stroke: #000000;
+        stroke-opacity: .5;
+    }
+
+</style>
+
+<body>
+
+<p id="chart" style="text-align: center">
+
+<!--    <script src="./lib/d3.v3.js" style="shape-rendering:geometricPrecision;"></script>-->
+    <script src="http://d3js.org/d3.v3.js"></script>
+    <script>
+
+        d3.sankey = function () {
+            var sankey = {},
+                nodeWidth = 24,
+                nodePadding = 8,
+                size = [1, 1],
+                nodes = [],
+                links = [];
+
+            sankey.nodeWidth = function (_) {
+                if (!arguments.length) return nodeWidth;
+                nodeWidth = +_;
+                return sankey;
+            };
+
+            sankey.nodePadding = function (_) {
+                if (!arguments.length) return nodePadding;
+                nodePadding = +_;
+                return sankey;
+            };
+
+            sankey.nodes = function (_) {
+                if (!arguments.length) return nodes;
+                nodes = _;
+                return sankey;
+            };
+
+            sankey.links = function (_) {
+                if (!arguments.length) return links;
+                links = _;
+                return sankey;
+            };
+
+            sankey.size = function (_) {
+                if (!arguments.length) return size;
+                size = _;
+                return sankey;
+            };
+
+            sankey.layout = function (iterations) {
+                computeNodeLinks();
+                computeNodeValues();
+                computeNodeBreadths();
+                computeNodeDepths(iterations);
+                computeLinkDepths();
+                return sankey;
+            };
+
+            sankey.relayout = function () {
+                computeLinkDepths();
+                return sankey;
+            };
+
+            sankey.link = function () {
+                var curvature = .5;
+
+                function link(d) {
+                    var x0 = d.source.x + d.source.dx,
+                        x1 = d.target.x,
+                        xi = d3.interpolateNumber(x0, x1),
+                        x2 = xi(curvature),
+                        x3 = xi(1 - curvature),
+                        y0 = d.source.y + d.sy + d.dy / 2,
+                        y1 = d.target.y + d.ty + d.dy / 2;
+                    return "M" + x0 + "," + y0
+                        + "C" + x2 + "," + y0
+                        + " " + x3 + "," + y1
+                        + " " + x1 + "," + y1;
+                }
+
+                link.curvature = function (_) {
+                    if (!arguments.length) return curvature;
+                    curvature = +_;
+                    return link;
+                };
+
+                return link;
+            };
+
+            // Populate the sourceLinks and targetLinks for each node.
+            // Also, if the source and target are not objects, assume they are indices.
+            function computeNodeLinks() {
+                nodes.forEach(function (node) {
+                    node.sourceLinks = [];
+                    node.targetLinks = [];
+                });
+                links.forEach(function (link) {
+                    var source = link.source,
+                        target = link.target;
+                    if (typeof source === "number") source = link.source = nodes[link.source];
+                    if (typeof target === "number") target = link.target = nodes[link.target];
+                    source.sourceLinks.push(link);
+                    target.targetLinks.push(link);
+                });
+            }
+
+            // Compute the value (size) of each node by summing the associated links.
+            function computeNodeValues() {
+                nodes.forEach(function (node) {
+                    node.value = Math.max(
+                        d3.sum(node.sourceLinks, value),
+                        d3.sum(node.targetLinks, value)
+                    );
+                });
+            }
+
+            // Iteratively assign the breadth (x-position) for each node.
+            // Nodes are assigned the maximum breadth of incoming neighbors plus one;
+            // nodes with no incoming links are assigned breadth zero, while
+            // nodes with no outgoing links are assigned the maximum breadth.
+            function computeNodeBreadths() {
+                const startX = level[0][0].x
+                const endX = level[level.length - 1][0].x + 36
+                const realWidth = endX - startX
+                // let startPlace = level[0][0].x / realWidth * 1400 - 30
+
+                nodes.forEach(function (node) {
+                    // for (let m =0 ;m< level.length; m++)
+                    //     for (let n = 0;n< level[m].length; n++)
+                    //         if (level[m][n].name === node.name) {
+                    //             node.x = level[m][n].x
+                    //             node.y = level[m][n].y
+                    //         }
+                    node.x = (node.x - startX) / realWidth * width// - startPlace
+                    node.dx = nodeWidth
+                })
+                // var remainingNodes = nodes,
+                //     nextNodes,
+                //     x = 0;
+                //
+                // while (remainingNodes.length) {
+                //     nextNodes = [];
+                //     remainingNodes.forEach(function (node) {
+                //         node.x = x;
+                //         node.dx = nodeWidth;
+                //         node.sourceLinks.forEach(function (link) {
+                //             nextNodes.push(link.target);
+                //         });
+                //     });
+                //     remainingNodes = nextNodes;
+                //     ++x;
+                // }
+                //
+                // //
+                // // moveSinksRight(x);
+                // scaleNodeBreadths((size[0] - nodeWidth) / (x - 1));
+            }
+
+            function computeNodeDepths(iterations) {
+                var nodesByBreadth = d3.nest()
+                    .key(function (d) {
+                        return d.x;
+                    })
+                    .sortKeys(d3.ascending)
+                    .entries(nodes)
+                    .map(function (d) {
+                        return d.values;
+                    });
+
+                initializeNodeDepth();
+                resolveCollisions();
+
+                // relaxLeftToRight(1);
+                // resolveCollisions();
+                //
+                // for (var alpha = 0.001; iterations > 0; --iterations) {
+                //     relaxRightToLeft(alpha *= .99);
+                //     resolveCollisions();
+                //     relaxLeftToRight(alpha);
+                //     resolveCollisions();
+                // }
+
+                function initializeNodeDepth() {
+                    // var ky = d3.min(nodesByBreadth, function (nodes) {
+                    //     return (size[1] - (nodes.length - 1) * nodePadding) / d3.sum(nodes, value);
+                    // });
+                    var ky = 4
+
+                    nodesByBreadth.forEach(function (nodes) {
+                        nodes.forEach(function (node, i) {
+                            // node.y = i;
+                            node.dy = node.value * ky;
+                        });
+                    });
+
+                    links.forEach(function (link) {
+                        link.dy = link.value * ky;
+                    });
+                }
+
+                function resolveCollisions() {
+                    nodesByBreadth.forEach(function (nodes) {
+                        var node,
+                            dy,
+                            y0 = 0,
+                            n = nodes.length,
+                            i;
+
+                        // Push any overlapping nodes down.
+                        nodes.sort(ascendingDepth);
+                        for (i = 0; i < n; ++i) {
+                            node = nodes[i];
+                            dy = y0 - node.y;
+                            if (dy > 0) node.y += dy;
+                            y0 = node.y + node.dy + nodePadding;
+                        }
+
+                        // If the bottommost node goes outside the bounds, push it back up.
+                        dy = y0 - nodePadding - size[1];
+                        if (dy > 0) {
+                            y0 = node.y -= dy;
+
+                            // Push any overlapping nodes back up.
+                            for (i = n - 2; i >= 0; --i) {
+                                node = nodes[i];
+                                dy = node.y + node.dy + nodePadding - y0;
+                                if (dy > 0) node.y -= dy;
+                                y0 = node.y;
+                            }
+                        }
+                    });
+                }
+
+                function ascendingDepth(a, b) {
+                    return a.y - b.y;
+                }
+
+                function relaxLeftToRight(alpha) {
+                    nodesByBreadth.forEach(function (nodes, breadth) {
+                        nodes.forEach(function (node) {
+                            if (node.targetLinks.length) {
+                                var y = d3.sum(node.targetLinks, weightedSource) / d3.sum(node.targetLinks, value);
+                                node.y += (y - center(node)) * alpha;
+                            }
+                        });
+                    });
+
+                    function weightedSource(link) {
+                        return center(link.source) * link.value;
+                    }
+                }
+
+                function relaxRightToLeft(alpha) {
+                    nodesByBreadth.slice().reverse().forEach(function (nodes) {
+                        nodes.forEach(function (node) {
+                            if (node.sourceLinks.length) {
+                                var y = d3.sum(node.sourceLinks, weightedTarget) / d3.sum(node.sourceLinks, value);
+                                node.y += (y - center(node)) * alpha;
+                            }
+                        });
+                    });
+
+                    function weightedTarget(link) {
+                        return center(link.target) * link.value;
+                    }
+                }
+            }
+
+            function computeLinkDepths() {
+                nodes.forEach(function (node) {
+                    node.sourceLinks.sort(ascendingTargetDepth);
+                    node.targetLinks.sort(ascendingSourceDepth);
+                });
+                nodes.forEach(function (node) {
+                    var sy = 0, ty = 0;
+                    node.sourceLinks.forEach(function (link) {
+                        link.sy = sy;
+                        sy += link.dy;
+                    });
+                    node.targetLinks.forEach(function (link) {
+                        link.ty = ty;
+                        ty += link.dy;
+                    });
+                });
+
+                function ascendingSourceDepth(a, b) {
+                    return a.source.y - b.source.y;
+                }
+
+                function ascendingTargetDepth(a, b) {
+                    return a.target.y - b.target.y;
+                }
+            }
+
+            function center(node) {
+                return node.y + node.dy / 2;
+            }
+
+            function value(link) {
+                return link.value;
+            }
+
+            return sankey;
+        };
+
+        var units = "Widgets";
+
+        var margin = {top: 10, right: 10, bottom: 10, left: 10},
+            width = 1420 - margin.left - margin.right,
+            // width = 2500 - margin.left - margin.right,
+            height = 760 - margin.top - margin.bottom;
+
+        var formatNumber = d3.format(",.0f"),    // zero decimal places
+            format = function (d) {
+                return formatNumber(d) + " " + units;
+            },
+            color = d3.scale.category20();
+
+        // append the svg canvas to the page
+        var svg = d3.select("#chart").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+        // Set the sankey diagram properties
+        var sankey = d3.sankey()
+            .nodeWidth(36)
+            .nodePadding(10)
+            .size([width, height]);
+
+        var path = sankey.link();
+
+        // load the data
+        let links = [{"source": "Agricultural Energy Use", "target": "Carbon Dioxide", "value": 0.7291666666666666}, {"source": "Agriculture", "target": "Agriculture Soils", "value": 2.7083333333333335}, {"source": "Agriculture", "target": "Livestock and Manure", "value": 2.8125000000000004}, {"source": "Agriculture", "target": "Other Agriculture", "value": 0.8854166666666667}, {"source": "Agriculture", "target": "Rice Cultivation", "value": 0.78125}, {"source": "Agriculture Soils", "target": "dummy->Agriculture Soils->Nitrous Oxide->V2", "value": 2.7083333333333335}, {"source": "Livestock and Manure", "target": "dummy->Livestock and Manure->Methane->V2", "value": 2.65625}, {"source": "Livestock and Manure", "target": "dummy->Livestock and Manure->Nitrous Oxide->V2", "value": 0.15625}, {"source": "Other Agriculture", "target": "dummy->Other Agriculture->Methane->V2", "value": 0.7291666666666666}, {"source": "Other Agriculture", "target": "dummy->Other Agriculture->Nitrous Oxide->V2", "value": 0.15625}, {"source": "Rice Cultivation", "target": "dummy->Rice Cultivation->Methane->V2", "value": 0.78125}, {"source": "Air", "target": "Carbon Dioxide", "value": 0.8854166666666667}, {"source": "Aluminium Non-Ferrous Metals", "target": "Carbon Dioxide", "value": 0.5208333333333334}, {"source": "Aluminium Non-Ferrous Metals", "target": "HFCs - PFCs", "value": 0.10416666666666669}, {"source": "Cement", "target": "Carbon Dioxide", "value": 2.604166666666667}, {"source": "Chemicals", "target": "Carbon Dioxide", "value": 1.7708333333333335}, {"source": "Chemicals", "target": "HFCs - PFCs", "value": 0.2604166666666667}, {"source": "Chemicals", "target": "Nitrous Oxide", "value": 0.10416666666666669}, {"source": "Coal Mining", "target": "Carbon Dioxide", "value": 0.05208333333333334}, {"source": "Coal Mining", "target": "Methane", "value": 0.625}, {"source": "Commercial Buildings", "target": "Carbon Dioxide", "value": 3.28125}, {"source": "Deforestation", "target": "dummy->Deforestation->Carbon Dioxide->V2", "value": 5.677083333333334}, {"source": "Electricity and heat", "target": "Agricultural Energy Use", "value": 0.20833333333333337}, {"source": "Electricity and heat", "target": "Aluminium Non-Ferrous Metals", "value": 0.20833333333333337}, {"source": "Electricity and heat", "target": "Cement", "value": 0.15625}, {"source": "Electricity and heat", "target": "Chemicals", "value": 0.6770833333333334}, {"source": "Electricity and heat", "target": "Commercial Buildings", "value": 2.604166666666667}, {"source": "Electricity and heat", "target": "Food and Tobacco", "value": 0.2604166666666667}, {"source": "Electricity and heat", "target": "Iron and Steel", "value": 0.5208333333333334}, {"source": "Electricity and heat", "target": "Machinery", "value": 0.5208333333333334}, {"source": "Electricity and heat", "target": "Oil and Gas Processing", "value": 0.20833333333333337}, {"source": "Electricity and heat", "target": "Other Industry", "value": 1.4062500000000002}, {"source": "Electricity and heat", "target": "Pulp - Paper and Printing", "value": 0.3125}, {"source": "Electricity and heat", "target": "Residential Buildings", "value": 2.7083333333333335}, {"source": "Electricity and heat", "target": "T and D Losses", "value": 1.1458333333333335}, {"source": "Electricity and heat", "target": "Unallocated Fuel Combustion", "value": 1.0416666666666667}, {"source": "Food and Tobacco", "target": "Carbon Dioxide", "value": 0.5208333333333334}, {"source": "Iron and Steel", "target": "Carbon Dioxide", "value": 2.0833333333333335}, {"source": "Machinery", "target": "Carbon Dioxide", "value": 0.5208333333333334}, {"source": "Oil and Gas Processing", "target": "Carbon Dioxide", "value": 1.8750000000000002}, {"source": "Oil and Gas Processing", "target": "Methane", "value": 1.4583333333333333}, {"source": "Other Industry", "target": "Carbon Dioxide", "value": 3.4375}, {"source": "Other Industry", "target": "HFCs - PFCs", "value": 0.20833333333333337}, {"source": "Pulp - Paper and Printing", "target": "Carbon Dioxide", "value": 0.5729166666666667}, {"source": "Residential Buildings", "target": "Carbon Dioxide", "value": 5.3125}, {"source": "T and D Losses", "target": "Carbon Dioxide", "value": 1.1458333333333335}, {"source": "Unallocated Fuel Combustion", "target": "Carbon Dioxide", "value": 1.5625}, {"source": "Unallocated Fuel Combustion", "target": "Methane", "value": 0.20833333333333337}, {"source": "Unallocated Fuel Combustion", "target": "Nitrous Oxide", "value": 0.20833333333333337}, {"source": "Energy", "target": "Electricity and heat", "value": 11.979166666666668}, {"source": "Energy", "target": "Fugitive Emissions", "value": 2.34375}, {"source": "Energy", "target": "Industry", "value": 7.447916666666668}, {"source": "Energy", "target": "Other Fuel Combustion", "value": 4.739583333333334}, {"source": "Energy", "target": "Transportation", "value": 7.65625}, {"source": "Fugitive Emissions", "target": "Coal Mining", "value": 0.6770833333333334}, {"source": "Fugitive Emissions", "target": "Oil and Gas Processing", "value": 1.666666666666667}, {"source": "Industry", "target": "Aluminium Non-Ferrous Metals", "value": 0.20833333333333337}, {"source": "Industry", "target": "Cement", "value": 0.9895833333333334}, {"source": "Industry", "target": "Chemicals", "value": 0.7291666666666666}, {"source": "Industry", "target": "Food and Tobacco", "value": 0.2604166666666667}, {"source": "Industry", "target": "Iron and Steel", "value": 1.5625}, {"source": "Industry", "target": "Oil and Gas Processing", "value": 1.4583333333333333}, {"source": "Industry", "target": "Other Industry", "value": 1.9791666666666667}, {"source": "Industry", "target": "Pulp - Paper and Printing", "value": 0.2604166666666667}, {"source": "Other Fuel Combustion", "target": "Agricultural Energy Use", "value": 0.5208333333333334}, {"source": "Other Fuel Combustion", "target": "Commercial Buildings", "value": 0.6770833333333334}, {"source": "Other Fuel Combustion", "target": "Residential Buildings", "value": 2.604166666666667}, {"source": "Other Fuel Combustion", "target": "Unallocated Fuel Combustion", "value": 0.9375000000000001}, {"source": "Transportation", "target": "Air", "value": 0.8854166666666667}, {"source": "Transportation", "target": "Rail - Ship and Other Transport", "value": 1.3020833333333335}, {"source": "Transportation", "target": "Road", "value": 5.46875}, {"source": "Harvest / Management", "target": "dummy->Harvest / Management->Carbon Dioxide->V2", "value": 0.6770833333333334}, {"source": "Industrial Processes", "target": "dummy->Industrial Processes->Aluminium Non-Ferrous Metals->V1", "value": 0.20833333333333337}, {"source": "Industrial Processes", "target": "dummy->Industrial Processes->Cement->V1", "value": 1.4583333333333333}, {"source": "Industrial Processes", "target": "dummy->Industrial Processes->Chemicals->V1", "value": 0.7291666666666666}, {"source": "Industrial Processes", "target": "dummy->Industrial Processes->Other Industry->V1", "value": 0.2604166666666667}, {"source": "Land Use Change", "target": "Deforestation", "value": 5.677083333333334}, {"source": "Land Use Change", "target": "Harvest / Management", "value": 0.6770833333333334}, {"source": "Landfills", "target": "dummy->Landfills->Methane->V2", "value": 0.8854166666666667}, {"source": "Rail - Ship and Other Transport", "target": "Carbon Dioxide", "value": 1.3020833333333335}, {"source": "Road", "target": "Carbon Dioxide", "value": 5.46875}, {"source": "Waste", "target": "Landfills", "value": 0.8854166666666667}, {"source": "Waste", "target": "Waste water - Other Waste", "value": 0.78125}, {"source": "Waste water - Other Waste", "target": "dummy->Waste water - Other Waste->Methane->V2", "value": 0.625}, {"source": "Waste water - Other Waste", "target": "dummy->Waste water - Other Waste->Nitrous Oxide->V2", "value": 0.15625}, {"source": "dummy->Industrial Processes->Aluminium Non-Ferrous Metals->V1", "target": "Aluminium Non-Ferrous Metals", "value": 0.20833333333333337}, {"source": "dummy->Industrial Processes->Cement->V1", "target": "Cement", "value": 1.4583333333333333}, {"source": "dummy->Industrial Processes->Chemicals->V1", "target": "Chemicals", "value": 0.7291666666666666}, {"source": "dummy->Industrial Processes->Other Industry->V1", "target": "Other Industry", "value": 0.2604166666666667}, {"source": "dummy->Agriculture Soils->Nitrous Oxide->V2", "target": "Nitrous Oxide", "value": 2.7083333333333335}, {"source": "dummy->Livestock and Manure->Methane->V2", "target": "Methane", "value": 2.65625}, {"source": "dummy->Livestock and Manure->Nitrous Oxide->V2", "target": "Nitrous Oxide", "value": 0.15625}, {"source": "dummy->Other Agriculture->Methane->V2", "target": "Methane", "value": 0.7291666666666666}, {"source": "dummy->Other Agriculture->Nitrous Oxide->V2", "target": "Nitrous Oxide", "value": 0.15625}, {"source": "dummy->Rice Cultivation->Methane->V2", "target": "Methane", "value": 0.78125}, {"source": "dummy->Deforestation->Carbon Dioxide->V2", "target": "Carbon Dioxide", "value": 5.677083333333334}, {"source": "dummy->Harvest / Management->Carbon Dioxide->V2", "target": "Carbon Dioxide", "value": 0.6770833333333334}, {"source": "dummy->Landfills->Methane->V2", "target": "Methane", "value": 0.8854166666666667}, {"source": "dummy->Waste water - Other Waste->Methane->V2", "target": "Methane", "value": 0.625}, {"source": "dummy->Waste water - Other Waste->Nitrous Oxide->V2", "target": "Nitrous Oxide", "value": 0.15625}]
+
+        //nodesPositionInfo:
+        let level = [[{"x": 448.0, "y": 0, "name": "Agriculture"}, {"x": 448.0, "y": 70.93750000000001, "name": "Waste"}, {"x": 448.0, "y": 181.89258700333374, "name": "Energy"}, {"x": 448.0, "y": 305.10416666666663, "name": "Industrial Processes"}, {"x": 448.0, "y": 351.5625, "name": "Land Use Change"}], [{"x": 665.6215367792055, "y": 0, "name": "Rice Cultivation"}, {"x": 665.6215367792055, "y": 14.562500000000002, "name": "Other Agriculture"}, {"x": 665.6215367792055, "y": 24.333333333333336, "name": "Agriculture Soils"}, {"x": 665.6215367792055, "y": 54.3125, "name": "Livestock and Manure"}, {"x": 665.6215367792055, "y": 67.9375, "name": "Waste water - Other Waste"}, {"x": 665.6215367792055, "y": 82.50000000000001, "name": "Landfills"}, {"x": 665.6215367792055, "y": 99.30208333333333, "name": "Fugitive Emissions"}, {"x": 665.6215367792055, "y": 126.20833333333333, "name": "Other Fuel Combustion"}, {"x": 665.6215367792055, "y": 166.73914974625526, "name": "Electricity and heat"}, {"x": 665.6215367792055, "y": 213.77083333333331, "name": "dummy->Industrial Processes->Chemicals->V1"}, {"x": 665.6215367792055, "y": 223.22916666666669, "name": "Industry"}, {"x": 665.6215367792055, "y": 272.84374999999994, "name": "dummy->Industrial Processes->Cement->V1"}, {"x": 665.6215367792055, "y": 306.7291666666667, "name": "Transportation"}, {"x": 665.6215367792055, "y": 332.07291666666663, "name": "Harvest / Management"}, {"x": 665.6215367792055, "y": 341.42708333333337, "name": "Deforestation"}, {"x": 665.6215367792055, "y": 377.81250000000006, "name": "dummy->Industrial Processes->Other Industry->V1"}, {"x": 665.6215367792055, "y": 387.21875, "name": "dummy->Industrial Processes->Aluminium Non-Ferrous Metals->V1"}], [{"x": 1023.4068191289641, "y": 0, "name": "dummy->Rice Cultivation->Methane->V2"}, {"x": 1023.4068191289641, "y": 11.093749999999998, "name": "dummy->Other Agriculture->Methane->V2"}, {"x": 1023.4068191289641, "y": 25.520833333333332, "name": "dummy->Livestock and Manure->Methane->V2"}, {"x": 1023.4068191289641, "y": 38.48958333333332, "name": "dummy->Landfills->Methane->V2"}, {"x": 1023.4068191289641, "y": 45.260416666666664, "name": "dummy->Waste water - Other Waste->Methane->V2"}, {"x": 1023.4068191289641, "y": 53.854166666666664, "name": "dummy->Other Agriculture->Nitrous Oxide->V2"}, {"x": 1023.4068191289641, "y": 59.635416666666664, "name": "dummy->Livestock and Manure->Nitrous Oxide->V2"}, {"x": 1023.4068191289641, "y": 64.94791666666666, "name": "dummy->Agriculture Soils->Nitrous Oxide->V2"}, {"x": 1023.4068191289641, "y": 83.95833333333333, "name": "dummy->Waste water - Other Waste->Nitrous Oxide->V2"}, {"x": 1023.4068191289641, "y": 91.30208333333331, "name": "Coal Mining"}, {"x": 1023.4068191289641, "y": 97.65625, "name": "Unallocated Fuel Combustion"}, {"x": 1023.4068191289641, "y": 122.55208333333333, "name": "Oil and Gas Processing"}, {"x": 1023.4068191289641, "y": 136.40624999999997, "name": "Agricultural Energy Use"}, {"x": 1023.4068191289641, "y": 142.86458333333334, "name": "Commercial Buildings"}, {"x": 1023.4068191289641, "y": 164.27083333333334, "name": "Residential Buildings"}, {"x": 1023.4068191289641, "y": 195.83333333333334, "name": "Machinery"}, {"x": 1023.4068191289641, "y": 203.4375, "name": "T and D Losses"}, {"x": 1023.4068191289641, "y": 214.16666666666666, "name": "Food and Tobacco"}, {"x": 1023.4068191289641, "y": 221.77083333333331, "name": "Iron and Steel"}, {"x": 1023.4068191289641, "y": 238.90624999999994, "name": "Pulp - Paper and Printing"}, {"x": 1023.4068191289641, "y": 251.4583333333333, "name": "Chemicals"}, {"x": 1023.4068191289641, "y": 268.5416666666667, "name": "Cement"}, {"x": 1023.4068191289641, "y": 288.0940306900979, "name": "Other Industry"}, {"x": 1023.4068191289641, "y": 305.8854166666666, "name": "Rail - Ship and Other Transport"}, {"x": 1023.4068191289641, "y": 313.4895833333333, "name": "Road"}, {"x": 1023.4068191289641, "y": 345.8333333333333, "name": "dummy->Harvest / Management->Carbon Dioxide->V2"}, {"x": 1023.4068191289641, "y": 371.24999999999994, "name": "dummy->Deforestation->Carbon Dioxide->V2"}, {"x": 1023.4068191289641, "y": 387.6041666666667, "name": "Air"}, {"x": 1023.4068191289641, "y": 397.34375, "name": "Aluminium Non-Ferrous Metals"}], [{"x": 1344.0, "y": 23.906250000000007, "name": "Methane"}, {"x": 1344.0, "y": 87.31249999999999, "name": "Nitrous Oxide"}, {"x": 1344.0, "y": 194.86483510665448, "name": "Carbon Dioxide"}, {"x": 1344.0, "y": 368.2916666666667, "name": "HFCs - PFCs"}]]
+
+        let result = [[1, 2, 3, 4, 5], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], [1, 2, 3, 4]]
+
+
+        let nodes = []
+        result.forEach((d, i) => {
+            d.forEach(j => {
+                nodes.push(level[i][parseInt(j) - 1])
+            })
+        })
+        console.log(nodes)
+
+        var another = nodes.map(d => ({name: d['name']}))
+        var orgNode = nodes.map(d => d.name)
+        var anotherLinks = links.map(d => ({
+                'source': orgNode.indexOf(d.source),
+                'target': orgNode.indexOf(d.target),
+                'value': d.value
+            }
+        ))
+        console.log(nodes, links)
+        var data = ({
+            "nodes": nodes,
+            "links": links,
+        })
+
+        var nodeMap = {};
+        var graph = data;
+        graph.nodes.forEach(function (x) {
+            nodeMap[x.name] = x;
+        });
+        console.log(nodeMap)
+        graph.links = graph.links.map(function (x) {
+            if (typeof nodeMap[x.target] === "undefined") console.log(x.target)
+            if (typeof nodeMap[x.source] === "undefined") console.log(x.source)
+            return {
+                source: nodeMap[x.source],
+                target: nodeMap[x.target],
+                value: x.value
+            };
+        });
+        console.log(graph)
+
+        sankey
+            .nodes(graph.nodes)
+            .links(graph.links)
+            .layout(32);
+        // add in the nodes
+        var node = svg.append("g").selectAll(".node")
+            .data(graph.nodes)
+            .enter().append("g")
+            .attr("class", "node")
+            .attr("transform", function (d) {
+                return "translate(" + d.x + "," + d.y + ")";
+            })
+
+        // add the rectangles for the nodes
+        node.append("rect")
+            .attr("name", (d) => d.name)
+            .attr("height", function (d) {
+                return d.dy;
+            })
+            .attr("width", sankey.nodeWidth())
+            .style("fill", function (d) {
+                return d.color = color(d.name.replace(/ .*/, ""));
+            })
+            .style("stroke", function (d) {
+                return d3.rgb(d.color).darker(1);
+            })
+            .append("title")
+            .text(function (d) {
+                return d.name + "\n" + format(d.value);
+            });
+
+        // add in the title for the nodes
+        node.append("text")
+            .attr("x", d => {
+                if (d.x < 300)
+                    return 6 + sankey.nodeWidth()
+                else if (d.x < 1000)
+                    return 6 + sankey.nodeWidth()
+                else return -6
+            })
+            .attr("y", function (d) {
+                console.log(d);
+                return d.dy / 2// + 3;
+            })
+            .attr("dy", ".35em")
+            .attr("text-anchor", d => {
+                if (d.x < 200)
+                    return "start"
+                else if (d.x < 500)
+                    return "start"
+                else if (d.x < 1000)
+                    return "start"
+                else return "end"
+            })
+            .attr("transform", null)
+            .text(function (d) {
+                return d.name;
+            }).style("opacity", 0.8)
+
+        // add in the links
+        var link = svg
+            .append("g")
+            .selectAll(".link")
+            .data(graph.links)
+            .enter()
+            .append("path")
+            .attr("class", "link")
+            .attr("d", path)
+            .attr("name", (d) => d.source.name + "-" + d.target.name)
+            .style("stroke-width", function (d) {
+                return Math.max(1, d.dy);
+            })
+            .style("stroke", function (d, i) {
+                return d3.rgb(color(i + 5)).darker(0.9)
+            })
+            // .sort(function (a, b) {return b.dy - a.dy;});
+            .append("title")
+            .text(function (d) {
+                return d.source.name + " → " +
+                    d.target.name + "\n" + format(d.value);
+            });
+
+
+
+    </script>
+
+
+</body>
+
+</html>

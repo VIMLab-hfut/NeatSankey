@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome-pyecharts</title>
+            <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+
+</head>
+<body>
+    <div id="c19cb4c0cf744e4e8bbed23066ae9c68" class="chart-container" style="width:900px; height:500px;"></div>
+    <script>
+        var chart_c19cb4c0cf744e4e8bbed23066ae9c68 = echarts.init(
+            document.getElementById('c19cb4c0cf744e4e8bbed23066ae9c68'), 'white', {renderer: 'canvas'});
+        var option_c19cb4c0cf744e4e8bbed23066ae9c68 = {
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "color": [
+        "#c23531",
+        "#2f4554",
+        "#61a0a8",
+        "#d48265",
+        "#749f83",
+        "#ca8622",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3",
+        "#f05b72",
+        "#ef5b9c",
+        "#f47920",
+        "#905a3d",
+        "#fab27b",
+        "#2a5caa",
+        "#444693",
+        "#726930",
+        "#b2d235",
+        "#6d8346",
+        "#ac6767",
+        "#1d953f",
+        "#6950a1",
+        "#918597"
+    ],
+    "series": [
+        {
+            "type": "boxplot",
+            "name": "OptimSankey",
+            "data": [
+                [
+                    121.333,
+                    122.833,
+                    132.833,
+                    188.8335,
+                    205.667
+                ],
+                [
+                    10.0,
+                    13.08325,
+                    58.1665,
+                    137.5,
+                    152.0
+                ],
+                [
+                    56.0,
+                    178.9165,
+                    208.5,
+                    243.50025,
+                    358.333
+                ],
+                [
+                    14.0,
+                    54.66675,
+                    249.33350000000002,
+                    322.0,
+                    322.0
+                ]
+            ],
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
+            },
+            "markPoint": {
+                "label": {
+                    "show": true,
+                    "position": "inside",
+                    "color": "#fff",
+                    "margin": 8
+                }
+            },
+            "markLine": {
+                "silent": false,
+                "precision": 2,
+                "label": {
+                    "show": true,
+                    "position": "top",
+                    "margin": 8
+                }
+            }
+        },
+        {
+            "type": "boxplot",
+            "name": "NeatSankey",
+            "data": [
+                [
+                    112.667,
+                    113.58349999999999,
+                    117.5,
+                    184.16675,
+                    206.0
+                ],
+                [
+                    14.333,
+                    16.1665,
+                    50.0,
+                    115.833,
+                    128.333
+                ],
+                [
+                    61.333,
+                    164.3335,
+                    192.5,
+                    238.0,
+                    347.0
+                ],
+                [
+                    28.667,
+                    62.417,
+                    233.16699999999997,
+                    304.6665,
+                    305.333
+                ]
+            ],
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
+            },
+            "markPoint": {
+                "label": {
+                    "show": true,
+                    "position": "inside",
+                    "color": "#fff",
+                    "margin": 8
+                }
+            },
+            "markLine": {
+                "silent": false,
+                "precision": 2,
+                "label": {
+                    "show": true,
+                    "position": "top",
+                    "margin": 8
+                }
+            }
+        },
+        {
+            "type": "boxplot",
+            "name": "BCSankey",
+            "data": [
+                [
+                    304.0,
+                    304.83325,
+                    335.5,
+                    418.9165,
+                    437.333
+                ],
+                [
+                    18.333,
+                    39.583,
+                    142.0,
+                    261.91675,
+                    289.0
+                ],
+                [
+                    79.667,
+                    264.00025,
+                    325.33349999999996,
+                    414.50025,
+                    675.333
+                ],
+                [
+                    83.667,
+                    147.83350000000002,
+                    385.5,
+                    430.667,
+                    430.667
+                ]
+            ],
+            "label": {
+                "show": true,
+                "position": "top",
+                "margin": 8
+            },
+            "markPoint": {
+                "label": {
+                    "show": true,
+                    "position": "inside",
+                    "color": "#fff",
+                    "margin": 8
+                }
+            },
+            "markLine": {
+                "silent": false,
+                "precision": 2,
+                "label": {
+                    "show": true,
+                    "position": "top",
+                    "margin": 8
+                }
+            }
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                "OptimSankey",
+                "NeatSankey",
+                "BCSankey"
+            ],
+            "selected": {
+                "OptimSankey": true,
+                "NeatSankey": true,
+                "BCSankey": true
+            }
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0,
+        "padding": 5
+    },
+    "xAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "gridIndex": 0,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": false,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            },
+            "data": [
+                "Economics",
+                "Teacher",
+                "Computer",
+                "Mechanism"
+            ]
+        }
+    ],
+    "yAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "gridIndex": 0,
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": false,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            }
+        }
+    ]
+};
+        chart_c19cb4c0cf744e4e8bbed23066ae9c68.setOption(option_c19cb4c0cf744e4e8bbed23066ae9c68);
+    </script>
+</body>
+</html>

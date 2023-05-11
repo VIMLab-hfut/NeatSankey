@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>SANKEY Experiment</title>
+<style>
+    .node rect {
+        cursor: move;
+        fill-opacity: .9;
+        shape-rendering: crispEdges;
+    }
+
+    .node text {
+        pointer-events: none;
+        text-shadow: 0 1px 0 #fff;
+    }
+
+    .link {
+        fill: none;
+        stroke: #000;
+        stroke-opacity: .2;
+    }
+
+    .link:hover {
+        stroke-opacity: .5;
+    }
+</style>
+
+<body>
+
+<p id="chart" style="text-align: center">
+
+<!--    <script src="http://d3js.org/d3.v3.js"></script>-->
+    <script src="../../static/js/d3.v3.js"></script>
+    <script>
+
+        // 并没有引入原d3-sankey.js
+        // 而是直接重写了sankey function
+        d3.sankey = function () {
+            var sankey = {},
+                nodeWidth = 24,
+                nodePadding = 8,
+                size = [1, 1],
+                nodes = [],
+                links = [];
+
+            sankey.nodeWidth = function (_) {
+                if (!arguments.length) return nodeWidth;
+                nodeWidth = +_;
+                return sankey;
+            };
+
+            sankey.nodePadding = function (_) {
+                if (!arguments.length) return nodePadding;
+                nodePadding = +_;
+                return sankey;
+            };
+
+            sankey.nodes = function (_) {
+                if (!arguments.length) return nodes;
+                nodes = _;
+                return sankey;
+            };
+
+            sankey.links = function (_) {
+                if (!arguments.length) return links;
+                links = _;
+                return sankey;
+            };
+
+            sankey.size = function (_) {
+                if (!arguments.length) return size;
+                size = _;
+                return sankey;
+            };
+
+            sankey.layout = function (iterations) {
+                computeNodeLinks();
+                computeNodeValues();
+                computeNodeBreadths();
+                computeNodeDepths(iterations);
+                computeLinkDepths();
+                return sankey;
+            };
+
+            sankey.relayout = function () {
+                computeLinkDepths();
+                return sankey;
+            };
+
+            sankey.link = function () {
+                var curvature = .5;
+
+                function link(d) {
+                    var x0 = d.source.x + d.source.dx,
+                        x1 = d.target.x,
+                        xi = d3.interpolateNumber(x0, x1),
+                        x2 = xi(curvature),
+                        x3 = xi(1 - curvature),
+                        y0 = d.source.y + d.sy + d.dy / 2,
+                        y1 = d.target.y + d.ty + d.dy / 2;
+                    return "M" + x0 + "," + y0
+                        + "C" + x2 + "," + y0
+                        + " " + x3 + "," + y1
+                        + " " + x1 + "," + y1;
+                }
+
+                link.curvature = function (_) {
+                    if (!arguments.length) return curvature;
+                    curvature = +_;
+                    return link;
+                };
+
+                return link;
+            };
+
+            // Populate the sourceLinks and targetLinks for each node.
+            // Also, if the source and target are not objects, assume they are indices.
+            function computeNodeLinks() {
+                nodes.forEach(function (node) {
+                    node.sourceLinks = [];
+                    node.targetLinks = [];
+                });
+                links.forEach(function (link) {
+                    var source = link.source,
+                        target = link.target;
+                    if (typeof source === "number") source = link.source = nodes[link.source];
+                    if (typeof target === "number") target = link.target = nodes[link.target];
+                    source.sourceLinks.push(link);
+                    target.targetLinks.push(link);
+                });
+            }
+
+            // Compute the value (size) of each node by summing the associated links.
+            function computeNodeValues() {
+                nodes.forEach(function (node) {
+                    node.value = Math.max(
+                        d3.sum(node.sourceLinks, value),
+                        d3.sum(node.targetLinks, value)
+                    );
+                });
+            }
+
+            // Iteratively assign the breadth (x-position) for each node.
+            // Nodes are assigned the maximum breadth of incoming neighbors plus one;
+            // nodes with no incoming links are assigned breadth zero, while
+            // nodes with no outgoing links are assigned the maximum breadth.
+            function computeNodeBreadths() {
+                var remainingNodes = nodes,
+                    nextNodes,
+                    x = 0;
+
+                while (remainingNodes.length) {
+                    nextNodes = [];
+                    remainingNodes.forEach(function (node) {
+                        node.x = x;
+                        node.dx = nodeWidth;
+                        node.sourceLinks.forEach(function (link) {
+                            nextNodes.push(link.target);
+                        });
+                    });
+                    remainingNodes = nextNodes;
+                    ++x;
+                }
+
+                //
+                // moveSinksRight(x);
+                scaleNodeBreadths((size[0] - nodeWidth) / (x - 1));
+            }
+
+            function moveSourcesRight() {
+                nodes.forEach(function (node) {
+                    if (!node.targetLinks.length) {
+                        node.x = d3.min(node.sourceLinks, function (d) {
+                            return d.target.x;
+                        }) - 1;
+                    }
+                });
+            }
+
+            function moveSinksRight(x) {
+                nodes.forEach(function (node) {
+                    if (!node.sourceLinks.length) {
+                        node.x = x - 1;
+                    }
+                });
+            }
+
+            function scaleNodeBreadths(kx) {
+                nodes.forEach(function (node) {
+                    node.x *= kx;
+                });
+            }
+
+            function computeNodeDepths(iterations) {
+                var nodesByBreadth = d3.nest()
+                    .key(function (d) {
+                        return d.x;
+                    })
+                    .sortKeys(d3.ascending)
+                    .entries(nodes)
+                    .map(function (d) {
+                        return d.values;
+                    });
+
+                //
+                initializeNodeDepth();
+                resolveCollisions();
+                // relaxLeftToRight(1);
+                // resolveCollisions();
+
+                // for (var alpha = 0.001; iterations > 0; --iterations) {
+                //     relaxRightToLeft(alpha *= .99);
+                //     resolveCollisions();
+                //     relaxLeftToRight(alpha);
+                //     resolveCollisions();
+                // }
+
+                function initializeNodeDepth() {
+                    var ky = d3.min(nodesByBreadth, function (nodes) {
+                        return (size[1] - (nodes.length - 1) * nodePadding) / d3.sum(nodes, value);
+                    });
+
+                    nodesByBreadth.forEach(function (nodes) {
+                        nodes.forEach(function (node, i) {
+                            node.y = i;
+                            node.dy = node.value * ky;
+                        });
+                    });
+
+                    links.forEach(function (link) {
+                        link.dy = link.value * ky;
+                    });
+                }
+
+                function relaxLeftToRight(alpha) {
+                    nodesByBreadth.forEach(function (nodes, breadth) {
+                        nodes.forEach(function (node) {
+                            if (node.targetLinks.length) {
+                                var y = d3.sum(node.targetLinks, weightedSource) / d3.sum(node.targetLinks, value);
+                                node.y += (y - center(node)) * alpha;
+                            }
+                        });
+                    });
+
+                    function weightedSource(link) {
+                        return center(link.source) * link.value;
+                    }
+                }
+
+                function relaxRightToLeft(alpha) {
+                    nodesByBreadth.slice().reverse().forEach(function (nodes) {
+                        nodes.forEach(function (node) {
+                            if (node.sourceLinks.length) {
+                                var y = d3.sum(node.sourceLinks, weightedTarget) / d3.sum(node.sourceLinks, value);
+                                node.y += (y - center(node)) * alpha;
+                            }
+                        });
+                    });
+
+                    function weightedTarget(link) {
+                        return center(link.target) * link.value;
+                    }
+                }
+
+                function resolveCollisions() {
+                    nodesByBreadth.forEach(function (nodes) {
+                        var node,
+                            dy,
+                            y0 = 0,
+                            n = nodes.length,
+                            i;
+
+                        // Push any overlapping nodes down.
+                        nodes.sort(ascendingDepth);
+                        for (i = 0; i < n; ++i) {
+                            node = nodes[i];
+                            dy = y0 - node.y;
+                            if (dy > 0) node.y += dy;
+                            y0 = node.y + node.dy + nodePadding;
+                        }
+
+                        // If the bottommost node goes outside the bounds, push it back up.
+                        dy = y0 - nodePadding - size[1];
+                        if (dy > 0) {
+                            y0 = node.y -= dy;
+
+                            // Push any overlapping nodes back up.
+                            for (i = n - 2; i >= 0; --i) {
+                                node = nodes[i];
+                                dy = node.y + node.dy + nodePadding - y0;
+                                if (dy > 0) node.y -= dy;
+                                y0 = node.y;
+                            }
+                        }
+                    });
+                }
+
+                function ascendingDepth(a, b) {
+                    return a.y - b.y;
+                }
+            }
+
+            function computeLinkDepths() {
+                nodes.forEach(function (node) {
+                    node.sourceLinks.sort(ascendingTargetDepth);
+                    node.targetLinks.sort(ascendingSourceDepth);
+                });
+                nodes.forEach(function (node) {
+                    var sy = 0, ty = 0;
+                    node.sourceLinks.forEach(function (link) {
+                        link.sy = sy;
+                        sy += link.dy;
+                    });
+                    node.targetLinks.forEach(function (link) {
+                        link.ty = ty;
+                        ty += link.dy;
+                    });
+                });
+
+                function ascendingSourceDepth(a, b) {
+                    return a.source.y - b.source.y;
+                }
+
+                function ascendingTargetDepth(a, b) {
+                    return a.target.y - b.target.y;
+                }
+            }
+
+            function center(node) {
+                return node.y + node.dy / 2;
+            }
+
+            function value(link) {
+                return link.value;
+            }
+
+            return sankey;
+        };
+
+        // 正式绘制Sankey图
+        var units = "Widgets";
+
+        var margin = {top: 10, right: 10, bottom: 10, left: 10},
+            width = 1300 - margin.left - margin.right,
+            // width = 2500 - margin.left - margin.right,
+            height = 670 - margin.top - margin.bottom;
+
+        var formatNumber = d3.format(",.0f"),    // zero decimal places
+            format = function (d) {
+                return formatNumber(d) + " " + units;
+            },
+            color = d3.scale.category20();
+
+        // append the svg canvas to the page
+        var svg = d3.select("#chart").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+        // Set the sankey diagram properties
+        var sankey = d3.sankey()
+            .nodeWidth(36)
+            .nodePadding(10)
+            .size([width, height]);
+
+        var path = sankey.link();
+
+        // load the data
+
+        var links = [{"source": "Anti-social behaviour", "target": "Unknown", "value": "1362075"}, {"source": "Bicycle theft", "target": "Charged as part of another case", "value": "39"}, {"source": "Bicycle theft", "target": "Court - awaiting outcome", "value": "2"}, {"source": "Bicycle theft", "target": "Court - awiting outcome", "value": "1130"}, {"source": "Bicycle theft", "target": "Court - case abandoned", "value": "16"}, {"source": "Bicycle theft", "target": "Court - community Sentence", "value": "71"}, {"source": "Bicycle theft", "target": "Court - compensation payment", "value": "17"}, {"source": "Bicycle theft", "target": "Court - not guilty", "value": "14"}, {"source": "Bicycle theft", "target": "Discharge - conditional", "value": "26"}, {"source": "Bicycle theft", "target": "Fined", "value": "24"}, {"source": "Bicycle theft", "target": "No suspect identified", "value": "56072"}, {"source": "Bicycle theft", "target": "Not worth pursuing", "value": "254"}, {"source": "Bicycle theft", "target": "Offender otherwise dealt with", "value": "5"}, {"source": "Bicycle theft", "target": "Prison - suspended sentence", "value": "26"}, {"source": "Bicycle theft", "target": "Prison Sentence", "value": "101"}, {"source": "Bicycle theft", "target": "Resolved", "value": "344"}, {"source": "Bicycle theft", "target": "Unable to prosecute suspect", "value": "4501"}, {"source": "Bicycle theft", "target": "Unknown", "value": "30693"}, {"source": "Bicycle theft", "target": "Warning / Caution", "value": "119"}, {"source": "Burglary", "target": "Charged as part of another case", "value": "1771"}, {"source": "Burglary", "target": "Court - awaiting outcome", "value": "195"}, {"source": "Burglary", "target": "Court - awiting outcome", "value": "16455"}, {"source": "Burglary", "target": "Court - case abandoned", "value": "197"}, {"source": "Burglary", "target": "Court - community Sentence", "value": "500"}, {"source": "Burglary", "target": "Court - compensation payment", "value": "16"}, {"source": "Burglary", "target": "Court - not guilty", "value": "371"}, {"source": "Burglary", "target": "Discharge - conditional", "value": "50"}, {"source": "Burglary", "target": "Fined", "value": "54"}, {"source": "Burglary", "target": "No suspect identified", "value": "251383"}, {"source": "Burglary", "target": "Not worth pursuing", "value": "1208"}, {"source": "Burglary", "target": "Offender otherwise dealt with", "value": "30"}, {"source": "Burglary", "target": "Prison - suspended sentence", "value": "299"}, {"source": "Burglary", "target": "Prison Sentence", "value": "1774"}, {"source": "Burglary", "target": "Property seized", "value": "2"}, {"source": "Burglary", "target": "Resolved", "value": "834"}, {"source": "Burglary", "target": "Unable to prosecute suspect", "value": "29667"}, {"source": "Burglary", "target": "Unknown", "value": "99482"}, {"source": "Burglary", "target": "Warning / Caution", "value": "663"}, {"source": "Criminal damage and arson", "target": "Charged as part of another case", "value": "187"}, {"source": "Criminal damage and arson", "target": "Court - awaiting outcome", "value": "62"}, {"source": "Criminal damage and arson", "target": "Court - awiting outcome", "value": "21091"}, {"source": "Criminal damage and arson", "target": "Court - case abandoned", "value": "508"}, {"source": "Criminal damage and arson", "target": "Court - community Sentence", "value": "1705"}, {"source": "Criminal damage and arson", "target": "Court - compensation payment", "value": "760"}, {"source": "Criminal damage and arson", "target": "Court - not guilty", "value": "499"}, {"source": "Criminal damage and arson", "target": "Discharge - absolute", "value": "23"}, {"source": "Criminal damage and arson", "target": "Discharge - conditional", "value": "974"}, {"source": "Criminal damage and arson", "target": "Fined", "value": "1256"}, {"source": "Criminal damage and arson", "target": "No suspect identified", "value": "300537"}, {"source": "Criminal damage and arson", "target": "Not worth pursuing", "value": "5191"}, {"source": "Criminal damage and arson", "target": "Offender otherwise dealt with", "value": "233"}, {"source": "Criminal damage and arson", "target": "Prison - suspended sentence", "value": "302"}, {"source": "Criminal damage and arson", "target": "Prison Sentence", "value": "760"}, {"source": "Criminal damage and arson", "target": "Property seized", "value": "1"}, {"source": "Criminal damage and arson", "target": "Resolved", "value": "11219"}, {"source": "Criminal damage and arson", "target": "Unable to prosecute suspect", "value": "104078"}, {"source": "Criminal damage and arson", "target": "Unknown", "value": "102138"}, {"source": "Criminal damage and arson", "target": "Warning / Caution", "value": "6849"}, {"source": "Drugs", "target": "Charged as part of another case", "value": "25"}, {"source": "Drugs", "target": "Court - awaiting outcome", "value": "599"}, {"source": "Drugs", "target": "Court - awiting outcome", "value": "36991"}, {"source": "Drugs", "target": "Court - case abandoned", "value": "289"}, {"source": "Drugs", "target": "Court - community Sentence", "value": "1184"}, {"source": "Drugs", "target": "Court - compensation payment", "value": "38"}, {"source": "Drugs", "target": "Court - not guilty", "value": "225"}, {"source": "Drugs", "target": "Discharge - absolute", "value": "24"}, {"source": "Drugs", "target": "Discharge - conditional", "value": "976"}, {"source": "Drugs", "target": "Fined", "value": "10022"}, {"source": "Drugs", "target": "No suspect identified", "value": "7427"}, {"source": "Drugs", "target": "Not worth pursuing", "value": "8738"}, {"source": "Drugs", "target": "Offender otherwise dealt with", "value": "165"}, {"source": "Drugs", "target": "Prison - suspended sentence", "value": "250"}, {"source": "Drugs", "target": "Prison Sentence", "value": "1042"}, {"source": "Drugs", "target": "Property seized", "value": "776"}, {"source": "Drugs", "target": "Resolved", "value": "32405"}, {"source": "Drugs", "target": "Unable to prosecute suspect", "value": "13916"}, {"source": "Drugs", "target": "Unknown", "value": "22295"}, {"source": "Drugs", "target": "Warning / Caution", "value": "33854"}, {"source": "Other crime", "target": "Charged as part of another case", "value": "68"}, {"source": "Other crime", "target": "Court - awaiting outcome", "value": "345"}, {"source": "Other crime", "target": "Court - awiting outcome", "value": "12744"}, {"source": "Other crime", "target": "Court - case abandoned", "value": "184"}, {"source": "Other crime", "target": "Court - community Sentence", "value": "280"}, {"source": "Other crime", "target": "Court - compensation payment", "value": "2"}, {"source": "Other crime", "target": "Court - not guilty", "value": "203"}, {"source": "Other crime", "target": "Discharge - absolute", "value": "2"}, {"source": "Other crime", "target": "Discharge - conditional", "value": "81"}, {"source": "Other crime", "target": "Fined", "value": "132"}, {"source": "Other crime", "target": "No suspect identified", "value": "19046"}, {"source": "Other crime", "target": "Not worth pursuing", "value": "8764"}, {"source": "Other crime", "target": "Offender otherwise dealt with", "value": "42"}, {"source": "Other crime", "target": "Prison - suspended sentence", "value": "200"}, {"source": "Other crime", "target": "Prison Sentence", "value": "575"}, {"source": "Other crime", "target": "Property seized", "value": "2"}, {"source": "Other crime", "target": "Resolved", "value": "1940"}, {"source": "Other crime", "target": "Unable to prosecute suspect", "value": "39404"}, {"source": "Other crime", "target": "Unknown", "value": "19572"}, {"source": "Other crime", "target": "Warning / Caution", "value": "1339"}, {"source": "Other theft", "target": "Charged as part of another case", "value": "317"}, {"source": "Other theft", "target": "Court - awaiting outcome", "value": "117"}, {"source": "Other theft", "target": "Court - awiting outcome", "value": "8102"}, {"source": "Other theft", "target": "Court - case abandoned", "value": "129"}, {"source": "Other theft", "target": "Court - community Sentence", "value": "368"}, {"source": "Other theft", "target": "Court - compensation payment", "value": "72"}, {"source": "Other theft", "target": "Court - not guilty", "value": "86"}, {"source": "Other theft", "target": "Discharge - absolute", "value": "2"}, {"source": "Other theft", "target": "Discharge - conditional", "value": "138"}, {"source": "Other theft", "target": "Fined", "value": "223"}, {"source": "Other theft", "target": "No suspect identified", "value": "280722"}, {"source": "Other theft", "target": "Not worth pursuing", "value": "4931"}, {"source": "Other theft", "target": "Offender otherwise dealt with", "value": "39"}, {"source": "Other theft", "target": "Prison - suspended sentence", "value": "123"}, {"source": "Other theft", "target": "Prison Sentence", "value": "307"}, {"source": "Other theft", "target": "Resolved", "value": "4013"}, {"source": "Other theft", "target": "Unable to prosecute suspect", "value": "73260"}, {"source": "Other theft", "target": "Unknown", "value": "161629"}, {"source": "Other theft", "target": "Warning / Caution", "value": "2100"}, {"source": "Possession of weapons", "target": "Charged as part of another case", "value": "4"}, {"source": "Possession of weapons", "target": "Court - awaiting outcome", "value": "78"}, {"source": "Possession of weapons", "target": "Court - awiting outcome", "value": "12328"}, {"source": "Possession of weapons", "target": "Court - case abandoned", "value": "293"}, {"source": "Possession of weapons", "target": "Court - community Sentence", "value": "983"}, {"source": "Possession of weapons", "target": "Court - compensation payment", "value": "2"}, {"source": "Possession of weapons", "target": "Court - not guilty", "value": "301"}, {"source": "Possession of weapons", "target": "Discharge - absolute", "value": "4"}, {"source": "Possession of weapons", "target": "Discharge - conditional", "value": "47"}, {"source": "Possession of weapons", "target": "Fined", "value": "102"}, {"source": "Possession of weapons", "target": "No suspect identified", "value": "5767"}, {"source": "Possession of weapons", "target": "Not worth pursuing", "value": "2445"}, {"source": "Possession of weapons", "target": "Offender otherwise dealt with", "value": "23"}, {"source": "Possession of weapons", "target": "Prison - suspended sentence", "value": "707"}, {"source": "Possession of weapons", "target": "Prison Sentence", "value": "904"}, {"source": "Possession of weapons", "target": "Property seized", "value": "5"}, {"source": "Possession of weapons", "target": "Resolved", "value": "1644"}, {"source": "Possession of weapons", "target": "Unable to prosecute suspect", "value": "11221"}, {"source": "Possession of weapons", "target": "Unknown", "value": "7679"}, {"source": "Possession of weapons", "target": "Warning / Caution", "value": "2665"}, {"source": "Public order", "target": "Charged as part of another case", "value": "31"}, {"source": "Public order", "target": "Court - awaiting outcome", "value": "110"}, {"source": "Public order", "target": "Court - awiting outcome", "value": "29980"}, {"source": "Public order", "target": "Court - case abandoned", "value": "733"}, {"source": "Public order", "target": "Court - community Sentence", "value": "1506"}, {"source": "Public order", "target": "Court - compensation payment", "value": "66"}, {"source": "Public order", "target": "Court - not guilty", "value": "707"}, {"source": "Public order", "target": "Discharge - absolute", "value": "34"}, {"source": "Public order", "target": "Discharge - conditional", "value": "573"}, {"source": "Public order", "target": "Fined", "value": "3411"}, {"source": "Public order", "target": "No suspect identified", "value": "118320"}, {"source": "Public order", "target": "Not worth pursuing", "value": "14974"}, {"source": "Public order", "target": "Offender otherwise dealt with", "value": "476"}, {"source": "Public order", "target": "Prison - suspended sentence", "value": "529"}, {"source": "Public order", "target": "Prison Sentence", "value": "1478"}, {"source": "Public order", "target": "Property seized", "value": "2"}, {"source": "Public order", "target": "Resolved", "value": "7518"}, {"source": "Public order", "target": "Unable to prosecute suspect", "value": "169057"}, {"source": "Public order", "target": "Unknown", "value": "85143"}, {"source": "Public order", "target": "Warning / Caution", "value": "4755"}, {"source": "Robbery", "target": "Charged as part of another case", "value": "32"}, {"source": "Robbery", "target": "Court - awaiting outcome", "value": "63"}, {"source": "Robbery", "target": "Court - awiting outcome", "value": "6163"}, {"source": "Robbery", "target": "Court - case abandoned", "value": "63"}, {"source": "Robbery", "target": "Court - community Sentence", "value": "176"}, {"source": "Robbery", "target": "Court - compensation payment", "value": "1"}, {"source": "Robbery", "target": "Court - not guilty", "value": "172"}, {"source": "Robbery", "target": "Discharge - absolute", "value": "1"}, {"source": "Robbery", "target": "Discharge - conditional", "value": "9"}, {"source": "Robbery", "target": "Fined", "value": "12"}, {"source": "Robbery", "target": "No suspect identified", "value": "35265"}, {"source": "Robbery", "target": "Not worth pursuing", "value": "289"}, {"source": "Robbery", "target": "Offender otherwise dealt with", "value": "9"}, {"source": "Robbery", "target": "Prison - suspended sentence", "value": "27"}, {"source": "Robbery", "target": "Prison Sentence", "value": "567"}, {"source": "Robbery", "target": "Resolved", "value": "211"}, {"source": "Robbery", "target": "Unable to prosecute suspect", "value": "14323"}, {"source": "Robbery", "target": "Unknown", "value": "30243"}, {"source": "Robbery", "target": "Warning / Caution", "value": "156"}, {"source": "Shoplifting", "target": "Charged as part of another case", "value": "2288"}, {"source": "Shoplifting", "target": "Court - awaiting outcome", "value": "56"}, {"source": "Shoplifting", "target": "Court - awiting outcome", "value": "46778"}, {"source": "Shoplifting", "target": "Court - case abandoned", "value": "502"}, {"source": "Shoplifting", "target": "Court - community Sentence", "value": "4428"}, {"source": "Shoplifting", "target": "Court - compensation payment", "value": "536"}, {"source": "Shoplifting", "target": "Court - not guilty", "value": "415"}, {"source": "Shoplifting", "target": "Discharge - absolute", "value": "37"}, {"source": "Shoplifting", "target": "Discharge - conditional", "value": "2206"}, {"source": "Shoplifting", "target": "Fined", "value": "3910"}, {"source": "Shoplifting", "target": "No suspect identified", "value": "155086"}, {"source": "Shoplifting", "target": "Not worth pursuing", "value": "10427"}, {"source": "Shoplifting", "target": "Offender otherwise dealt with", "value": "651"}, {"source": "Shoplifting", "target": "Prison - suspended sentence", "value": "2108"}, {"source": "Shoplifting", "target": "Prison Sentence", "value": "7207"}, {"source": "Shoplifting", "target": "Property seized", "value": "1"}, {"source": "Shoplifting", "target": "Resolved", "value": "15250"}, {"source": "Shoplifting", "target": "Unable to prosecute suspect", "value": "50458"}, {"source": "Shoplifting", "target": "Unknown", "value": "59100"}, {"source": "Shoplifting", "target": "Warning / Caution", "value": "4552"}, {"source": "Theft from the person", "target": "Charged as part of another case", "value": "26"}, {"source": "Theft from the person", "target": "Court - awaiting outcome", "value": "7"}, {"source": "Theft from the person", "target": "Court - awiting outcome", "value": "1130"}, {"source": "Theft from the person", "target": "Court - case abandoned", "value": "26"}, {"source": "Theft from the person", "target": "Court - community Sentence", "value": "37"}, {"source": "Theft from the person", "target": "Court - compensation payment", "value": "2"}, {"source": "Theft from the person", "target": "Court - not guilty", "value": "18"}, {"source": "Theft from the person", "target": "Discharge - conditional", "value": "7"}, {"source": "Theft from the person", "target": "Fined", "value": "17"}, {"source": "Theft from the person", "target": "No suspect identified", "value": "43833"}, {"source": "Theft from the person", "target": "Not worth pursuing", "value": "282"}, {"source": "Theft from the person", "target": "Offender otherwise dealt with", "value": "2"}, {"source": "Theft from the person", "target": "Prison - suspended sentence", "value": "17"}, {"source": "Theft from the person", "target": "Prison Sentence", "value": "80"}, {"source": "Theft from the person", "target": "Property seized", "value": "2"}, {"source": "Theft from the person", "target": "Resolved", "value": "249"}, {"source": "Theft from the person", "target": "Unable to prosecute suspect", "value": "6332"}, {"source": "Theft from the person", "target": "Unknown", "value": "58630"}, {"source": "Theft from the person", "target": "Warning / Caution", "value": "154"}, {"source": "Vehicle crime", "target": "Charged as part of another case", "value": "385"}, {"source": "Vehicle crime", "target": "Court - awaiting outcome", "value": "74"}, {"source": "Vehicle crime", "target": "Court - awiting outcome", "value": "8378"}, {"source": "Vehicle crime", "target": "Court - case abandoned", "value": "217"}, {"source": "Vehicle crime", "target": "Court - community Sentence", "value": "534"}, {"source": "Vehicle crime", "target": "Court - compensation payment", "value": "19"}, {"source": "Vehicle crime", "target": "Court - not guilty", "value": "227"}, {"source": "Vehicle crime", "target": "Discharge - absolute", "value": "3"}, {"source": "Vehicle crime", "target": "Discharge - conditional", "value": "117"}, {"source": "Vehicle crime", "target": "Fined", "value": "172"}, {"source": "Vehicle crime", "target": "No suspect identified", "value": "290006"}, {"source": "Vehicle crime", "target": "Not worth pursuing", "value": "1044"}, {"source": "Vehicle crime", "target": "Offender otherwise dealt with", "value": "96"}, {"source": "Vehicle crime", "target": "Prison - suspended sentence", "value": "136"}, {"source": "Vehicle crime", "target": "Prison Sentence", "value": "493"}, {"source": "Vehicle crime", "target": "Resolved", "value": "487"}, {"source": "Vehicle crime", "target": "Unable to prosecute suspect", "value": "22460"}, {"source": "Vehicle crime", "target": "Unknown", "value": "135323"}, {"source": "Vehicle crime", "target": "Warning / Caution", "value": "438"}, {"source": "Violence and sexual offences", "target": "Charged as part of another case", "value": "98"}, {"source": "Violence and sexual offences", "target": "Court - awaiting outcome", "value": "1364"}, {"source": "Violence and sexual offences", "target": "Court - awiting outcome", "value": "112067"}, {"source": "Violence and sexual offences", "target": "Court - case abandoned", "value": "2987"}, {"source": "Violence and sexual offences", "target": "Court - community Sentence", "value": "6978"}, {"source": "Violence and sexual offences", "target": "Court - compensation payment", "value": "316"}, {"source": "Violence and sexual offences", "target": "Court - not guilty", "value": "4387"}, {"source": "Violence and sexual offences", "target": "Discharge - absolute", "value": "36"}, {"source": "Violence and sexual offences", "target": "Discharge - conditional", "value": "1502"}, {"source": "Violence and sexual offences", "target": "Fined", "value": "2511"}, {"source": "Violence and sexual offences", "target": "No suspect identified", "value": "301365"}, {"source": "Violence and sexual offences", "target": "Not worth pursuing", "value": "39097"}, {"source": "Violence and sexual offences", "target": "Offender otherwise dealt with", "value": "272"}, {"source": "Violence and sexual offences", "target": "Prison - suspended sentence", "value": "1916"}, {"source": "Violence and sexual offences", "target": "Prison Sentence", "value": "4141"}, {"source": "Violence and sexual offences", "target": "Resolved", "value": "30569"}, {"source": "Violence and sexual offences", "target": "Unable to prosecute suspect", "value": "1007284"}, {"source": "Violence and sexual offences", "target": "Unknown", "value": "336204"}, {"source": "Violence and sexual offences", "target": "Warning / Caution", "value": "24400"}]
+
+        var level = [[{"name": "Anti-social behaviour", "size": 1362075.0}, {"name": "Theft from the person", "size": 110851.0}, {"name": "Burglary", "size": 404951.0}, {"name": "Shoplifting", "size": 365996.0}, {"name": "Public order", "size": 439403.0}, {"name": "Possession of weapons", "size": 47202.0}, {"name": "Other crime", "size": 104925.0}, {"name": "Drugs", "size": 171241.0}, {"name": "Criminal damage and arson", "size": 558373.0}, {"name": "Bicycle theft", "size": 93454.0}, {"name": "Violence and sexual offences", "size": 1877494.0}, {"name": "Vehicle crime", "size": 460609.0}, {"name": "Robbery", "size": 87782.0}, {"name": "Other theft", "size": 536678.0}], [{"name": "Property seized", "size": 791.0}, {"name": "Unknown", "size": 2510206.0}, {"name": "Warning / Caution", "size": 82044.0}, {"name": "Unable to prosecute suspect", "size": 1545961.0}, {"name": "Resolved", "size": 106683.0}, {"name": "Prison Sentence", "size": 19429.0}, {"name": "Prison - suspended sentence", "size": 6640.0}, {"name": "Offender otherwise dealt with", "size": 2043.0}, {"name": "Not worth pursuing", "size": 97644.0}, {"name": "No suspect identified", "size": 1864829.0}, {"name": "Fined", "size": 21846.0}, {"name": "Discharge - conditional", "size": 6706.0}, {"name": "Court - not guilty", "size": 7625.0}, {"name": "Court - compensation payment", "size": 1847.0}, {"name": "Court - community Sentence", "size": 18750.0}, {"name": "Court - case abandoned", "size": 6144.0}, {"name": "Court - awiting outcome", "size": 313337.0}, {"name": "Court - awaiting outcome", "size": 3072.0}, {"name": "Charged as part of another case", "size": 5271.0}, {"name": "Discharge - absolute", "size": 166.0}]]
+
+        // original result from bc
+        let result = [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]]
+
+
+        let nodes = []
+        result.forEach((d, i) => {
+            d.forEach(j => {
+                console.log(j)
+                console.log(level[i][parseInt(j) - 1])
+                nodes.push(level[i][parseInt(j) - 1])
+            })
+        })
+        console.log(nodes)
+
+        var another = nodes.map(d => ({name: d['name']}))
+        var orgNode = nodes.map(d => d.name)
+        var anotherLinks = links.map(d => ({
+                'source': orgNode.indexOf(d.source),
+                'target': orgNode.indexOf(d.target),
+                'value': d.value
+            }
+        ))
+        console.log(nodes, links)
+        var data = ({
+            "nodes": nodes,
+            "links": links,
+        })
+
+        var nodeMap = {};
+        var graph = data;
+        graph.nodes.forEach(function (x) {
+            nodeMap[x.name] = x;
+        });
+        console.log(nodeMap)
+        graph.links = graph.links.map(function (x) {
+            if (typeof nodeMap[x.target] === "undefined") console.log(x.target)
+            if (typeof nodeMap[x.source] === "undefined") console.log(x.source)
+            return {
+                source: nodeMap[x.source],
+                target: nodeMap[x.target],
+                value: x.value
+            };
+        });
+        console.log(graph)
+
+        sankey
+            .nodes(graph.nodes)
+            .links(graph.links)
+            .layout(32);
+
+        // add in the links
+        var link = svg.append("g").selectAll(".link")
+            .data(graph.links)
+            .enter().append("path")
+            .attr("class", "link")
+            .attr("d", path)
+            .style("stroke-width", function (d) {
+                return Math.max(1, d.dy);
+            })
+            .sort(function (a, b) {
+                return b.dy - a.dy;
+            });
+
+        // add the link titles
+        link.append("title")
+            .text(function (d) {
+                return d.source.name + " → " +
+                    d.target.name + "\n" + format(d.value);
+            });
+
+        // add in the nodes
+        var node = svg.append("g").selectAll(".node")
+            .data(graph.nodes)
+            .enter().append("g")
+            .attr("class", "node")
+            .attr("transform", function (d) {
+                return "translate(" + d.x + "," + d.y + ")";
+            })
+            // .call(d3.behavior.drag()
+            //     .origin(function (d) {
+            //         return d;
+            //     })
+            //     .on("dragstart", function () {
+            //         this.parentNode.appendChild(this);
+            //     })
+            //     .on("drag", dragmove));
+
+        // add the rectangles for the nodes
+        node.append("rect")
+            .attr("height", function (d) {
+                return d.dy;
+            })
+            .attr("width", sankey.nodeWidth())
+            .style("fill", function (d) {
+                return d.color = color(d.name.replace(/ .*/, ""));
+            })
+            .style("stroke", function (d) {
+                return d3.rgb(d.color).darker(2);
+            })
+            .append("title")
+            .text(function (d) {
+                return d.name + "\n" + format(d.value);
+            });
+
+        // add in the title for the nodes
+        node.append("text")
+            .attr("x", d => {
+                if (d.x === 0)
+                    return 6 + sankey.nodeWidth()
+                else if (d.x === 448)
+                    return -6
+                else if (d.x === 896)
+                    return 6 + sankey.nodeWidth()
+                else return -6
+            })
+            .attr("y", function (d) {
+                console.log(d);
+                return d.dy / 2;
+            })
+            .attr("dy", ".35em")
+            .attr("text-anchor", d => {
+                if (d.x === 0)
+                    return "start"
+                else if (d.x === 448)
+                    return "end"
+                else if (d.x === 896)
+                    return "start"
+                else return "end"
+            })
+            .attr("transform", null)
+            .text(function (d) {
+                return d.name;
+            })
+        // .filter(function (d) { return d.x < width / 2; })
+        // .attr("x", 6 + sankey.nodeWidth())
+        // .attr("text-anchor", "start");
+
+        // the function for moving the nodes
+        function dragmove(d) {
+            d3.select(this).attr("transform",
+                "translate(" + (
+                    d.x = Math.max(0, Math.min(width - d.dx, d3.event.x))
+                ) + "," + (
+                    d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))
+                ) + ")");
+            sankey.relayout();
+            link.attr("d", path);
+        }
+    //　
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,1823 @@
+<!doctype html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>调查问卷（二）</title>
+
+    <!-- load CSS -->
+    <!-- Google web font "Open Sans" -->
+    <link rel="stylesheet" href="/static/css/materialize.min.css">
+    <!-- https://materializecss.com -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <!-- https://getbootstrap.com/ -->
+    <link rel="stylesheet" href="/static/css/all.min.css">
+    <!-- https://fontawesome.com/ -->
+    <link rel="stylesheet" href="/static/css/templatemo-style.css">
+    <!-- Template Mo style -->
+    <link rel="icon" href="/static/img/icon.png"/>
+   
+	<script src="/static/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/js/materialize.min.js"></script>
+	<script src="/static/js/FileSaver.js"></script>
+
+<script>
+var second = 0;
+window.setInterval(function () {
+    second++;
+}, 1000);
+function ok(){
+    var content = res31+res32+res33+res34+res35+res36+res37+res38+res39+res40+res41+res42+res43+res44+res45+res46+res47+res48+res49+res50+res51+res52+res53+res54+res55+res56+res57+res58+res59+res60;
+    var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
+    saveAs(blob, "res2.txt");
+}
+</script>
+    
+</head>
+<body>
+<div class="adcenter"></div>    
+	<div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-7">
+				<img src="/static/img/logo.png" alt="Image">
+                <h2 class="tm-site-name">调&nbsp;查&nbsp;问&nbsp;卷</h2>
+            </div>
+            <div class="col-sm-12 col-md-5 mt-md-0 mt-5">
+                <div class="tm-site-header-right-col">
+                    <a href="https://baidu.com" class="btn btn-primary"　style="line-height: 100px">联系我们</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="tm-intro">
+                <div class="col-sm-12 col-md-8 mb-md-0 mb-4 tm-intro-left">
+                    <p class="mb-0">这是问卷的第二页，在完成并提交所有任务后会自动生成相应的文件，麻烦您将“res2.txt”以及“res1.txt”和“base.txt”三个文件一并反馈给我们。感谢您的参与！</p>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <em>
+                        <p class="tm-highlight">Tendency is all you need</p>
+                    </em>
+                </div>
+            </div>
+        </div>
+
+        <form action="home.html" method="post">
+            <div class="row">
+				<!-- 第1个问题 --> 
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题1</h2>
+					<img src="/static/img/backups/Q3_q1.png" alt="Image" >
+                    <p>以下有<b>三个小问题</b>，对于每个问题，请您从标出的两个图层中选出哪个图层对应的整体趋势最接近上面黑色图层的变化趋势。注意，图层的长度与图层的趋势并没有关系。</p>
+                    <div class="tm-q-choice-container"  >
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q3_q1_a1.png" alt="Image" style="display:none;" id="Q3_q1_a1_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q1_a1" class="filled-in tm-checkbox" id="Q3_q1_a1_1" >
+										<span>图层1与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q1_a1" class="filled-in tm-checkbox" id="Q3_q1_a1_2" >
+										<span>图层2与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio31()" id="Q3_q1_a1_button">查看图片</button>
+							</div>
+                        </label>
+                    </div>
+				<script>
+						var res31="";
+						function disable_radio31(){
+							var myButton=document.getElementById("Q3_q1_a1_button");
+							var radio1=document.getElementById("Q3_q1_a1_1");
+							var radio2=document.getElementById("Q3_q1_a1_2");
+							var myImg=document.getElementById("Q3_q1_a1_Img");							
+							if(myButton.innerHTML == "查看图片"){
+								myButton.innerHTML="确定选项";
+								second=0;
+								myImg.style="";
+							}else{
+								if(!radio1.disabled){
+									if(radio1.checked){
+										res31=radio1.id+","+second+"\n";
+									}else if(radio2.checked){
+										res31=radio2.id+","+second+"\n";
+									}
+									radio1.disabled=true;
+									radio2.disabled=true;
+									myImg.style="display:none;"
+									myButton.innerHTML="已提交"
+								}
+							}
+
+						}
+				</script>
+				<div class="tm-q-choice-container"  >
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q3_q1_a2.png" alt="Image" style="display:none;" id="Q3_q1_a2_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q1_a2" class="filled-in tm-checkbox" id="Q3_q1_a2_1" >
+										<span>图层1与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q1_a2" class="filled-in tm-checkbox" id="Q3_q1_a2_2" >
+										<span>图层2与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio32()" id="Q3_q1_a2_button">查看图片</button>
+							</div>
+                        </label>
+                    </div>
+				<script>
+						var res32="";
+						function disable_radio32(){
+							var myButton=document.getElementById("Q3_q1_a2_button");
+							var radio1=document.getElementById("Q3_q1_a2_1");
+							var radio2=document.getElementById("Q3_q1_a2_2");
+							var myImg=document.getElementById("Q3_q1_a2_Img");
+							if(myButton.innerHTML == "查看图片"){
+								myButton.innerHTML="确定选项";
+								second=0;
+								myImg.style="";
+							}else{
+								if(!radio1.disabled){
+									if(radio1.checked){
+										res32=radio1.id+","+second+"\n";
+									}else if(radio2.checked){
+										res32=radio2.id+","+second+"\n";
+									}
+									radio1.disabled=true;
+									radio2.disabled=true;
+									myImg.style="display:none;"
+									myButton.innerHTML="已提交"
+								}
+							}
+
+						}
+				</script>                    
+					<div class="tm-q-choice-container"  >
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q3_q1_a3.png" alt="Image" style="display:none;" id="Q3_q1_a3_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q1_a3" class="filled-in tm-checkbox" id="Q3_q1_a3_1" >
+										<span>图层1与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q1_a3" class="filled-in tm-checkbox" id="Q3_q1_a3_2" >
+										<span>图层2与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio33()" id="Q3_q1_a3_button">查看图片</button>
+							</div>
+                        </label>
+                    </div>
+				<script>
+						var res33="";
+						function disable_radio33(){
+							var myButton=document.getElementById("Q3_q1_a3_button");
+							var radio1=document.getElementById("Q3_q1_a3_1");
+							var radio2=document.getElementById("Q3_q1_a3_2");
+							var myImg=document.getElementById("Q3_q1_a3_Img");
+							if(myButton.innerHTML == "查看图片"){
+								myButton.innerHTML="确定选项";
+								second=0;
+								myImg.style="";
+							}else{
+								if(!radio1.disabled){
+									if(radio1.checked){
+										res33=radio1.id+","+second+"\n";
+									}else if(radio2.checked){
+										res33=radio2.id+","+second+"\n";
+									}
+									radio1.disabled=true;
+									radio2.disabled=true;
+									myImg.style="display:none;"
+									myButton.innerHTML="已提交"
+								}
+							}
+
+						}
+				</script>
+                </div>  
+		
+				<!-- 第2个问题 --> 
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题2</h2>
+					<img src="/static/img/backups/Q3_q2.png" alt="Image" >
+                    <p>以下有<b>三个小问题</b>，对于每个问题，请您从标出的三个图层中选出哪个图层对应的整体趋势最接近上面黑色图层的变化趋势。注意，图层的长度与图层的趋势并没有关系。</p>
+					<div class="tm-q-choice-container"  >
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q3_q2_a3.png" alt="Image" style="display:none;" id="Q3_q2_a3_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q2_a3" class="filled-in tm-checkbox" id="Q3_q2_a3_1" >
+										<span>图层1与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q2_a3" class="filled-in tm-checkbox" id="Q3_q2_a3_2" >
+										<span>图层2与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q2_a3" class="filled-in tm-checkbox" id="Q3_q2_a3_3" >
+										<span>图层3与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio34()" id="Q3_q2_a3_button">查看图片</button>
+							</div>
+                        </label>
+                    </div>
+				<script>
+						var res34="";
+						function disable_radio34(){
+							var myButton=document.getElementById("Q3_q2_a3_button");
+							var radio1=document.getElementById("Q3_q2_a3_1");
+							var radio2=document.getElementById("Q3_q2_a3_2");
+							var radio3=document.getElementById("Q3_q2_a3_3");
+							var myImg=document.getElementById("Q3_q2_a3_Img");
+							if(myButton.innerHTML == "查看图片"){
+								myButton.innerHTML="确定选项";
+								second=0;
+								myImg.style="";
+							}else{
+								if(!radio1.disabled){
+									if(radio1.checked){
+										res34=radio1.id+","+second+"\n";
+									}else if(radio2.checked){
+										res34=radio2.id+","+second+"\n";
+									}else if(radio3.checked){
+										res34=radio3.id+","+second+"\n";
+									}
+									radio1.disabled=true;
+									radio2.disabled=true;
+									radio3.disabled=true;
+									myImg.style="display:none;"
+									myButton.innerHTML="已提交"
+								}
+							}
+
+						}
+				</script>
+                    <div class="tm-q-choice-container"  >
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q3_q2_a2.png" alt="Image" style="display:none;" id="Q3_q2_a2_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q2_a2" class="filled-in tm-checkbox" id="Q3_q2_a2_1" >
+										<span>图层1与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q2_a2" class="filled-in tm-checkbox" id="Q3_q2_a2_2" >
+										<span>图层2与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q2_a2" class="filled-in tm-checkbox" id="Q3_q2_a2_3" >
+										<span>图层3与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio35()" id="Q3_q2_a2_button">查看图片</button>
+							</div>
+                        </label>
+                    </div>
+				<script>
+						var res35="";
+						function disable_radio35(){
+							var myButton=document.getElementById("Q3_q2_a2_button");
+							var radio1=document.getElementById("Q3_q2_a2_1");
+							var radio2=document.getElementById("Q3_q2_a2_2");
+							var radio3=document.getElementById("Q3_q2_a2_3");
+							var myImg=document.getElementById("Q3_q2_a2_Img");
+							if(myButton.innerHTML == "查看图片"){
+								myButton.innerHTML="确定选项";
+								second=0;
+								myImg.style="";
+							}else{
+								if(!radio1.disabled){
+									if(radio1.checked){
+										res35=radio1.id+","+second+"\n";
+									}else if(radio2.checked){
+										res35=radio2.id+","+second+"\n";
+									}else if(radio3.checked){
+										res35=radio3.id+","+second+"\n";
+									}
+									radio1.disabled=true;
+									radio2.disabled=true;
+									radio3.disabled=true;
+									myImg.style="display:none;"
+									myButton.innerHTML="已提交"
+								}
+							}
+
+						}
+				</script>
+                    <div class="tm-q-choice-container"  >
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q3_q2_a1.png" alt="Image" style="display:none;" id="Q3_q2_a1_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q2_a1" class="filled-in tm-checkbox" id="Q3_q2_a1_1" >
+										<span>图层1与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q2_a1" class="filled-in tm-checkbox" id="Q3_q2_a1_2" >
+										<span>图层2与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q2_a1" class="filled-in tm-checkbox" id="Q3_q2_a1_3" >
+										<span>图层3与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio36()" id="Q3_q2_a1_button">查看图片</button>
+							</div>
+                        </label>
+                    </div>
+				<script>
+						var res36="";
+						function disable_radio36(){
+							var myButton=document.getElementById("Q3_q2_a1_button");
+							var radio1=document.getElementById("Q3_q2_a1_1");
+							var radio2=document.getElementById("Q3_q2_a1_2");
+							var radio3=document.getElementById("Q3_q2_a1_3");
+							var myImg=document.getElementById("Q3_q2_a1_Img");
+							if(myButton.innerHTML == "查看图片"){
+								myButton.innerHTML="确定选项";
+								second=0;
+								myImg.style="";
+							}else{
+								if(!radio1.disabled){
+									if(radio1.checked){
+										res36=radio1.id+","+second+"\n";
+									}else if(radio2.checked){
+										res36=radio2.id+","+second+"\n";
+									}else if(radio3.checked){
+										res36=radio3.id+","+second+"\n";
+									}
+									radio1.disabled=true;
+									radio2.disabled=true;
+									radio3.disabled=true;
+									myImg.style="display:none;"
+									myButton.innerHTML="已提交"
+								}
+							}
+
+						}
+				</script>
+	                </div> 
+				
+					<!-- 第3个问题 --> 
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题3</h2>
+					<img src="/static/img/backups/Q3_q3.png" alt="Image" >
+                    <p>以下有<b>三个小问题</b>，对于每个问题，请您从标出的四个图层中选出哪个图层对应的整体趋势最接近上面黑色图层的变化趋势。注意，图层的长度与图层的趋势并没有关系。</p>			
+                    <div class="tm-q-choice-container"  >
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q3_q3_a1.png" alt="Image" style="display:none;" id="Q3_q3_a1_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q3_a1" class="filled-in tm-checkbox" id="Q3_q3_a1_1" >
+										<span>图层1与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q3_a1" class="filled-in tm-checkbox" id="Q3_q3_a1_2" >
+										<span>图层2与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q3_a1" class="filled-in tm-checkbox" id="Q3_q3_a1_3" >
+										<span>图层3与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q3_a1" class="filled-in tm-checkbox" id="Q3_q3_a1_4" >
+										<span>图层4与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio37()" id="Q3_q3_a1_button">查看图片</button>
+							</div>
+                        </label>
+                    </div>
+				<script>
+						var res37="";
+						function disable_radio37(){
+							var myButton=document.getElementById("Q3_q3_a1_button");
+							var radio1=document.getElementById("Q3_q3_a1_1");
+							var radio2=document.getElementById("Q3_q3_a1_2");
+							var radio3=document.getElementById("Q3_q3_a1_3");
+							var radio4=document.getElementById("Q3_q3_a1_4");
+							var myImg=document.getElementById("Q3_q3_a1_Img");
+							if(myButton.innerHTML == "查看图片"){
+								myButton.innerHTML="确定选项";
+								second=0;
+								myImg.style="";
+							}else{
+								if(!radio1.disabled){
+									if(radio1.checked){
+										res37=radio1.id+","+second+"\n";
+									}else if(radio2.checked){
+										res37=radio2.id+","+second+"\n";
+									}else if(radio3.checked){
+										res37=radio3.id+","+second+"\n";
+									}else if(radio4.checked){
+										res37=radio4.id+","+second+"\n";
+									}
+									radio1.disabled=true;
+									radio2.disabled=true;
+									radio3.disabled=true;
+									radio4.disabled=true;
+									myImg.style="display:none;"
+									myButton.innerHTML="已提交"
+								}
+							}
+
+						}
+				</script>
+                    <div class="tm-q-choice-container"  >
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q3_q3_a3.png" alt="Image" style="display:none;" id="Q3_q3_a3_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q3_a3" class="filled-in tm-checkbox" id="Q3_q3_a3_1" >
+										<span>图层1与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q3_a3" class="filled-in tm-checkbox" id="Q3_q3_a3_2" >
+										<span>图层2与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q3_a3" class="filled-in tm-checkbox" id="Q3_q3_a3_3" >
+										<span>图层3与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q3_a3" class="filled-in tm-checkbox" id="Q3_q3_a3_4" >
+										<span>图层4与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio38()" id="Q3_q3_a3_button">查看图片</button>
+							</div>
+                        </label>
+                    </div>
+				<script>
+						var res38="";
+						function disable_radio38(){
+							var myButton=document.getElementById("Q3_q3_a3_button");
+							var radio1=document.getElementById("Q3_q3_a3_1");
+							var radio2=document.getElementById("Q3_q3_a3_2");
+							var radio3=document.getElementById("Q3_q3_a3_3");
+							var radio4=document.getElementById("Q3_q3_a3_4");
+							var myImg=document.getElementById("Q3_q3_a3_Img");
+							if(myButton.innerHTML == "查看图片"){
+								myButton.innerHTML="确定选项";
+								second=0;
+								myImg.style="";
+							}else{
+								if(!radio1.disabled){
+									if(radio1.checked){
+										res38=radio1.id+","+second+"\n";
+									}else if(radio2.checked){
+										res38=radio2.id+","+second+"\n";
+									}else if(radio3.checked){
+										res38=radio3.id+","+second+"\n";
+									}else if(radio4.checked){
+										res38=radio4.id+","+second+"\n";
+									}
+									radio1.disabled=true;
+									radio2.disabled=true;
+									radio3.disabled=true;
+									radio4.disabled=true;
+									myImg.style="display:none;"
+									myButton.innerHTML="已提交"
+								}
+							}
+
+						}
+				</script>
+                    <div class="tm-q-choice-container"  >
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q3_q3_a2.png" alt="Image" style="display:none;" id="Q3_q3_a2_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q3_a2" class="filled-in tm-checkbox" id="Q3_q3_a2_1" >
+										<span>图层1与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q3_a2" class="filled-in tm-checkbox" id="Q3_q3_a2_2" >
+										<span>图层2与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q3_a2" class="filled-in tm-checkbox" id="Q3_q3_a2_3" >
+										<span>图层3与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q3_a2" class="filled-in tm-checkbox" id="Q3_q3_a2_4" >
+										<span>图层4与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio39()" id="Q3_q3_a2_button">查看图片</button>
+							</div>
+                        </label>
+                    </div>
+				<script>
+						var res39="";
+						function disable_radio39(){
+							var myButton=document.getElementById("Q3_q3_a2_button");
+							var radio1=document.getElementById("Q3_q3_a2_1");
+							var radio2=document.getElementById("Q3_q3_a2_2");
+							var radio3=document.getElementById("Q3_q3_a2_3");
+							var radio4=document.getElementById("Q3_q3_a2_4");
+							var myImg=document.getElementById("Q3_q3_a2_Img");
+							if(myButton.innerHTML == "查看图片"){
+								myButton.innerHTML="确定选项";
+								second=0;
+								myImg.style="";
+							}else{
+								if(!radio1.disabled){
+									if(radio1.checked){
+										res39=radio1.id+","+second+"\n";
+									}else if(radio2.checked){
+										res39=radio2.id+","+second+"\n";
+									}else if(radio3.checked){
+										res39=radio3.id+","+second+"\n";
+									}else if(radio4.checked){
+										res39=radio4.id+","+second+"\n";
+									}
+									radio1.disabled=true;
+									radio2.disabled=true;
+									radio3.disabled=true;
+									radio4.disabled=true;
+									myImg.style="display:none;"
+									myButton.innerHTML="已提交"
+								}
+							}
+
+						}
+				</script>
+		            </div>			
+				
+						<!-- 第4个问题 --> 
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题4</h2>
+					<img src="/static/img/backups/Q3_q4.png" alt="Image" >
+                    <p>以下有<b>三个小问题</b>，对于每个问题，请您从标出的四个图层中选出哪个图层对应的整体趋势最接近上面黑色图层的变化趋势。注意，图层的长度与图层的趋势并没有关系。
+	                    <div class="tm-q-choice-container"  >
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q3_q4_a2.png" alt="Image" style="display:none;" id="Q3_q4_a2_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q4_a2" class="filled-in tm-checkbox" id="Q3_q4_a2_1" >
+										<span>图层1与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q4_a2" class="filled-in tm-checkbox" id="Q3_q4_a2_2" >
+										<span>图层2与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q4_a2" class="filled-in tm-checkbox" id="Q3_q4_a2_3" >
+										<span>图层3与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q4_a2" class="filled-in tm-checkbox" id="Q3_q4_a2_4" >
+										<span>图层4与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio40()" id="Q3_q4_a2_button">查看图片</button>
+							</div>
+                        </label>
+                    </div>
+				<script>
+						var res40="";
+						function disable_radio40(){
+							var myButton=document.getElementById("Q3_q4_a2_button");
+							var radio1=document.getElementById("Q3_q4_a2_1");
+							var radio2=document.getElementById("Q3_q4_a2_2");
+							var radio3=document.getElementById("Q3_q4_a2_3");
+							var radio4=document.getElementById("Q3_q4_a2_4");
+							var myImg=document.getElementById("Q3_q4_a2_Img");
+							if(myButton.innerHTML == "查看图片"){
+								myButton.innerHTML="确定选项";
+								second=0;
+								myImg.style="";
+							}else{
+								if(!radio1.disabled){
+									if(radio1.checked){
+										res40=radio1.id+","+second+"\n";
+									}else if(radio2.checked){
+										res40=radio2.id+","+second+"\n";
+									}else if(radio3.checked){
+										res40=radio3.id+","+second+"\n";
+									}else if(radio4.checked){
+										res40=radio4.id+","+second+"\n";
+									}
+									radio1.disabled=true;
+									radio2.disabled=true;
+									radio3.disabled=true;
+									radio4.disabled=true;
+									myImg.style="display:none;"
+									myButton.innerHTML="已提交"
+								}
+							}
+
+						}
+				</script>
+                    <div class="tm-q-choice-container"  >
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q3_q4_a1.png" alt="Image" style="display:none;" id="Q3_q4_a1_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q4_a1" class="filled-in tm-checkbox" id="Q3_q4_a1_1" >
+										<span>图层1与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q4_a1" class="filled-in tm-checkbox" id="Q3_q4_a1_2" >
+										<span>图层2与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q4_a1" class="filled-in tm-checkbox" id="Q3_q4_a1_3" >
+										<span>图层3与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q4_a1" class="filled-in tm-checkbox" id="Q3_q4_a1_4" >
+										<span>图层4与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio41()" id="Q3_q4_a1_button">查看图片</button>
+							</div>
+                        </label>
+                    </div>
+				<script>
+						var res41="";
+						function disable_radio41(){
+							var myButton=document.getElementById("Q3_q4_a1_button");
+							var radio1=document.getElementById("Q3_q4_a1_1");
+							var radio2=document.getElementById("Q3_q4_a1_2");
+							var radio3=document.getElementById("Q3_q4_a1_3");
+							var radio4=document.getElementById("Q3_q4_a1_4");
+							var myImg=document.getElementById("Q3_q4_a1_Img");
+							if(myButton.innerHTML == "查看图片"){
+								myButton.innerHTML="确定选项";
+								second=0;
+								myImg.style="";
+							}else{
+								if(!radio1.disabled){
+									if(radio1.checked){
+										res41=radio1.id+","+second+"\n";
+									}else if(radio2.checked){
+										res41=radio2.id+","+second+"\n";
+									}else if(radio3.checked){
+										res41=radio3.id+","+second+"\n";
+									}else if(radio4.checked){
+										res41=radio4.id+","+second+"\n";
+									}
+									radio1.disabled=true;
+									radio2.disabled=true;
+									radio3.disabled=true;
+									radio4.disabled=true;
+									myImg.style="display:none;"
+									myButton.innerHTML="已提交"
+								}
+							}
+
+						}
+				</script>
+                    <div class="tm-q-choice-container"  >
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q3_q4_a3.png" alt="Image" style="display:none;" id="Q3_q4_a3_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q4_a3" class="filled-in tm-checkbox" id="Q3_q4_a3_1" >
+										<span>图层1与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q4_a3" class="filled-in tm-checkbox" id="Q3_q4_a3_2" >
+										<span>图层2与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q4_a3" class="filled-in tm-checkbox" id="Q3_q4_a3_3" >
+										<span>图层3与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q4_a3" class="filled-in tm-checkbox" id="Q3_q4_a3_4" >
+										<span>图层4与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio42()" id="Q3_q4_a3_button">查看图片</button>
+							</div>
+                        </label>
+                    </div>
+				<script>
+						var res42="";
+						function disable_radio42(){
+							var myButton=document.getElementById("Q3_q4_a3_button");
+							var radio1=document.getElementById("Q3_q4_a3_1");
+							var radio2=document.getElementById("Q3_q4_a3_2");
+							var radio3=document.getElementById("Q3_q4_a3_3");
+							var radio4=document.getElementById("Q3_q4_a3_4");
+							var myImg=document.getElementById("Q3_q4_a3_Img");
+							if(myButton.innerHTML == "查看图片"){
+								myButton.innerHTML="确定选项";
+								second=0;
+								myImg.style="";
+							}else{
+								if(!radio1.disabled){
+									if(radio1.checked){
+										res42=radio1.id+","+second+"\n";
+									}else if(radio2.checked){
+										res42=radio2.id+","+second+"\n";
+									}else if(radio3.checked){
+										res42=radio3.id+","+second+"\n";
+									}else if(radio4.checked){
+										res42=radio4.id+","+second+"\n";
+									}
+									radio1.disabled=true;
+									radio2.disabled=true;
+									radio3.disabled=true;
+									radio4.disabled=true;
+									myImg.style="display:none;"
+									myButton.innerHTML="已提交"
+								}
+							}
+
+						}
+				</script>			
+					</p>				
+				
+							<!-- 第5个问题 --> 
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题5</h2>
+					<img src="/static/img/backups/Q3_q5.png" alt="Image" >
+                    <p>以下有<b>三个小问题</b>，对于每个问题，请您从标出的四个图层中选出哪个图层对应的整体趋势最接近上面黑色图层的变化趋势。注意，图层的长度与图层的趋势并没有关系。	
+                    <div class="tm-q-choice-container"  >
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q3_q5_a1.png" alt="Image" style="display:none;" id="Q3_q5_a1_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q5_a1" class="filled-in tm-checkbox" id="Q3_q5_a1_1" >
+										<span>图层1与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q5_a1" class="filled-in tm-checkbox" id="Q3_q5_a1_2" >
+										<span>图层2与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q5_a1" class="filled-in tm-checkbox" id="Q3_q5_a1_3" >
+										<span>图层3与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q5_a1" class="filled-in tm-checkbox" id="Q3_q5_a1_4" >
+										<span>图层4与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio43()" id="Q3_q5_a1_button">查看图片</button>
+							</div>
+                        </label>
+                    </div>
+				<script>
+						var res43="";
+						function disable_radio43(){
+							var myButton=document.getElementById("Q3_q5_a1_button");
+							var radio1=document.getElementById("Q3_q5_a1_1");
+							var radio2=document.getElementById("Q3_q5_a1_2");
+							var radio3=document.getElementById("Q3_q5_a1_3");
+							var radio4=document.getElementById("Q3_q5_a1_4");
+							var myImg=document.getElementById("Q3_q5_a1_Img");
+							if(myButton.innerHTML == "查看图片"){
+								myButton.innerHTML="确定选项";
+								second=0;
+								myImg.style="";
+							}else{
+								if(!radio1.disabled){
+									if(radio1.checked){
+										res43=radio1.id+","+second+"\n";
+									}else if(radio2.checked){
+										res43=radio2.id+","+second+"\n";
+									}else if(radio3.checked){
+										res43=radio3.id+","+second+"\n";
+									}else if(radio4.checked){
+										res43=radio4.id+","+second+"\n";
+									}
+									radio1.disabled=true;
+									radio2.disabled=true;
+									radio3.disabled=true;
+									radio4.disabled=true;
+									myImg.style="display:none;"
+									myButton.innerHTML="已提交"
+								}
+							}
+
+						}
+				</script>
+                    <div class="tm-q-choice-container"  >
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q3_q5_a3.png" alt="Image" style="display:none;" id="Q3_q5_a3_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q5_a3" class="filled-in tm-checkbox" id="Q3_q5_a3_1" >
+										<span>图层1与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q5_a3" class="filled-in tm-checkbox" id="Q3_q5_a3_2" >
+										<span>图层2与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q5_a3" class="filled-in tm-checkbox" id="Q3_q5_a3_3" >
+										<span>图层3与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q5_a3" class="filled-in tm-checkbox" id="Q3_q5_a3_4" >
+										<span>图层4与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio44()" id="Q3_q5_a3_button">查看图片</button>
+							</div>
+                        </label>
+                    </div>
+				<script>
+						var res44="";
+						function disable_radio44(){
+							var myButton=document.getElementById("Q3_q5_a3_button");
+							var radio1=document.getElementById("Q3_q5_a3_1");
+							var radio2=document.getElementById("Q3_q5_a3_2");
+							var radio3=document.getElementById("Q3_q5_a3_3");
+							var radio4=document.getElementById("Q3_q5_a3_4");
+							var myImg=document.getElementById("Q3_q5_a3_Img");
+							if(myButton.innerHTML == "查看图片"){
+								myButton.innerHTML="确定选项";
+								second=0;
+								myImg.style="";
+							}else{
+								if(!radio1.disabled){
+									if(radio1.checked){
+										res44=radio1.id+","+second+"\n";
+									}else if(radio2.checked){
+										res44=radio2.id+","+second+"\n";
+									}else if(radio3.checked){
+										res44=radio3.id+","+second+"\n";
+									}else if(radio4.checked){
+										res44=radio4.id+","+second+"\n";
+									}
+									radio1.disabled=true;
+									radio2.disabled=true;
+									radio3.disabled=true;
+									radio4.disabled=true;
+									myImg.style="display:none;"
+									myButton.innerHTML="已提交"
+								}
+							}
+
+						}
+				</script>
+                    <div class="tm-q-choice-container"  >
+                        <label class="tm-q-choice">
+                            <img src="/static/img/backups/Q3_q5_a2.png" alt="Image" style="display:none;" id="Q3_q5_a2_Img">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q5_a2" class="filled-in tm-checkbox" id="Q3_q5_a2_1" >
+										<span>图层1与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q5_a2" class="filled-in tm-checkbox" id="Q3_q5_a2_2" >
+										<span>图层2与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q5_a2" class="filled-in tm-checkbox" id="Q3_q5_a2_3" >
+										<span>图层3与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q3_q5_a2" class="filled-in tm-checkbox" id="Q3_q5_a2_4" >
+										<span>图层4与黑色图层变化趋势最接近</span>
+									</div>
+								</label>
+								<button type="button" class="btn btn-primary" onClick="disable_radio45()" id="Q3_q5_a2_button">查看图片</button>
+							</div>
+                        </label>
+                    </div>
+				<script>
+						var res45="";
+						function disable_radio45(){
+							var myButton=document.getElementById("Q3_q5_a2_button");
+							var radio1=document.getElementById("Q3_q5_a2_1");
+							var radio2=document.getElementById("Q3_q5_a2_2");
+							var radio3=document.getElementById("Q3_q5_a2_3");
+							var radio4=document.getElementById("Q3_q5_a2_4");
+							var myImg=document.getElementById("Q3_q5_a2_Img");
+							if(myButton.innerHTML == "查看图片"){
+								myButton.innerHTML="确定选项";
+								second=0;
+								myImg.style="";
+							}else{
+								if(!radio1.disabled){
+									if(radio1.checked){
+										res45=radio1.id+","+second+"\n";
+									}else if(radio2.checked){
+										res45=radio2.id+","+second+"\n";
+									}else if(radio3.checked){
+										res45=radio3.id+","+second+"\n";
+									}else if(radio4.checked){
+										res45=radio4.id+","+second+"\n";
+									}
+									radio1.disabled=true;
+									radio2.disabled=true;
+									radio3.disabled=true;
+									radio4.disabled=true;
+									myImg.style="display:none;"
+									myButton.innerHTML="已提交"
+								}
+							}
+
+						}
+				</script>				
+					</p>				
+
+					<!-- 第6个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题6</h2>
+                    <p>我们请您从两组图层的起始点中选出哪组图层<b>起始点的横向距离</b>最近。注意！此处只需要您判断<b>图层起始点在x轴方向上的距离</b>。如下图，请您判断A组：1、2两个图层起始点和B组：3、4两个两个图层起始点的横向距离哪个更近。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q4_q1_a1.png" alt="Image" style="display:none;" id="Q4_q1_a1_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q1_a1" class="filled-in tm-checkbox" id="Q4_q1_a1_1">
+										<span>1、2两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q1_a1" class="filled-in tm-checkbox"  id="Q4_q1_a1_2">
+										<span>3、4两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio46()" id="Q4_q1_a1_button">查看图片</button>
+								<script>
+									var res46="";
+									function disable_radio46(){
+										var myButton=document.getElementById("Q4_q1_a1_button");
+										var radio1=document.getElementById("Q4_q1_a1_1");
+										var radio2=document.getElementById("Q4_q1_a1_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q4_q1_a1_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res46=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res46=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>
+				<!-- 第7个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题7</h2>
+                    <p>我们请您从两组图层的起始点中选出哪组图层<b>起始点的横向距离</b>最近。注意！此处只需要您判断<b>图层起始点在x轴方向上的距离</b>。如下图，请您判断A组：1、2两个图层起始点和B组：3、4两个两个图层起始点的横向距离哪个更近。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q4_q2_a3.png" alt="Image" style="display:none;" id="Q4_q2_a3_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q2_a3" class="filled-in tm-checkbox" id="Q4_q2_a3_1">
+										<span>1、2两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q2_a3" class="filled-in tm-checkbox"  id="Q4_q2_a3_2">
+										<span>3、4两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio47()" id="Q4_q2_a3_button">查看图片</button>
+								<script>
+									var res47="";
+									function disable_radio47(){
+										var myButton=document.getElementById("Q4_q2_a3_button");
+										var radio1=document.getElementById("Q4_q2_a3_1");
+										var radio2=document.getElementById("Q4_q2_a3_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q4_q2_a3_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res47=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res47=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>
+				<!-- 第8个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题8</h2>
+                    <p>我们请您从两组图层的起始点中选出哪组图层<b>起始点的横向距离</b>最近。注意！此处只需要您判断<b>图层起始点在x轴方向上的距离</b>。如下图，请您判断A组：1、2两个图层起始点和B组：3、4两个两个图层起始点的横向距离哪个更近。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q4_q3_a2.png" alt="Image" style="display:none;" id="Q4_q3_a2_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q3_a2" class="filled-in tm-checkbox" id="Q4_q3_a2_1">
+										<span>1、2两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q3_a2" class="filled-in tm-checkbox"  id="Q4_q3_a2_2">
+										<span>3、4两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio48()" id="Q4_q3_a2_button">查看图片</button>
+								<script>
+									var res48="";
+									function disable_radio48(){
+										var myButton=document.getElementById("Q4_q3_a2_button");
+										var radio1=document.getElementById("Q4_q3_a2_1");
+										var radio2=document.getElementById("Q4_q3_a2_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q4_q3_a2_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res48=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res48=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>
+				<!-- 第9个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题9</h2>
+                    <p>我们请您从两组图层的起始点中选出哪组图层<b>起始点的横向距离</b>最近。注意！此处只需要您判断<b>图层起始点在x轴方向上的距离</b>。如下图，请您判断A组：1、2两个图层起始点和B组：3、4两个两个图层起始点的横向距离哪个更近。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q4_q1_a2.png" alt="Image" style="display:none;" id="Q4_q1_a2_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q1_a2" class="filled-in tm-checkbox" id="Q4_q1_a2_1">
+										<span>1、2两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q1_a2" class="filled-in tm-checkbox"  id="Q4_q1_a2_2">
+										<span>3、4两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio49()" id="Q4_q1_a2_button">查看图片</button>
+								<script>
+									var res49="";
+									function disable_radio49(){
+										var myButton=document.getElementById("Q4_q1_a2_button");
+										var radio1=document.getElementById("Q4_q1_a2_1");
+										var radio2=document.getElementById("Q4_q1_a2_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q4_q1_a2_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res49=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res49=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>
+				<!-- 第10个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题10</h2>
+                    <p>我们请您从两组图层的起始点中选出哪组图层<b>起始点的横向距离</b>最近。注意！此处只需要您判断<b>图层起始点在x轴方向上的距离</b>。如下图，请您判断A组：1、2两个图层起始点和B组：3、4两个两个图层起始点的横向距离哪个更近。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q4_q2_a2.png" alt="Image" style="display:none;" id="Q4_q2_a2_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q2_a2" class="filled-in tm-checkbox" id="Q4_q2_a2_1">
+										<span>1、2两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q2_a2" class="filled-in tm-checkbox"  id="Q4_q2_a2_2">
+										<span>3、4两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio50()" id="Q4_q2_a2_button">查看图片</button>
+								<script>
+									var res50="";
+									function disable_radio50(){
+										var myButton=document.getElementById("Q4_q2_a2_button");
+										var radio1=document.getElementById("Q4_q2_a2_1");
+										var radio2=document.getElementById("Q4_q2_a2_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q4_q2_a2_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res50=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res50=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>
+				<!-- 第11个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题11</h2>
+                    <p>我们请您从两组图层的起始点中选出哪组图层<b>起始点的横向距离</b>最近。注意！此处只需要您判断<b>图层起始点在x轴方向上的距离</b>。如下图，请您判断A组：1、2两个图层起始点和B组：3、4两个两个图层起始点的横向距离哪个更近。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q4_q1_a3.png" alt="Image" style="display:none;" id="Q4_q1_a3_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q1_a3" class="filled-in tm-checkbox" id="Q4_q1_a3_1">
+										<span>1、2两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q1_a3" class="filled-in tm-checkbox"  id="Q4_q1_a3_2">
+										<span>3、4两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio51()" id="Q4_q1_a3_button">查看图片</button>
+								<script>
+									var res51="";
+									function disable_radio51(){
+										var myButton=document.getElementById("Q4_q1_a3_button");
+										var radio1=document.getElementById("Q4_q1_a3_1");
+										var radio2=document.getElementById("Q4_q1_a3_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q4_q1_a3_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res51=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res51=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>
+				<!-- 第12个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题12</h2>
+                    <p>我们请您从两组图层的起始点中选出哪组图层<b>起始点的横向距离</b>最近。注意！此处只需要您判断<b>图层起始点在x轴方向上的距离</b>。如下图，请您判断A组：1、2两个图层起始点和B组：3、4两个两个图层起始点的横向距离哪个更近。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q4_q2_a1.png" alt="Image" style="display:none;" id="Q4_q2_a1_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q2_a1" class="filled-in tm-checkbox" id="Q4_q2_a1_1">
+										<span>1、2两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q2_a1" class="filled-in tm-checkbox"  id="Q4_q2_a1_2">
+										<span>3、4两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio52()" id="Q4_q2_a1_button">查看图片</button>
+								<script>
+									var res52="";
+									function disable_radio52(){
+										var myButton=document.getElementById("Q4_q2_a1_button");
+										var radio1=document.getElementById("Q4_q2_a1_1");
+										var radio2=document.getElementById("Q4_q2_a1_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q4_q2_a1_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res52=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res52=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>
+				<!-- 第13个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题13</h2>
+                    <p>我们请您从两组图层的起始点中选出哪组图层<b>起始点的横向距离</b>最近。注意！此处只需要您判断<b>图层起始点在x轴方向上的距离</b>。如下图，请您判断A组：1、2两个图层起始点和B组：3、4两个两个图层起始点的横向距离哪个更近。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q4_q3_a1.png" alt="Image" style="display:none;" id="Q4_q3_a1_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q3_a1" class="filled-in tm-checkbox" id="Q4_q3_a1_1">
+										<span>1、2两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q3_a1" class="filled-in tm-checkbox"  id="Q4_q3_a1_2">
+										<span>3、4两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio53()" id="Q4_q3_a1_button">查看图片</button>
+								<script>
+									var res53="";
+									function disable_radio53(){
+										var myButton=document.getElementById("Q4_q3_a1_button");
+										var radio1=document.getElementById("Q4_q3_a1_1");
+										var radio2=document.getElementById("Q4_q3_a1_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q4_q3_a1_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res53=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res53=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>
+				<!-- 第14个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题14</h2>
+                    <p>我们请您从两组图层的起始点中选出哪组图层<b>起始点的横向距离</b>最近。注意！此处只需要您判断<b>图层起始点在x轴方向上的距离</b>。如下图，请您判断A组：1、2两个图层起始点和B组：3、4两个两个图层起始点的横向距离哪个更近。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q4_q4_a2.png" alt="Image" style="display:none;" id="Q4_q4_a2_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q4_a2" class="filled-in tm-checkbox" id="Q4_q4_a2_1">
+										<span>1、2两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q4_a2" class="filled-in tm-checkbox"  id="Q4_q4_a2_2">
+										<span>3、4两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio54()" id="Q4_q4_a2_button">查看图片</button>
+								<script>
+									var res54="";
+									function disable_radio54(){
+										var myButton=document.getElementById("Q4_q4_a2_button");
+										var radio1=document.getElementById("Q4_q4_a2_1");
+										var radio2=document.getElementById("Q4_q4_a2_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q4_q4_a2_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res54=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res54=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>
+				<!-- 第15个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题15</h2>
+                    <p>我们请您从两组图层的起始点中选出哪组图层<b>起始点的横向距离</b>最近。注意！此处只需要您判断<b>图层起始点在x轴方向上的距离</b>。如下图，请您判断A组：1、2两个图层起始点和B组：3、4两个两个图层起始点的横向距离哪个更近。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q4_q5_a3.png" alt="Image" style="display:none;" id="Q4_q5_a3_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q5_a3" class="filled-in tm-checkbox" id="Q4_q5_a3_1">
+										<span>1、2两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q5_a3" class="filled-in tm-checkbox"  id="Q4_q5_a3_2">
+										<span>3、4两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio55()" id="Q4_q5_a3_button">查看图片</button>
+								<script>
+									var res55="";
+									function disable_radio55(){
+										var myButton=document.getElementById("Q4_q5_a3_button");
+										var radio1=document.getElementById("Q4_q5_a3_1");
+										var radio2=document.getElementById("Q4_q5_a3_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q4_q5_a3_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res55=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res55=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>
+				<!-- 第16个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题16</h2>
+                    <p>我们请您从两组图层的起始点中选出哪组图层<b>起始点的横向距离</b>最近。注意！此处只需要您判断<b>图层起始点在x轴方向上的距离</b>。如下图，请您判断A组：1、2两个图层起始点和B组：3、4两个两个图层起始点的横向距离哪个更近。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q4_q5_a1.png" alt="Image" style="display:none;" id="Q4_q5_a1_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q5_a1" class="filled-in tm-checkbox" id="Q4_q5_a1_1">
+										<span>1、2两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q5_a1" class="filled-in tm-checkbox"  id="Q4_q5_a1_2">
+										<span>3、4两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio56()" id="Q4_q5_a1_button">查看图片</button>
+								<script>
+									var res56="";
+									function disable_radio56(){
+										var myButton=document.getElementById("Q4_q5_a1_button");
+										var radio1=document.getElementById("Q4_q5_a1_1");
+										var radio2=document.getElementById("Q4_q5_a1_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q4_q5_a1_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res56=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res56=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>
+				<!-- 第17个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题17</h2>
+                    <p>我们请您从两组图层的起始点中选出哪组图层<b>起始点的横向距离</b>最近。注意！此处只需要您判断<b>图层起始点在x轴方向上的距离</b>。如下图，请您判断A组：1、2两个图层起始点和B组：3、4两个两个图层起始点的横向距离哪个更近。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q4_q3_a3.png" alt="Image" style="display:none;" id="Q4_q3_a3_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q3_a3" class="filled-in tm-checkbox" id="Q4_q3_a3_1">
+										<span>1、2两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q3_a3" class="filled-in tm-checkbox"  id="Q4_q3_a3_2">
+										<span>3、4两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio57()" id="Q4_q3_a3_button">查看图片</button>
+								<script>
+									var res57="";
+									function disable_radio57(){
+										var myButton=document.getElementById("Q4_q3_a3_button");
+										var radio1=document.getElementById("Q4_q3_a3_1");
+										var radio2=document.getElementById("Q4_q3_a3_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q4_q3_a3_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res57=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res57=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>
+				<!-- 第18个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题18</h2>
+                    <p>我们请您从两组图层的起始点中选出哪组图层<b>起始点的横向距离</b>最近。注意！此处只需要您判断<b>图层起始点在x轴方向上的距离</b>。如下图，请您判断A组：1、2两个图层起始点和B组：3、4两个两个图层起始点的横向距离哪个更近。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q4_q4_a3.png" alt="Image" style="display:none;" id="Q4_q4_a3_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q4_a3" class="filled-in tm-checkbox" id="Q4_q4_a3_1">
+										<span>1、2两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q4_a3" class="filled-in tm-checkbox"  id="Q4_q4_a3_2">
+										<span>3、4两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio58()" id="Q4_q4_a3_button">查看图片</button>
+								<script>
+									var res58="";
+									function disable_radio58(){
+										var myButton=document.getElementById("Q4_q4_a3_button");
+										var radio1=document.getElementById("Q4_q4_a3_1");
+										var radio2=document.getElementById("Q4_q4_a3_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q4_q4_a3_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res58=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res58=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>
+				<!-- 第19个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题19</h2>
+                    <p>我们请您从两组图层的起始点中选出哪组图层<b>起始点的横向距离</b>最近。注意！此处只需要您判断<b>图层起始点在x轴方向上的距离</b>。如下图，请您判断A组：1、2两个图层起始点和B组：3、4两个两个图层起始点的横向距离哪个更近。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q4_q5_a2.png" alt="Image" style="display:none;" id="Q4_q5_a2_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q5_a2" class="filled-in tm-checkbox" id="Q4_q5_a2_1">
+										<span>1、2两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q5_a2" class="filled-in tm-checkbox"  id="Q4_q5_a2_2">
+										<span>3、4两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio59()" id="Q4_q5_a2_button">查看图片</button>
+								<script>
+									var res59="";
+									function disable_radio59(){
+										var myButton=document.getElementById("Q4_q5_a2_button");
+										var radio1=document.getElementById("Q4_q5_a2_1");
+										var radio2=document.getElementById("Q4_q5_a2_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q4_q5_a2_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res59=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res59=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>
+				<!-- 第20个问题 -->
+                <div class="col-12">
+				<hr>
+                    <h2 class="tm-question-header">问题20</h2>
+                    <p>我们请您从两组图层的起始点中选出哪组图层<b>起始点的横向距离</b>最近。注意！此处只需要您判断<b>图层起始点在x轴方向上的距离</b>。如下图，请您判断A组：1、2两个图层起始点和B组：3、4两个两个图层起始点的横向距离哪个更近。</p>
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/Q4_q4_a1.png" alt="Image" style="display:none;" id="Q4_q4_a1_Img">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q4_a1" class="filled-in tm-checkbox" id="Q4_q4_a1_1">
+										<span>1、2两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="Q4_q4_a1" class="filled-in tm-checkbox"  id="Q4_q4_a1_2">
+										<span>3、4两个图层起始点的横向距离更近</span>
+									</div>
+								</label>
+
+									<button type="button" class="btn btn-primary" onClick="disable_radio60()" id="Q4_q4_a1_button">查看图片</button>
+								<script>
+									var res60="";
+									function disable_radio60(){
+										var myButton=document.getElementById("Q4_q4_a1_button");
+										var radio1=document.getElementById("Q4_q4_a1_1");
+										var radio2=document.getElementById("Q4_q4_a1_2");
+										if(myButton.innerHTML == "查看图片"){
+											myButton.innerHTML="确定选项";
+											second=0;
+											var myImg=document.getElementById("Q4_q4_a1_Img");
+											myImg.style="";
+										}else{
+											if(!radio1.disabled){
+												if(radio1.checked){
+													res60=radio1.id+","+second+"\n";
+												}else if(radio2.checked){
+													res60=radio2.id+","+second+"\n";
+												}
+												radio1.disabled=true;
+												radio2.disabled=true;
+											}
+										}
+
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>
+                </div>
+			
+				
+
+				
+				
+				
+				
+				
+				
+                <div class="col-12 text-center tm-submit-container">
+                    <button type="submit" class="btn btn-primary tm-btn-submit" onclick="ok()">提交问卷</button>
+                </div>
+            </div> <!-- row -->
+        </form>
+    </div>
+
+</body>
+</html>

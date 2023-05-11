@@ -1,0 +1,1481 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>问卷主页</title>
+
+<!-- load CSS -->
+<!-- Google web font "Open Sans" -->
+<link rel="stylesheet" href="/static/css/materialize.min.css">
+<!-- https://materializecss.com -->
+<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+<!-- https://getbootstrap.com/ -->
+<link rel="stylesheet" href="/static/css/all.min.css">
+<!-- https://fontawesome.com/ -->
+<link rel="stylesheet" href="/static/css/templatemo-style.css">
+<!-- Template Mo style -->
+<link rel="icon" href="/static/img/icon.png"/>
+
+<script src="/static/js/jquery-3.3.1.min.js"></script>
+<script src="/static/js/materialize.min.js"></script>
+<script src="/static/js/FileSaver.js"></script>
+
+<script>
+function ok(){
+	jres1="";
+	jres2="";
+	jres3="";
+	jjres1="";
+	jjres2="";
+	jjres3="";
+	jjjres1="";
+	jjjres2="";
+	jjjres3="";
+	disable_radio1();
+	disable_radio2();
+	disable_radio3();
+	disable_radio7();
+	disable_radio8();
+	disable_radio9();
+	disable_radio10();
+	disable_radio11();
+	disable_radio12();	
+	jres11="";
+	jres22="";
+	jres33="";
+	jjres11="";
+	jjres22="";
+	jjres33="";
+	jjjres11="";
+	jjjres22="";
+	jjjres33="";
+	disable_radio();
+	disable_radio22();
+	disable_radio33();
+	disable_radio77();
+	disable_radio88();
+	disable_radio99();
+	disable_radio100();
+	disable_radio111();
+	disable_radio122();
+	var maleval=document.getElementById("inputmale");
+	var femaleval=document.getElementById("inputfemale");	
+	var ageval=document.getElementById("inputage");
+	if (maleval.checked){
+		content="male"+","+ageval.value+","+jres1+jres2+jres3+jjres1+jjres2+jjres3+jjjres1+jjjres2+jjjres3+jres11+jres22+jres33+jjres11+jjres22+jjres33+jjjres11+jjjres22+jjjres33+'\n';
+	}else{
+		content="female"+","+ageval.value+","+jres1+jres2+jres3+jjres1+jjres2+jjres3+jjjres1+jjjres2+jjjres3+jres11+jres22+jres33+jjres11+jjres22+jjres33+jjjres11+jjjres22+jjjres33+'\n';
+	}
+    var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
+    saveAs(blob, "base.txt");
+}
+</script>	
+	
+	
+<title>问卷主页</title>
+</head>
+
+<body>
+	
+	<div class="adcenter"></div>    
+	<div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-7">
+                <h2 class="tm-site-name">调&nbsp;查&nbsp;问&nbsp;卷</h2>
+            </div>
+            <div class="col-sm-12 col-md-5 mt-md-0 mt-5">
+                <div class="tm-site-header-right-col">
+                    <a href="https://baidu.com" class="btn btn-primary"　style="line-height: 100px">联系我们</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="tm-intro">
+                <div class="col-sm-12 col-md-8 mb-md-0 mb-4 tm-intro-left">
+                    <p class="mb-0">我的实验是为了。。。。，您需要。。。。。。
+					整个实验期间，请您只使用肉眼完成下面的任务。</p>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <em>
+                        <p class="tm-highlight">“Your Opinion Matters”</p>
+                    </em>
+                </div>
+            </div>
+        </div>
+
+        <form action="question1.html" method="post">              
+                <div class="col-12 tm-respondent-info">
+                	<hr>
+                	<h2 class="tm-question-header tm-question-header-mt">首先请填写以下基本信息。</h2>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <div class="tm-choice-mt">                               
+								<label for="inputgender">你的性别</label>
+                                <label class="tm-q-choice">
+                                    <input type="radio" name="gender" id="inputmale" class="with-gap" value="male">
+                                    <span>男</span>
+                                </label>
+                                <label class="tm-q-choice tm-choice-ml">
+                                    <input type="radio" name="gender" id="inputfemale" class="with-gap" value="female">
+                                    <span>女</span>
+                                </label>
+                            	</div>
+                            </div>
+                        </div>
+						<div class="col-md-6 col-lg-4">											
+						<div class="form-group">
+                                <label for="inputage">你的年龄：</label>
+                                <input type="age" class="form-control browser-default" id="inputage" name="age">
+                            </div>
+						</div>
+                    </div>
+                </div>
+                <div class="col-12 tm-respondent-info">	
+	             <hr>
+                	<h2 class="tm-question-header tm-question-header-mt">审美偏好评估</h2>
+					<p class="mb-0">在开始答题前，为了了解您的审美偏好，首先请您从<b>美观性</b>以及<b>可读性</b>两个角度对以下图片进行打分（1-7分,其中1分最低，7分最高）。对于<b>美观性</b>，您只需考虑您的直观感受。对于<b>可读性</b>，您需要考虑包括图层厚度，图层变化趋势已经图层相对位置等问题。</p>
+					
+						
+					
+					
+					<!-- 第1个问题 -->
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/J4_a1.png" alt="Image">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								美观性：
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a1" class="filled-in tm-checkbox" id="J4_a1_1">
+										<span>1</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a1" class="filled-in tm-checkbox"  id="J4_a1_2">
+										<span>2</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a1" class="filled-in tm-checkbox"  id="J4_a1_3">
+										<span>3</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a1" class="filled-in tm-checkbox" id="J4_a1_4">
+										<span>4</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a1" class="filled-in tm-checkbox"  id="J4_a1_5">
+										<span>5</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a1" class="filled-in tm-checkbox"  id="J4_a1_6">
+										<span>6</span>
+									</div>
+								</label>	
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a1" class="filled-in tm-checkbox"  id="J4_a1_7">
+										<span>7</span>
+									</div>
+								</label>
+								<script>
+									function disable_radio1(){
+										var radio1=document.getElementById("J4_a1_1");
+										var radio2=document.getElementById("J4_a1_2");
+										var radio3=document.getElementById("J4_a1_3");
+										var radio4=document.getElementById("J4_a1_4");
+										var radio5=document.getElementById("J4_a1_5");
+										var radio6=document.getElementById("J4_a1_6");
+										var radio7=document.getElementById("J4_a1_7");
+										if(radio1.checked){
+											jres1=radio1.id+"," ;
+										}else if(radio2.checked){
+											jres1=radio2.id+"," ;
+										}else if(radio3.checked){
+											jres1=radio3.id+"," ;
+										}else if(radio4.checked){
+											jres1=radio4.id+"," ;
+										}else if(radio5.checked){
+											jres1=radio5.id+"," ;
+										}else if(radio6.checked){
+											jres1=radio6.id+"," ;
+										}else if(radio7.checked){
+											jres1=radio7.id+"," ;
+										}
+									}
+								</script>
+							<br/>可读性：
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a11" class="filled-in tm-checkbox" id="J4_a1_11">
+										<span>1</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a11" class="filled-in tm-checkbox"  id="J4_a1_22">
+										<span>2</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a11" class="filled-in tm-checkbox"  id="J4_a1_33">
+										<span>3</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a11" class="filled-in tm-checkbox" id="J4_a1_44">
+										<span>4</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a11" class="filled-in tm-checkbox"  id="J4_a1_55">
+										<span>5</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a11" class="filled-in tm-checkbox"  id="J4_a1_66">
+										<span>6</span>
+									</div>
+								</label>	
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a11" class="filled-in tm-checkbox"  id="J4_a1_77">
+										<span>7</span>
+									</div>
+								</label>
+								<script>
+									function disable_radio(){
+										var radio1=document.getElementById("J4_a1_11");
+										var radio2=document.getElementById("J4_a1_22");
+										var radio3=document.getElementById("J4_a1_33");
+										var radio4=document.getElementById("J4_a1_44");
+										var radio5=document.getElementById("J4_a1_55");
+										var radio6=document.getElementById("J4_a1_66");
+										var radio7=document.getElementById("J4_a1_77");
+										if(radio1.checked){
+											jres11=radio1.id+"," ;
+										}else if(radio2.checked){
+											jres11=radio2.id+"," ;
+										}else if(radio3.checked){
+											jres11=radio3.id+"," ;
+										}else if(radio4.checked){
+											jres11=radio4.id+"," ;
+										}else if(radio5.checked){
+											jres11=radio5.id+"," ;
+										}else if(radio6.checked){
+											jres11=radio6.id+"," ;
+										}else if(radio7.checked){
+											jres11=radio7.id+"," ;
+										}
+									}
+								</script>
+								</div>
+                        </label>
+					</div>					
+					<!-- 第2个问题 -->
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/J4_a2.png" alt="Image">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								美观性：
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a2" class="filled-in tm-checkbox" id="J4_a2_1">
+										<span>1</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a2" class="filled-in tm-checkbox"  id="J4_a2_2">
+										<span>2</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a2" class="filled-in tm-checkbox"  id="J4_a2_3">
+										<span>3</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a2" class="filled-in tm-checkbox" id="J4_a2_4">
+										<span>4</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a2" class="filled-in tm-checkbox"  id="J4_a2_5">
+										<span>5</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a2" class="filled-in tm-checkbox"  id="J4_a2_6">
+										<span>6</span>
+									</div>
+								</label>	
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a2" class="filled-in tm-checkbox"  id="J4_a2_7">
+										<span>7</span>
+									</div>
+								</label>
+								<script>
+									function disable_radio2(){
+										var radio1=document.getElementById("J4_a2_1");
+										var radio2=document.getElementById("J4_a2_2");
+										var radio3=document.getElementById("J4_a2_3");
+										var radio4=document.getElementById("J4_a2_4");
+										var radio5=document.getElementById("J4_a2_5");
+										var radio6=document.getElementById("J4_a2_6");
+										var radio7=document.getElementById("J4_a2_7");
+										if(radio1.checked){
+											jres2=radio1.id+"," ;
+										}else if(radio2.checked){
+											jres2=radio2.id+"," ;
+										}else if(radio3.checked){
+											jres2=radio3.id+"," ;
+										}else if(radio4.checked){
+											jres2=radio4.id+"," ;
+										}else if(radio5.checked){
+											jres2=radio5.id+"," ;
+										}else if(radio6.checked){
+											jres2=radio6.id+"," ;
+										}else if(radio7.checked){
+											jres2=radio7.id+"," ;
+										}																			
+									}
+								</script>
+
+								<br/>可读性：
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a22" class="filled-in tm-checkbox" id="J4_a2_11">
+										<span>1</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a22" class="filled-in tm-checkbox"  id="J4_a2_22">
+										<span>2</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a22" class="filled-in tm-checkbox"  id="J4_a2_33">
+										<span>3</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a22" class="filled-in tm-checkbox" id="J4_a2_44">
+										<span>4</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a22" class="filled-in tm-checkbox"  id="J4_a2_55">
+										<span>5</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a22" class="filled-in tm-checkbox"  id="J4_a2_66">
+										<span>6</span>
+									</div>
+								</label>	
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a22" class="filled-in tm-checkbox"  id="J4_a2_77">
+										<span>7</span>
+									</div>
+								</label>
+								<script>
+									function disable_radio22(){
+										var radio1=document.getElementById("J4_a2_11");
+										var radio2=document.getElementById("J4_a2_22");
+										var radio3=document.getElementById("J4_a2_33");
+										var radio4=document.getElementById("J4_a2_44");
+										var radio5=document.getElementById("J4_a2_55");
+										var radio6=document.getElementById("J4_a2_66");
+										var radio7=document.getElementById("J4_a2_77");
+										if(radio1.checked){
+											jres22=radio1.id+"," ;
+										}else if(radio2.checked){
+											jres22=radio2.id+"," ;
+										}else if(radio3.checked){
+											jres22=radio3.id+"," ;
+										}else if(radio4.checked){
+											jres22=radio4.id+"," ;
+										}else if(radio5.checked){
+											jres22=radio5.id+"," ;
+										}else if(radio6.checked){
+											jres22=radio6.id+"," ;
+										}else if(radio7.checked){
+											jres22=radio7.id+"," ;
+										}																			
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>					
+					<!-- 第3个问题 -->
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/J4_a3.png" alt="Image">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								美观性
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a3" class="filled-in tm-checkbox" id="J4_a3_1">
+										<span>1</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J4_a3" class="filled-in tm-checkbox"  id="J4_a3_2">
+										<span>2</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a3" class="filled-in tm-checkbox"  id="J4_a3_3">
+										<span>3</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a3" class="filled-in tm-checkbox" id="J4_a3_4">
+										<span>4</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a3" class="filled-in tm-checkbox"  id="J4_a3_5">
+										<span>5</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a3" class="filled-in tm-checkbox"  id="J4_a3_6">
+										<span>6</span>
+									</div>
+								</label>	
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a3" class="filled-in tm-checkbox"  id="J4_a3_7">
+										<span>7</span>
+									</div>
+								</label>
+								<script>
+									function disable_radio3(){
+										var radio1=document.getElementById("J4_a3_1");
+										var radio2=document.getElementById("J4_a3_2");
+										var radio3=document.getElementById("J4_a3_3");
+										var radio4=document.getElementById("J4_a3_4");
+										var radio5=document.getElementById("J4_a3_5");
+										var radio6=document.getElementById("J4_a3_6");
+										var radio7=document.getElementById("J4_a3_7");
+										if(radio1.checked){
+											jres3=radio1.id+"," ;
+										}else if(radio2.checked){
+											jres3=radio2.id+"," ;
+										}else if(radio3.checked){
+											jres3=radio3.id+"," ;
+										}else if(radio4.checked){
+											jres3=radio4.id+"," ;
+										}else if(radio5.checked){
+											jres3=radio5.id+"," ;
+										}else if(radio6.checked){
+											jres3=radio6.id+"," ;
+										}else if(radio7.checked){
+											jres3=radio7.id+"," ;
+										}																			
+									}
+								</script>
+
+								<br/>可读性：<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a33" class="filled-in tm-checkbox" id="J4_a3_11">
+										<span>1</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J4_a33" class="filled-in tm-checkbox"  id="J4_a3_22">
+										<span>2</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a33" class="filled-in tm-checkbox"  id="J4_a3_33">
+										<span>3</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a33" class="filled-in tm-checkbox" id="J4_a3_44">
+										<span>4</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a33" class="filled-in tm-checkbox"  id="J4_a3_55">
+										<span>5</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a33" class="filled-in tm-checkbox"  id="J4_a3_66">
+										<span>6</span>
+									</div>
+								</label>	
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J4_a33" class="filled-in tm-checkbox"  id="J4_a3_77">
+										<span>7</span>
+									</div>
+								</label>
+								<script>
+									function disable_radio33(){
+										var radio1=document.getElementById("J4_a3_11");
+										var radio2=document.getElementById("J4_a3_22");
+										var radio3=document.getElementById("J4_a3_33");
+										var radio4=document.getElementById("J4_a3_44");
+										var radio5=document.getElementById("J4_a3_55");
+										var radio6=document.getElementById("J4_a3_66");
+										var radio7=document.getElementById("J4_a3_77");
+										if(radio1.checked){
+											jres33=radio1.id+"," ;
+										}else if(radio2.checked){
+											jres33=radio2.id+"," ;
+										}else if(radio3.checked){
+											jres33=radio3.id+"," ;
+										}else if(radio4.checked){
+											jres33=radio4.id+"," ;
+										}else if(radio5.checked){
+											jres33=radio5.id+"," ;
+										}else if(radio6.checked){
+											jres33=radio6.id+"," ;
+										}else if(radio7.checked){
+											jres33=radio7.id+"," ;
+										}																			
+									}
+								</script>
+								</div>
+						</label>
+                    </div>						
+					
+					<!-- 第1个问题 -->
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/J5_a1.png" alt="Image">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								美观性：
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a1" class="filled-in tm-checkbox" id="J5_a1_1">
+										<span>1</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J5_a1" class="filled-in tm-checkbox"  id="J5_a1_2">
+										<span>2</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J5_a1" class="filled-in tm-checkbox"  id="J5_a1_3">
+										<span>3</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a1"  class="filled-in tm-checkbox" id="J5_a1_4">
+										<span>4</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a1"  class="filled-in tm-checkbox"  id="J5_a1_5">
+										<span>5</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J5_a1" class="filled-in tm-checkbox"  id="J5_a1_6">
+										<span>6</span>
+									</div>
+								</label>	
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a1"  class="filled-in tm-checkbox"  id="J5_a1_7">
+										<span>7</span>
+									</div>
+								</label>
+								<script>
+									function disable_radio7(){
+										var radio1=document.getElementById("J5_a1_1");
+										var radio2=document.getElementById("J5_a1_2");
+										var radio3=document.getElementById("J5_a1_3");
+										var radio4=document.getElementById("J5_a1_4");
+										var radio5=document.getElementById("J5_a1_5");
+										var radio6=document.getElementById("J5_a1_6");
+										var radio7=document.getElementById("J5_a1_7");
+										if(radio1.checked){
+											jjres1=radio1.id+"," ;
+										}else if(radio2.checked){
+											jjres1=radio2.id+"," ;
+										}else if(radio3.checked){
+											jjres1=radio3.id+"," ;
+										}else if(radio4.checked){
+											jjres1=radio4.id+"," ;
+										}else if(radio5.checked){
+											jjres1=radio5.id+"," ;
+										}else if(radio6.checked){
+											jjres1=radio6.id+"," ;
+										}else if(radio7.checked){
+											jjres1=radio7.id+"," ;
+										}																			
+									}
+								</script>
+															<br/>	可读性：
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a11" class="filled-in tm-checkbox" id="J5_a1_11">
+										<span>1</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J5_a11" class="filled-in tm-checkbox"  id="J5_a1_22">
+										<span>2</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J5_a11" class="filled-in tm-checkbox"  id="J5_a1_33">
+										<span>3</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a11"  class="filled-in tm-checkbox" id="J5_a1_44">
+										<span>4</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a11"  class="filled-in tm-checkbox"  id="J5_a1_55">
+										<span>5</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J5_a11" class="filled-in tm-checkbox"  id="J5_a1_66">
+										<span>6</span>
+									</div>
+								</label>	
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a11"  class="filled-in tm-checkbox"  id="J5_a1_77">
+										<span>7</span>
+									</div>
+								</label>
+								<script>
+									function disable_radio77(){
+										var radio1=document.getElementById("J5_a1_11");
+										var radio2=document.getElementById("J5_a1_22");
+										var radio3=document.getElementById("J5_a1_33");
+										var radio4=document.getElementById("J5_a1_44");
+										var radio5=document.getElementById("J5_a1_55");
+										var radio6=document.getElementById("J5_a1_66");
+										var radio7=document.getElementById("J5_a1_77");
+										if(radio1.checked){
+											jjres11=radio1.id+"," ;
+										}else if(radio2.checked){
+											jjres11=radio2.id+"," ;
+										}else if(radio3.checked){
+											jjres11=radio3.id+"," ;
+										}else if(radio4.checked){
+											jjres11=radio4.id+"," ;
+										}else if(radio5.checked){
+											jjres11=radio5.id+"," ;
+										}else if(radio6.checked){
+											jjres11=radio6.id+"," ;
+										}else if(radio7.checked){
+											jjres11=radio7.id+"," ;
+										}																			
+									}
+								</script>
+								</div>
+                        </label>
+                    </div>					
+					<!-- 第2个问题 -->
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/J5_a2.png" alt="Image">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								美观性：
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a2"  class="filled-in tm-checkbox" id="J5_a2_1">
+										<span>1</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a2"  class="filled-in tm-checkbox"  id="J5_a2_2">
+										<span>2</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J5_a2" class="filled-in tm-checkbox"  id="J5_a2_3">
+										<span>3</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J5_a2" class="filled-in tm-checkbox" id="J5_a2_4">
+										<span>4</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a2"  class="filled-in tm-checkbox"  id="J5_a2_5">
+										<span>5</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a2"  class="filled-in tm-checkbox"  id="J5_a2_6">
+										<span>6</span>
+									</div>
+								</label>	
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a2"  class="filled-in tm-checkbox"  id="J5_a2_7">
+										<span>7</span>
+									</div>
+								</label>
+								<script>
+									function disable_radio8(){
+										var radio1=document.getElementById("J5_a2_1");
+										var radio2=document.getElementById("J5_a2_2");
+										var radio3=document.getElementById("J5_a2_3");
+										var radio4=document.getElementById("J5_a2_4");
+										var radio5=document.getElementById("J5_a2_5");
+										var radio6=document.getElementById("J5_a2_6");
+										var radio7=document.getElementById("J5_a2_7");
+										if(radio1.checked){
+											jjres2=radio1.id+"," ;
+										}else if(radio2.checked){
+											jjres2=radio2.id+"," ;
+										}else if(radio3.checked){
+											jjres2=radio3.id+"," ;
+										}else if(radio4.checked){
+											jjres2=radio4.id+"," ;
+										}else if(radio5.checked){
+											jjres2=radio5.id+"," ;
+										}else if(radio6.checked){
+											jjres2=radio6.id+"," ;
+										}else if(radio7.checked){
+											jjres2=radio7.id+"," ;
+										}																			
+									}
+								</script>
+															<br/>可读性：
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a22"  class="filled-in tm-checkbox" id="J5_a2_11">
+										<span>1</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a22"  class="filled-in tm-checkbox"  id="J5_a2_22">
+										<span>2</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J5_a22" class="filled-in tm-checkbox"  id="J5_a2_33">
+										<span>3</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J5_a22" class="filled-in tm-checkbox" id="J5_a2_44">
+										<span>4</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a22"  class="filled-in tm-checkbox"  id="J5_a2_55">
+										<span>5</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a22"  class="filled-in tm-checkbox"  id="J5_a2_66">
+										<span>6</span>
+									</div>
+								</label>	
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a22"  class="filled-in tm-checkbox"  id="J5_a2_77">
+										<span>7</span>
+									</div>
+								</label>
+								<script>
+									function disable_radio88(){
+										var radio1=document.getElementById("J5_a2_11");
+										var radio2=document.getElementById("J5_a2_22");
+										var radio3=document.getElementById("J5_a2_33");
+										var radio4=document.getElementById("J5_a2_44");
+										var radio5=document.getElementById("J5_a2_55");
+										var radio6=document.getElementById("J5_a2_66");
+										var radio7=document.getElementById("J5_a2_77");
+										if(radio1.checked){
+											jjres22=radio1.id+"," ;
+										}else if(radio2.checked){
+											jjres22=radio2.id+"," ;
+										}else if(radio3.checked){
+											jjres22=radio3.id+"," ;
+										}else if(radio4.checked){
+											jjres22=radio4.id+"," ;
+										}else if(radio5.checked){
+											jjres22=radio5.id+"," ;
+										}else if(radio6.checked){
+											jjres22=radio6.id+"," ;
+										}else if(radio7.checked){
+											jjres22=radio7.id+"," ;
+										}																			
+									}
+								</script>
+
+								</div>
+                        </label>
+                    </div>					
+					<!-- 第3个问题 -->
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/J5_a3.png" alt="Image">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								美观性：
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a3"  class="filled-in tm-checkbox" id="J5_a3_1">
+										<span>1</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J5_a3" class="filled-in tm-checkbox"  id="J5_a3_2">
+										<span>2</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a3"  class="filled-in tm-checkbox"  id="J5_a3_3">
+										<span>3</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a3"  class="filled-in tm-checkbox" id="J5_a3_4">
+										<span>4</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a3"  class="filled-in tm-checkbox"  id="J5_a3_5">
+										<span>5</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J5_a3" class="filled-in tm-checkbox"  id="J5_a3_6">
+										<span>6</span>
+									</div>
+								</label>	
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J5_a3" class="filled-in tm-checkbox"  id="J5_a3_7">
+										<span>7</span>
+									</div>
+								</label>
+								<script>
+									function disable_radio9(){
+										var radio1=document.getElementById("J5_a3_1");
+										var radio2=document.getElementById("J5_a3_2");
+										var radio3=document.getElementById("J5_a3_3");
+										var radio4=document.getElementById("J5_a3_4");
+										var radio5=document.getElementById("J5_a3_5");
+										var radio6=document.getElementById("J5_a3_6");
+										var radio7=document.getElementById("J5_a3_7");
+										if(radio1.checked){
+											jjres3=radio1.id+"," ;
+										}else if(radio2.checked){
+											jjres3=radio2.id+"," ;
+										}else if(radio3.checked){
+											jjres3=radio3.id+"," ;
+										}else if(radio4.checked){
+											jjres3=radio4.id+"," ;
+										}else if(radio5.checked){
+											jjres3=radio5.id+"," ;
+										}else if(radio6.checked){
+											jjres3=radio6.id+"," ;
+										}else if(radio7.checked){
+											jjres3=radio7.id+"," ;
+										}																			
+									}
+								</script>
+																<br/>可读性：
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a33"  class="filled-in tm-checkbox" id="J5_a3_11">
+										<span>1</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J5_a33" class="filled-in tm-checkbox"  id="J5_a3_22">
+										<span>2</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a33"  class="filled-in tm-checkbox"  id="J5_a3_33">
+										<span>3</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a33"  class="filled-in tm-checkbox" id="J5_a3_44">
+										<span>4</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J5_a33"  class="filled-in tm-checkbox"  id="J5_a3_55">
+										<span>5</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J5_a33" class="filled-in tm-checkbox"  id="J5_a3_66">
+										<span>6</span>
+									</div>
+								</label>	
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J5_a33" class="filled-in tm-checkbox"  id="J5_a3_77">
+										<span>7</span>
+									</div>
+								</label>
+								<script>
+									function disable_radio99(){
+										var radio1=document.getElementById("J5_a3_11");
+										var radio2=document.getElementById("J5_a3_22");
+										var radio3=document.getElementById("J5_a3_33");
+										var radio4=document.getElementById("J5_a3_44");
+										var radio5=document.getElementById("J5_a3_55");
+										var radio6=document.getElementById("J5_a3_66");
+										var radio7=document.getElementById("J5_a3_77");
+										if(radio1.checked){
+											jjres33=radio1.id+"," ;
+										}else if(radio2.checked){
+											jjres33=radio2.id+"," ;
+										}else if(radio3.checked){
+											jjres33=radio3.id+"," ;
+										}else if(radio4.checked){
+											jjres33=radio4.id+"," ;
+										}else if(radio5.checked){
+											jjres33=radio5.id+"," ;
+										}else if(radio6.checked){
+											jjres33=radio6.id+"," ;
+										}else if(radio7.checked){
+											jjres33=radio7.id+"," ;
+										}																			
+									}
+								</script>
+
+								</div>
+                        </label>
+                    </div>					
+				
+					<!-- 第1个问题 -->
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/J6_a1.png" alt="Image">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								美观性：
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J6_a1"  class="filled-in tm-checkbox" id="J6_a1_1">
+										<span>1</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J6_a1" class="filled-in tm-checkbox"  id="J6_a1_2">
+										<span>2</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J6_a1" class="filled-in tm-checkbox"  id="J6_a1_3">
+										<span>3</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J6_a1"  class="filled-in tm-checkbox" id="J6_a1_4">
+										<span>4</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J6_a1"  class="filled-in tm-checkbox"  id="J6_a1_5">
+										<span>5</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J6_a1" class="filled-in tm-checkbox"  id="J6_a1_6">
+										<span>6</span>
+									</div>
+								</label>	
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J6_a1" class="filled-in tm-checkbox"  id="J6_a1_7">
+										<span>7</span>
+									</div>
+								</label>
+								<script>
+									function disable_radio10(){
+										var radio1=document.getElementById("J6_a1_1");
+										var radio2=document.getElementById("J6_a1_2");
+										var radio3=document.getElementById("J6_a1_3");
+										var radio4=document.getElementById("J6_a1_4");
+										var radio5=document.getElementById("J6_a1_5");
+										var radio6=document.getElementById("J6_a1_6");
+										var radio7=document.getElementById("J6_a1_7");
+										if(radio1.checked){
+											jjjres1=radio1.id+"," ;
+										}else if(radio2.checked){
+											jjjres1=radio2.id+"," ;
+										}else if(radio3.checked){
+											jjjres1=radio3.id+"," ;
+										}else if(radio4.checked){
+											jjjres1=radio4.id+"," ;
+										}else if(radio5.checked){
+											jjjres1=radio5.id+"," ;
+										}else if(radio6.checked){
+											jjjres1=radio6.id+"," ;
+										}else if(radio7.checked){
+											jjjres1=radio7.id+"," ;
+										}																			
+									}
+								</script>
+																<bra>可读性：
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J6_a11"  class="filled-in tm-checkbox" id="J6_a1_11">
+										<span>1</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J6_a11" class="filled-in tm-checkbox"  id="J6_a1_22">
+										<span>2</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J6_a11" class="filled-in tm-checkbox"  id="J6_a1_33">
+										<span>3</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J6_a11"  class="filled-in tm-checkbox" id="J6_a1_44">
+										<span>4</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J6_a11"  class="filled-in tm-checkbox"  id="J6_a1_55">
+										<span>5</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J6_a11" class="filled-in tm-checkbox"  id="J6_a1_66">
+										<span>6</span>
+									</div>
+								</label>	
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J6_a11" class="filled-in tm-checkbox"  id="J6_a1_77">
+										<span>7</span>
+									</div>
+								</label>
+								<script>
+									function disable_radio100(){
+										var radio1=document.getElementById("J6_a1_11");
+										var radio2=document.getElementById("J6_a1_22");
+										var radio3=document.getElementById("J6_a1_33");
+										var radio4=document.getElementById("J6_a1_44");
+										var radio5=document.getElementById("J6_a1_55");
+										var radio6=document.getElementById("J6_a1_66");
+										var radio7=document.getElementById("J6_a1_77");
+										if(radio1.checked){
+											jjjres11=radio1.id+"," ;
+										}else if(radio2.checked){
+											jjjres11=radio2.id+"," ;
+										}else if(radio3.checked){
+											jjjres11=radio3.id+"," ;
+										}else if(radio4.checked){
+											jjjres11=radio4.id+"," ;
+										}else if(radio5.checked){
+											jjjres11=radio5.id+"," ;
+										}else if(radio6.checked){
+											jjjres11=radio6.id+"," ;
+										}else if(radio7.checked){
+											jjjres11=radio7.id+"," ;
+										}																			
+									}
+								</script>
+
+								</div>
+                        </label>
+                    </div>					
+					<!-- 第2个问题 -->
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/J6_a2.png" alt="Image">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								美观性：
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J6_a2"  class="filled-in tm-checkbox" id="J6_a2_1">
+										<span>1</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J6_a2"  class="filled-in tm-checkbox"  id="J6_a2_2">
+										<span>2</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J6_a2"  class="filled-in tm-checkbox"  id="J6_a2_3">
+										<span>3</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J6_a2"  class="filled-in tm-checkbox" id="J6_a2_4">
+										<span>4</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J6_a2" class="filled-in tm-checkbox"  id="J6_a2_5">
+										<span>5</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J6_a2"  class="filled-in tm-checkbox"  id="J6_a2_6">
+										<span>6</span>
+									</div>
+								</label>	
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J6_a2" class="filled-in tm-checkbox"  id="J6_a2_7">
+										<span>7</span>
+									</div>
+								</label>
+								<script>
+									function disable_radio11(){
+										var radio1=document.getElementById("J6_a2_1");
+										var radio2=document.getElementById("J6_a2_2");
+										var radio3=document.getElementById("J6_a2_3");
+										var radio4=document.getElementById("J6_a2_4");
+										var radio5=document.getElementById("J6_a2_5");
+										var radio6=document.getElementById("J6_a2_6");
+										var radio7=document.getElementById("J6_a2_7");
+										if(radio1.checked){
+											jjjres2=radio1.id+"," ;
+										}else if(radio2.checked){
+											jjjres2=radio2.id+"," ;
+										}else if(radio3.checked){
+											jjjres2=radio3.id+"," ;
+										}else if(radio4.checked){
+											jjjres2=radio4.id+"," ;
+										}else if(radio5.checked){
+											jjjres2=radio5.id+"," ;
+										}else if(radio6.checked){
+											jjjres2=radio6.id+"," ;
+										}else if(radio7.checked){
+											jjjres2=radio7.id+"," ;
+										}																			
+									}
+								</script>
+																<br/>可读性：
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J6_a22"  class="filled-in tm-checkbox" id="J6_a2_11">
+										<span>1</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J6_a22"  class="filled-in tm-checkbox"  id="J6_a2_22">
+										<span>2</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J6_a22"  class="filled-in tm-checkbox"  id="J6_a2_33">
+										<span>3</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J6_a22"  class="filled-in tm-checkbox" id="J6_a2_44">
+										<span>4</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J6_a22" class="filled-in tm-checkbox"  id="J6_a2_55">
+										<span>5</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J6_a22"  class="filled-in tm-checkbox"  id="J6_a2_66">
+										<span>6</span>
+									</div>
+								</label>	
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J6_a22" class="filled-in tm-checkbox"  id="J6_a2_77">
+										<span>7</span>
+									</div>
+								</label>
+								<script>
+									function disable_radio111(){
+										var radio1=document.getElementById("J6_a2_11");
+										var radio2=document.getElementById("J6_a2_22");
+										var radio3=document.getElementById("J6_a2_33");
+										var radio4=document.getElementById("J6_a2_44");
+										var radio5=document.getElementById("J6_a2_55");
+										var radio6=document.getElementById("J6_a2_66");
+										var radio7=document.getElementById("J6_a2_77");
+										if(radio1.checked){
+											jjjres22=radio1.id+"," ;
+										}else if(radio2.checked){
+											jjjres22=radio2.id+"," ;
+										}else if(radio3.checked){
+											jjjres22=radio3.id+"," ;
+										}else if(radio4.checked){
+											jjjres22=radio4.id+"," ;
+										}else if(radio5.checked){
+											jjjres22=radio5.id+"," ;
+										}else if(radio6.checked){
+											jjjres22=radio6.id+"," ;
+										}else if(radio7.checked){
+											jjjres22=radio7.id+"," ;
+										}																			
+									}
+								</script>
+
+								</div>
+                        </label>
+                    </div>					
+					<!-- 第3个问题 -->
+                    <div class="tm-q-choice-container">
+						<img src="/static/img/backups/J6_a3.png" alt="Image">
+                        <label class="tm-q-choice">
+                            <div class="mb-3" >
+								美观性：
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J6_a3"  class="filled-in tm-checkbox" id="J6_a3_1">
+										<span>1</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J6_a3" class="filled-in tm-checkbox"  id="J6_a3_2">
+										<span>2</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J6_a3" class="filled-in tm-checkbox"  id="J6_a3_3">
+										<span>3</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J6_a3"  class="filled-in tm-checkbox" id="J6_a3_4">
+										<span>4</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J6_a3"  class="filled-in tm-checkbox"  id="J6_a3_5">
+										<span>5</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J6_a3" class="filled-in tm-checkbox"  id="J6_a3_6">
+										<span>6</span>
+									</div>
+								</label>	
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J6_a3"  class="filled-in tm-checkbox"  id="J6_a3_7">
+										<span>7</span>
+									</div>
+								</label>
+								<script>
+									function disable_radio12(){
+										var radio1=document.getElementById("J6_a3_1");
+										var radio2=document.getElementById("J6_a3_2");
+										var radio3=document.getElementById("J6_a3_3");
+										var radio4=document.getElementById("J6_a3_4");
+										var radio5=document.getElementById("J6_a3_5");
+										var radio6=document.getElementById("J6_a3_6");
+										var radio7=document.getElementById("J6_a3_7");
+										if(radio1.checked){
+											jjjres3=radio1.id+"," ;
+										}else if(radio2.checked){
+											jjjres3=radio2.id+"," ;
+										}else if(radio3.checked){
+											jjjres3=radio3.id+"," ;
+										}else if(radio4.checked){
+											jjjres3=radio4.id+"," ;
+										}else if(radio5.checked){
+											jjjres3=radio5.id+"," ;
+										}else if(radio6.checked){
+											jjjres3=radio6.id+"," ;
+										}else if(radio7.checked){
+											jjjres3=radio7.id+"," ;
+										}																			
+									}
+								</script>
+																<br/>可读性：
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J6_a33"  class="filled-in tm-checkbox" id="J6_a3_11">
+										<span>1</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J6_a33" class="filled-in tm-checkbox"  id="J6_a3_22">
+										<span>2</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J6_a33" class="filled-in tm-checkbox"  id="J6_a3_33">
+										<span>3</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J6_a33"  class="filled-in tm-checkbox" id="J6_a3_44">
+										<span>4</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J6_a33"  class="filled-in tm-checkbox"  id="J6_a3_55">
+										<span>5</span>
+									</div>
+								</label>
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio"  name="J6_a33" class="filled-in tm-checkbox"  id="J6_a3_66">
+										<span>6</span>
+									</div>
+								</label>	
+								<label class="tm-q-choice tm-q-choice-2-col">
+									<div class="mb-3">
+										<input type="radio" name="J6_a33"  class="filled-in tm-checkbox"  id="J6_a3_77">
+										<span>7</span>
+									</div>
+								</label>
+								<script>
+									function disable_radio122(){
+										var radio1=document.getElementById("J6_a3_11");
+										var radio2=document.getElementById("J6_a3_22");
+										var radio3=document.getElementById("J6_a3_33");
+										var radio4=document.getElementById("J6_a3_44");
+										var radio5=document.getElementById("J6_a3_55");
+										var radio6=document.getElementById("J6_a3_66");
+										var radio7=document.getElementById("J6_a3_77");
+										if(radio1.checked){
+											jjjres33=radio1.id+"," ;
+										}else if(radio2.checked){
+											jjjres33=radio2.id+"," ;
+										}else if(radio3.checked){
+											jjjres33=radio3.id+"," ;
+										}else if(radio4.checked){
+											jjjres33=radio4.id+"," ;
+										}else if(radio5.checked){
+											jjjres33=radio5.id+"," ;
+										}else if(radio6.checked){
+											jjjres33=radio6.id+"," ;
+										}else if(radio7.checked){
+											jjjres33=radio7.id+"," ;
+										}																			
+									}
+								</script>
+
+								</div>
+                        </label>
+                    </div>							
+					
+				</div>
+							
+                <div class="col-12 text-center tm-submit-container">
+                    <button type="submit" href="#" class="btn btn-primary tm-btn-submit" onClick="ok()">开始答题</button>
+                </div>
+        </form>
+    </div>
+	
+</body>
+</html>

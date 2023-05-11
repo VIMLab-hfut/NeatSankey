@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>THANKS!</title>
+
+    <link rel="icon" href="/static/img/icon.png"/>
+
+    <!--<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>-->
+    <script src="/static/js/axios.min.js"></script>
+    <!-- <script src="http://d3js.org/d3.v3.js"></script> -->
+    <script src="/static/js/d3.v3.js"></script>
+
+    <!-- load CSS -->
+    <!-- Google web font "Open Sans" -->
+    <link rel="stylesheet" href="/static/css/materialize.min.css">
+    <!-- https://materializecss.com -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <!-- https://getbootstrap.com/ -->
+    <link rel="stylesheet" href="/static/css/all.min.css">
+    <!-- Template Mo style -->
+
+    <script src="/static/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/js/materialize.min.js"></script>
+    <!--<script src="/static/js/FileSaver.js"></script>-->
+
+    <!-- https://fontawesome.com/ -->
+    <link rel="stylesheet" href="/static/css/templatemo-style.css">
+</head>
+<body>
+
+<div style="text-align: center;">
+    <h2 class="tm-site-name">感谢参与本次调查</h2>
+    <div class="row" style="margin: 0 -15px 0 -15px">
+        <div class="col-sm-12 col-md-7">
+            <img src="/static/img/logo.png" alt="Image Fetching Failed" height="83.6px">
+        </div>
+
+        <div class="col-sm-12 col-md-4">
+            <em>
+                <div class="tm-highlight">“Tendency is all we need”</div>
+            </em>
+        </div>
+    </div>
+</div>
+
+<hr style="stroke: black; stroke-width: 5px; width: 70vw; text-align: center;"/>
+
+<div style="margin: 20px"></div>
+
+<div class="container" style="text-align: center;" id="thank_words_1">
+    <div><b>我们对您无私的帮助致以最诚挚的感谢</b></div>
+</div>
+
+<div style="margin: 20px"></div>
+
+<div class="container" style="text-align: center;" id="thank_words_2">
+    <div><b>劳请您主动与我们联系，并留下您的联系方式</b></div>
+</div>
+
+<div style="margin: 20px"></div>
+
+<div class="container" style="text-align: center;" id="thank_words_3">
+    <div><b>我们会在事后寄送小礼品以表达感谢</b></div>
+</div>
+
+<script>
+    let formData = new FormData()
+
+    for (let al = 1; al <= 3; al++)
+        // algorithms num
+        for (let ma = 1; ma <= 5; ma++)
+            // maps num
+            for (let pr = 1; pr <= 3; pr++) {
+                //problems num
+                formData.append(`Test${(al - 1) * 15 + (ma - 1) * 3 + pr + 1}Timecost`, localStorage.getItem(`Test${(al - 1) * 15 + (ma - 1) * 3 + pr + 1}Timecost`))
+                formData.append(`Test${(al - 1) * 15 + (ma - 1) * 3 + pr + 1}Choice`, localStorage.getItem(`Test${(al - 1) * 15 + (ma - 1) * 3 + pr + 1}Choice`))
+            }
+
+    for (let SUSQ = 1; SUSQ <= 10; SUSQ++)
+        formData.append(`Q${SUSQ}`, localStorage.getItem(`Q${SUSQ}`))
+
+
+    formData.append("sex", localStorage.getItem("sex"))
+    formData.append("age", localStorage.getItem("age"))
+    formData.append("major", localStorage.getItem("major"))
+
+    formData.append("startTime", localStorage.getItem("startTime"))
+    formData.append("finishTime", localStorage.getItem("finishTime"))
+
+    formData.append("questionOrder", localStorage.getItem("questionOrder"))
+
+    axios({
+        method: 'POST',
+        url: "saveData",
+        data: formData,
+        headers: {
+            'Content-Type': "multipart/form-data",
+        },
+        timeout: 3000
+    }).then((response) => {
+        console.log(response.status)
+    })
+
+</script>
+</body>
+</html>
